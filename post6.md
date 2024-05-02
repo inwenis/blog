@@ -6,7 +6,7 @@ Today I removed something that I allowed to be created feeling that it is redund
 
 A year ago a student found a tool to auto-generate documentation for our internal SDK from code annotations. They proposed to embed publishing of the documentation to our Continuous Integration pipeline. An idea sound on paper, however considering our team I felt it won't be used. The team was enthusiastic (as our team often is).
 
-Everyone in our team has the SDK's git repo on their machine and we rely on intellisense and the code for documentation. It seemed unlikely that we will not change our habits as the new documentation wouldn't be easier to use than just F12-ing into the source code.
+Everyone in our team has the SDK's git repo on their machine and we rely on intellisense and the code for documentation. It seemed unlikely that we will change our habits as the new documentation wouldn't be easier to use than just F12-ing into the source code.
 
 Despite my doubts I (being the team-lead) allowed this "feature". My reasoning - I have already torpedoed a few initiatives of that particular student. I didn't want to kill his motivation. I wanted to let them fiddle with something they find interesting. There was a slight chance I'm wrong and the docs web-page will be used.
 
