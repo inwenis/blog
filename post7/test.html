@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First JavaScript</h1>
+
+<p>JavaScript can change the content of an HTML element:</p>
+
+<button type="button" onclick="myFunction()">Click Me!</button>
+
+<p id="demo">This is a demonstration.</p>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js">
+
+</script>
+<script async>
+    (async () => {
+        const x = await axios.get('http://127.0.0.1:3000/');
+        // const x = await axios.get('http://127.0.0.1:3000/',{ withCredentials: true });
+        document.getElementById("demo").innerHTML = "Hello JavaScript!";
+        console.log(x);
+        const y = await axios.get('http://127.0.0.1:3000/', {withCredentials: true});
+        // const y = await axios.get('http://127.0.0.1:3000/',{ withCredentials: true });
+        console.log(y);
+    })();
+
+  </script>
+</body>
+</html>
+
