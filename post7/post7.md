@@ -97,3 +97,10 @@ https://www.dhiwise.com/post/managing-secure-cookies-via-axios-interceptors
 https://medium.com/@stheodorejohn/managing-cookies-with-axios-simplifying-cookie-based-authentication-911e53c23c8a
     -> or this doesn't mention that cookies don't work in node without extra packages
     (at least this one mentions i's chat-gpt helped)
+
+
+
+without tough cookie etc you would need to parse and persist cookies your self and add them to headers in axios
+
+what is an http agent?
+it's a object/class responsible for menaging HTTP client stuff. talks with OS, makes sockets, closes sockets
