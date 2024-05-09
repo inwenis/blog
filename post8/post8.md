@@ -1,6 +1,11 @@
 # node packages updating
 
 ## tl;dr
+1. `> npm install depcheck -g` - install `depcheck` globally
+1. `> depcheck` - check for redundant packages
+1. `> npm un this-redundant-package` - uninstall redundant packages
+1. Create a pull-request `remove-redundant-packages`
+---
 1. `> npm i` - make order in `node_modules`
 1. `> npm audit` - see vulnerability issues
 1. `> npm audit fix` - fix vulnerability issues that don't require attention
