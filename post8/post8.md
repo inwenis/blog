@@ -3,7 +3,7 @@
 ## tl;dr
 1. `> npm install depcheck -g` - install `depcheck` globally
 1. `> depcheck` - check for redundant packages
-1. `> npm un this-redundant-package` - uninstall redundant packages
+1. `> npm un this-redundant-package` - uninstall redundant packages (repeat for all redundant packages)
 1. Create a pull-request `remove-redundant-packages`
 ---
 1. `> npm i` - make order in `node_modules`
@@ -15,7 +15,7 @@
 1. `> npm-check-updates` - see how outdated packages are
 1. `> npm outdated` - see how outdated packages are
 1. `> npm update --save` - update packages respecting your semver constraints from `packages.json`
-1. If you have packages that use major version `0.*.*` you'll need to manually update there here
+1. If you have packages that use major version `0.*.*` you'll need to manually update these now
     - `> npm install that-one-package@latest`
 1. Create a pull-request `update-packages-minor`
 ---
@@ -131,13 +131,13 @@ https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-
 `> npm install depcheck -g`
 
 `> depcheck` - shows unused dependencies.
-`depcheck` just scans for require/import statements in your code so you might be using a package in a different way and `depcheck` will consider it unused (ex. when you import packages using `importLazy`).
+`depcheck` scans for `require`/`import` statements in your code so you might be utilizing a package differently but `depcheck` will consider it unused (ex. when you import packages using `importLazy`).
 
 ### npm-check
 
 `> npm i npm-check -g`
 
-`> npm-check` - a different tool to help with dependencies, didn't use it.
+`> npm-check` - a different tool to help with dependencies (I didn't use it)
 
 `> npm ls` - list installed packages (from `node_modules`)
 
