@@ -1,23 +1,58 @@
-
-
-
 axios - promise-based HTTP client for node.js
-    - in node it uses http module
-        -> no cookies in node by default
-    - in browsers it uses XMLHttpRequest
-        -> cookies work by default
-https://github.com/axios/axios/issues/5742
-    node issue saying that it doesn't have cookies by default
+- when used in node.js axios uses http module (https://nodejs.org/api/http.html)
+- in node axios __does not__ support cookies by itself (https://github.com/axios/axios/issues/5742)
+  - there are npm packages that add cookies support to axios
+- when used in browsers it uses XMLHttpRequest
+- when used in browsers cookies work by default
+
+---
+
+Why would you use axios over plain `http` module from node?
+
+Axios adds several features, makes http requests much easier. Try using plain `http` and you'll convince your self.
+
+---
+
+Are there other packages like `axios`?
+
+Yes - for example `node-fetch` https://github.com/node-fetch/node-fetch
+
+---
+
+When making a request axios creates a default `http` and `https` agent - https://axios-http.com/docs/req_config (not sure if new agents are created with each requests). You can specify custom agents for a specific request or set custom agents as default agents to use with an `axios` instance.
+```js
+const a = require('axios');
+const http = require('node:http');
+
+(async () => {
+    // configure your agent as you need
+    const myCustomAgent = new http.Agent({ keepAlive: true });
+
+    // use your custom agent for a specific request
+    const x = await a.get('https://example.com/', { httpAgent: myCustomAgent });
+    console.log(x);
+
+    // set you agent as default for all requests
+    a.default.httpAgent = myCustomAgent;
+})();
+
+```
+
+inco note - our http client is misleading, it uses same agent for http and https, it should maybe be called customAgent
+
+What are agents responsible for?
+
+`http`/`s` agents handle sockets, TCP, ports, etc. They talk to the OS, manage connection to hosts.
 
 
-for every request if agents are not specified they're creted by axios
-    https://axios-http.com/docs/req_config (not sure if it's created each time or re-used, doesn't matter much) (our http client is bit mislaeding, it uses same agent for http and https, it should maybe be called customAgent)
 
-
+## Cookies
 https://www.npmjs.com/package/http-cookie-agent
-Allows cookies with every Node.js HTTP clients (e.g. Node.js global fetch, undici, axios, node-fetch).
-use CookieJar from tough-cookie to store cookie
-the module itself wraps around http agent and reads/writes cookies to CookieJar
+
+Allows cookies with Node.js HTTP clients (e.g. Node.js global fetch, undici, axios, node-fetch).
+`http-cookie-agent` implements a `http`/`s` agent that inspects headers of requesta and does all cookie related magic for you. It uses the class `CookieJar` from package `tough-cookie` to parse&store&etc cookies.
+
+
 
 ```js
 import axios from 'axios';
@@ -26,20 +61,23 @@ import { HttpCookieAgent, HttpsCookieAgent } from 'http-cookie-agent/http';
 
 const jar = new CookieJar();
 
-const client = axios.create({
+const a = axios.create({
   httpAgent: new HttpCookieAgent({ cookies: { jar } }),
   httpsAgent: new HttpsCookieAgent({ cookies: { jar } }),
 });
-
-await client.get('https://example.com');
+// now we have an axios instance supporting cookies
+await a.get('https://example.com');
 ```
 
-axios-cookiejar-support
+# `axios-cookiejar-support`
+
 https://github.com/3846masa/axios-cookiejar-support/tree/main
-Add tough-cookie support to axios.
-depends on http-cookie-agent
-it probably just wraps around axios to replace the http agents with http-cookie-agent with cookie jars
-yep - https://github.com/3846masa/axios-cookiejar-support/blob/main/src/index.ts
+
+Depends on `http-cookie-agent` and `tough-cookie`.
+Does the same as `http-cookie-agent` but you don't have to create your agents. This is a small package that just intercepts axios requests and makes sure custom http/s agents are used [source](https://github.com/3846masa/axios-cookiejar-support/blob/main/src/index.ts).
+
+Saves you a bit of typing, you can't use your own custom agents. If you need to configure your `http`/`s` agents (ex. with a certificate) - use `http-cookie-agent` [github issue 1](https://github.com/3846masa/axios-cookiejar-support/issues/431) [github issue 2](https://github.com/3846masa/axios-cookiejar-support/issues/426)
+
 
 ```js
 import axios from 'axios';
@@ -51,13 +89,6 @@ const client = wrapper(axios.create({ jar }));
 
 await client.get('https://example.com');
 ```
-
-if you need to use a custom agent you would need to use the http-cookie-agent and configure it with your stuff
-https://github.com/3846masa/axios-cookiejar-support/issues/431
-https://github.com/3846masa/axios-cookiejar-support/issues/426
-    -> if you're using http-cookie-agent, just don't use axios-cookiejar-support
-
-https://github.com/3846masa/axios-cookiejar-support/blob/main/MIGRATION.md
 
 
 
