@@ -42,11 +42,15 @@ inco note - our http client is misleading, it uses same agent for http and https
 
 What are agents responsible for?
 
-`http`/`s` agents handle sockets, TCP, ports, etc. They talk to the OS, manage connection to hosts.
+`http`/`s` agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.
 
 
 
 ## Cookies
+
+Without extra packages you would need to manually read response headers. Look for `Set-Cookie` headers. Store the cookies somewhere. Add cookie headers to subsequent request manually.
+
+
 https://www.npmjs.com/package/http-cookie-agent
 
 Allows cookies with Node.js HTTP clients (e.g. Node.js global fetch, undici, axios, node-fetch).
@@ -90,48 +94,38 @@ const client = wrapper(axios.create({ jar }));
 await client.get('https://example.com');
 ```
 
+## tough-cookie
+NPM package - cookie parsing/storage/retrieval (but nothing with http).
+
+# Cookies
+https://datatracker.ietf.org/doc/html/rfc6265 - RFC describing cookies.
+It has a concise paragraph on Third-party cookies - https://datatracker.ietf.org/doc/html/rfc6265#page-28 .
+
+Servers responds with a `Set-Cookie` header. Client can set the requested cookie. Cookies have a specific format described in this document.
 
 
-
-
-
-https://datatracker.ietf.org/doc/html/rfc6265
-doc describing cookies
-server respons with Set-Cookie header
-    cookies have a specific format defined in this doc
-https://datatracker.ietf.org/doc/html/rfc6265#section-7.1
-    very concise description on 3rd party cookies
-
-
-
-axios - module using http (in node) to make http request
-http-cookie-agent - module wraps around http, uses tough cookie to make a cookie enabled http agent
-tough-cookie - cookie parsing/storage/retrieval (but nothing with http)
-
+---
 https://npmtrends.com/cookie-vs-cookiejar-vs-cookies-vs-tough-cookie
-    interesting cookie for !servers! are more popular than tough-cookie for client since ~2023
+interesting - `cookie` for servers are more popular than `tough-cookie` for clients since ~2023.
 
-stuff we don't use
-cookie - cookie module for !servers!
-cookiejar - just a different cookie jar for clients
-https://www.npmjs.com/package/cookies - another lib for server cookies
+Is this due to more serve side apps being written in node?
 
+# stuff we don't use
+`cookie` - npm package - cookies for servers
+`cookies` - npm package - cookies for servers (different then `cookie`)
+`cookiejar` - npm package - a different cookie jar for clients
+
+## fetch
 fetch is kinda like axios - it's another http client lib.
 you can export requsts to fetch from google chrome, but you can easily modify them for axios (having the fetch request)
 
+## chat-gpt crap
+When researching I came across some chat-gpt generated content.
+You read it thinking it will be something but it's trash.
 
-when reaserching i came across I think 2 chat-gpt articles, and they're crap.
-you read them thinking it will be sth but it's trash
 https://www.dhiwise.com/post/managing-secure-cookies-via-axios-interceptors
-    -> like this article from 2024 that tell you to implement everything your self xD
+-> this article from 2024 that tell you to implement cookies your self, doesn't even mention the word "package", "module"
 
 https://medium.com/@stheodorejohn/managing-cookies-with-axios-simplifying-cookie-based-authentication-911e53c23c8a
-    -> or this doesn't mention that cookies don't work in node without extra packages
-    (at least this one mentions i's chat-gpt helped)
-
-
-
-without tough cookie etc you would need to parse and persist cookies your self and add them to headers in axios
-
-what is an http agent?
-it's a object/class responsible for menaging HTTP client stuff. talks with OS, makes sockets, closes sockets
+-> doesn't mention that cookies don't work in axios run in node without extra packages
+    (at least this one mentions that chat-gpt helped, thought I bet it's fully written by chat-gpt)
