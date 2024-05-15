@@ -139,6 +139,28 @@ https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-
 
 `> npm-check` - a different tool to help with dependencies (I didn't use it)
 
+### honorable mentions
+
 `> npm ls` - list installed packages (from `node_modules`)
 
 `> npm ls axios` - show all versions of axios and why we have them
+
+`npm ls` will not show you origin of not-installed optional dependencies.
+
+Consider this - you devleop on a `win` maching and deploy your solution to a `linux` box.
+On windows (see below) you might think `node-gyp-build` is not used in your solution.
+```
+> npm ls node-gyp-build
+test-npm@1.0.0 C:\git\test-npm
+`-- (empty)
+```
+
+But on a linux box it will be used:
+```
+> npm ls node-gyp-build
+npm-test-proj@1.0.0 /git/npm-test-proj
+└─┬ kafka-lz4-lite@1.0.5
+  └─┬ piscina@3.2.0
+    └─┬ nice-napi@1.0.2
+      └── node-gyp-build@4.8.1
+```

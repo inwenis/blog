@@ -137,3 +137,7 @@ https://medium.com/@stheodorejohn/managing-cookies-with-axios-simplifying-cookie
 ---
 
 inco note - our http client is misleading, it uses same agent for http and https, it should maybe be called customAgent
+
+
+https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
+
