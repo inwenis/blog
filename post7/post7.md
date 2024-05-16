@@ -94,11 +94,11 @@ const client = wrapper(axios.create({ jar }));
 await client.get('https://example.com');
 ```
 
-### tough-cookie
+### `tough-cookie`
 
 https://www.npmjs.com/package/tough-cookie
 
-npm package - cookie parsing/storage/retrieval (but `tough-cookie` itself does nothing with http request).
+npm package - cookie parsing/storage/retrieval (`tough-cookie` itself does nothing with http request).
 
 ### A bit about cookies
 https://datatracker.ietf.org/doc/html/rfc6265 - RFC describing cookies.
@@ -109,6 +109,7 @@ Servers responds with a `Set-Cookie` header. Client can set the requested cookie
 
 ## Random stuff
 https://npmtrends.com/cookie-vs-cookiejar-vs-cookies-vs-tough-cookie
+
 interesting - `cookie` for servers are more popular than `tough-cookie` for clients since ~2023.
 
 Is this due to more serve side apps being written in node?
@@ -118,10 +119,17 @@ Is this due to more serve side apps being written in node?
 - `cookies` - npm package - cookies for servers (different then `cookie`)
 - `cookiejar` - npm package - a different cookie jar for clients
 
-## fetch
-fetch is kinda like axios - it's another http client.
+## fetch & `fetch` & `node-fetch`
 
-You can export requests to fetch from google chrome, but you can easily modify them for axios (having the fetch request)
+fetch - standard created by WHATWG meant to replace `XMLHttpRequest` - https://fetch.spec.whatwg.org/
+
+`fetch` - an old npm package to fetch web content - don't use it
+
+`node-fetch` - community implemented `fetch` standard as a npm package - go ahead and use it
+
+`fetch` - node's native implementation of the `fetch` standard - https://nodejs.org/dist/latest-v21.x/docs/api/globals.html#fetch
+
+Since `fetch` standard is the standard for both browsers and node chrome has a neat feature to export requests to `fetch`
 
 ## chat-gpt crap
 When researching I came across some chat-gpt generated content.
@@ -138,6 +146,58 @@ https://medium.com/@stheodorejohn/managing-cookies-with-axios-simplifying-cookie
 
 inco note - our http client is misleading, it uses same agent for http and https, it should maybe be called customAgent
 
+## axios and fiddler
+
+Using a request interceptor (proxy) like fiddler can help during development and debugging.
+
+To make fiddler intercept axios request we have to tell axios that there is a proxy where all requests from axios should go. The proxy should take care of forwarding those requests to the actual destination.
+
+```
+http_proxy=... // set proxy for http requests
+https_proxy=... // set proxy for https requests
+no_proxy=domain1.com,domain2.com // comma separated list of domains that should not be proxied
+```
+
+The proxy for both http and https can be the same url.
+
+Read more - https://axios-http.com/docs/req_config
+
+When using fiddler on windows I suggest going to `Network & internet > Proxy` and disableing proxies there (fiddler by default sets this). This way `fiddler` will only receive requests from the process where we set `http(s)_proxy` env vars.
+
+---
+I was not able to make fiddler work with client certificates.
+It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler/tasks/respondwithclientcert but I couldn't get it to work
+
+---
 
 https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
 
+https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate
+
+https://stackoverflow.com/questions/69502074/how-to-send-proxy-and-certs-over-a-axios-or-node-fetch-call-from-nodejs
+
+
+
+
+key != cert
+
+SSL vs TLS
+
+ssh - secure shell protocol - do shell commands over a secure connection
+
+client can be anonymoun in TLS - usually the case on web
+TLS can be mutual - if the client has a cert the servers will/can validate it
+
+putty is free+openn source software than can do SSH.
+putty has it's own format of key files - .ppk
+
+ppk - putty private key ( you can change the fomrat to pem wiht some software)
+A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
+https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
+
+
+x.509?
+pem
+pfx
+
+to try out - https://www.npmjs.com/package/proxy-agent
