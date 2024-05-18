@@ -3,18 +3,24 @@
 
 <body>
 
-  <p>This page demonstrates that axios supports cookie by default when run in a web browser.</p>
+  <p>This page demonstrates axios' cookie support when run in a web browser.</p>
+  <p>Open developer tools and refresh this page.</p>
+  <p>3 requests are sent to the server:</p>
+  <ol>
+    <li>1st request gets this page, no cookies are sent from the server.</li>
+    <li>2nd request is from axios and server asks to set a cookie.</li>
+    <li>3rd request is from axios and client sends the cookie back.</li>
+  </ol>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js">
 
   </script>
   <script async>
     (async () => {
-      const x = await axios.get('http://127.0.0.1:3000/');
+      const x = await axios.get('http://127.0.0.1:3000/with-cookie');
       console.log(x);
-      const y = await axios.get('http://127.0.0.1:3000/');
+      const y = await axios.get('http://127.0.0.1:3000/with-cookie');
       console.log(y);
-      // with credentials = true ???
     })();
 
   </script>
