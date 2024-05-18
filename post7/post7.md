@@ -171,3 +171,14 @@ It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler
 ## honorable mentions
 
 I would like to try out - https://www.npmjs.com/package/proxy-agent at some point
+
+## axios & cookies demo
+
+```
+> npm i
+> node server.mjs
+open browser and go to http://127.0.0.1:3000
+cookies are supported
+> node test.js (from another console)
+cookies are not supported
+```
