@@ -172,6 +172,8 @@ It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler
 
 I would like to try out - https://www.npmjs.com/package/proxy-agent at some point
 
+I don't fully understand `withCredentials`
+
 ## axios & cookies demo
 
 ```
