@@ -148,9 +148,9 @@ inco note - our http client is misleading, it uses same agent for http and https
 
 ## axios and fiddler
 
-Using a request interceptor (proxy) like fiddler can help during development and debugging.
+Using a request interceptor (proxy) like fiddler helps during development and debugging.
 
-To make fiddler intercept axios request we have to tell axios that there is a proxy where all requests from axios should go. The proxy should take care of forwarding those requests to the actual destination.
+To make fiddler intercept axios request we have to tell axios that there is a proxy where all requests from should go. The proxy forwards those requests to the actual destination.
 
 ```
 http_proxy=... // set proxy for http requests
@@ -164,40 +164,10 @@ Read more - https://axios-http.com/docs/req_config
 
 When using fiddler on windows I suggest going to `Network & internet > Proxy` and disableing proxies there (fiddler by default sets this). This way `fiddler` will only receive requests from the process where we set `http(s)_proxy` env vars.
 
----
+### fiddler and client certificates
 I was not able to make fiddler work with client certificates.
 It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler/tasks/respondwithclientcert but I couldn't get it to work
 
----
+## honorable mentions
 
-https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
-
-https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate
-
-https://stackoverflow.com/questions/69502074/how-to-send-proxy-and-certs-over-a-axios-or-node-fetch-call-from-nodejs
-
-
-
-
-key != cert
-
-SSL vs TLS
-
-ssh - secure shell protocol - do shell commands over a secure connection
-
-client can be anonymoun in TLS - usually the case on web
-TLS can be mutual - if the client has a cert the servers will/can validate it
-
-putty is free+openn source software than can do SSH.
-putty has it's own format of key files - .ppk
-
-ppk - putty private key ( you can change the fomrat to pem wiht some software)
-A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
-https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
-
-
-x.509?
-pem
-pfx
-
-to try out - https://www.npmjs.com/package/proxy-agent
+I would like to try out - https://www.npmjs.com/package/proxy-agent at some point

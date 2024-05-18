@@ -1,31 +1,23 @@
-
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h1>My First JavaScript</h1>
+  <p>This page demonstrates that axios supports cookie by default when run in a web browser.</p>
 
-<p>JavaScript can change the content of an HTML element:</p>
+  <script src="https://unpkg.com/axios/dist/axios.min.js">
 
-<button type="button" onclick="myFunction()">Click Me!</button>
-
-<p id="demo">This is a demonstration.</p>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js">
-
-</script>
-<script async>
+  </script>
+  <script async>
     (async () => {
-        const x = await axios.get('http://127.0.0.1:3000/');
-        // const x = await axios.get('http://127.0.0.1:3000/',{ withCredentials: true });
-        document.getElementById("demo").innerHTML = "Hello JavaScript!";
-        console.log(x);
-        const y = await axios.get('http://127.0.0.1:3000/', {withCredentials: true});
-        // const y = await axios.get('http://127.0.0.1:3000/',{ withCredentials: true });
-        console.log(y);
+      const x = await axios.get('http://127.0.0.1:3000/');
+      console.log(x);
+      const y = await axios.get('http://127.0.0.1:3000/');
+      console.log(y);
+      // with credentials = true ???
     })();
 
   </script>
 </body>
-</html>
 
+</html>
