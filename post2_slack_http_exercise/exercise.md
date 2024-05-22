@@ -2,7 +2,7 @@ An exercise in shell/scripting/regex
 
 At my company consultants used to exchange code on pastebin.
 We obviously don't want our code publicly available on pastebin.
-We have exported our slack workspace and the task is to fine all suspicous links.
+We have exported our slack workspace and the task is to find all suspicious links.
 
 I can't share the actual slack export so for this exercise we use a sample slack export.
 

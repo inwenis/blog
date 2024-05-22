@@ -15,7 +15,7 @@ x |> Async.RunSynchronously // prints another random number
 x |> Async.RunSynchronously // prints same number as above
 
 // Why does it matter that lines 14 and 15 print the same number?
-// Let's consider the folowing code:
+// Let's consider the following code:
 // We're sending http requests and if they fail we'd like to retry them
 
 
