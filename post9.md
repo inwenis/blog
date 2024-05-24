@@ -41,3 +41,8 @@ to try out - https://www.npmjs.com/package/proxy-agent
 
 
 https://www.glezen.org/Base64Decoder.html
+
+
+convention - propose
+    - specify format in secret name
+    - use plain - not base64 encoded
