@@ -1,14 +1,9 @@
 An exercise in shell/scripting/regex
 
-At my company consultants used to exchange code on pastebin.
-We obviously don't want our code publicly available on pastebin.
-We have exported our slack workspace and the task is to find all suspicious links.
-
-I can't share the actual slack export so for this exercise we use a sample slack export.
-
-1/ find all links from all messages in this slack export
-2/ find all domains used in those links (to see if there are anyother suspicoius domains other than pastebin.)
-
+It came to your attention that some remote emplyess shared code over https://pastebin.com/.
+Your task:
+1. find all pastebin links so they can be removed
+2. find all other links to see if another server was used to share code
 
 
 TODO for filip:
