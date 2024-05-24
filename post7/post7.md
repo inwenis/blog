@@ -184,3 +184,9 @@ cookies are supported
 > node test.js (from another console)
 cookies are not supported
 ```
+
+## axios, certificates, etc
+
+To use axios with a client certificate you need to configure the https agent with the key and cert.
+the key and cert need to be in pem format. They both can be in the same pem file, or in separate pem files.
+(did not try it) but you should be able to merge and split your pem.

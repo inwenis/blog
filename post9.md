@@ -9,9 +9,18 @@ https://stackoverflow.com/questions/69502074/how-to-send-proxy-and-certs-over-a-
 
 key != cert
 
+cert
+a certificate proves that a public key belongs to a given entity.
+The cert includes the public key and info about it. and CA's signature validating the cert.
+So the CA signes saying "I prove that this public key belongs to this person/entity"
+
 SSL vs TLS
 
 SSH (Secure SHell protocol) - protocol that allows to execute shell commands over a secure connection
+SFTP is ssh FTP.
+it is an extension of SSH.
+to connect to a sftp you need a private ssh key. The public ssh key (you'r provaites key counterpart) is stored at the server.
+
 
 client can be anonymous in TLS - usually the case on web
 TLS can be mutual - if the client has a cert the servers will/can validate it
@@ -28,3 +37,7 @@ pem
 pfx
 
 to try out - https://www.npmjs.com/package/proxy-agent
+
+
+
+https://www.glezen.org/Base64Decoder.html
