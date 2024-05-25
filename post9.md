@@ -160,26 +160,30 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 
 Contents between header and footer (`-----BEGIN CERTIFICATE-----` + `-----END CERTIFICATE-----`) is base64 encoded. The content can be DER binary data.
 
+# DER
+Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like `validity date`, `issuer`, etc. For certificates to work you need to store this information and transfer it. DER encodes this information is a binary format. This is then after base64 encoded and then it goes into a PEM file.
+
+# X.509
+X.509 is the standard defining public key certificates for TLS/SSL (HTTPS)
 
 
-
-x.509?
-pfx
-
-to try out - https://www.npmjs.com/package/proxy-agent
+# PFX
+PFX seems to be Microsoft's complicated file format for storing cryptographic data.
 
 
-
+---
+base64 offline decoder:
 https://www.glezen.org/Base64Decoder.html
 
+Nice description of certs vs key:
+https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
+
+Generate yourself a certificate:
+https://getacert.com/index.html
+
+Important info on `rejectUnauthorized: false` and certificates in `axios`/`node`:
+https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate
 
 convention - propose
     - specify format in secret name
     - use plain - not base64 encoded
-
-
-https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
-
-https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate
-
-https://stackoverflow.com/questions/69502074/how-to-send-proxy-and-certs-over-a-axios-or-node-fetch-call-from-nodejs
