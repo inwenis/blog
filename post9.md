@@ -125,8 +125,12 @@ Privacy-Enhanced Mail (PEM) is THE file format for exhanging keys, certificates.
 
 The file extensions doesn't really matter. Just open the file and see the headers to be sure what it is.
 
+To view a pem certificate on Windows - rename it to `.crt` and double click.
+
 You can open a .pem file as plain text as see its content:
 ```
+// pem ignores stuff between the headers so you can put comments here
+
 -----BEGIN RSA PRIVATE KEY-----
 izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI
 MbS2U6wTS24SZk5RunJIUkitRKeWWMS28SLGfkDs1bBYlSPa5smAd3/q1OePi4ae
@@ -187,3 +191,37 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 convention - propose
     - specify format in secret name
     - use plain - not base64 encoded
+
+# Lazy websites
+
+Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).
+
+Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.
+
+## don't's (for node)
+Many answers on SO suggest to set `NODE_TLS_REJECT_UNAUTHORIZED=0` or `const httpsAgent = new https.Agent({ rejectUnauthorized: false });`. Both are a terrible idea as it tells node to ignore certificate validation. Read more [here](https://stackoverflow.com/a/53585725/2377787)
+
+## does (for node)
+Use [NODE_EXTRA_CA_CERTS](https://nodejs.org/api/cli.html#node_extra_ca_certsfile). Alternatively use a library to programmatically give node the missing certificate [link](https://stackoverflow.com/a/39972054/2377787)
+
+Good read - https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs
+
+# root CA stores
+## Node
+
+It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:
+- https://github.com/nodejs/node/blob/main/src/node_root_certs.h
+- https://github.com/nodejs/node/issues/4175
+
+## Windows
+You can view Windows certificates with PowerShell:
+```PowerShell
+Get-ChildItem -Recurse Cert:
+```
+
+## Chrome
+https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md
+
+If you would like to become chrome's trusted CA - https://www.chromium.org/Home/chromium-security/root-ca-policy/
+
+https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html
