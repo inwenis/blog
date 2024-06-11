@@ -104,7 +104,7 @@ SSH (Secure SHell protocol) - protocol that allows to execute shell commands ove
 SFTP is an extension of SSH. SFTP != FTP over SSH.
 To connect to a SFTP server you need a private ssh key. The public ssh key (your private key's counterpart) is stored at the server.
 
-TLS & SSL - this of SSL as the older/first protocol for secure communication. SSL was outphased by TLS. TLS is THE protocol used by HTTPS for secure connections.
+TLS & SSL - think of SSL as the older/first protocol for secure communication. SSL was outphased by TLS. TLS is THE protocol used by HTTPS for secure connections.
 
 Clients can be anonymous in TLS - usually the case on web - the server provides a cert to your browser but you don't need a cert of your own.
 TLS can be mutual - if the client has a cert the servers will/can validate it.
