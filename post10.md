@@ -3,6 +3,13 @@
 -> quick feedback is king
 picture here
 
+split problem
+solve all pieaces separately
+solbe all pieces indepentd of you project, create a project on the side - example - self updating exe.
+
+don't - don't code everything in your large/heavy project
+
+
 ---
 
 case: you're working with a large or small system/program, it talks to a remote API, you want to test different API calls to the remote API
