@@ -23,14 +23,14 @@ _Are there other packages like `axios`?_
 
 ---
 
-When making a request axios creates a default `http` and `https` agent - https://axios-http.com/docs/req_config (not sure if new agents are created with each requests). You can specify custom agents for a specific request or set custom agents as default agents to use with an `axios` instance.
+When making a request axios creates a default `http` and `https` agent - https://axios-http.com/docs/req_config (axios probably uses [global agents](https://nodejs.org/api/http.html#httpglobalagent)). You can specify custom agents for a specific request or set custom agents as default agents to use with an `axios` instance.
 
 ```js
 const a = require('axios');
 const http = require('node:http');
 
 (async () => {
-    // configure your agent as you need
+    // configure your agent as needed
     const myCustomAgent = new http.Agent({ keepAlive: true });
 
     // use your custom agent for a specific request
@@ -50,7 +50,7 @@ _What are agents responsible for?_
 
 ## cookies
 
-Without extra packages you need to manually read response headers, look for `Set-Cookie` headers. Store the cookies somewhere. Add cookie headers to subsequent request manually.
+Without extra packages you need to code reading response headers, look for `Set-Cookie` headers. Store cookies somewhere. Code adding cookie headers to subsequent request.
 
 ### `http-cookie-agent`
 https://www.npmjs.com/package/http-cookie-agent
