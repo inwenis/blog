@@ -20,6 +20,7 @@
 1. Create a pull-request `update-packages-minor`
 ---
 If you're brave and can test/run you project easily:
+
 1. `ncu -u` - updates `packages.json` to all latest versions as shown by `npm-check-updates`
     - this might introduce breaking changes
 1. `npm i` - update `package-lock.json`
@@ -27,6 +28,7 @@ If you're brave and can test/run you project easily:
 1. Create a pull-request `update-packages-major`
 ---
 If you're not brave or can't just YOLO and update all major versions:
+
 1. `npm-check-updates` - check again what is left to update
 1. `npm i that-package@latest` - update major version of of `that-package`
 1. Test your project.
