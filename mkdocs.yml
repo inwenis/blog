@@ -1,1 +1,5 @@
 site_name: My Docs
+nav:
+  - Home: index.md
+  - post8: post8.md
+  - post9: post9.md
