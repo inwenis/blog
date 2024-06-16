@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>post8 - My Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">post8</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../post9/" class="nav-link">post9</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../post9/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#node-packages-updating" class="nav-link">node packages updating</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#tldr" class="nav-link">tl;dr</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#longer-read" class="nav-link">longer read</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="node-packages-updating">node packages updating</h1>
+<h2 id="tldr">tl;dr</h2>
+<ol>
+<li><code>&gt; npm install depcheck -g</code> - install <code>depcheck</code> globally</li>
+<li><code>&gt; depcheck</code> - check for redundant packages</li>
+<li><code>&gt; npm un this-redundant-package</code> - uninstall redundant packages (repeat for all redundant packages)</li>
+<li>Create a pull-request <code>remove-redundant-packages</code></li>
+</ol>
+<hr />
+<ol>
+<li><code>&gt; npm i</code> - make order in <code>node_modules</code></li>
+<li><code>&gt; npm audit</code> - see vulnerability issues</li>
+<li><code>&gt; npm audit fix</code> - fix vulnerability issues that don't require attention</li>
+<li>Create a pull-request <code>fix-vulnerability-issues</code></li>
+</ol>
+<hr />
+<ol>
+<li><code>&gt; npm i npm-check-updates -g</code> - install <code>npm-check-updates</code> globally</li>
+<li><code>&gt; npm-check-updates</code> - see how outdated packages are</li>
+<li><code>&gt; npm outdated</code> - see how outdated packages are</li>
+<li><code>&gt; npm update --save</code> - update packages respecting your semver constraints from <code>packages.json</code></li>
+<li>If you have packages that use major version <code>0.*.*</code> you'll need to manually update these now<ul>
+<li><code>&gt; npm install that-one-package@latest</code></li>
+</ul>
+</li>
+<li>Create a pull-request <code>update-packages-minor</code></li>
+</ol>
+<hr />
+<p>If you're brave and can test/run you project easily:
+1. <code>ncu -u</code> - updates <code>packages.json</code> to all latest versions as shown by <code>npm-check-updates</code>
+    - this might introduce breaking changes
+1. <code>npm i</code> - update <code>package-lock.json</code>
+1. Test your project.
+1. Create a pull-request <code>update-packages-major</code></p>
+<hr />
+<p>If you're not brave or can't just YOLO and update all major versions:
+1. <code>npm-check-updates</code> - check again what is left to update
+1. <code>npm i that-package@latest</code> - update major version of of <code>that-package</code>
+1. Test your project.
+    - .js is dynamically typed so you might have just updated a package that breaks your project but you'll not know until you run your code
+1. Repeat for all packages.
+1. Create a pull-request <code>update-packages-major</code></p>
+<h2 id="longer-read">longer read</h2>
+<p>Need to update dependencies in a node js project? Here are my notes on this.</p>
+<p><code>&gt; npm i</code> (<code>npm install</code>)</p>
+<pre><code>&gt; npm i
+
+added 60 packages, removed 124 packages, changed 191 packages, and audited 522 packages in 13s
+
+96 packages are looking for funding
+  run `npm fund` for details
+
+10 vulnerabilities (2 low, 7 moderate, 1 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+</code></pre>
+<ul>
+<li>installs missing packages in <code>node_modules</code></li>
+<li>removes redundant packages in <code>node_modules</code></li>
+<li>installs correct versions of mismatched packages (if <code>packages-lock.json</code> wants a different version than found in <code>node_modules</code>)</li>
+<li>shows what is going on with packaged in your project</li>
+</ul>
+<p><code>&gt; npm audit</code> - shows a report on vulnerability issues in your dependencies</p>
+<p><code>&gt; npm audit fix</code> - updates packages to address vulnerability issues (updates that do not require attention)</p>
+<p><code>&gt; npm outdated</code> - shows a table with your packages and versions</p>
+<pre><code>$ npm outdated
+Package      Current   Wanted   Latest  Location                  Depended by
+glob          5.0.15   5.0.15    6.0.1  node_modules/glob         dependent-package-name
+nothingness    0.0.3      git      git  node_modules/nothingness  dependent-package-name
+npm            3.5.1    3.5.2    3.5.1  node_modules/npm          dependent-package-name
+local-dev      0.0.3   linked   linked  local-dev                 dependent-package-name
+once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-package-name
+</code></pre>
+<ul>
+<li><code>Current</code> - what is in <code>nodes_modules</code></li>
+<li><code>Wanted</code> - most recent version that respect the version constraint from <code>packages.json</code></li>
+<li><code>Latest</code> - latest version from npm registry</li>
+</ul>
+<p>To update to latest minor+patch versions of your dependencies (<code>Wanted</code>) - <code>npm outdated</code> shows all you need to know but I prefer the output of <code>npm-check-updates</code></p>
+<p><code>&gt; npm i npm-check-updates -g</code> (<code>-g</code> -&gt; global mode - package will be available on your whole machine)</p>
+<p><code>&gt; npm-check-updates</code> - shows where an update will be a major/minor/patch update (I like the colors)</p>
+<pre><code>Checking C:\git\blog\package.json
+[====================] 39/39 100%
+
+ @azure/storage-blob         ^12.5.0  →      ^12.17.0
+ adm-zip                     ^0.4.16  →       ^0.5.12
+ axios                       ^0.27.2  →        ^1.6.8
+ basic-ftp                    ^5.0.1  →        ^5.0.5
+ cheerio                 ^1.0.0-rc.6  →  ^1.0.0-rc.12
+ eslint                      ^8.12.0  →        ^9.2.0
+ eslint-config-prettier       ^8.5.0  →        ^9.1.0
+ eslint-plugin-import        ^2.25.4  →       ^2.29.1
+ fast-xml-parser              ^4.2.4  →        ^4.3.6
+ humanize-duration           ^3.27.3  →       ^3.32.0
+ iconv                        ^3.0.0  →        ^3.0.1
+ jsonwebtoken                 ^9.0.0  →        ^9.0.2
+ luxon                        ^3.4.3  →        ^3.4.4
+</code></pre>
+<h3 id="let-us-update-something">Let us update something</h3>
+<p><code>&gt; npm update</code> - perform updates respecting your semver constraints and update <code>package-lock.json</code></p>
+<p><code>&gt; npm update --save</code> - same as above but also update <code>packages.json</code>, use this one always</p>
+<p><strong>The behavior for packages with major version <code>0.*.*</code> is different than for versions &gt;=<code>1.0.0</code> (see <code>npm help update</code>)</strong></p>
+<p><code>npm update</code> will most likely bump all minor and patch versions for you.</p>
+<p>You can run <code>npm update --save</code> often.</p>
+<h3 id="what-do-the-symbols-in-packagejson-mean">What do the symbols in <code>package.json</code> mean?</h3>
+<p>https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json/25861938#25861938</p>
+<h3 id="npm-update-save-vs-npm-audit-fix"><code>npm update --save</code> vs <code>npm audit fix</code></h3>
+<p><code>npm audit fix</code> will only update packages to fix vulnerability issues</p>
+<p><code>npm update --save</code> will update all packages it can (respecting semver constraints)</p>
+<h3 id="do-i-have-unused-dependencies">Do I have unused dependencies?</h3>
+<p><code>&gt; npm install depcheck -g</code></p>
+<p><code>&gt; depcheck</code> - shows unused dependencies.
+<code>depcheck</code> scans for <code>require</code>/<code>import</code> statements in your code so you might be utilizing a package differently but <code>depcheck</code> will consider it unused (ex. when you import packages using <code>importLazy</code>).</p>
+<h3 id="npm-check">npm-check</h3>
+<p><code>&gt; npm i npm-check -g</code></p>
+<p><code>&gt; npm-check</code> - a different tool to help with dependencies (I didn't use it)</p>
+<h3 id="honorable-mentions">honorable mentions</h3>
+<p><code>&gt; npm ls</code> - list installed packages (from <code>node_modules</code>)</p>
+<p><code>&gt; npm ls axios</code> - show all versions of axios and why we have them</p>
+<p><code>npm ls</code> will not show you origin of not-installed optional dependencies.</p>
+<p>Consider this - you devleop on a <code>win</code> maching and deploy your solution to a <code>linux</code> box.
+On windows (see below) you might think <code>node-gyp-build</code> is not used in your solution.</p>
+<pre><code>&gt; npm ls node-gyp-build
+test-npm@1.0.0 C:\git\test-npm
+`-- (empty)
+</code></pre>
+<p>But on a linux box it will be used:</p>
+<pre><code>&gt; npm ls node-gyp-build
+npm-test-proj@1.0.0 /git/npm-test-proj
+└─┬ kafka-lz4-lite@1.0.5
+  └─┬ piscina@3.2.0
+    └─┬ nice-napi@1.0.2
+      └── node-gyp-build@4.8.1
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
