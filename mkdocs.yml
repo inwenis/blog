@@ -12,3 +12,8 @@ extra:
   analytics:
     provider: google
     property: G-MZ0JN1EDPS
+plugins:
+  - search
+  - mkdocs-simple-hooks:
+      hooks:
+        on_pre_build: "docs.hooks:copy_readme"
