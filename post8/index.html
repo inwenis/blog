@@ -519,20 +519,28 @@
 <li>Create a pull-request <code>update-packages-minor</code></li>
 </ol>
 <hr />
-<p>If you're brave and can test/run you project easily:
-1. <code>ncu -u</code> - updates <code>packages.json</code> to all latest versions as shown by <code>npm-check-updates</code>
-    - this might introduce breaking changes
-1. <code>npm i</code> - update <code>package-lock.json</code>
-1. Test your project.
-1. Create a pull-request <code>update-packages-major</code></p>
+<p>If you're brave and can test/run you project easily:</p>
+<ol>
+<li><code>ncu -u</code> - updates <code>packages.json</code> to all latest versions as shown by <code>npm-check-updates</code><ul>
+<li>this might introduce breaking changes</li>
+</ul>
+</li>
+<li><code>npm i</code> - update <code>package-lock.json</code></li>
+<li>Test your project.</li>
+<li>Create a pull-request <code>update-packages-major</code></li>
+</ol>
 <hr />
-<p>If you're not brave or can't just YOLO and update all major versions:
-1. <code>npm-check-updates</code> - check again what is left to update
-1. <code>npm i that-package@latest</code> - update major version of of <code>that-package</code>
-1. Test your project.
-    - .js is dynamically typed so you might have just updated a package that breaks your project but you'll not know until you run your code
-1. Repeat for all packages.
-1. Create a pull-request <code>update-packages-major</code></p>
+<p>If you're not brave or can't just YOLO and update all major versions:</p>
+<ol>
+<li><code>npm-check-updates</code> - check again what is left to update</li>
+<li><code>npm i that-package@latest</code> - update major version of of <code>that-package</code></li>
+<li>Test your project.<ul>
+<li>.js is dynamically typed so you might have just updated a package that breaks your project but you'll not know until you run your code</li>
+</ul>
+</li>
+<li>Repeat for all packages.</li>
+<li>Create a pull-request <code>update-packages-major</code></li>
+</ol>
 <h2 id="longer-read">longer read</h2>
 <p>Need to update dependencies in a node js project? Here are my notes on this.</p>
 <p><code>&gt; npm i</code> (<code>npm install</code>)</p>

@@ -557,9 +557,11 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 <p>Good read - https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs</p>
 <h1 id="root-ca-stores">root CA stores</h1>
 <h2 id="node">Node</h2>
-<p>It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:
-- https://github.com/nodejs/node/blob/main/src/node_root_certs.h
-- https://github.com/nodejs/node/issues/4175</p>
+<p>It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:</p>
+<ul>
+<li>https://github.com/nodejs/node/blob/main/src/node_root_certs.h</li>
+<li>https://github.com/nodejs/node/issues/4175</li>
+</ul>
 <h2 id="windows">Windows</h2>
 <p>You can view Windows certificates with PowerShell:</p>
 <pre><code class="language-PowerShell">Get-ChildItem -Recurse Cert:
