@@ -1,3 +1,6 @@
+# F# async - be mindful of what you put in async {}
+
+```F#
 open System
 
 let r = Random()
@@ -13,11 +16,14 @@ m () |> Async.RunSynchronously // prints another random number
 let x = m ()
 x |> Async.RunSynchronously // prints another random number
 x |> Async.RunSynchronously // prints same number as above
+```
 
-// Why does it matter that lines 14 and 15 print the same number?
-// Let's consider the following code:
+Why does it matter that lines 14 and 15 print the same number?
+
+Let's consider the following code:
+
+```F#
 // We're sending http requests and if they fail we'd like to retry them
-
 
 #r "System.Net.Http"
 open System.Net.Http
@@ -56,8 +62,10 @@ let retry computation =
 send "http://test" |> retry |> Async.RunSynchronously
 // retrying will fail always with "The request message was already sent. Cannot send the same request message multiple times."
 // This is because just like L14/15 print the same number, here we send the exact same request object and that's not allowed
+```
 
-// the fix
+The fix
+```F#
 let send2 url =
   async {
     let httpRequest = new HttpRequestMessage()
@@ -69,3 +77,4 @@ let send2 url =
   }
 
 send2 "http://test" |> retry |> Async.RunSynchronously
+```
