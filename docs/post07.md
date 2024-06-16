@@ -3,9 +3,10 @@
 ## axios
 
 axios - promise-based HTTP client for node.js
+
 - when used in node.js axios uses http module (https://nodejs.org/api/http.html)
 - in node axios __does not__ support cookies by itself (https://github.com/axios/axios/issues/5742)
-  - there are npm packages that add cookies support to axios
+    - there are npm packages that add cookies support to axios
 - when used in browsers it uses XMLHttpRequest
 - when used in browsers cookies work by default
 

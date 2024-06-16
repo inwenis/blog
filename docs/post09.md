@@ -7,6 +7,7 @@ Keys are used to encrypt connections, certs are used to verify that the key owne
 ## Certificate aka cert
 A certificate proves that a public key belongs to a given entity.
 The cert includes:
+
 - public key
 - information about the key
 - CA's signature validating the cert
