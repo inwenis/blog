@@ -1,6 +1,6 @@
-2024-05-02
+# It will be great, set it up, don't use it, remove it
 
-On ???
+2024-05-02
 
 Today I removed something that I allowed to be created feeling that it is redundant from the beginning.
 
