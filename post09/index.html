@@ -613,7 +613,15 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 <p>Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).</p>
 <p>Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.</p>
 <h2 id="donts-for-node">don't's (for node)</h2>
-<p>Many answers on SO suggest to set <code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> or <code>const httpsAgent = new https.Agent({ rejectUnauthorized: false });</code>. Both are a terrible idea as it tells node to ignore certificate validation. Read more <a href="https://stackoverflow.com/a/53585725/2377787">here</a></p>
+<p>Several answers on SO suggest:</p>
+<ul>
+<li><code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> or </li>
+<li><code>const httpsAgent = new https.Agent({ rejectUnauthorized: false });</code></li>
+</ul>
+<p>Both are terrible ideas - they make your app accept unauthorized connections. They are the equivalent of this conversation:</p>
+<p>"I can't verify this certificate, we can not be sure who we are connecting to" - says Node with care in its voice</p>
+<p>"Doesn't matter, YOLO, carry on" - you reply shrugging your shoulders</p>
+<p>Read more <a href="https://stackoverflow.com/a/53585725/2377787">here</a></p>
 <h2 id="does-for-node">does (for node)</h2>
 <p>Use <a href="https://nodejs.org/api/cli.html#node_extra_ca_certsfile">NODE_EXTRA_CA_CERTS</a>. Alternatively use a library to programmatically give node the missing certificate <a href="https://stackoverflow.com/a/39972054/2377787">link</a></p>
 <p>Good read - https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs</p>
