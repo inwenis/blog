@@ -200,7 +200,18 @@ Website's certificates are usually signed by intermediate CA, which in turn are 
 Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.
 
 ## don't's (for node)
-Many answers on SO suggest to set `NODE_TLS_REJECT_UNAUTHORIZED=0` or `const httpsAgent = new https.Agent({ rejectUnauthorized: false });`. Both are a terrible idea as it tells node to ignore certificate validation. Read more [here](https://stackoverflow.com/a/53585725/2377787)
+Several answers on SO suggest:
+
+- `NODE_TLS_REJECT_UNAUTHORIZED=0` or 
+- `const httpsAgent = new https.Agent({ rejectUnauthorized: false });`
+
+Both are terrible ideas - they make your app accept unauthorized connections. They are the equivalent of this conversation:
+
+"I can't verify this certificate, we can not be sure who we are connecting to" - says Node with care in its voice
+
+"Doesn't matter, YOLO, carry on" - you reply shrugging your shoulders
+
+Read more [here](https://stackoverflow.com/a/53585725/2377787)
 
 ## does (for node)
 Use [NODE_EXTRA_CA_CERTS](https://nodejs.org/api/cli.html#node_extra_ca_certsfile). Alternatively use a library to programmatically give node the missing certificate [link](https://stackoverflow.com/a/39972054/2377787)
