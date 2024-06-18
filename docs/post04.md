@@ -7,11 +7,11 @@
 
 *Don't pretend to handle more than you handle* ~me just now
 
-My team took over some scrapers. After a few months someone reported an issue stating that they're missing data from one of the scrapers. No errors were logged seen by our team.
+My team took over some scrapers. After a few months an issue is reported stating that accounting is missing data from one of the scrapers. No errors were logged and or seen by our team.
 
-My collegaue investivates the issue. Findings:
+My colleague investigates the issue. Findings:
 
-- the data is indeed missing currently
+- most recent data is indeed missing in our data base (it is already available in the API)
 - the data is often delayed (compared to when it's available in the remote API)
 - the data is not time critical but a delay of hours or days is vexing (remember folks - talk to your users or customers)
 - the scraper is using parallelism to send all requests at once (probably to get the data faster)
