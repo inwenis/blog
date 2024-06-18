@@ -4,6 +4,7 @@ theme:
 nav:
   - Home: index.md
   - post01: post01.md
+  - post04: post04.md
   - post06: post06.md
   - post07: post07.md
   - post08: post08.md
