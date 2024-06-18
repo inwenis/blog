@@ -3,7 +3,7 @@
 2023-05-09
 
 *Premature optimization is the root of all evil*
-~some wise guy long ago
+~Donald Knuth
 
 *Don't pretend to handle more than you handle* ~me just now
 
@@ -86,3 +86,9 @@ We agreed to drop the if after realizing that:
 > We have ~30 countries in Europe, even if they all connect with each other there will be at most ~400 gas connections to handle here. We don't know that the if is faster then the iterator. 400 is extremely optimistic. We have 1 entry now, and realistically we will have 10 gasPoints in 5 years.
 
 The conversation wasn't as smooth as I pretend here but we managed.
+
+## Links
+
+[https://wiki.c2.com/?PrematureOptimization](https://wiki.c2.com/?PrematureOptimization)
+
+[https://wiki.c2.com/?ProfileBeforeOptimizing](https://wiki.c2.com/?ProfileBeforeOptimizing)
