@@ -1,7 +1,34 @@
-post 4
+# Short post on premature optimization and error handling
 
-Lasse at work had this issue wwhere someone wrote a scraper and used parallelism to make it faster. The data tho didn't seem to be time critical so the parallelism seems unnecessary. It also caused the scraper to hit the API many time, some requests would fail. The other error in this scraper was the error handling of basically swallowing all errors with a msg "no data found"
+2023-05-09
 
+*Premature optimization is the root of all evil*
+~some wise guy long ago
 
-take away - don't preoptimize
-    - don't handle more erorrs than you can
+*Don't pretend to handle more than you handle* ~me just now
+
+My team took over some scrapers. After a few months someone reported an issue stating that they're missing data from one of the scrapers. No errors were logged seen by our team.
+
+My collegaue investivates the issue. Findings:
+
+- the data is indeed missing currently
+- the data is often delayed (compared to when it's available in the remote API)
+- the data is not time critical but a delay of hours or days is vexing (remember folks - talk to your users or customers)
+- the scraper is using parallelism to send all requests at once (probably to get the data faster)
+- the API doesn't like our intense scraping and bans us from accessing the API, sometimes for hours
+- we never saw any Errors as the error handling looks like this:
+
+```
+try {
+    data = hit the REST API using multiple parallel requests
+    persist(data)
+} catch {
+    log.info("No data found")
+}
+```
+
+## Take away
+
+- talk to your users - in this case to find our that data doesn't need to arrive seconds after being published
+- don't optimize prematurely
+- don't catch all exception pretending you handle them
