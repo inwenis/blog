@@ -32,3 +32,57 @@ try {
 - talk to your users - in this case to find our that data doesn't need to arrive seconds after being published
 - don't optimize prematurely
 - don't catch all exception pretending you handle them
+
+## More venting
+
+I have seen my share of premature optimizations. AFAIR I always managed to have a conversation about the (un)necessity of an optimization and agree to prefer readability/simplicity over premature optimization.
+
+My advice if you see premature optimization - talk to the perp. People do what they consider necessary and right. They might optimize code hoping to save the company money or time.
+
+If you have the experience to know that saving 2kB of RAM in an invoicing app run once a month is not worth using that obscure data structure - talk to those who don't yet know it. Their intentions are good.
+
+I'm pretty sure I'm also guilty of premature optimization, just can't recall any instance as my brain is probably protecting my ego by erasing any memories of such mistakes from my past.
+
+## An example
+
+One example of premature optimization stuck with me. I recall reviewing code as below
+
+
+```C#
+foreach(var gasConnectionPoint in gasPoints)
+{
+    if (gasConnectionPoint.properties.Any())
+    {
+        foreach (var x in properties)
+        {
+            // do sth with x here
+        }
+    }
+}
+```
+
+The review went something like this:
+
+> **me**: drop the if, foreach handles empty collections just fine
+>
+> **author**: but this is better
+>
+> **me**: why?
+>
+> **author**: if the collection is empty we don't even use the iterator
+>
+> **me**: how often is this code run?
+>
+> **author**: currently only for a single entry in gasPoints, but there can be more
+>
+> **me**: how many more and when?
+>
+> **author**: users might create an entry for every gas pipeline connection in Europe
+>
+> **me**: ok, how many is that?
+
+We agreed to drop the if after realizing that:
+
+> We have ~30 countries in Europe, even if they all connect with each other there will be at most ~400 gas connections to handle here. We don't know that the if is faster then the iterator. 400 is extremely optimistic. We have 1 entry now, and realistically we will have 10 gasPoints in 5 years.
+
+The conversation wasn't as smooth as I pretend here but we managed.
