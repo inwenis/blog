@@ -1,0 +1,1 @@
+If you're here to read one of the posts go to [https://programki.eu/](https://programki.eu/).
