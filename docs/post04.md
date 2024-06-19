@@ -37,7 +37,7 @@ try {
 
 I have seen my share of premature optimizations. AFAIR I always managed to have a conversation about the (un)necessity of an optimization and agree to prefer readability/simplicity over premature optimization.
 
-My advice if you see premature optimization - talk to the perp. People do what they consider necessary and right. They might optimize code hoping to save the company money or time.
+If you see premature optimization my advise is "talk to the perp". People do what they consider necessary and right. They might optimize code hoping to save the company money or time.
 
 If you have the experience to know that saving 2kB of RAM in an invoicing app run once a month is not worth using that obscure data structure - talk to those who don't yet know it. Their intentions are good.
 
@@ -55,7 +55,7 @@ foreach(var gasConnectionPoint in gasPoints)
     {
         foreach (var x in gasConnectionPoint.properties.properties)
         {
-            // do sth with x here
+            // do sth with x
         }
     }
 }
