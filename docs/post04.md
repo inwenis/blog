@@ -92,3 +92,5 @@ The conversation wasn't as smooth as I pretend here but we managed.
 [https://wiki.c2.com/?PrematureOptimization](https://wiki.c2.com/?PrematureOptimization)
 
 [https://wiki.c2.com/?ProfileBeforeOptimizing](https://wiki.c2.com/?ProfileBeforeOptimizing)
+
+[https://youtube.com/CodeAesthetics/PrematureOptimization](https://www.youtube.com/watch?v=tKbV6BpH-C8)
