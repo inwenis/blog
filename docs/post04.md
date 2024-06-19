@@ -53,7 +53,7 @@ foreach(var gasConnectionPoint in gasPoints)
 {
     if (gasConnectionPoint.properties.Any())
     {
-        foreach (var x in properties)
+        foreach (var x in gasConnectionPoint.properties.properties)
         {
             // do sth with x here
         }
