@@ -1,1 +1,1 @@
-If you're here to read one of the posts go to [https://programki.eu/](https://programki.eu/).
+If you're here to read the blog - [go to "https://programki.eu/"](https://programki.eu/).
