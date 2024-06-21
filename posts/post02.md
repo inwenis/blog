@@ -1,10 +1,10 @@
 # Exercises in bash/shell/scripting
 
-I think that being fluent in the shell/scripting of you choice allows you to improve your work by 20%. It doesn't take you to another level. You don't suddenly poses the knowlege to implement flawless distributed transactions but you get some things done much faster. Less frustration. I often have/had this thought of "if only I knew bash/PowerShell better I would be able to find this information in minutes".
+Being fluent in shell/scripting allows you to improve your work by 20%. It doesn't take you to another level. You don't suddenly poses the knowledge to implement flawless distributed transactions but some things get done much faster with no frustration.
 
-So I thouth I'll collect exercies for others to practice their shell skills.
+Here is my collection of shell/scripting exercises for others to practice shell skills.
 
-As a side note - I'm still not sure if I should learn more PowerShell or try out a different Shell. Or perhaps do everything in F# since you can have .fsx files. PowerShell is just so ugly.
+A side note - I'm still not sure if I should learn more PowerShell, try out a different shell or do everything in F# fsx. PowerShell is just so ugly ;(
 
 ## Exercise 1
 
@@ -12,17 +12,25 @@ What were the arguments of `DetectOrientationScript` function in https://github.
 
 Try to do it without `git log -S` <- TODO - hide these
 
-solution with git:
+Solution with git:
+```
 git log -S DetectOrientationScript
+```
 
 Why do these returns differ?
+```
 git log -S DetectOrientationScript -p | sls DetectOrientationScript
 git log -p | sls "^\+.*DetectOrientationScript"
+```
 
 Measure time of different scripts/commands
--> powershell measure-command
+```PowerShell
+measure-command
+```
 
-dump git log from `git log -p | sls "^\+.*DetectOrientationScript"` to file so it's faster, check if it's faster
+What is faster?
+  - `git log -p | sls "^\+.*DetectOrientationScript"`
+  - or doing the same but reading git log from file?
 
 
 ## Exercise 2
