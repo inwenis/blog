@@ -567,7 +567,7 @@ TotalSeconds      : 3.47
 real    0m3.471s
 ...
 </code></pre>
-<p>Times without <code>git log -S</code> doing the heavy lifting times look different:</p>
+<p>Without <code>git log -S</code> doing heavy lifting times look different:</p>
 <pre><code class="language-PowerShell">[PowerShell 7.4]
 &gt; @(1..10) | % { Measure-Command { git log -p | sls &quot;^\+.*\sDetectOrientationScript&quot; } } | % { $_.TotalSeconds } | Measure-Object -Average
 
