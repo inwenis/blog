@@ -356,15 +356,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#https-agents-handle-creatingclosing-sockets-tcp-etc-they-talk-to-the-os-manage-connection-to-hosts" class="md-nav__link">
-    <span class="md-ellipsis">
-      &gt; http/s agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#cookies" class="md-nav__link">
     <span class="md-ellipsis">
       cookies
@@ -586,15 +577,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#https-agents-handle-creatingclosing-sockets-tcp-etc-they-talk-to-the-os-manage-connection-to-hosts" class="md-nav__link">
-    <span class="md-ellipsis">
-      &gt; http/s agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#cookies" class="md-nav__link">
     <span class="md-ellipsis">
       cookies
@@ -787,8 +769,11 @@ const http = require('node:http');
 })();
 </code></pre>
 <hr />
-<p><em>What are agents responsible for?</em></p>
-<h2 id="https-agents-handle-creatingclosing-sockets-tcp-etc-they-talk-to-the-os-manage-connection-to-hosts">&gt; <code>http</code>/<code>s</code> agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.</h2>
+<p><em>What are <code>http</code>/<code>s</code> agents responsible for?</em></p>
+<blockquote>
+<p><code>http</code>/<code>s</code> agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.</p>
+</blockquote>
+<hr />
 <h2 id="cookies">cookies</h2>
 <p>Without extra packages you need to code reading response headers, look for <code>Set-Cookie</code> headers. Store cookies somewhere. Code adding cookie headers to subsequent request.</p>
 <h3 id="http-cookie-agent"><code>http-cookie-agent</code></h3>
