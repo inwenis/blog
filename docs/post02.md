@@ -131,4 +131,4 @@ Average  : 27.33900077
 ```
 
 ### Reflections
-Bash is faster then PowerShell. PowerShell 7 is **much** faster then PowerShell 5. It was surprisingly easy to get the average with `Measure-Object` in PowerShell. It was surprisingly difficult in bash to get the average.
+Bash is faster then PowerShell. PowerShell 7 is **much** faster then PowerShell 5. It was surprisingly easy to get the average with `Measure-Object` in PowerShell and surprisingly difficult in bash.
