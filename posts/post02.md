@@ -10,28 +10,70 @@ A side note - I'm still not sure if I should learn more PowerShell, try out a di
 
 What were the arguments of `DetectOrientationScript` function in https://github.com/tesseract-ocr/tesseract when it was first introduced?
 
-Try to do it without `git log -S` <- TODO - hide these
-
-Solution with git:
-```
-git log -S DetectOrientationScript
+Answer:
+```C++
+bool DetectOrientationScript(int& orient_deg, float& orient_conf, std::string& script, float& script_conf);
 ```
 
-Why do these returns differ?
-```
-git log -S DetectOrientationScript -p | sls DetectOrientationScript
-git log -p | sls "^\+.*DetectOrientationScript"
-```
-
-Measure time of different scripts/commands
 ```PowerShell
-measure-command
+[PowerShell]
+> git log -S DetectOrientationScript # get sha of oldest commit
+> git show bc95798e011a39acf9778b95c8d8c5847774cc47 | sls DetectOrientationScript
+
+[bash]
+> git log -S DetectOrientationScript # get sha of oldest commit
+> git show bc95798e011a39acf9778b95c8d8c5847774cc47 | grep DetectOrientationScript
 ```
 
-What is faster?
-  - `git log -p | sls "^\+.*DetectOrientationScript"`
-  - or doing the same but reading git log from file?
+One-liner:
+```PowerShell
+[PowerShell]
+> git log -S " DetectOrientationScript" -p | sls DetectOrientationScript | select -Last 1
 
+[bash]
+> git log -S " DetectOrientationScript" -p | grep DetectOrientationScript | tail -1
+```
+
+### Bonus - execution times
+```PowerShell
+[PowerShell 7.4]
+> measure-command { git log -S " DetectOrientationScript" -p | sls DetectOrientationScript | select -Last 1 }
+...
+TotalSeconds      : 3.47
+...
+
+[bash]
+> time git log -S " DetectOrientationScript" -p | grep DetectOrientationScript | tail -1
+...
+real    0m3.471s
+...
+```
+
+Times without `git log -S` doing the heavy lifting times looks different:
+
+```PowerShell
+[PowerShell 7.4]
+> @(1..10) | % { Measure-Command { git log -p | sls "^\+.*\sDetectOrientationScript" } } | % { $_.TotalSeconds } | Measure-Object -Average
+
+Count    : 10
+Average  : 9.27122774
+```
+```PowerShell
+[PowerShell 5.1]
+> @(1..10) | % { Measure-Command { git log -p | sls "^\+.*\sDetectOrientationScript" } } | % { $_.TotalSeconds } | Measure-Object -Average
+
+Count    : 10
+Average  : 27.33900077
+```
+```bash
+[bash]
+> seq 10 | xargs -I '{}' bash -c "TIMEFORMAT='%3E' ; time git log -p | grep -E '^\+.*\sDetectOrientationScript' > /dev/null" 2> times
+> awk '{s+=$1} END {print s}' times
+6.7249 # For convince I moved to dot one place to the left
+```
+
+### Reflections
+Bash is faster then PowerShell. PowerShell 7 is **much** faster then PowerShell 5. It was surprisingly easy to get the average with `Measure-Object` in PowerShell. It was surprisingly difficult in bash to get the average.
 
 ## Exercise 2
 
