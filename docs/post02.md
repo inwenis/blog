@@ -8,7 +8,7 @@ A side note - I'm still not sure if I should learn more PowerShell, try out a di
 
 ## Exercise 1
 
-What were the arguments of `DetectOrientationScript` function in https://github.com/tesseract-ocr/tesseract when it was first introduced?
+What were the arguments of `DetectOrientationScript` function in [https://github.com/tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract) when it was first introduced?
 
 Scroll down for answer
 
