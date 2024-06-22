@@ -15,11 +15,3 @@ Do sth like:
 https://explainshell.com/explain?cmd=git+xargs+du+-c
 
 https://github.com/jlevy/the-art-of-command-line?tab=readme-ov-file#windows-only
-
-## Exercise 3
-
-Real-life example - I once had to find all http/s link to a specific domain in the slack export as someone used a website and publicly shared prioriatery code.
-
-Exerice - find all distinct http links in https://github.com/tesseract-ocr/tesseract repo
-
-`ls -r -file | % { sls -path $_.FullName -Pattern http } | % { $_.line } | sort | select -Unique | Measure-Object`

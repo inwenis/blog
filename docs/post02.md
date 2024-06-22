@@ -6,11 +6,17 @@ Here is my collection of shell/scripting exercises for others to practice shell 
 
 A side note - I'm still not sure if I should learn more PowerShell, try out a different shell or do everything in F# fsx. PowerShell is just so ugly ;(
 
+Scroll down for answers
+
 ## Exercise 1
 
 What were the arguments of `DetectOrientationScript` function in [https://github.com/tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract) when it was first introduced?
 
-Scroll down for answer
+## Exercise 3
+
+This happened to me once - I had to find all http/s links to a specific domains in the export of our company's messages as someone shared proprietary code on websites available publicly.
+
+Exercise - find all distinct http/s links in [https://github.com/tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract)
 
 .
 
@@ -67,6 +73,8 @@ Scroll down for answer
 .
 
 .
+
+## Exercise 1 - answer
 
 Answer:
 ```C++
@@ -132,3 +140,19 @@ Average  : 27.33900077
 
 ### Reflections
 Bash is faster then PowerShell. PowerShell 7 is **much** faster then PowerShell 5. It was surprisingly easy to get the average with `Measure-Object` in PowerShell and surprisingly difficult in bash.
+
+## Exercise 3 - answer
+
+```PowerShell
+[PowerShell 7.4]
+> ls -r -file | % { sls -path $_.FullName -pattern https?:.* -CaseSensitive } | % { $_.Matches[0].Value } | sort | select -Unique
+
+# finds 234 links
+```
+
+```bash
+[bash]
+> find . -type f -not -path './.git/*' | xargs grep -E https?:.* -ho | sort | uniq
+
+# finds 234 links
+```
