@@ -107,7 +107,7 @@ real    0m3.471s
 ...
 ```
 
-Times without `git log -S` doing the heavy lifting times look different:
+Without `git log -S` doing heavy lifting times look different:
 
 ```PowerShell
 [PowerShell 7.4]
