@@ -44,9 +44,11 @@ const http = require('node:http');
 ```
 
 ---
-_What are agents responsible for?_
+_What are `http`/`s` agents responsible for?_
+
 
 > `http`/`s` agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.
+
 ---
 
 ## cookies
