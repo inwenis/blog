@@ -262,6 +262,36 @@ This is how I got to the answer:
 > cat .\sorted | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_" }
 ```
 
+```F#
+[F#]
+open System.IO
+open System.Text.RegularExpressions
+
+let lines = File.ReadAllLines("HDFS.log")
+
+let a =
+    lines
+    |> Array.filter (fun x -> x.Contains("Served block") || x.Contains("Got exception while serving"))
+
+a
+// |> Array.take 10000
+|> Array.map (fun x ->
+    let m = Regex.Match(x, "(Served block|Got exception while serving).*/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})")
+    m.Groups[2].Value,
+    match m.Groups[1].Value with
+    | "Served block"                -> true
+    | "Got exception while serving" -> false )
+|> Array.groupBy fst
+|> Array.map (fun (key, group) ->
+    let total = group.Length
+    let failed = group |> Array.map snd |> Array.filter not |> Array.length
+    key, (decimal failed)/(decimal total)
+    )
+|> Array.sortBy fst
+|> Array.map (fun (i,m) -> sprintf "%s  %.15f" i m)
+|> fun x -> File.AppendAllLines("fsout", x)
+
+```
 
 ## Exercise 3 - answer
 
