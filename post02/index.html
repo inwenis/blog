@@ -792,6 +792,35 @@ Average  : 27.33900077
 &gt; cat .\sorted -Head 10000 | group -Property {$_ -replace &quot;nk|ok&quot;,&quot;&quot;} | % { $g = $_.group | ? {$_.contains(&quot;nk&quot;) }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output &quot;$_&quot; }
 &gt; cat .\sorted | group -Property {$_ -replace &quot;nk|ok&quot;,&quot;&quot;} | % { $g = $_.group | ? {$_.contains(&quot;nk&quot;) }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output &quot;$_&quot; }
 </code></pre>
+<pre><code class="language-F#">[F#]
+open System.IO
+open System.Text.RegularExpressions
+
+let lines = File.ReadAllLines(&quot;HDFS.log&quot;)
+
+let a =
+    lines
+    |&gt; Array.filter (fun x -&gt; x.Contains(&quot;Served block&quot;) || x.Contains(&quot;Got exception while serving&quot;))
+
+a
+// |&gt; Array.take 10000
+|&gt; Array.map (fun x -&gt;
+    let m = Regex.Match(x, &quot;(Served block|Got exception while serving).*/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&quot;)
+    m.Groups[2].Value,
+    match m.Groups[1].Value with
+    | &quot;Served block&quot;                -&gt; true
+    | &quot;Got exception while serving&quot; -&gt; false )
+|&gt; Array.groupBy fst
+|&gt; Array.map (fun (key, group) -&gt;
+    let total = group.Length
+    let failed = group |&gt; Array.map snd |&gt; Array.filter not |&gt; Array.length
+    key, (decimal failed)/(decimal total)
+    )
+|&gt; Array.sortBy fst
+|&gt; Array.map (fun (i,m) -&gt; sprintf &quot;%s  %.15f&quot; i m)
+|&gt; fun x -&gt; File.AppendAllLines(&quot;fsout&quot;, x)
+
+</code></pre>
 <h2 id="exercise-3-answer">Exercise 3 - answer</h2>
 <pre><code class="language-PowerShell">[PowerShell 7.4]
 &gt; ls -r -file | % { sls -path $_.FullName -pattern https?:.* -CaseSensitive } | % { $_.Matches[0].Value } | sort | select -Unique
