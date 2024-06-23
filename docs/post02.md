@@ -12,6 +12,22 @@ Scroll down for answers
 
 What were the arguments of `DetectOrientationScript` function in [https://github.com/tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract) when it was first introduced?
 
+## Exercise 2
+
+Get `Hadoop distributed file system log` from [https://github.com/logpai/loghub?tab=readme-ov-file](https://github.com/logpai/loghub?tab=readme-ov-file)
+
+Find the ratio of (failed block serving)/(failed block serving + successful block serving) for each IP
+
+The result should like:
+```
+...
+10.251.43.210  0.452453987730061
+10.251.65.203  0.464609355865785
+10.251.65.237  0.455237129089526
+10.251.66.102  0.452124935995904
+...
+```
+
 ## Exercise 3
 
 This happened to me once - I had to find all http/s links to a specific domains in the export of our company's messages as someone shared proprietary code on websites available publicly.
@@ -140,6 +156,112 @@ Average  : 27.33900077
 
 ### Reflections
 Bash is faster then PowerShell. PowerShell 7 is **much** faster then PowerShell 5. It was surprisingly easy to get the average with `Measure-Object` in PowerShell and surprisingly difficult in bash.
+
+## Exercise 2 - answer
+
+```PowerShell
+[PowerShell 7.4]
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" -replace ":","" } | % { $_ -replace "(ok|nk)/(.*)", "`${2} `${1}"} | sort > sorted
+> cat .\sorted | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_" }
+```
+
+This is how I got to the answer:
+```PowerShell
+> sls "Served block" -Path .\HDFS.log | select -first 10
+> sls "Served block|Got exception while serving" -Path .\HDFS.log | select -first 10
+> sls "Served block|Got exception while serving" -Path .\HDFS.log | select -first 100
+> sls "Served block|Got exception while serving" -Path .\HDFS.log | select -first 1000
+> sls "Served block.*|Got exception while serving" -Path .\HDFS.log | select -first 1000
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | select -first 1000
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log -raw | select -first 1000
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log -raw | select matches -first 1000
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log -raw | select Matches -first 1000
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log -raw | select Matches
+> $a = sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log -raw
+> $a[0]
+> get-type $a[0]
+> Get-TypeData $a
+> $a[0]
+> $a[0].Matches[0].Value
+> $a = sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log
+> $a[0]
+> $a[0].Matches[0].Value
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" }
+> "asdf" -replace "a","b"
+> "asdf" -replace "a","b" -replace "d","x"
+> "asdf" -replace "a.","b" -replace "d","x"
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk" }
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" }
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" -replace ":","" }
+> "aaxxaa" -replace "a.","b"
+> "aaxxaa" -replace "a.","b$0"
+> "aaxxaa" -replace "a.","b$1"
+> "aaxxaa" -replace "a.","b${1}"
+> "aaxxaa" -replace "a.","b${0}"
+> "aaxxaa" -replace "a.","b`${0}"
+> "okaaxxokaa" -replace "(ok|no)aa","_`{$1}_"
+> "okaaxxokaa" -replace "(ok|no)aa","_`${1}_"
+> "okaaxxokaa" -replace "(ok|no)aa","_`${1}_`${0}"
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" -replace ":","" } | % { $_ -replace "(ok|nk)/(.*)", "`${2} `${1}"}
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" -replace ":","" } | % { $_ -replace "(ok|nk)/(.*)", "`${2} `${1}"} | sort
+> sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" -replace ":","" } | % { $_ -replace "(ok|nk)/(.*)", "`${2} `${1}"} | sort > sorted
+> cat .\sorted -First 10
+> cat | group
+> cat | group -Property {$_}
+> cat .\sorted | group -Property {$_}
+> cat .\sorted -Head 10 | group -Property {$_}
+> cat .\sorted -Head 100 | group -Property {$_}
+> cat .\sorted -Head 1000 | group -Property {$_}
+> cat .\sorted -Head 10000 | group -Property {$_}
+> cat .\sorted -Head 10000 | group -Property {$_} | select name,count
+> cat .\sorted | group -Property {$_} | select name,count
+> cat .\sorted | group -Property {$_ -replace "nk|ok",""}
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""}
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, $g.Length / $_.count }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, $g.Length, $_.count }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, $g.Length / $_.count }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, $g.Length, $_.count }
+> $__
+> $__[0]
+> $__[1]
+> $__[2]
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, $g.Length, $_.count }
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, $g.Length, $_.count }
+> $a[0]
+> $a[1]
+> $a[2]
+> $a[1].GetType()
+> $a[2].GetType()
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, ($g.Length) / ($_.count) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $_.name, (($g.Length) / ($_.count)) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; ,$_.name, (($g.Length) / ($_.count)) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; @($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; ,@($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; return ,@($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; [Array] ,@($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; [Array]@($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; return ,$_.name, (($g.Length) / ($_.count)) }
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; return ,$_.name, (($g.Length) / ($_.count)) }
+> $a[0]
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; return ,($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; return ,($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; return ,@($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; ,@($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))) }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); $x }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); ,$x }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x }
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x }
+> $a[0]
+> $a[0][0]
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { wirte-output "$_[0]" }
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_[0]" }
+> $a = cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_[0]" }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_[0]" }
+> cat .\sorted -Head 10000 | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_" }
+> cat .\sorted | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_" }
+```
+
 
 ## Exercise 3 - answer
 
