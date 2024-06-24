@@ -10,6 +10,7 @@ nav:
   - post07: post07.md
   - post08: post08.md
   - post09: post09.md
+  - post12: post12.md
 extra:
   analytics:
     provider: google
