@@ -2,7 +2,7 @@
 
 ## tl;dr
 
-In PowerShell in you want to return an array instead of one element of the array at the time do this:
+In PowerShell if you want to return an array instead of one element of the array at the time do this:
 ```PowerShell
 > @(1..2) | % { $a = "a" * $_; @($a,$_) } # wrong! will pipe/return 1 element at a time
 > @(1..2) | % { $a = "a" * $_; ,@($a,$_) } # correct! will pipe/return pairs
