@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../post04/">
+        <link rel="prev" href="../post09/">
       
-      
-        <link rel="next" href="../post07/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>post06 - programki.eu</title>
+        <title>post12 - programki.eu</title>
       
     
     
@@ -72,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#it-will-be-great-set-it-up-dont-use-it-remove-it" class="md-skip">
+        <a href="#powershell-quirk" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              post06
+              post12
             
           </span>
         </div>
@@ -278,19 +276,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../post06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -299,7 +288,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -368,10 +356,30 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../post12/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    post12
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -380,6 +388,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      tl;dr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#longer-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      Longer read
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -404,6 +450,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      tl;dr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#longer-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      Longer read
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -417,15 +489,126 @@
                   
 
 
-<h1 id="it-will-be-great-set-it-up-dont-use-it-remove-it">It will be great, set it up, don't use it, remove it</h1>
-<p>2024-05-02</p>
-<p>Today, I removed something I allowed to be created despite initially feeling it was redundant.</p>
-<p>A year ago, a student found a tool to auto-generate documentation for our internal SDK from code annotations. They proposed embedding this documentation in our Continuous Integration pipeline. Although the idea sounded good on paper, I felt it wouldn’t be used by our team. However, the team was enthusiastic.</p>
-<p>Everyone in our team has the SDK's git repo on their machine, and we rely on IntelliSense and the code for documentation. It seemed unlikely that we would change our habits since the new documentation wouldn’t be easier to use than just using F12 to view the source code.</p>
-<p>Despite my doubts, I allowed this feature as the team lead. I had already rejected a few initiatives from that student and didn’t want to kill their motivation. I wanted to let them work on something they found interesting. There was a slight chance I was wrong and the documentation might be used.</p>
-<p>Today, a year later, I noticed the docs website no longer works. It had been down for some time, and no one noticed because no one used it. I removed any trace of the published documentation.</p>
-<p>This made me reflect: was it wrong to allow something to be created that never paid off?</p>
-<p>In this case, the investment was small. The gain was that the student got to work on something interesting. So, I think it was right to let our team try it out and remove it once we were certain it wasn’t used</p>
+<h1 id="powershell-quirk">PowerShell quirk</h1>
+<h2 id="tldr">tl;dr</h2>
+<p>In PowerShell in you want to return an array instead of one element of the array at the time do this:</p>
+<pre><code class="language-PowerShell">&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } # wrong! will pipe/return 1 element at a time
+&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } # correct! will pipe/return pairs
+</code></pre>
+<p><strong>Beware! Result of both snippets will be displayed in the exact same way even though they have different types!</strong>
+See below:</p>
+<pre><code class="language-PowerShell">&gt; @(1,2,3,4)
+1
+2
+3
+4
+&gt; @((1,2),(3,4))
+1
+2
+3
+4
+</code></pre>
+<p>To check types of you result</p>
+<pre><code class="language-PowerShell">&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
+&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
+# Alternatively
+&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } | Get-Member -name GetType
+&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | Get-Member -name GetType
+# Get-Member only shows output for every distinct type
+</code></pre>
+<h2 id="longer-read">Longer read</h2>
+<p>Occasionally I have a fist fight with PS to return an Array instead of one element at a time. PS is a tough oponent. I think I get it now though.</p>
+<p>The comma <code>,</code> in PS is a binary and unary operator. You can use it with a single or 2 arguments.</p>
+<pre><code class="language-PowerShell">&gt; ,1 # as an unary operator the comma creates an array with 1 member
+1
+&gt; 1,2 # as an binary operator the comma creates an array with 2 members
+1
+2
+</code></pre>
+<p>Beware that both an array[] and array[][] will be displayed the same way. <code>$y</code> is an array[][], it is printed the same way to the output as <code>$x</code></p>
+<pre><code class="language-PowerShell">&gt; $x = @(1,2,3,4) ; $x.GetType().Name ; $x[0].GetType().Name ; $x
+Object[]
+Int32
+1
+2
+3
+4
+&gt; $y = @((1,2),(3,4)) ; $y.GetType().Name ; $y[0].GetType().Name ; $y
+Object[]
+Object[]
+1
+2
+3
+4
+</code></pre>
+<p>If you're trying to return an array of pairs:</p>
+<pre><code class="language-PowerShell">&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } # wrong
+a
+1
+aa
+2
+&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } # correct!
+a
+1
+aa
+2
+# Even though the result looks like a flat array this this time it's an array of arrays
+&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } | Get-Member -name GetType # we get strings and ints
+
+   TypeName: System.String
+
+Name    MemberType Definition
+----    ---------- ----------
+GetType Method     type GetType()
+
+   TypeName: System.Int32
+
+Name    MemberType Definition
+----    ---------- ----------
+GetType Method     type GetType()
+
+&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | Get-Member -name GetType # we get arrays
+
+   TypeName: System.Object[]
+
+Name    MemberType Definition
+----    ---------- ----------
+GetType Method     type GetType()
+
+</code></pre>
+<p>More on printing your arrays of pairs:</p>
+<pre><code class="language-PowerShell">&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-output # write-output will &quot;unwind&quot; your array
+a
+1
+aa
+2
+&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-host
+a 1
+aa 2
+&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | % { write-output &quot;$_&quot; }
+a 1
+aa 2
+&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-output -NoEnumerate # returns an array of arrays but it's printed as if it's a flat array
+a
+1
+aa
+2
+</code></pre>
+<p>This <a href="https://stackoverflow.com/a/29985418/2377787">https://stackoverflow.com/a/29985418/2377787</a> explains how <code>@()</code> works in PS.</p>
+<pre><code class="language-PowerShell">&gt; $a='A','B','C'
+&gt; $b=@($a;)
+&gt; $a
+A
+B
+C
+&gt; $b
+A
+B
+C
+&gt; [Object]::ReferenceEquals($a, $b)
+False
+</code></pre>
+<p>Above <code>$a;</code> is understood as <code>$a</code> is a collection, collections should be enumerated and each item is passed to the pipeline. <code>@($a;)</code> sees 3 elements but not the original array and creates an array from the 3 elements. In PS <code>@($collection)</code> creates a copy of <code>$collection</code>. <code>@(,$collection)</code> - creates an array with a single element <code>$collection</code>.</p>
 
 
 
