@@ -695,7 +695,7 @@ Average  : 27.33900077
 <h2 id="exercise-2-answer">Exercise 2 - answer</h2>
 <pre><code class="language-PowerShell">[PowerShell 7.4]
 &gt; sls &quot;Served block.*|Got exception while serving.*&quot; -Path .\HDFS.log | % { $_.Matches[0].Value -replace &quot;Served block.*/&quot;,&quot;ok/&quot; -replace &quot;Got exception while serving.*/&quot;,&quot;nk/&quot; -replace &quot;:&quot;,&quot;&quot; } | % { $_ -replace &quot;(ok|nk)/(.*)&quot;, &quot;`${2} `${1}&quot;} | sort &gt; sorted
-&gt; cat .\sorted | group -Property {$_ -replace &quot;nk|ok&quot;,&quot;&quot;} | % { $g = $_.group | ? {$_.contains(&quot;nk&quot;) }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output &quot;$_&quot; }
+&gt; cat .\sorted | group -Property {$_ -replace &quot;nk|ok&quot;,&quot;&quot;} | % { $g = $_.group | ? {$_.contains(&quot;nk&quot;) }; ,@($_.name, ($g.Length/$_.count)) } | write-host
 </code></pre>
 <p>This is how I got to the answer:</p>
 <pre><code class="language-PowerShell">&gt; sls &quot;Served block&quot; -Path .\HDFS.log | select -first 10
