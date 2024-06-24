@@ -162,7 +162,7 @@ Bash is faster then PowerShell. PowerShell 7 is **much** faster then PowerShell 
 ```PowerShell
 [PowerShell 7.4]
 > sls "Served block.*|Got exception while serving.*" -Path .\HDFS.log | % { $_.Matches[0].Value -replace "Served block.*/","ok/" -replace "Got exception while serving.*/","nk/" -replace ":","" } | % { $_ -replace "(ok|nk)/(.*)", "`${2} `${1}"} | sort > sorted
-> cat .\sorted | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; $x = @($_.name, (($g.Length) / ($_.count))); return ,$x } | % { write-output "$_" }
+> cat .\sorted | group -Property {$_ -replace "nk|ok",""} | % { $g = $_.group | ? {$_.contains("nk") }; ,@($_.name, ($g.Length/$_.count)) } | write-host
 ```
 
 This is how I got to the answer:
