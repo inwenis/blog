@@ -2,7 +2,7 @@
 draft: false
 date: 2024-06-24
 categories:
-  - Power Shell
+  - PowerShell
 ---
 
 # PowerShell quirk
