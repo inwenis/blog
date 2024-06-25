@@ -1,16 +1,15 @@
 site_name: programki.eu
 theme:
   name: material
+features:
+    - navigation.sections
+plugins:
+  - blog:
+      blog_dir: . 
+  - search
+  - tags
 nav:
-  - Home: index.md
-  - post01: post01.md
-  - post02: post02.md
-  - post04: post04.md
-  - post06: post06.md
-  - post07: post07.md
-  - post08: post08.md
-  - post09: post09.md
-  - post12: post12.md
+  - index.md
 extra:
   analytics:
     provider: google

@@ -1,4 +1,5 @@
-# My blog about programming & other stuff
+# Blog
+## My blog about programming & other stuff
 
 If you find a typo or would like to improve my posts feel free to submit a pull request to [https://github.com/inwenis/blog](https://github.com/inwenis/blog).
 

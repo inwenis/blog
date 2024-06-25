@@ -1,3 +1,10 @@
+---
+draft: false
+date: 2021-06-12
+categories:
+  - 'F Sharp'
+---
+
 # F# async - be mindful of what you put in async {}
 
 ```F#

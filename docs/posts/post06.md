@@ -1,3 +1,11 @@
+---
+draft: false
+date: 2024-06-17
+categories:
+  - General coding
+  - Team lead
+---
+
 # It will be great, set it up, don't use it, remove it
 
 2024-05-02

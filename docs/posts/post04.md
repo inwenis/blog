@@ -1,6 +1,11 @@
-# Short post on premature optimization and error handling
+---
+draft: false
+date: 2023-05-09
+categories:
+  - General coding
+---
 
-2023-05-09
+# Short post on premature optimization and error handling
 
 *Premature optimization is the root of all evil*
 ~Donald Knuth

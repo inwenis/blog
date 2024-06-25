@@ -1,3 +1,14 @@
+---
+draft: false
+date: 2022-10-28
+categories:
+  - PowerShell
+  - bash
+  - scripting
+  - F Sharp
+  - exercises
+---
+
 # Exercises in bash/shell/scripting
 
 Being fluent in shell/scripting allows you to improve your work by 20%. It doesn't take you to another level. You don't suddenly poses the knowledge to implement flawless distributed transactions but some things get done much faster with no frustration.
