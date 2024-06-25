@@ -1,3 +1,10 @@
+---
+draft: false
+date: 2024-06-24
+categories:
+  - PowerShell
+---
+
 # PowerShell quirk
 
 ## tl;dr

@@ -1,3 +1,13 @@
+---
+draft: false
+date: 2024-05-18
+categories:
+  - certificates
+  - keys
+  - SSL
+  - HTTPS
+---
+
 # Notes on keys, certs, certificates, HTTPS, SSL, SSH, TLS
 
 key != cert (a key is different from a certificate)

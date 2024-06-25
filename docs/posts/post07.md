@@ -1,3 +1,13 @@
+---
+draft: false
+date: 2024-05-06
+categories:
+  - node
+  - js
+  - axios
+  - cookies
+---
+
 # axios, cookies & more
 
 ## axios

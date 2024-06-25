@@ -1,3 +1,13 @@
+---
+draft: false
+date: 2024-05-09
+categories:
+  - node
+  - npm
+  - js
+  - dependencies
+---
+
 # node packages updating
 
 ## tl;dr
