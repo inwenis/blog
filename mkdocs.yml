@@ -1,8 +1,6 @@
 site_name: programki.eu
 theme:
   name: material
-features:
-    - navigation.sections
 plugins:
   - blog:
       blog_dir: . 
