@@ -1,0 +1,1242 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../keys/">
+      
+      
+        <link rel="next" href="../npm/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.26">
+    
+    
+      
+        <title>node - programki.eu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-MZ0JN1EDPS"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-MZ0JN1EDPS",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-MZ0JN1EDPS",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#node" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="programki.eu" class="md-header__button md-logo" aria-label="programki.eu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            programki.eu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              node
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="programki.eu" class="md-nav__button md-logo" aria-label="programki.eu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    programki.eu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../f-sharp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    F Sharp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../general-coding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    General coding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTPS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../powershell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PowerShell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../team-lead/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Team lead
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../axios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    axios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    certificates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cookies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    exercises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../js/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../keys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+      
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    node
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../npm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    npm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    scripting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content" data-md-component="content">
+    <div class="md-content__inner">
+      <header class="md-typeset">
+        <h1 id="node">node</h1>
+      </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2024-05-09 00:00:00">May 9, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">node</a>, 
+              <a href="../npm/" class="md-meta__link">npm</a>, 
+              <a href="../js/" class="md-meta__link">js</a>, 
+              <a href="../dependencies/" class="md-meta__link">dependencies</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="node-packages-updating"><a class="toclink" href="../../2024/05/09/node-packages-updating/">node packages updating</a></h2>
+<h3 id="tldr"><a class="toclink" href="../../2024/05/09/node-packages-updating/#tldr">tl;dr</a></h3>
+<ol>
+<li><code>&gt; npm install depcheck -g</code> - install <code>depcheck</code> globally</li>
+<li><code>&gt; depcheck</code> - check for redundant packages</li>
+<li><code>&gt; npm un this-redundant-package</code> - uninstall redundant packages (repeat for all redundant packages)</li>
+<li>Create a pull-request <code>remove-redundant-packages</code></li>
+</ol>
+<hr />
+<ol>
+<li><code>&gt; npm i</code> - make order in <code>node_modules</code></li>
+<li><code>&gt; npm audit</code> - see vulnerability issues</li>
+<li><code>&gt; npm audit fix</code> - fix vulnerability issues that don't require attention</li>
+<li>Create a pull-request <code>fix-vulnerability-issues</code></li>
+</ol>
+<hr />
+<ol>
+<li><code>&gt; npm i npm-check-updates -g</code> - install <code>npm-check-updates</code> globally</li>
+<li><code>&gt; npm-check-updates</code> - see how outdated packages are</li>
+<li><code>&gt; npm outdated</code> - see how outdated packages are</li>
+<li><code>&gt; npm update --save</code> - update packages respecting your semver constraints from <code>packages.json</code></li>
+<li>If you have packages that use major version <code>0.*.*</code> you'll need to manually update these now<ul>
+<li><code>&gt; npm install that-one-package@latest</code></li>
+</ul>
+</li>
+<li>Create a pull-request <code>update-packages-minor</code></li>
+</ol>
+<hr />
+<p>If you're brave and can test/run you project easily:</p>
+<ol>
+<li><code>ncu -u</code> - updates <code>packages.json</code> to all latest versions as shown by <code>npm-check-updates</code><ul>
+<li>this might introduce breaking changes</li>
+</ul>
+</li>
+<li><code>npm i</code> - update <code>package-lock.json</code></li>
+<li>Test your project.</li>
+<li>Create a pull-request <code>update-packages-major</code></li>
+</ol>
+<hr />
+<p>If you're not brave or can't just YOLO and update all major versions:</p>
+<ol>
+<li><code>npm-check-updates</code> - check again what is left to update</li>
+<li><code>npm i that-package@latest</code> - update major version of of <code>that-package</code></li>
+<li>Test your project.<ul>
+<li>.js is dynamically typed so you might have just updated a package that breaks your project but you'll not know until you run your code</li>
+</ul>
+</li>
+<li>Repeat for all packages.</li>
+<li>Create a pull-request <code>update-packages-major</code></li>
+</ol>
+<h3 id="longer-read"><a class="toclink" href="../../2024/05/09/node-packages-updating/#longer-read">longer read</a></h3>
+<p>Need to update dependencies in a node js project? Here are my notes on this.</p>
+<p><code>&gt; npm i</code> (<code>npm install</code>)</p>
+<pre><code>&gt; npm i
+
+added 60 packages, removed 124 packages, changed 191 packages, and audited 522 packages in 13s
+
+96 packages are looking for funding
+  run `npm fund` for details
+
+10 vulnerabilities (2 low, 7 moderate, 1 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+</code></pre>
+<ul>
+<li>installs missing packages in <code>node_modules</code></li>
+<li>removes redundant packages in <code>node_modules</code></li>
+<li>installs correct versions of mismatched packages (if <code>packages-lock.json</code> wants a different version than found in <code>node_modules</code>)</li>
+<li>shows what is going on with packaged in your project</li>
+</ul>
+<p><code>&gt; npm audit</code> - shows a report on vulnerability issues in your dependencies</p>
+<p><code>&gt; npm audit fix</code> - updates packages to address vulnerability issues (updates that do not require attention)</p>
+<p><code>&gt; npm outdated</code> - shows a table with your packages and versions</p>
+<pre><code>$ npm outdated
+Package      Current   Wanted   Latest  Location                  Depended by
+glob          5.0.15   5.0.15    6.0.1  node_modules/glob         dependent-package-name
+nothingness    0.0.3      git      git  node_modules/nothingness  dependent-package-name
+npm            3.5.1    3.5.2    3.5.1  node_modules/npm          dependent-package-name
+local-dev      0.0.3   linked   linked  local-dev                 dependent-package-name
+once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-package-name
+</code></pre>
+<ul>
+<li><code>Current</code> - what is in <code>nodes_modules</code></li>
+<li><code>Wanted</code> - most recent version that respect the version constraint from <code>packages.json</code></li>
+<li><code>Latest</code> - latest version from npm registry</li>
+</ul>
+<p>To update to latest minor+patch versions of your dependencies (<code>Wanted</code>) - <code>npm outdated</code> shows all you need to know but I prefer the output of <code>npm-check-updates</code></p>
+<p><code>&gt; npm i npm-check-updates -g</code> (<code>-g</code> -&gt; global mode - package will be available on your whole machine)</p>
+<p><code>&gt; npm-check-updates</code> - shows where an update will be a major/minor/patch update (I like the colors)</p>
+<pre><code>Checking C:\git\blog\package.json
+[====================] 39/39 100%
+
+ @azure/storage-blob         ^12.5.0  →      ^12.17.0
+ adm-zip                     ^0.4.16  →       ^0.5.12
+ axios                       ^0.27.2  →        ^1.6.8
+ basic-ftp                    ^5.0.1  →        ^5.0.5
+ cheerio                 ^1.0.0-rc.6  →  ^1.0.0-rc.12
+ eslint                      ^8.12.0  →        ^9.2.0
+ eslint-config-prettier       ^8.5.0  →        ^9.1.0
+ eslint-plugin-import        ^2.25.4  →       ^2.29.1
+ fast-xml-parser              ^4.2.4  →        ^4.3.6
+ humanize-duration           ^3.27.3  →       ^3.32.0
+ iconv                        ^3.0.0  →        ^3.0.1
+ jsonwebtoken                 ^9.0.0  →        ^9.0.2
+ luxon                        ^3.4.3  →        ^3.4.4
+</code></pre>
+<h4 id="let-us-update-something"><a class="toclink" href="../../2024/05/09/node-packages-updating/#let-us-update-something">Let us update something</a></h4>
+<p><code>&gt; npm update</code> - perform updates respecting your semver constraints and update <code>package-lock.json</code></p>
+<p><code>&gt; npm update --save</code> - same as above but also update <code>packages.json</code>, use this one always</p>
+<p><strong>The behavior for packages with major version <code>0.*.*</code> is different than for versions &gt;=<code>1.0.0</code> (see <code>npm help update</code>)</strong></p>
+<p><code>npm update</code> will most likely bump all minor and patch versions for you.</p>
+<p>You can run <code>npm update --save</code> often.</p>
+<h4 id="what-do-the-symbols-in-packagejson-mean"><a class="toclink" href="../../2024/05/09/node-packages-updating/#what-do-the-symbols-in-packagejson-mean">What do the symbols in <code>package.json</code> mean?</a></h4>
+<p>https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json/25861938#25861938</p>
+<h4 id="npm-update-save-vs-npm-audit-fix"><a class="toclink" href="../../2024/05/09/node-packages-updating/#npm-update-save-vs-npm-audit-fix"><code>npm update --save</code> vs <code>npm audit fix</code></a></h4>
+<p><code>npm audit fix</code> will only update packages to fix vulnerability issues</p>
+<p><code>npm update --save</code> will update all packages it can (respecting semver constraints)</p>
+<h4 id="do-i-have-unused-dependencies"><a class="toclink" href="../../2024/05/09/node-packages-updating/#do-i-have-unused-dependencies">Do I have unused dependencies?</a></h4>
+<p><code>&gt; npm install depcheck -g</code></p>
+<p><code>&gt; depcheck</code> - shows unused dependencies.
+<code>depcheck</code> scans for <code>require</code>/<code>import</code> statements in your code so you might be utilizing a package differently but <code>depcheck</code> will consider it unused (ex. when you import packages using <code>importLazy</code>).</p>
+<h4 id="npm-check"><a class="toclink" href="../../2024/05/09/node-packages-updating/#npm-check">npm-check</a></h4>
+<p><code>&gt; npm i npm-check -g</code></p>
+<p><code>&gt; npm-check</code> - a different tool to help with dependencies (I didn't use it)</p>
+<h4 id="honorable-mentions"><a class="toclink" href="../../2024/05/09/node-packages-updating/#honorable-mentions">honorable mentions</a></h4>
+<p><code>&gt; npm ls</code> - list installed packages (from <code>node_modules</code>)</p>
+<p><code>&gt; npm ls axios</code> - show all versions of axios and why we have them</p>
+<p><code>npm ls</code> will not show you origin of not-installed optional dependencies.</p>
+<p>Consider this - you devleop on a <code>win</code> maching and deploy your solution to a <code>linux</code> box.
+On windows (see below) you might think <code>node-gyp-build</code> is not used in your solution.</p>
+<pre><code>&gt; npm ls node-gyp-build
+test-npm@1.0.0 C:\git\test-npm
+`-- (empty)
+</code></pre>
+<p>But on a linux box it will be used:</p>
+<pre><code>&gt; npm ls node-gyp-build
+npm-test-proj@1.0.0 /git/npm-test-proj
+└─┬ kafka-lz4-lite@1.0.5
+  └─┬ piscina@3.2.0
+    └─┬ nice-napi@1.0.2
+      └── node-gyp-build@4.8.1
+</code></pre>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2024-05-06 00:00:00">May 6, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">node</a>, 
+              <a href="../js/" class="md-meta__link">js</a>, 
+              <a href="../axios/" class="md-meta__link">axios</a>, 
+              <a href="../cookies/" class="md-meta__link">cookies</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="axios-cookies-more"><a class="toclink" href="../../2024/05/06/axios-cookies--more/">axios, cookies &amp; more</a></h2>
+<h3 id="axios"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios">axios</a></h3>
+<p>axios - promise-based HTTP client for node.js</p>
+<ul>
+<li>when used in node.js axios uses http module (https://nodejs.org/api/http.html)</li>
+<li>in node axios <strong>does not</strong> support cookies by itself (https://github.com/axios/axios/issues/5742)<ul>
+<li>there are npm packages that add cookies support to axios</li>
+</ul>
+</li>
+<li>when used in browsers it uses XMLHttpRequest</li>
+<li>when used in browsers cookies work by default</li>
+</ul>
+<hr />
+<p><em>Why would you use <code>axios</code> over plain <code>http</code> module from node?</em></p>
+<blockquote>
+<p>Axios makes http requests much easier. Try using plain <code>http</code> and you'll convince your self.</p>
+</blockquote>
+<hr />
+<p><em>Are there other packages like <code>axios</code>?</em></p>
+<blockquote>
+<p>Yes - for example <code>node-fetch</code> https://github.com/node-fetch/node-fetch</p>
+</blockquote>
+<hr />
+<p>When making a request axios creates a default <code>http</code> and <code>https</code> agent - https://axios-http.com/docs/req_config (axios probably uses <a href="https://nodejs.org/api/http.html#httpglobalagent">global agents</a>). You can specify custom agents for a specific request or set custom agents as default agents to use with an <code>axios</code> instance.</p>
+<pre><code class="language-js">const a = require('axios');
+const http = require('node:http');
+
+(async () =&gt; {
+    // configure your agent as needed
+    const myCustomAgent = new http.Agent({ keepAlive: true });
+
+    // use your custom agent for a specific request
+    const x = await a.get('https://example.com/', { httpAgent: myCustomAgent });
+    console.log(x);
+
+    // set you agent as default for all requests
+    a.default.httpAgent = myCustomAgent;
+})();
+</code></pre>
+<hr />
+<p><em>What are <code>http</code>/<code>s</code> agents responsible for?</em></p>
+<blockquote>
+<p><code>http</code>/<code>s</code> agents handle creating/closing sockets, TCP, etc. They talk to the OS, manage connection to hosts.</p>
+</blockquote>
+<hr />
+<h3 id="cookies"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#cookies">cookies</a></h3>
+<p>Without extra packages you need to code reading response headers, look for <code>Set-Cookie</code> headers. Store cookies somewhere. Code adding cookie headers to subsequent request.</p>
+<h4 id="http-cookie-agent"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#http-cookie-agent"><code>http-cookie-agent</code></a></h4>
+<p>https://www.npmjs.com/package/http-cookie-agent</p>
+<p>Manages cookies for node.js HTTP clients (e.g. Node.js global fetch, undici, axios, node-fetch).
+<code>http-cookie-agent</code> implements a <code>http</code>/<code>s</code> agent that inspects request headers and does cookie related magic for you. It uses the class <code>CookieJar</code> from package <code>tough-cookie</code> to parse&amp;store cookies.</p>
+<pre><code class="language-js">import axios from 'axios';
+import { CookieJar } from 'tough-cookie';
+import { HttpCookieAgent, HttpsCookieAgent } from 'http-cookie-agent/http';
+
+const jar = new CookieJar();
+
+const a = axios.create({
+  httpAgent: new HttpCookieAgent({ cookies: { jar } }),
+  httpsAgent: new HttpsCookieAgent({ cookies: { jar } }),
+});
+// now we have an axios instance supporting cookies
+await a.get('https://example.com');
+</code></pre>
+<h4 id="axios-cookiejar-support"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-cookiejar-support"><code>axios-cookiejar-support</code></a></h4>
+<p>https://www.npmjs.com/package/axios-cookiejar-support</p>
+<p>Depends on <code>http-cookie-agent</code> and <code>tough-cookie</code>.
+Does the same as <code>http-cookie-agent</code> but you don't have to create <code>http</code>/<code>s</code> agents yourself. This is a small package that just intercepts axios requests and makes sure custom <code>http</code>/<code>s</code> agents are used <a href="https://github.com/3846masa/axios-cookiejar-support/blob/main/src/index.ts">source</a>.</p>
+<p>Saves you a bit of typing but you can't use your own custom agents. If you need to configure your <code>http</code>/<code>s</code> agents (ex. with a certificate) - use <code>http-cookie-agent</code> (see <a href="https://github.com/3846masa/axios-cookiejar-support/issues/431">github issue</a> and <a href="https://github.com/3846masa/axios-cookiejar-support/issues/426">github issue</a>)</p>
+<pre><code class="language-js">import axios from 'axios';
+import { wrapper } from 'axios-cookiejar-support';
+import { CookieJar } from 'tough-cookie';
+
+const jar = new CookieJar();
+const client = wrapper(axios.create({ jar }));
+
+await client.get('https://example.com');
+</code></pre>
+<h4 id="tough-cookie"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#tough-cookie"><code>tough-cookie</code></a></h4>
+<p>https://www.npmjs.com/package/tough-cookie</p>
+<p>npm package - cookie parsing/storage/retrieval (<code>tough-cookie</code> itself does nothing with http request).</p>
+<h4 id="a-bit-about-cookies"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#a-bit-about-cookies">A bit about cookies</a></h4>
+<p>https://datatracker.ietf.org/doc/html/rfc6265 - RFC describing cookies.</p>
+<p>https://datatracker.ietf.org/doc/html/rfc6265#page-28 - concise paragraph on Third-party cookies.</p>
+<p>Servers responds with a <code>Set-Cookie</code> header. Client can set the requested cookie. Cookies have a specific format described in this document.</p>
+<h3 id="random-stuff"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#random-stuff">Random stuff</a></h3>
+<p>https://npmtrends.com/cookie-vs-cookiejar-vs-cookies-vs-tough-cookie</p>
+<p>interesting - <code>cookie</code> for servers are more popular than <code>tough-cookie</code> for clients since ~2023.</p>
+<p>Is this due to more serve side apps being written in node?</p>
+<h3 id="packages-we-dont-use"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#packages-we-dont-use">Packages we don't use</a></h3>
+<ul>
+<li><code>cookie</code> - npm package - cookies for servers</li>
+<li><code>cookies</code> - npm package - cookies for servers (different then <code>cookie</code>)</li>
+<li><code>cookiejar</code> - npm package - a different cookie jar for clients</li>
+</ul>
+<h3 id="fetch-fetch-node-fetch"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#fetch-fetch-node-fetch">fetch &amp; <code>fetch</code> &amp; <code>node-fetch</code></a></h3>
+<p>fetch - standard created by WHATWG meant to replace <code>XMLHttpRequest</code> - https://fetch.spec.whatwg.org/</p>
+<p><code>fetch</code> - an old npm package to fetch web content - don't use it</p>
+<p><code>node-fetch</code> - community implemented <code>fetch</code> standard as a npm package - go ahead and use it</p>
+<p><code>fetch</code> - node's native implementation of the <code>fetch</code> standard - https://nodejs.org/dist/latest-v21.x/docs/api/globals.html#fetch</p>
+<p>Since <code>fetch</code> standard is the standard for both browsers and node chrome has a neat feature to export requests to <code>fetch</code></p>
+<h3 id="chat-gpt-crap"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#chat-gpt-crap">chat-gpt crap</a></h3>
+<p>When researching I came across some chat-gpt generated content.
+You read it thinking it will be something but it's trash.</p>
+<p>https://www.dhiwise.com/post/managing-secure-cookies-via-axios-interceptors
+-&gt; this article from 2024 that tell you to implement cookies your self, doesn't even mention the word "package", "module"</p>
+<p>https://medium.com/@stheodorejohn/managing-cookies-with-axios-simplifying-cookie-based-authentication-911e53c23c8a
+-&gt; doesn't mention that cookies don't work in axios run in node without extra packages
+    (at least this one mentions that chat-gpt helped, thought I bet it's fully written by chat-gpt)</p>
+<hr />
+<p>inco note - our http client is misleading, it uses same agent for http and https, it should maybe be called customAgent</p>
+<h3 id="axios-and-fiddler"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-and-fiddler">axios and fiddler</a></h3>
+<p>Using a request interceptor (proxy) like fiddler helps during development and debugging.</p>
+<p>To make fiddler intercept axios request we have to tell axios that there is a proxy where all requests from should go. The proxy forwards those requests to the actual destination.</p>
+<pre><code>http_proxy=... // set proxy for http requests
+https_proxy=... // set proxy for https requests
+no_proxy=domain1.com,domain2.com // comma separated list of domains that should not be proxied
+</code></pre>
+<p>The proxy for both http and https can be the same url.</p>
+<p>Read more - https://axios-http.com/docs/req_config</p>
+<p>When using fiddler on windows I suggest going to <code>Network &amp; internet &gt; Proxy</code> and disableing proxies there (fiddler by default sets this). This way <code>fiddler</code> will only receive requests from the process where we set <code>http(s)_proxy</code> env vars.</p>
+<h4 id="fiddler-and-client-certificates"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#fiddler-and-client-certificates">fiddler and client certificates</a></h4>
+<p>I was not able to make fiddler work with client certificates.
+It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler/tasks/respondwithclientcert but I couldn't get it to work</p>
+<h3 id="honorable-mentions"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#honorable-mentions">honorable mentions</a></h3>
+<p>I would like to try out - https://www.npmjs.com/package/proxy-agent at some point</p>
+<p>I don't fully understand <code>withCredentials</code></p>
+<h3 id="axios-cookies-demo"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-cookies-demo">axios &amp; cookies demo</a></h3>
+<pre><code>&gt; npm i
+&gt; node server.mjs
+open browser and go to http://127.0.0.1:3000
+cookies are supported
+&gt; node test.js (from another console)
+cookies are not supported
+</code></pre>
+<h3 id="axios-certificates-etc"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-certificates-etc">axios, certificates, etc</a></h3>
+<p>To use axios with a client certificate you need to configure the https agent with the key and cert.
+the key and cert need to be in pem format. They both can be in the same pem file, or in separate pem files.
+(did not try it) but you should be able to merge and split your pem.</p>
+<p>https://nodejs.org/api/tls.html#tlscreatesecurecontextoptions</p>
+<p>to try out - https://www.npmjs.com/package/proxy-agent</p>
+    
+  </div>
+</article>
+      
+      
+        
+          
+
+
+
+<nav class="md-pagination">
+  
+</nav>
+        
+      
+    </div>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+    
+  </body>
+</html>
