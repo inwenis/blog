@@ -7,7 +7,7 @@ categories:
 
 # F# async - be mindful of what you put in async {}
 
-```F#
+```F# linenums="1"
 open System
 
 let r = Random()
@@ -29,7 +29,7 @@ Why does it matter that lines 14 and 15 print the same number?
 
 Let's consider the following code:
 
-```F#
+```F# linenums="1"
 // We're sending http requests and if they fail we'd like to retry them
 
 #r "System.Net.Http"
@@ -72,7 +72,7 @@ send "http://test" |> retry |> Async.RunSynchronously
 ```
 
 The fix
-```F#
+```F# linenums="1"
 let send2 url =
   async {
     let httpRequest = new HttpRequestMessage()

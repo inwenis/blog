@@ -1,6 +1,8 @@
 site_name: programki.eu
 theme:
   name: material
+  features:
+    - content.code.copy
 plugins:
   - blog:
       blog_dir: . 
@@ -12,3 +14,11 @@ extra:
   analytics:
     provider: google
     property: G-MZ0JN1EDPS
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
