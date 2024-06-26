@@ -929,7 +929,7 @@ See below:</p>
 3
 4
 </code></pre>
-<p>To check types of you result</p>
+<p>To check actual types:</p>
 <pre><code class="language-PowerShell">&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
 &gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
 # Alternatively
