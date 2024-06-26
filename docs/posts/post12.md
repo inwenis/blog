@@ -29,7 +29,7 @@ See below:
 4
 ```
 
-To check types of you result
+To check actual types:
 ```PowerShell
 > $x = @(1..2) | % { $a = "a" * $_; @($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
 > $x = @(1..2) | % { $a = "a" * $_; ,@($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
