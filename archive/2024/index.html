@@ -858,124 +858,123 @@
   <div class="md-post__content md-typeset">
     <h2 id="powershell-quirk"><a class="toclink" href="../../2024/06/24/powershell-quirk/">PowerShell quirk</a></h2>
 <h3 id="tldr"><a class="toclink" href="../../2024/06/24/powershell-quirk/#tldr">tl;dr</a></h3>
-<p>In PowerShell if you want to return an array instead of one element of the array at the time do this:</p>
-<pre><code class="language-PowerShell">&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } # wrong! will pipe/return 1 element at a time
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } # correct! will pipe/return pairs
-</code></pre>
-<p><strong>Beware! Result of both snippets will be displayed in the exact same way even though they have different types!</strong>
-See below:</p>
-<pre><code class="language-PowerShell">&gt; @(1,2,3,4)
-1
-2
-3
-4
-&gt; @((1,2),(3,4))
-1
-2
-3
-4
-</code></pre>
-<p>To check actual types:</p>
-<pre><code class="language-PowerShell">&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
-&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
-# Alternatively
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } | Get-Member -name GetType
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | Get-Member -name GetType
-# Get-Member only shows output for every distinct type
-</code></pre>
+<p>In PowerShell if you want to return an array instead of one element of the array at the time do this:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># wrong! will pipe/return 1 element at a time</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># correct! will pipe/return pairs</span>
+</span></code></pre></div>
+<strong>Beware! Result of both snippets will be displayed in the exact same way even though they have different types!</strong>
+See below:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">1</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">2</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">3</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">4</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">&gt;</span> <span class="p">@((</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">),(</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">))</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">1</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">2</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">3</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">4</span>
+</span></code></pre></div></p>
+<p>To check actual types:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">&gt;</span> <span class="nv">$x</span> <span class="p">=</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">&gt;</span> <span class="nv">$x</span> <span class="p">=</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c"># Alternatively</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c"># Get-Member only shows output for every distinct type</span>
+</span></code></pre></div></p>
 <h3 id="longer-read"><a class="toclink" href="../../2024/06/24/powershell-quirk/#longer-read">Longer read</a></h3>
 <p>Occasionally I have a fist fight with PS to return an Array instead of one element at a time. PS is a tough oponent. I think I get it now though.</p>
-<p>The comma <code>,</code> in PS is a binary and unary operator. You can use it with a single or 2 arguments.</p>
-<pre><code class="language-PowerShell">&gt; ,1 # as an unary operator the comma creates an array with 1 member
-1
-&gt; 1,2 # as an binary operator the comma creates an array with 2 members
-1
-2
-</code></pre>
-<p>Beware that both an array[] and array[][] will be displayed the same way. <code>$y</code> is an array[][], it is printed the same way to the output as <code>$x</code></p>
-<pre><code class="language-PowerShell">&gt; $x = @(1,2,3,4) ; $x.GetType().Name ; $x[0].GetType().Name ; $x
-Object[]
-Int32
-1
-2
-3
-4
-&gt; $y = @((1,2),(3,4)) ; $y.GetType().Name ; $y[0].GetType().Name ; $y
-Object[]
-Object[]
-1
-2
-3
-4
-</code></pre>
-<p>If you're trying to return an array of pairs:</p>
-<pre><code class="language-PowerShell">&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } # wrong
-a
-1
-aa
-2
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } # correct!
-a
-1
-aa
-2
-# Even though the result looks like a flat array this this time it's an array of arrays
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } | Get-Member -name GetType # we get strings and ints
-
-   TypeName: System.String
-
-Name    MemberType Definition
-----    ---------- ----------
-GetType Method     type GetType()
-
-   TypeName: System.Int32
-
-Name    MemberType Definition
-----    ---------- ----------
-GetType Method     type GetType()
-
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | Get-Member -name GetType # we get arrays
-
-   TypeName: System.Object[]
-
-Name    MemberType Definition
-----    ---------- ----------
-GetType Method     type GetType()
-
-</code></pre>
-<p>More on printing your arrays of pairs:</p>
-<pre><code class="language-PowerShell">&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-output # write-output will &quot;unwind&quot; your array
-a
-1
-aa
-2
-&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-host
-a 1
-aa 2
-&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | % { write-output &quot;$_&quot; }
-a 1
-aa 2
-&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-output -NoEnumerate # returns an array of arrays but it's printed as if it's a flat array
-a
-1
-aa
-2
-</code></pre>
+<p>The comma <code>,</code> in PS is a binary and unary operator. You can use it with a single or 2 arguments.
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">&gt;</span> <span class="p">,</span><span class="n">1</span> <span class="c"># as an unary operator the comma creates an array with 1 member</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">1</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">&gt;</span> <span class="n">1</span><span class="p">,</span><span class="n">2</span> <span class="c"># as an binary operator the comma creates an array with 2 members</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">1</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">2</span>
+</span></code></pre></div></p>
+<p>Beware that both an array[] and array[][] will be displayed the same way. <code>$y</code> is an array[][], it is printed the same way to the output as <code>$x</code>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">&gt;</span> <span class="nv">$x</span> <span class="p">=</span> <span class="p">@(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">)</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">Int32</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">1</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">2</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">3</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">4</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">&gt;</span> <span class="nv">$y</span> <span class="p">=</span> <span class="p">@((</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">),(</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">))</span> <span class="p">;</span> <span class="nv">$y</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$y</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$y</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="n">1</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="n">2</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="n">3</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="n">4</span>
+</span></code></pre></div></p>
+<p>If you're trying to return an array of pairs:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># wrong</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">a</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">1</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">aa</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="n">2</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># correct!</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">a</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">1</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">aa</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">2</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="c"># Even though the result looks like a flat array this this time it&#39;s an array of arrays</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span> <span class="c"># we get strings and ints</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>   <span class="n">TypeName</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">String</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="n">Name</span>    <span class="n">MemberType</span> <span class="n">Definition</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="p">----</span>    <span class="p">----------</span> <span class="p">----------</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="n">GetType</span> <span class="n">Method</span>     <span class="nb">type </span><span class="n">GetType</span><span class="p">()</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>   <span class="n">TypeName</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Int32</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="n">Name</span>    <span class="n">MemberType</span> <span class="n">Definition</span>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="p">----</span>    <span class="p">----------</span> <span class="p">----------</span>
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="n">GetType</span> <span class="n">Method</span>     <span class="nb">type </span><span class="n">GetType</span><span class="p">()</span>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span> <span class="c"># we get arrays</span>
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>   <span class="n">TypeName</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="n">Name</span>    <span class="n">MemberType</span> <span class="n">Definition</span>
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="p">----</span>    <span class="p">----------</span> <span class="p">----------</span>
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="n">GetType</span> <span class="n">Method</span>     <span class="nb">type </span><span class="n">GetType</span><span class="p">()</span>
+</span></code></pre></div></p>
+<p>More on printing your arrays of pairs:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">write-output</span> <span class="c"># write-output will &quot;unwind&quot; your array</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">a</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">1</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">aa</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">2</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">write-host</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="n">a</span> <span class="n">1</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">aa</span> <span class="n">2</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">write-output</span> <span class="s2">&quot;$_&quot;</span> <span class="p">}</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">a</span> <span class="n">1</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">aa</span> <span class="n">2</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">write-output</span> <span class="n">-NoEnumerate</span> <span class="c"># returns an array of arrays but it&#39;s printed as if it&#39;s a flat array</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">a</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="n">1</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="n">aa</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="n">2</span>
+</span></code></pre></div></p>
 <p>This <a href="https://stackoverflow.com/a/29985418/2377787">https://stackoverflow.com/a/29985418/2377787</a> explains how <code>@()</code> works in PS.</p>
-<pre><code class="language-PowerShell">&gt; $a='A','B','C'
-&gt; $b=@($a;)
-&gt; $a
-A
-B
-C
-&gt; $b
-A
-B
-C
-&gt; [Object]::ReferenceEquals($a, $b)
-False
-</code></pre>
-<p>Above <code>$a;</code> is understood as <code>$a</code> is a collection, collections should be enumerated and each item is passed to the pipeline. <code>@($a;)</code> sees 3 elements but not the original array and creates an array from the 3 elements. In PS <code>@($collection)</code> creates a copy of <code>$collection</code>. <code>@(,$collection)</code> - creates an array with a single element <code>$collection</code>.</p>
+<p><div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">&gt;</span> <span class="nv">$a</span><span class="p">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="p">&gt;</span> <span class="nv">$b</span><span class="p">=@(</span><span class="nv">$a</span><span class="p">;)</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">&gt;</span> <span class="nv">$a</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">A</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">B</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">C</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">&gt;</span> <span class="nv">$b</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">A</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="n">B</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="n">C</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="p">&gt;</span> <span class="no">[Object]</span><span class="p">::</span><span class="n">ReferenceEquals</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="n">False</span>
+</span></code></pre></div>
+Above <code>$a;</code> is understood as <code>$a</code> is a collection, collections should be enumerated and each item is passed to the pipeline. <code>@($a;)</code> sees 3 elements but not the original array and creates an array from the 3 elements. In PS <code>@($collection)</code> creates a copy of <code>$collection</code>. <code>@(,$collection)</code> - creates an array with a single element <code>$collection</code>.</p>
     
   </div>
 </article>
@@ -1062,82 +1061,81 @@ The cert includes:</p>
 </ul>
 <p>CA's signature basically says "I confirm that this public key belongs to this person/entity". The signature is made using CA's private key.</p>
 <p>This is wikipedia certificate which I've exported from my chrome browser. This is the certificate in PEM format.</p>
-<pre><code>-----BEGIN CERTIFICATE-----
-MIIISzCCB9GgAwIBAgIQB0GeOVg6THbPHqFDR/pfOjAKBggqhkjOPQQDAzBWMQsw
-CQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMTAwLgYDVQQDEydEaWdp
-Q2VydCBUTFMgSHlicmlkIEVDQyBTSEEzODQgMjAyMCBDQTEwHhcNMjMxMDE4MDAw
-MDAwWhcNMjQxMDE2MjM1OTU5WjB5MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2Fs
-aWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEjMCEGA1UEChMaV2lraW1l
-ZGlhIEZvdW5kYXRpb24sIEluYy4xGDAWBgNVBAMMDyoud2lraXBlZGlhLm9yZzBZ
-MBMGByqGSM49AgEGCCqGSM49AwEHA0IABDVh9CEa/2rEO/oGR8YZbr5wOPHcFrG8
-OBQS1BQrHAsxgVn1Z/bnKtE8Hvqup+0GXdZvXYlMa8iw4A+Dz/XTitqjggZcMIIG
-WDAfBgNVHSMEGDAWgBQKvAgpF4ylOW16Ds4zxy6z7fvDejAdBgNVHQ4EFgQUyqwM
-Z6LjhkM/u0PnQdmhhzp43TMwggLtBgNVHREEggLkMIIC4IIPKi53aWtpcGVkaWEu
-b3Jngg13aWtpbWVkaWEub3Jngg1tZWRpYXdpa2kub3Jngg13aWtpYm9va3Mub3Jn
-ggx3aWtpZGF0YS5vcmeCDHdpa2luZXdzLm9yZ4INd2lraXF1b3RlLm9yZ4IOd2lr
-aXNvdXJjZS5vcmeCD3dpa2l2ZXJzaXR5Lm9yZ4IOd2lraXZveWFnZS5vcmeCDndp
-a3Rpb25hcnkub3Jnghd3aWtpbWVkaWFmb3VuZGF0aW9uLm9yZ4IGdy53aWtpghJ3
-bWZ1c2VyY29udGVudC5vcmeCESoubS53aWtpcGVkaWEub3Jngg8qLndpa2ltZWRp
-YS5vcmeCESoubS53aWtpbWVkaWEub3JnghYqLnBsYW5ldC53aWtpbWVkaWEub3Jn
-gg8qLm1lZGlhd2lraS5vcmeCESoubS5tZWRpYXdpa2kub3Jngg8qLndpa2lib29r
-cy5vcmeCESoubS53aWtpYm9va3Mub3Jngg4qLndpa2lkYXRhLm9yZ4IQKi5tLndp
-a2lkYXRhLm9yZ4IOKi53aWtpbmV3cy5vcmeCECoubS53aWtpbmV3cy5vcmeCDyou
-d2lraXF1b3RlLm9yZ4IRKi5tLndpa2lxdW90ZS5vcmeCECoud2lraXNvdXJjZS5v
-cmeCEioubS53aWtpc291cmNlLm9yZ4IRKi53aWtpdmVyc2l0eS5vcmeCEyoubS53
-aWtpdmVyc2l0eS5vcmeCECoud2lraXZveWFnZS5vcmeCEioubS53aWtpdm95YWdl
-Lm9yZ4IQKi53aWt0aW9uYXJ5Lm9yZ4ISKi5tLndpa3Rpb25hcnkub3JnghkqLndp
-a2ltZWRpYWZvdW5kYXRpb24ub3JnghQqLndtZnVzZXJjb250ZW50Lm9yZ4INd2lr
-aXBlZGlhLm9yZ4IRd2lraWZ1bmN0aW9ucy5vcmeCEyoud2lraWZ1bmN0aW9ucy5v
-cmcwPgYDVR0gBDcwNTAzBgZngQwBAgIwKTAnBggrBgEFBQcCARYbaHR0cDovL3d3
-dy5kaWdpY2VydC5jb20vQ1BTMA4GA1UdDwEB/wQEAwIDiDAdBgNVHSUEFjAUBggr
-BgEFBQcDAQYIKwYBBQUHAwIwgZsGA1UdHwSBkzCBkDBGoESgQoZAaHR0cDovL2Ny
-bDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTSHlicmlkRUNDU0hBMzg0MjAyMENB
-MS0xLmNybDBGoESgQoZAaHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
-VExTSHlicmlkRUNDU0hBMzg0MjAyMENBMS0xLmNybDCBhQYIKwYBBQUHAQEEeTB3
-MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTwYIKwYBBQUH
-MAKGQ2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFRMU0h5YnJp
-ZEVDQ1NIQTM4NDIwMjBDQTEtMS5jcnQwDAYDVR0TAQH/BAIwADCCAYAGCisGAQQB
-1nkCBAIEggFwBIIBbAFqAHcA7s3QZNXbGs7FXLedtM0TojKHRny87N7DUUhZRnEf
-tZsAAAGLQ1J6cgAABAMASDBGAiEA5reeeuLSzGPvJQ5hT3Bd8aOVxmIltXMTLhY6
-19qDGWUCIQDO0LMbF3s42tyxgFIOt7rVOpsHe9Sy0wFQQj8BWO0LIQB2AEiw42va
-pkc0D+VqAvqdMOscUgHLVt0sgdm7v6s52IRzAAABi0NSegEAAAQDAEcwRQIgYJdu
-BrioIun6FTeQhDxqK2eyZehguOkxScS3nwsGSakCIQC1FyuCpm+QQBRJFSTAnStR
-iP+hgGIhgzyZ837usahB0QB3ANq2v2s/tbYin5vCu1xr6HCRcWy7UYSFNL2kPTBI
-1/urAAABi0NSeg8AAAQDAEgwRgIhAOm1GvY8M4V+tUyjV9/PCj8rcWHUOvfY0a/o
-nsKg/bitAiEA1Vm1pP8CDp7hGcQzBBTscpCVebzWCe8DK231mtv97QUwCgYIKoZI
-zj0EAwMDaAAwZQIwKuOOLjmwGgtjG6SASF4W2e8KtQZANRsYXMXJDGwBCi9fM7Qy
-S9dvlFLwrcDg1gxlAjEA5XwJikbpk/qyQerzeUspuZKhqh1KPuj2uBdp8vicuBxu
-TJUd1W+d3LmikOUgGzil
------END CERTIFICATE-----
-
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>-----BEGIN CERTIFICATE-----
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>MIIISzCCB9GgAwIBAgIQB0GeOVg6THbPHqFDR/pfOjAKBggqhkjOPQQDAzBWMQsw
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>CQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMTAwLgYDVQQDEydEaWdp
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Q2VydCBUTFMgSHlicmlkIEVDQyBTSEEzODQgMjAyMCBDQTEwHhcNMjMxMDE4MDAw
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>MDAwWhcNMjQxMDE2MjM1OTU5WjB5MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2Fs
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>aWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEjMCEGA1UEChMaV2lraW1l
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>ZGlhIEZvdW5kYXRpb24sIEluYy4xGDAWBgNVBAMMDyoud2lraXBlZGlhLm9yZzBZ
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>MBMGByqGSM49AgEGCCqGSM49AwEHA0IABDVh9CEa/2rEO/oGR8YZbr5wOPHcFrG8
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>OBQS1BQrHAsxgVn1Z/bnKtE8Hvqup+0GXdZvXYlMa8iw4A+Dz/XTitqjggZcMIIG
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>WDAfBgNVHSMEGDAWgBQKvAgpF4ylOW16Ds4zxy6z7fvDejAdBgNVHQ4EFgQUyqwM
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>Z6LjhkM/u0PnQdmhhzp43TMwggLtBgNVHREEggLkMIIC4IIPKi53aWtpcGVkaWEu
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>b3Jngg13aWtpbWVkaWEub3Jngg1tZWRpYXdpa2kub3Jngg13aWtpYm9va3Mub3Jn
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>ggx3aWtpZGF0YS5vcmeCDHdpa2luZXdzLm9yZ4INd2lraXF1b3RlLm9yZ4IOd2lr
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>aXNvdXJjZS5vcmeCD3dpa2l2ZXJzaXR5Lm9yZ4IOd2lraXZveWFnZS5vcmeCDndp
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>a3Rpb25hcnkub3Jnghd3aWtpbWVkaWFmb3VuZGF0aW9uLm9yZ4IGdy53aWtpghJ3
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>bWZ1c2VyY29udGVudC5vcmeCESoubS53aWtpcGVkaWEub3Jngg8qLndpa2ltZWRp
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>YS5vcmeCESoubS53aWtpbWVkaWEub3JnghYqLnBsYW5ldC53aWtpbWVkaWEub3Jn
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>gg8qLm1lZGlhd2lraS5vcmeCESoubS5tZWRpYXdpa2kub3Jngg8qLndpa2lib29r
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>cy5vcmeCESoubS53aWtpYm9va3Mub3Jngg4qLndpa2lkYXRhLm9yZ4IQKi5tLndp
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>a2lkYXRhLm9yZ4IOKi53aWtpbmV3cy5vcmeCECoubS53aWtpbmV3cy5vcmeCDyou
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>d2lraXF1b3RlLm9yZ4IRKi5tLndpa2lxdW90ZS5vcmeCECoud2lraXNvdXJjZS5v
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>cmeCEioubS53aWtpc291cmNlLm9yZ4IRKi53aWtpdmVyc2l0eS5vcmeCEyoubS53
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>aWtpdmVyc2l0eS5vcmeCECoud2lraXZveWFnZS5vcmeCEioubS53aWtpdm95YWdl
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>Lm9yZ4IQKi53aWt0aW9uYXJ5Lm9yZ4ISKi5tLndpa3Rpb25hcnkub3JnghkqLndp
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>a2ltZWRpYWZvdW5kYXRpb24ub3JnghQqLndtZnVzZXJjb250ZW50Lm9yZ4INd2lr
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>aXBlZGlhLm9yZ4IRd2lraWZ1bmN0aW9ucy5vcmeCEyoud2lraWZ1bmN0aW9ucy5v
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>cmcwPgYDVR0gBDcwNTAzBgZngQwBAgIwKTAnBggrBgEFBQcCARYbaHR0cDovL3d3
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>dy5kaWdpY2VydC5jb20vQ1BTMA4GA1UdDwEB/wQEAwIDiDAdBgNVHSUEFjAUBggr
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>BgEFBQcDAQYIKwYBBQUHAwIwgZsGA1UdHwSBkzCBkDBGoESgQoZAaHR0cDovL2Ny
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>bDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTSHlicmlkRUNDU0hBMzg0MjAyMENB
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>MS0xLmNybDBGoESgQoZAaHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>VExTSHlicmlkRUNDU0hBMzg0MjAyMENBMS0xLmNybDCBhQYIKwYBBQUHAQEEeTB3
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTwYIKwYBBQUH
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>MAKGQ2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFRMU0h5YnJp
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>ZEVDQ1NIQTM4NDIwMjBDQTEtMS5jcnQwDAYDVR0TAQH/BAIwADCCAYAGCisGAQQB
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>1nkCBAIEggFwBIIBbAFqAHcA7s3QZNXbGs7FXLedtM0TojKHRny87N7DUUhZRnEf
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>tZsAAAGLQ1J6cgAABAMASDBGAiEA5reeeuLSzGPvJQ5hT3Bd8aOVxmIltXMTLhY6
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>19qDGWUCIQDO0LMbF3s42tyxgFIOt7rVOpsHe9Sy0wFQQj8BWO0LIQB2AEiw42va
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>pkc0D+VqAvqdMOscUgHLVt0sgdm7v6s52IRzAAABi0NSegEAAAQDAEcwRQIgYJdu
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>BrioIun6FTeQhDxqK2eyZehguOkxScS3nwsGSakCIQC1FyuCpm+QQBRJFSTAnStR
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>iP+hgGIhgzyZ837usahB0QB3ANq2v2s/tbYin5vCu1xr6HCRcWy7UYSFNL2kPTBI
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>1/urAAABi0NSeg8AAAQDAEgwRgIhAOm1GvY8M4V+tUyjV9/PCj8rcWHUOvfY0a/o
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>nsKg/bitAiEA1Vm1pP8CDp7hGcQzBBTscpCVebzWCe8DK231mtv97QUwCgYIKoZI
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>zj0EAwMDaAAwZQIwKuOOLjmwGgtjG6SASF4W2e8KtQZANRsYXMXJDGwBCi9fM7Qy
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>S9dvlFLwrcDg1gxlAjEA5XwJikbpk/qyQerzeUspuZKhqh1KPuj2uBdp8vicuBxu
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>TJUd1W+d3LmikOUgGzil
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>-----END CERTIFICATE-----
+</span></code></pre></div>
 <p>We can double click the cert file to view it (on Windows) or use many other different tools to view its content.</p>
 <p>https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate</p>
-<pre><code>&gt; $cert = New-Object Security.Cryptography.X509Certificates.X509Certificate2([string]&quot;C:\Users\inwen\Downloads\_.wikipedia.org.crt&quot;)
-&gt; $cert | select *
-
-EnhancedKeyUsageList : {Server Authentication (1.3.6.1.5.5.7.3.1), Client Authentication (1.3.6.1.5.5.7.3.2)}
-DnsNameList          : {*.wikipedia.org, wikimedia.org, mediawiki.org, wikibooks.org...}
-SendAsTrustedIssuer  : False
-Archived             : False
-Extensions           : {System.Security.Cryptography.Oid, System.Security.Cryptography.Oid, System.Security.Cryptography.Oid, System.Security.Cryptography.Oid...}
-FriendlyName         :
-IssuerName           : System.Security.Cryptography.X509Certificates.X500DistinguishedName
-NotAfter             : 17/10/2024 01:59:59
-NotBefore            : 18/10/2023 02:00:00
-HasPrivateKey        : False
-PrivateKey           :
-PublicKey            : System.Security.Cryptography.X509Certificates.PublicKey
-RawData              : {48, 130, 8, 75...}
-SerialNumber         : 07419E39583A4C76CF1EA14347FA5F3A
-SubjectName          : System.Security.Cryptography.X509Certificates.X500DistinguishedName
-SignatureAlgorithm   : System.Security.Cryptography.Oid
-Thumbprint           : 483F0C71F34AE0EA30D99BD60463DCDAA8F49DFB
-Version              : 3
-Handle               : 2140299849504
-Issuer               : CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1, O=DigiCert Inc, C=US
-Subject              : CN=*.wikipedia.org, O=&quot;Wikimedia Foundation, Inc.&quot;, L=San Francisco, S=California, C=US
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt; $cert = New-Object Security.Cryptography.X509Certificates.X509Certificate2([string]&quot;C:\Users\inwen\Downloads\_.wikipedia.org.crt&quot;)
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&gt; $cert | select *
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>EnhancedKeyUsageList : {Server Authentication (1.3.6.1.5.5.7.3.1), Client Authentication (1.3.6.1.5.5.7.3.2)}
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>DnsNameList          : {*.wikipedia.org, wikimedia.org, mediawiki.org, wikibooks.org...}
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>SendAsTrustedIssuer  : False
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Archived             : False
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>Extensions           : {System.Security.Cryptography.Oid, System.Security.Cryptography.Oid, System.Security.Cryptography.Oid, System.Security.Cryptography.Oid...}
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>FriendlyName         :
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>IssuerName           : System.Security.Cryptography.X509Certificates.X500DistinguishedName
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>NotAfter             : 17/10/2024 01:59:59
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>NotBefore            : 18/10/2023 02:00:00
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>HasPrivateKey        : False
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>PrivateKey           :
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>PublicKey            : System.Security.Cryptography.X509Certificates.PublicKey
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>RawData              : {48, 130, 8, 75...}
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>SerialNumber         : 07419E39583A4C76CF1EA14347FA5F3A
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>SubjectName          : System.Security.Cryptography.X509Certificates.X500DistinguishedName
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>SignatureAlgorithm   : System.Security.Cryptography.Oid
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>Thumbprint           : 483F0C71F34AE0EA30D99BD60463DCDAA8F49DFB
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>Version              : 3
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>Handle               : 2140299849504
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>Issuer               : CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1, O=DigiCert Inc, C=US
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>Subject              : CN=*.wikipedia.org, O=&quot;Wikimedia Foundation, Inc.&quot;, L=San Francisco, S=California, C=US
+</span></code></pre></div>
 <h3 id="ssl-tls-ssh-sftp"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#ssl-tls-ssh-sftp">SSL &amp; TLS &amp; SSH &amp; SFTP</a></h3>
 <p>SSH (Secure SHell protocol) - protocol that allows to execute shell commands over a secure connection.</p>
 <p>SFTP is an extension of SSH. SFTP != FTP over SSH.
@@ -1159,39 +1157,39 @@ https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html</p>
 </ul>
 <p>The file extensions doesn't really matter. Just open the file and see the headers to be sure what it is.</p>
 <p>To view a pem certificate on Windows - rename it to <code>.crt</code> and double click.</p>
-<p>You can open a .pem file as plain text as see its content:</p>
-<pre><code>// pem ignores stuff between the headers so you can put comments here
-
------BEGIN RSA PRIVATE KEY-----
-izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI
-MbS2U6wTS24SZk5RunJIUkitRKeWWMS28SLGfkDs1bBYlSPa5smAd3/q1OePi4ae
-dU6YgWuDxzBAKEKVSUu6pA2HOdyQ9N4F1dI+F8w9J990zE93EgyNqZFBBa2L70h4
-M7DrB0gJBWMdUMoxGnun5glLiCMo2JrHZ9RkMiallS1sHMhELx2UAlP8I1+0Mav8
-iMlHGyUW8EJy0paVf09MPpceEcVwDBeX0+G4UQlO551GTFtOSRjcD8U+GkCzka9W
-/SFQrSGe3Gh3SDaOw/4JEMAjWPDLiCglwh0rLIO4VwU6AxzTCuCw3d1ZxQsU6VFQ
-PqHA8haOUATZIrp3886PBThVqALBk9p1Nqn51bXLh13Zy9DZIVx4Z5Ioz/EGuzgR
-d68VW5wybLjYE2r6Q9nHpitSZ4ZderwjIZRes67HdxYFw8unm4Wo6kuGnb5jSSag
-vwBxKzAf3Omn+J6IthTJKuDd13rKZGMcRpQQ6VstwihYt1TahQ/qfJUWPjPcU5ML
-9LkgVwA8Ndi1wp1/sEPe+UlL16L6vO9jUHcueWN7+zSUOE/cDSJyMd9x/ZL8QASA
-ETd5dujVIqlINL2vJKr1o4T+i0RsnpfFiqFmBKlFqww/SKzJeChdyEtpa/dJMrt2
-8S86b6zEmkser+SDYgGketS2DZ4hB+vh2ujSXmS8Gkwrn+BfHMzkbtio8lWbGw0l
-eM1tfdFZ6wMTLkxRhBkBK4JiMiUMvpERyPib6a2L6iXTfH+3RUDS6A==
------END RSA PRIVATE KEY-----
------BEGIN CERTIFICATE-----
-MIICMzCCAZygAwIBAgIJALiPnVsvq8dsMA0GCSqGSIb3DQEBBQUAMFMxCzAJBgNV
-BAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNVBAcTA2ZvbzEMMAoGA1UEChMDZm9v
-MQwwCgYDVQQLEwNmb28xDDAKBgNVBAMTA2ZvbzAeFw0xMzAzMTkxNTQwMTlaFw0x
-ODAzMTgxNTQwMTlaMFMxCzAJBgNVBAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNV
-BAcTA2ZvbzEMMAoGA1UEChMDZm9vMQwwCgYDVQQLEwNmb28xDDAKBgNVBAMTA2Zv
-bzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzdGfxi9CNbMf1UUcvDQh7MYB
-OveIHyc0E0KIbhjK5FkCBU4CiZrbfHagaW7ZEcN0tt3EvpbOMxxc/ZQU2WN/s/wP
-xph0pSfsfFsTKM4RhTWD2v4fgk+xZiKd1p0+L4hTtpwnEw0uXRVd0ki6muwV5y/P
-+5FHUeldq+pgTcgzuK8CAwEAAaMPMA0wCwYDVR0PBAQDAgLkMA0GCSqGSIb3DQEB
-BQUAA4GBAJiDAAtY0mQQeuxWdzLRzXmjvdSuL9GoyT3BF/jSnpxz5/58dba8pWen
-v3pj4P3w5DoOso0rzkZy2jEsEitlVM2mLSbQpMM+MUVQCQoiG6W9xuCFuxSrwPIS
-pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
------END CERTIFICATE-----
-</code></pre>
+<p>You can open a .pem file as plain text as see its content:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>// pem ignores stuff between the headers so you can put comments here
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>-----BEGIN RSA PRIVATE KEY-----
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>MbS2U6wTS24SZk5RunJIUkitRKeWWMS28SLGfkDs1bBYlSPa5smAd3/q1OePi4ae
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>dU6YgWuDxzBAKEKVSUu6pA2HOdyQ9N4F1dI+F8w9J990zE93EgyNqZFBBa2L70h4
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>M7DrB0gJBWMdUMoxGnun5glLiCMo2JrHZ9RkMiallS1sHMhELx2UAlP8I1+0Mav8
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>iMlHGyUW8EJy0paVf09MPpceEcVwDBeX0+G4UQlO551GTFtOSRjcD8U+GkCzka9W
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>/SFQrSGe3Gh3SDaOw/4JEMAjWPDLiCglwh0rLIO4VwU6AxzTCuCw3d1ZxQsU6VFQ
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>PqHA8haOUATZIrp3886PBThVqALBk9p1Nqn51bXLh13Zy9DZIVx4Z5Ioz/EGuzgR
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>d68VW5wybLjYE2r6Q9nHpitSZ4ZderwjIZRes67HdxYFw8unm4Wo6kuGnb5jSSag
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>vwBxKzAf3Omn+J6IthTJKuDd13rKZGMcRpQQ6VstwihYt1TahQ/qfJUWPjPcU5ML
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>9LkgVwA8Ndi1wp1/sEPe+UlL16L6vO9jUHcueWN7+zSUOE/cDSJyMd9x/ZL8QASA
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>ETd5dujVIqlINL2vJKr1o4T+i0RsnpfFiqFmBKlFqww/SKzJeChdyEtpa/dJMrt2
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>8S86b6zEmkser+SDYgGketS2DZ4hB+vh2ujSXmS8Gkwrn+BfHMzkbtio8lWbGw0l
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>eM1tfdFZ6wMTLkxRhBkBK4JiMiUMvpERyPib6a2L6iXTfH+3RUDS6A==
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>-----END RSA PRIVATE KEY-----
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>-----BEGIN CERTIFICATE-----
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>MIICMzCCAZygAwIBAgIJALiPnVsvq8dsMA0GCSqGSIb3DQEBBQUAMFMxCzAJBgNV
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>BAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNVBAcTA2ZvbzEMMAoGA1UEChMDZm9v
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>MQwwCgYDVQQLEwNmb28xDDAKBgNVBAMTA2ZvbzAeFw0xMzAzMTkxNTQwMTlaFw0x
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>ODAzMTgxNTQwMTlaMFMxCzAJBgNVBAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNV
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>BAcTA2ZvbzEMMAoGA1UEChMDZm9vMQwwCgYDVQQLEwNmb28xDDAKBgNVBAMTA2Zv
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>bzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzdGfxi9CNbMf1UUcvDQh7MYB
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>OveIHyc0E0KIbhjK5FkCBU4CiZrbfHagaW7ZEcN0tt3EvpbOMxxc/ZQU2WN/s/wP
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>xph0pSfsfFsTKM4RhTWD2v4fgk+xZiKd1p0+L4hTtpwnEw0uXRVd0ki6muwV5y/P
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>+5FHUeldq+pgTcgzuK8CAwEAAaMPMA0wCwYDVR0PBAQDAgLkMA0GCSqGSIb3DQEB
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>BQUAA4GBAJiDAAtY0mQQeuxWdzLRzXmjvdSuL9GoyT3BF/jSnpxz5/58dba8pWen
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>v3pj4P3w5DoOso0rzkZy2jEsEitlVM2mLSbQpMM+MUVQCQoiG6W9xuCFuxSrwPIS
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>-----END CERTIFICATE-----
+</span></code></pre></div></p>
 <p>Contents between header and footer (<code>-----BEGIN CERTIFICATE-----</code> + <code>-----END CERTIFICATE-----</code>) is base64 encoded. The content can be DER binary data.</p>
 <h2 id="der"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#der">DER</a></h2>
 <p>Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like <code>validity date</code>, <code>issuer</code>, etc. For certificates to work you need to store this information and transfer it. DER encodes this information is a binary format. This is then after base64 encoded and then it goes into a PEM file.</p>
@@ -1235,9 +1233,9 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 <li>https://github.com/nodejs/node/issues/4175</li>
 </ul>
 <h3 id="windows"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#windows">Windows</a></h3>
-<p>You can view Windows certificates with PowerShell:</p>
-<pre><code class="language-PowerShell">Get-ChildItem -Recurse Cert:
-</code></pre>
+<p>You can view Windows certificates with PowerShell:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Get-ChildItem</span> <span class="n">-Recurse</span> <span class="n">Cert</span><span class="p">:</span>
+</span></code></pre></div></p>
 <h3 id="chrome"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#chrome">Chrome</a></h3>
 <p>https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md</p>
 <p>If you would like to become chrome's trusted CA - https://www.chromium.org/Home/chromium-security/root-ca-policy/</p>
@@ -1327,44 +1325,42 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 </ol>
 <h3 id="longer-read"><a class="toclink" href="../../2024/05/09/node-packages-updating/#longer-read">longer read</a></h3>
 <p>Need to update dependencies in a node js project? Here are my notes on this.</p>
-<p><code>&gt; npm i</code> (<code>npm install</code>)</p>
-<pre><code>&gt; npm i
-
-added 60 packages, removed 124 packages, changed 191 packages, and audited 522 packages in 13s
-
-96 packages are looking for funding
-  run `npm fund` for details
-
-10 vulnerabilities (2 low, 7 moderate, 1 high)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-To address all issues possible (including breaking changes), run:
-  npm audit fix --force
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-</code></pre>
-<ul>
-<li>installs missing packages in <code>node_modules</code></li>
-<li>removes redundant packages in <code>node_modules</code></li>
-<li>installs correct versions of mismatched packages (if <code>packages-lock.json</code> wants a different version than found in <code>node_modules</code>)</li>
-<li>shows what is going on with packaged in your project</li>
-</ul>
+<p><code>&gt; npm i</code> (<code>npm install</code>)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt; npm i
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>added 60 packages, removed 124 packages, changed 191 packages, and audited 522 packages in 13s
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>96 packages are looking for funding
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  run `npm fund` for details
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>10 vulnerabilities (2 low, 7 moderate, 1 high)
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>To address issues that do not require attention, run:
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  npm audit fix
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>To address all issues possible (including breaking changes), run:
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>  npm audit fix --force
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>Some issues need review, and may require choosing
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>a different dependency.
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>Run `npm audit` for details.
+</span></code></pre></div>
+- installs missing packages in <code>node_modules</code>
+- removes redundant packages in <code>node_modules</code>
+- installs correct versions of mismatched packages (if <code>packages-lock.json</code> wants a different version than found in <code>node_modules</code>)
+- shows what is going on with packaged in your project</p>
 <p><code>&gt; npm audit</code> - shows a report on vulnerability issues in your dependencies</p>
 <p><code>&gt; npm audit fix</code> - updates packages to address vulnerability issues (updates that do not require attention)</p>
-<p><code>&gt; npm outdated</code> - shows a table with your packages and versions</p>
-<pre><code>$ npm outdated
-Package      Current   Wanted   Latest  Location                  Depended by
-glob          5.0.15   5.0.15    6.0.1  node_modules/glob         dependent-package-name
-nothingness    0.0.3      git      git  node_modules/nothingness  dependent-package-name
-npm            3.5.1    3.5.2    3.5.1  node_modules/npm          dependent-package-name
-local-dev      0.0.3   linked   linked  local-dev                 dependent-package-name
-once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-package-name
-</code></pre>
+<p><code>&gt; npm outdated</code> - shows a table with your packages and versions
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ npm outdated
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Package      Current   Wanted   Latest  Location                  Depended by
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>glob          5.0.15   5.0.15    6.0.1  node_modules/glob         dependent-package-name
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>nothingness    0.0.3      git      git  node_modules/nothingness  dependent-package-name
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>npm            3.5.1    3.5.2    3.5.1  node_modules/npm          dependent-package-name
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>local-dev      0.0.3   linked   linked  local-dev                 dependent-package-name
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-package-name
+</span></code></pre></div></p>
 <ul>
 <li><code>Current</code> - what is in <code>nodes_modules</code></li>
 <li><code>Wanted</code> - most recent version that respect the version constraint from <code>packages.json</code></li>
@@ -1372,24 +1368,24 @@ once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-pack
 </ul>
 <p>To update to latest minor+patch versions of your dependencies (<code>Wanted</code>) - <code>npm outdated</code> shows all you need to know but I prefer the output of <code>npm-check-updates</code></p>
 <p><code>&gt; npm i npm-check-updates -g</code> (<code>-g</code> -&gt; global mode - package will be available on your whole machine)</p>
-<p><code>&gt; npm-check-updates</code> - shows where an update will be a major/minor/patch update (I like the colors)</p>
-<pre><code>Checking C:\git\blog\package.json
-[====================] 39/39 100%
-
- @azure/storage-blob         ^12.5.0  →      ^12.17.0
- adm-zip                     ^0.4.16  →       ^0.5.12
- axios                       ^0.27.2  →        ^1.6.8
- basic-ftp                    ^5.0.1  →        ^5.0.5
- cheerio                 ^1.0.0-rc.6  →  ^1.0.0-rc.12
- eslint                      ^8.12.0  →        ^9.2.0
- eslint-config-prettier       ^8.5.0  →        ^9.1.0
- eslint-plugin-import        ^2.25.4  →       ^2.29.1
- fast-xml-parser              ^4.2.4  →        ^4.3.6
- humanize-duration           ^3.27.3  →       ^3.32.0
- iconv                        ^3.0.0  →        ^3.0.1
- jsonwebtoken                 ^9.0.0  →        ^9.0.2
- luxon                        ^3.4.3  →        ^3.4.4
-</code></pre>
+<p><code>&gt; npm-check-updates</code> - shows where an update will be a major/minor/patch update (I like the colors)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Checking C:\git\blog\package.json
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>[====================] 39/39 100%
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a> @azure/storage-blob         ^12.5.0  →      ^12.17.0
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a> adm-zip                     ^0.4.16  →       ^0.5.12
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a> axios                       ^0.27.2  →        ^1.6.8
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a> basic-ftp                    ^5.0.1  →        ^5.0.5
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a> cheerio                 ^1.0.0-rc.6  →  ^1.0.0-rc.12
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a> eslint                      ^8.12.0  →        ^9.2.0
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a> eslint-config-prettier       ^8.5.0  →        ^9.1.0
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a> eslint-plugin-import        ^2.25.4  →       ^2.29.1
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a> fast-xml-parser              ^4.2.4  →        ^4.3.6
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a> humanize-duration           ^3.27.3  →       ^3.32.0
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a> iconv                        ^3.0.0  →        ^3.0.1
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a> jsonwebtoken                 ^9.0.0  →        ^9.0.2
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a> luxon                        ^3.4.3  →        ^3.4.4
+</span></code></pre></div></p>
 <h4 id="let-us-update-something"><a class="toclink" href="../../2024/05/09/node-packages-updating/#let-us-update-something">Let us update something</a></h4>
 <p><code>&gt; npm update</code> - perform updates respecting your semver constraints and update <code>package-lock.json</code></p>
 <p><code>&gt; npm update --save</code> - same as above but also update <code>packages.json</code>, use this one always</p>
@@ -1413,19 +1409,19 @@ once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-pack
 <p><code>&gt; npm ls axios</code> - show all versions of axios and why we have them</p>
 <p><code>npm ls</code> will not show you origin of not-installed optional dependencies.</p>
 <p>Consider this - you devleop on a <code>win</code> maching and deploy your solution to a <code>linux</code> box.
-On windows (see below) you might think <code>node-gyp-build</code> is not used in your solution.</p>
-<pre><code>&gt; npm ls node-gyp-build
-test-npm@1.0.0 C:\git\test-npm
-`-- (empty)
-</code></pre>
-<p>But on a linux box it will be used:</p>
-<pre><code>&gt; npm ls node-gyp-build
-npm-test-proj@1.0.0 /git/npm-test-proj
-└─┬ kafka-lz4-lite@1.0.5
-  └─┬ piscina@3.2.0
-    └─┬ nice-napi@1.0.2
-      └── node-gyp-build@4.8.1
-</code></pre>
+On windows (see below) you might think <code>node-gyp-build</code> is not used in your solution.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt; npm ls node-gyp-build
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>test-npm@1.0.0 C:\git\test-npm
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>`-- (empty)
+</span></code></pre></div></p>
+<p>But on a linux box it will be used:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt; npm ls node-gyp-build
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>npm-test-proj@1.0.0 /git/npm-test-proj
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>└─┬ kafka-lz4-lite@1.0.5
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  └─┬ piscina@3.2.0
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    └─┬ nice-napi@1.0.2
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>      └── node-gyp-build@4.8.1
+</span></code></pre></div></p>
     
   </div>
 </article>
@@ -1483,21 +1479,21 @@ npm-test-proj@1.0.0 /git/npm-test-proj
 </blockquote>
 <hr />
 <p>When making a request axios creates a default <code>http</code> and <code>https</code> agent - https://axios-http.com/docs/req_config (axios probably uses <a href="https://nodejs.org/api/http.html#httpglobalagent">global agents</a>). You can specify custom agents for a specific request or set custom agents as default agents to use with an <code>axios</code> instance.</p>
-<pre><code class="language-js">const a = require('axios');
-const http = require('node:http');
-
-(async () =&gt; {
-    // configure your agent as needed
-    const myCustomAgent = new http.Agent({ keepAlive: true });
-
-    // use your custom agent for a specific request
-    const x = await a.get('https://example.com/', { httpAgent: myCustomAgent });
-    console.log(x);
-
-    // set you agent as default for all requests
-    a.default.httpAgent = myCustomAgent;
-})();
-</code></pre>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;axios&#39;</span><span class="p">);</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node:http&#39;</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="c1">// configure your agent as needed</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">myCustomAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Agent</span><span class="p">({</span><span class="w"> </span><span class="nx">keepAlive</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="c1">// use your custom agent for a specific request</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://example.com/&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">httpAgent</span><span class="o">:</span><span class="w"> </span><span class="nx">myCustomAgent</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="c1">// set you agent as default for all requests</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">httpAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">myCustomAgent</span><span class="p">;</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="p">})();</span>
+</span></code></pre></div>
 <hr />
 <p><em>What are <code>http</code>/<code>s</code> agents responsible for?</em></p>
 <blockquote>
@@ -1510,33 +1506,33 @@ const http = require('node:http');
 <p>https://www.npmjs.com/package/http-cookie-agent</p>
 <p>Manages cookies for node.js HTTP clients (e.g. Node.js global fetch, undici, axios, node-fetch).
 <code>http-cookie-agent</code> implements a <code>http</code>/<code>s</code> agent that inspects request headers and does cookie related magic for you. It uses the class <code>CookieJar</code> from package <code>tough-cookie</code> to parse&amp;store cookies.</p>
-<pre><code class="language-js">import axios from 'axios';
-import { CookieJar } from 'tough-cookie';
-import { HttpCookieAgent, HttpsCookieAgent } from 'http-cookie-agent/http';
-
-const jar = new CookieJar();
-
-const a = axios.create({
-  httpAgent: new HttpCookieAgent({ cookies: { jar } }),
-  httpsAgent: new HttpsCookieAgent({ cookies: { jar } }),
-});
-// now we have an axios instance supporting cookies
-await a.get('https://example.com');
-</code></pre>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CookieJar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;tough-cookie&#39;</span><span class="p">;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpCookieAgent</span><span class="p">,</span><span class="w"> </span><span class="nx">HttpsCookieAgent</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;http-cookie-agent/http&#39;</span><span class="p">;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CookieJar</span><span class="p">();</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nx">httpAgent</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HttpCookieAgent</span><span class="p">({</span><span class="w"> </span><span class="nx">cookies</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}),</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="nx">httpsAgent</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HttpsCookieAgent</span><span class="p">({</span><span class="w"> </span><span class="nx">cookies</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}),</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">});</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1">// now we have an axios instance supporting cookies</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="k">await</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">);</span>
+</span></code></pre></div>
 <h4 id="axios-cookiejar-support"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-cookiejar-support"><code>axios-cookiejar-support</code></a></h4>
 <p>https://www.npmjs.com/package/axios-cookiejar-support</p>
 <p>Depends on <code>http-cookie-agent</code> and <code>tough-cookie</code>.
 Does the same as <code>http-cookie-agent</code> but you don't have to create <code>http</code>/<code>s</code> agents yourself. This is a small package that just intercepts axios requests and makes sure custom <code>http</code>/<code>s</code> agents are used <a href="https://github.com/3846masa/axios-cookiejar-support/blob/main/src/index.ts">source</a>.</p>
 <p>Saves you a bit of typing but you can't use your own custom agents. If you need to configure your <code>http</code>/<code>s</code> agents (ex. with a certificate) - use <code>http-cookie-agent</code> (see <a href="https://github.com/3846masa/axios-cookiejar-support/issues/431">github issue</a> and <a href="https://github.com/3846masa/axios-cookiejar-support/issues/426">github issue</a>)</p>
-<pre><code class="language-js">import axios from 'axios';
-import { wrapper } from 'axios-cookiejar-support';
-import { CookieJar } from 'tough-cookie';
-
-const jar = new CookieJar();
-const client = wrapper(axios.create({ jar }));
-
-await client.get('https://example.com');
-</code></pre>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">wrapper</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios-cookiejar-support&#39;</span><span class="p">;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CookieJar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;tough-cookie&#39;</span><span class="p">;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CookieJar</span><span class="p">();</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wrapper</span><span class="p">(</span><span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="p">}));</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">);</span>
+</span></code></pre></div>
 <h4 id="tough-cookie"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#tough-cookie"><code>tough-cookie</code></a></h4>
 <p>https://www.npmjs.com/package/tough-cookie</p>
 <p>npm package - cookie parsing/storage/retrieval (<code>tough-cookie</code> itself does nothing with http request).</p>
@@ -1573,10 +1569,10 @@ You read it thinking it will be something but it's trash.</p>
 <h3 id="axios-and-fiddler"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-and-fiddler">axios and fiddler</a></h3>
 <p>Using a request interceptor (proxy) like fiddler helps during development and debugging.</p>
 <p>To make fiddler intercept axios request we have to tell axios that there is a proxy where all requests from should go. The proxy forwards those requests to the actual destination.</p>
-<pre><code>http_proxy=... // set proxy for http requests
-https_proxy=... // set proxy for https requests
-no_proxy=domain1.com,domain2.com // comma separated list of domains that should not be proxied
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>http_proxy=... // set proxy for http requests
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>https_proxy=... // set proxy for https requests
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>no_proxy=domain1.com,domain2.com // comma separated list of domains that should not be proxied
+</span></code></pre></div>
 <p>The proxy for both http and https can be the same url.</p>
 <p>Read more - https://axios-http.com/docs/req_config</p>
 <p>When using fiddler on windows I suggest going to <code>Network &amp; internet &gt; Proxy</code> and disableing proxies there (fiddler by default sets this). This way <code>fiddler</code> will only receive requests from the process where we set <code>http(s)_proxy</code> env vars.</p>
@@ -1587,13 +1583,13 @@ It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler
 <p>I would like to try out - https://www.npmjs.com/package/proxy-agent at some point</p>
 <p>I don't fully understand <code>withCredentials</code></p>
 <h3 id="axios-cookies-demo"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-cookies-demo">axios &amp; cookies demo</a></h3>
-<pre><code>&gt; npm i
-&gt; node server.mjs
-open browser and go to http://127.0.0.1:3000
-cookies are supported
-&gt; node test.js (from another console)
-cookies are not supported
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt; npm i
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>&gt; node server.mjs
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>open browser and go to http://127.0.0.1:3000
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>cookies are supported
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>&gt; node test.js (from another console)
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>cookies are not supported
+</span></code></pre></div>
 <h3 id="axios-certificates-etc"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-certificates-etc">axios, certificates, etc</a></h3>
 <p>To use axios with a client certificate you need to configure the https agent with the key and cert.
 the key and cert need to be in pem format. They both can be in the same pem file, or in separate pem files.
@@ -1648,7 +1644,7 @@ the key and cert need to be in pem format. They both can be in the same pem file
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>

@@ -912,124 +912,123 @@
 
 <h1 id="powershell-quirk">PowerShell quirk</h1>
 <h2 id="tldr">tl;dr</h2>
-<p>In PowerShell if you want to return an array instead of one element of the array at the time do this:</p>
-<pre><code class="language-PowerShell">&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } # wrong! will pipe/return 1 element at a time
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } # correct! will pipe/return pairs
-</code></pre>
-<p><strong>Beware! Result of both snippets will be displayed in the exact same way even though they have different types!</strong>
-See below:</p>
-<pre><code class="language-PowerShell">&gt; @(1,2,3,4)
-1
-2
-3
-4
-&gt; @((1,2),(3,4))
-1
-2
-3
-4
-</code></pre>
-<p>To check actual types:</p>
-<pre><code class="language-PowerShell">&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
-&gt; $x = @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } ; $x.GetType().Name ; $x[0].GetType().Name ; $x
-# Alternatively
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } | Get-Member -name GetType
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | Get-Member -name GetType
-# Get-Member only shows output for every distinct type
-</code></pre>
+<p>In PowerShell if you want to return an array instead of one element of the array at the time do this:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># wrong! will pipe/return 1 element at a time</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># correct! will pipe/return pairs</span>
+</span></code></pre></div>
+<strong>Beware! Result of both snippets will be displayed in the exact same way even though they have different types!</strong>
+See below:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">1</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">2</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">3</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">4</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">&gt;</span> <span class="p">@((</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">),(</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">))</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">1</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">2</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">3</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">4</span>
+</span></code></pre></div></p>
+<p>To check actual types:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&gt;</span> <span class="nv">$x</span> <span class="p">=</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">&gt;</span> <span class="nv">$x</span> <span class="p">=</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c"># Alternatively</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c"># Get-Member only shows output for every distinct type</span>
+</span></code></pre></div></p>
 <h2 id="longer-read">Longer read</h2>
 <p>Occasionally I have a fist fight with PS to return an Array instead of one element at a time. PS is a tough oponent. I think I get it now though.</p>
-<p>The comma <code>,</code> in PS is a binary and unary operator. You can use it with a single or 2 arguments.</p>
-<pre><code class="language-PowerShell">&gt; ,1 # as an unary operator the comma creates an array with 1 member
-1
-&gt; 1,2 # as an binary operator the comma creates an array with 2 members
-1
-2
-</code></pre>
-<p>Beware that both an array[] and array[][] will be displayed the same way. <code>$y</code> is an array[][], it is printed the same way to the output as <code>$x</code></p>
-<pre><code class="language-PowerShell">&gt; $x = @(1,2,3,4) ; $x.GetType().Name ; $x[0].GetType().Name ; $x
-Object[]
-Int32
-1
-2
-3
-4
-&gt; $y = @((1,2),(3,4)) ; $y.GetType().Name ; $y[0].GetType().Name ; $y
-Object[]
-Object[]
-1
-2
-3
-4
-</code></pre>
-<p>If you're trying to return an array of pairs:</p>
-<pre><code class="language-PowerShell">&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } # wrong
-a
-1
-aa
-2
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } # correct!
-a
-1
-aa
-2
-# Even though the result looks like a flat array this this time it's an array of arrays
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; @($a,$_) } | Get-Member -name GetType # we get strings and ints
-
-   TypeName: System.String
-
-Name    MemberType Definition
-----    ---------- ----------
-GetType Method     type GetType()
-
-   TypeName: System.Int32
-
-Name    MemberType Definition
-----    ---------- ----------
-GetType Method     type GetType()
-
-&gt; @(1..2) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | Get-Member -name GetType # we get arrays
-
-   TypeName: System.Object[]
-
-Name    MemberType Definition
-----    ---------- ----------
-GetType Method     type GetType()
-
-</code></pre>
-<p>More on printing your arrays of pairs:</p>
-<pre><code class="language-PowerShell">&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-output # write-output will &quot;unwind&quot; your array
-a
-1
-aa
-2
-&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-host
-a 1
-aa 2
-&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | % { write-output &quot;$_&quot; }
-a 1
-aa 2
-&gt; @(1..4) | % { $a = &quot;a&quot; * $_; ,@($a,$_) } | write-output -NoEnumerate # returns an array of arrays but it's printed as if it's a flat array
-a
-1
-aa
-2
-</code></pre>
+<p>The comma <code>,</code> in PS is a binary and unary operator. You can use it with a single or 2 arguments.
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&gt;</span> <span class="p">,</span><span class="n">1</span> <span class="c"># as an unary operator the comma creates an array with 1 member</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">1</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">&gt;</span> <span class="n">1</span><span class="p">,</span><span class="n">2</span> <span class="c"># as an binary operator the comma creates an array with 2 members</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">1</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">2</span>
+</span></code></pre></div></p>
+<p>Beware that both an array[] and array[][] will be displayed the same way. <code>$y</code> is an array[][], it is printed the same way to the output as <code>$x</code>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&gt;</span> <span class="nv">$x</span> <span class="p">=</span> <span class="p">@(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">)</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$x</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">Int32</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">1</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">2</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">3</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">4</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">&gt;</span> <span class="nv">$y</span> <span class="p">=</span> <span class="p">@((</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">),(</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">))</span> <span class="p">;</span> <span class="nv">$y</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$y</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span> <span class="p">;</span> <span class="nv">$y</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">1</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">2</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">3</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">4</span>
+</span></code></pre></div></p>
+<p>If you're trying to return an array of pairs:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># wrong</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">a</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">1</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">aa</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">2</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="c"># correct!</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">a</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">1</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">aa</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">2</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c"># Even though the result looks like a flat array this this time it&#39;s an array of arrays</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span> <span class="c"># we get strings and ints</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>   <span class="n">TypeName</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">String</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">Name</span>    <span class="n">MemberType</span> <span class="n">Definition</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="p">----</span>    <span class="p">----------</span> <span class="p">----------</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="n">GetType</span> <span class="n">Method</span>     <span class="nb">type </span><span class="n">GetType</span><span class="p">()</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>   <span class="n">TypeName</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Int32</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="n">Name</span>    <span class="n">MemberType</span> <span class="n">Definition</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="p">----</span>    <span class="p">----------</span> <span class="p">----------</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="n">GetType</span> <span class="n">Method</span>     <span class="nb">type </span><span class="n">GetType</span><span class="p">()</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-name</span> <span class="n">GetType</span> <span class="c"># we get arrays</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>   <span class="n">TypeName</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Object</span><span class="p">[]</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="n">Name</span>    <span class="n">MemberType</span> <span class="n">Definition</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="p">----</span>    <span class="p">----------</span> <span class="p">----------</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="n">GetType</span> <span class="n">Method</span>     <span class="nb">type </span><span class="n">GetType</span><span class="p">()</span>
+</span></code></pre></div></p>
+<p>More on printing your arrays of pairs:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">write-output</span> <span class="c"># write-output will &quot;unwind&quot; your array</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">a</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">1</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">aa</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">2</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">write-host</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">a</span> <span class="n">1</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">aa</span> <span class="n">2</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">write-output</span> <span class="s2">&quot;$_&quot;</span> <span class="p">}</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">a</span> <span class="n">1</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">aa</span> <span class="n">2</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">&gt;</span> <span class="p">@(</span><span class="n">1</span><span class="p">..</span><span class="n">4</span><span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;a&quot;</span> <span class="p">*</span> <span class="nv">$_</span><span class="p">;</span> <span class="p">,@(</span><span class="nv">$a</span><span class="p">,</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">write-output</span> <span class="n">-NoEnumerate</span> <span class="c"># returns an array of arrays but it&#39;s printed as if it&#39;s a flat array</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">a</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">1</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">aa</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">2</span>
+</span></code></pre></div></p>
 <p>This <a href="https://stackoverflow.com/a/29985418/2377787">https://stackoverflow.com/a/29985418/2377787</a> explains how <code>@()</code> works in PS.</p>
-<pre><code class="language-PowerShell">&gt; $a='A','B','C'
-&gt; $b=@($a;)
-&gt; $a
-A
-B
-C
-&gt; $b
-A
-B
-C
-&gt; [Object]::ReferenceEquals($a, $b)
-False
-</code></pre>
-<p>Above <code>$a;</code> is understood as <code>$a</code> is a collection, collections should be enumerated and each item is passed to the pipeline. <code>@($a;)</code> sees 3 elements but not the original array and creates an array from the 3 elements. In PS <code>@($collection)</code> creates a copy of <code>$collection</code>. <code>@(,$collection)</code> - creates an array with a single element <code>$collection</code>.</p>
+<p><div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&gt;</span> <span class="nv">$a</span><span class="p">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">&gt;</span> <span class="nv">$b</span><span class="p">=@(</span><span class="nv">$a</span><span class="p">;)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">&gt;</span> <span class="nv">$a</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">A</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">B</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">C</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">&gt;</span> <span class="nv">$b</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">A</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">B</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">C</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">&gt;</span> <span class="no">[Object]</span><span class="p">::</span><span class="n">ReferenceEquals</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">False</span>
+</span></code></pre></div>
+Above <code>$a;</code> is understood as <code>$a</code> is a collection, collections should be enumerated and each item is passed to the pipeline. <code>@($a;)</code> sees 3 elements but not the original array and creates an array from the 3 elements. In PS <code>@($collection)</code> creates a copy of <code>$collection</code>. <code>@(,$collection)</code> - creates an array with a single element <code>$collection</code>.</p>
 
 
 
@@ -1083,7 +1082,7 @@ False
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.ad660dcc.min.js"></script>

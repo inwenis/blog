@@ -883,21 +883,21 @@
 </blockquote>
 <hr />
 <p>When making a request axios creates a default <code>http</code> and <code>https</code> agent - https://axios-http.com/docs/req_config (axios probably uses <a href="https://nodejs.org/api/http.html#httpglobalagent">global agents</a>). You can specify custom agents for a specific request or set custom agents as default agents to use with an <code>axios</code> instance.</p>
-<pre><code class="language-js">const a = require('axios');
-const http = require('node:http');
-
-(async () =&gt; {
-    // configure your agent as needed
-    const myCustomAgent = new http.Agent({ keepAlive: true });
-
-    // use your custom agent for a specific request
-    const x = await a.get('https://example.com/', { httpAgent: myCustomAgent });
-    console.log(x);
-
-    // set you agent as default for all requests
-    a.default.httpAgent = myCustomAgent;
-})();
-</code></pre>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;axios&#39;</span><span class="p">);</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node:http&#39;</span><span class="p">);</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">    </span><span class="c1">// configure your agent as needed</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">myCustomAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Agent</span><span class="p">({</span><span class="w"> </span><span class="nx">keepAlive</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="c1">// use your custom agent for a specific request</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://example.com/&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">httpAgent</span><span class="o">:</span><span class="w"> </span><span class="nx">myCustomAgent</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">    </span><span class="c1">// set you agent as default for all requests</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">httpAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">myCustomAgent</span><span class="p">;</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="p">})();</span>
+</span></code></pre></div>
 <hr />
 <p><em>What are <code>http</code>/<code>s</code> agents responsible for?</em></p>
 <blockquote>
@@ -910,33 +910,33 @@ const http = require('node:http');
 <p>https://www.npmjs.com/package/http-cookie-agent</p>
 <p>Manages cookies for node.js HTTP clients (e.g. Node.js global fetch, undici, axios, node-fetch).
 <code>http-cookie-agent</code> implements a <code>http</code>/<code>s</code> agent that inspects request headers and does cookie related magic for you. It uses the class <code>CookieJar</code> from package <code>tough-cookie</code> to parse&amp;store cookies.</p>
-<pre><code class="language-js">import axios from 'axios';
-import { CookieJar } from 'tough-cookie';
-import { HttpCookieAgent, HttpsCookieAgent } from 'http-cookie-agent/http';
-
-const jar = new CookieJar();
-
-const a = axios.create({
-  httpAgent: new HttpCookieAgent({ cookies: { jar } }),
-  httpsAgent: new HttpsCookieAgent({ cookies: { jar } }),
-});
-// now we have an axios instance supporting cookies
-await a.get('https://example.com');
-</code></pre>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CookieJar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;tough-cookie&#39;</span><span class="p">;</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpCookieAgent</span><span class="p">,</span><span class="w"> </span><span class="nx">HttpsCookieAgent</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;http-cookie-agent/http&#39;</span><span class="p">;</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CookieJar</span><span class="p">();</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">  </span><span class="nx">httpAgent</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HttpCookieAgent</span><span class="p">({</span><span class="w"> </span><span class="nx">cookies</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}),</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">  </span><span class="nx">httpsAgent</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HttpsCookieAgent</span><span class="p">({</span><span class="w"> </span><span class="nx">cookies</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}),</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="p">});</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="c1">// now we have an axios instance supporting cookies</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="k">await</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">);</span>
+</span></code></pre></div>
 <h4 id="axios-cookiejar-support"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-cookiejar-support"><code>axios-cookiejar-support</code></a></h4>
 <p>https://www.npmjs.com/package/axios-cookiejar-support</p>
 <p>Depends on <code>http-cookie-agent</code> and <code>tough-cookie</code>.
 Does the same as <code>http-cookie-agent</code> but you don't have to create <code>http</code>/<code>s</code> agents yourself. This is a small package that just intercepts axios requests and makes sure custom <code>http</code>/<code>s</code> agents are used <a href="https://github.com/3846masa/axios-cookiejar-support/blob/main/src/index.ts">source</a>.</p>
 <p>Saves you a bit of typing but you can't use your own custom agents. If you need to configure your <code>http</code>/<code>s</code> agents (ex. with a certificate) - use <code>http-cookie-agent</code> (see <a href="https://github.com/3846masa/axios-cookiejar-support/issues/431">github issue</a> and <a href="https://github.com/3846masa/axios-cookiejar-support/issues/426">github issue</a>)</p>
-<pre><code class="language-js">import axios from 'axios';
-import { wrapper } from 'axios-cookiejar-support';
-import { CookieJar } from 'tough-cookie';
-
-const jar = new CookieJar();
-const client = wrapper(axios.create({ jar }));
-
-await client.get('https://example.com');
-</code></pre>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">wrapper</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios-cookiejar-support&#39;</span><span class="p">;</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CookieJar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;tough-cookie&#39;</span><span class="p">;</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CookieJar</span><span class="p">();</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wrapper</span><span class="p">(</span><span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="w"> </span><span class="nx">jar</span><span class="w"> </span><span class="p">}));</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">);</span>
+</span></code></pre></div>
 <h4 id="tough-cookie"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#tough-cookie"><code>tough-cookie</code></a></h4>
 <p>https://www.npmjs.com/package/tough-cookie</p>
 <p>npm package - cookie parsing/storage/retrieval (<code>tough-cookie</code> itself does nothing with http request).</p>
@@ -973,10 +973,10 @@ You read it thinking it will be something but it's trash.</p>
 <h3 id="axios-and-fiddler"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-and-fiddler">axios and fiddler</a></h3>
 <p>Using a request interceptor (proxy) like fiddler helps during development and debugging.</p>
 <p>To make fiddler intercept axios request we have to tell axios that there is a proxy where all requests from should go. The proxy forwards those requests to the actual destination.</p>
-<pre><code>http_proxy=... // set proxy for http requests
-https_proxy=... // set proxy for https requests
-no_proxy=domain1.com,domain2.com // comma separated list of domains that should not be proxied
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>http_proxy=... // set proxy for http requests
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>https_proxy=... // set proxy for https requests
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>no_proxy=domain1.com,domain2.com // comma separated list of domains that should not be proxied
+</span></code></pre></div>
 <p>The proxy for both http and https can be the same url.</p>
 <p>Read more - https://axios-http.com/docs/req_config</p>
 <p>When using fiddler on windows I suggest going to <code>Network &amp; internet &gt; Proxy</code> and disableing proxies there (fiddler by default sets this). This way <code>fiddler</code> will only receive requests from the process where we set <code>http(s)_proxy</code> env vars.</p>
@@ -987,13 +987,13 @@ It should be done like this - https://docs.telerik.com/fiddler/configure-fiddler
 <p>I would like to try out - https://www.npmjs.com/package/proxy-agent at some point</p>
 <p>I don't fully understand <code>withCredentials</code></p>
 <h3 id="axios-cookies-demo"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-cookies-demo">axios &amp; cookies demo</a></h3>
-<pre><code>&gt; npm i
-&gt; node server.mjs
-open browser and go to http://127.0.0.1:3000
-cookies are supported
-&gt; node test.js (from another console)
-cookies are not supported
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>&gt; npm i
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>&gt; node server.mjs
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>open browser and go to http://127.0.0.1:3000
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>cookies are supported
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>&gt; node test.js (from another console)
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>cookies are not supported
+</span></code></pre></div>
 <h3 id="axios-certificates-etc"><a class="toclink" href="../../2024/05/06/axios-cookies--more/#axios-certificates-etc">axios, certificates, etc</a></h3>
 <p>To use axios with a client certificate you need to configure the https agent with the key and cert.
 the key and cert need to be in pem format. They both can be in the same pem file, or in separate pem files.
@@ -1048,7 +1048,7 @@ the key and cert need to be in pem format. They both can be in the same pem file
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
