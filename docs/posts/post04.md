@@ -54,11 +54,11 @@ One example of premature optimization stuck with me. I recall reviewing code as 
 
 
 ```C#
-foreach(var gasConnectionPoint in gasPoints)
+foreach(var gasPoint in gasPoints)
 {
-    if (gasConnectionPoint.properties.Any())
+    if (gasPoint.Properties.Any())
     {
-        foreach (var x in gasConnectionPoint.properties.properties)
+        foreach (var x in gasPoint.Properties)
         {
             // do sth with x
         }
