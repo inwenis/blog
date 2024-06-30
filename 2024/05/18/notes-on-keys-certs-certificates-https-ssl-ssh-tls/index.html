@@ -536,6 +536,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../category/tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../category/axios/" class="md-nav__link">
         
   
@@ -987,30 +1010,30 @@ The cert includes:</p>
 </span></code></pre></div>
 <p>We can double click the cert file to view it (on Windows) or use many other different tools to view its content.</p>
 <p>https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; $cert = New-Object Security.Cryptography.X509Certificates.X509Certificate2([string]&quot;C:\Users\inwen\Downloads\_.wikipedia.org.crt&quot;)
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&gt; $cert | select *
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&gt;</span> <span class="nv">$cert</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X509Certificate2</span><span class="p">(</span><span class="no">[string]</span><span class="s2">&quot;C:\Users\inwen\Downloads\_.wikipedia.org.crt&quot;</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&gt;</span> <span class="nv">$cert</span> <span class="p">|</span> <span class="nb">select </span><span class="p">*</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>EnhancedKeyUsageList : {Server Authentication (1.3.6.1.5.5.7.3.1), Client Authentication (1.3.6.1.5.5.7.3.2)}
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>DnsNameList          : {*.wikipedia.org, wikimedia.org, mediawiki.org, wikibooks.org...}
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>SendAsTrustedIssuer  : False
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Archived             : False
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Extensions           : {System.Security.Cryptography.Oid, System.Security.Cryptography.Oid, System.Security.Cryptography.Oid, System.Security.Cryptography.Oid...}
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>FriendlyName         :
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>IssuerName           : System.Security.Cryptography.X509Certificates.X500DistinguishedName
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>NotAfter             : 17/10/2024 01:59:59
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>NotBefore            : 18/10/2023 02:00:00
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>HasPrivateKey        : False
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>PrivateKey           :
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>PublicKey            : System.Security.Cryptography.X509Certificates.PublicKey
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>RawData              : {48, 130, 8, 75...}
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>SerialNumber         : 07419E39583A4C76CF1EA14347FA5F3A
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>SubjectName          : System.Security.Cryptography.X509Certificates.X500DistinguishedName
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>SignatureAlgorithm   : System.Security.Cryptography.Oid
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>Thumbprint           : 483F0C71F34AE0EA30D99BD60463DCDAA8F49DFB
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>Version              : 3
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>Handle               : 2140299849504
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Issuer               : CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1, O=DigiCert Inc, C=US
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>Subject              : CN=*.wikipedia.org, O=&quot;Wikimedia Foundation, Inc.&quot;, L=San Francisco, S=California, C=US
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">EnhancedKeyUsageList</span> <span class="p">:</span> <span class="p">{</span><span class="n">Server</span> <span class="n">Authentication</span> <span class="p">(</span><span class="n">1</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">1</span><span class="p">),</span> <span class="n">Client</span> <span class="n">Authentication</span> <span class="p">(</span><span class="n">1</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">2</span><span class="p">)}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">DnsNameList</span>          <span class="p">:</span> <span class="p">{*.</span><span class="n">wikipedia</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">wikimedia</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">mediawiki</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">wikibooks</span><span class="p">.</span><span class="n">org</span><span class="p">...}</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">SendAsTrustedIssuer</span>  <span class="p">:</span> <span class="n">False</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">Archived</span>             <span class="p">:</span> <span class="n">False</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">Extensions</span>           <span class="p">:</span> <span class="p">{</span><span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">...}</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">FriendlyName</span>         <span class="p">:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">IssuerName</span>           <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X500DistinguishedName</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">NotAfter</span>             <span class="p">:</span> <span class="n">17</span><span class="p">/</span><span class="n">10</span><span class="p">/</span><span class="n">2024</span> <span class="n">01</span><span class="p">:</span><span class="n">59</span><span class="p">:</span><span class="n">59</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">NotBefore</span>            <span class="p">:</span> <span class="n">18</span><span class="p">/</span><span class="n">10</span><span class="p">/</span><span class="n">2023</span> <span class="n">02</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">HasPrivateKey</span>        <span class="p">:</span> <span class="n">False</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">PrivateKey</span>           <span class="p">:</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">PublicKey</span>            <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">PublicKey</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">RawData</span>              <span class="p">:</span> <span class="p">{</span><span class="n">48</span><span class="p">,</span> <span class="n">130</span><span class="p">,</span> <span class="n">8</span><span class="p">,</span> <span class="n">75</span><span class="p">...}</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">SerialNumber</span>         <span class="p">:</span> <span class="n">07419E39583A4C76CF1EA14347FA5F3A</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">SubjectName</span>          <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X500DistinguishedName</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">SignatureAlgorithm</span>   <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">Thumbprint</span>           <span class="p">:</span> <span class="n">483F0C71F34AE0EA30D99BD60463DCDAA8F49DFB</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">Version</span>              <span class="p">:</span> <span class="n">3</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">Handle</span>               <span class="p">:</span> <span class="n">2140299849504</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">Issuer</span>               <span class="p">:</span> <span class="n">CN</span><span class="p">=</span><span class="n">DigiCert</span> <span class="n">TLS</span> <span class="n">Hybrid</span> <span class="n">ECC</span> <span class="n">SHA384</span> <span class="n">2020</span> <span class="n">CA1</span><span class="p">,</span> <span class="n">O</span><span class="p">=</span><span class="n">DigiCert</span> <span class="n">Inc</span><span class="p">,</span> <span class="n">C</span><span class="p">=</span><span class="n">US</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="n">Subject</span>              <span class="p">:</span> <span class="n">CN</span><span class="p">=*.</span><span class="n">wikipedia</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">O</span><span class="p">=</span><span class="s2">&quot;Wikimedia Foundation, Inc.&quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">=</span><span class="n">San</span> <span class="n">Francisco</span><span class="p">,</span> <span class="n">S</span><span class="p">=</span><span class="n">California</span><span class="p">,</span> <span class="n">C</span><span class="p">=</span><span class="n">US</span>
 </span></code></pre></div>
 <h2 id="ssl-tls-ssh-sftp">SSL &amp; TLS &amp; SSH &amp; SFTP</h2>
 <p>SSH (Secure SHell protocol) - protocol that allows to execute shell commands over a secure connection.</p>
