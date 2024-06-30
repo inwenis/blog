@@ -81,7 +81,7 @@ We can double click the cert file to view it (on Windows) or use many other diff
 
 https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate
 
-```
+```PowerShell
 > $cert = New-Object Security.Cryptography.X509Certificates.X509Certificate2([string]"C:\Users\inwen\Downloads\_.wikipedia.org.crt")
 > $cert | select *
 
