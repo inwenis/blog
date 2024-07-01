@@ -10,7 +10,7 @@ categories:
 ## Terminal etc.
 - [https://github.com/PowerShell/PowerShell](https://github.com/PowerShell/PowerShell) - PowerShell 7+ - faster & better then Windows PowerShell
 - [https://ohmyposh.dev/](https://ohmyposh.dev/) - amazing prompts - replace that old `$` sign with amazing stuff
-- [https://github.com/dahlbyk/posh-git](https://github.com/dahlbyk/posh-git) - offers a prompt for git repos. I think it comes bundled witrh `oh-my-posh` for PowerShell. I used `oh-my-posh` prompt and `posh-git` for autocompletion of commands.
+  - [https://github.com/dahlbyk/posh-git](https://github.com/dahlbyk/posh-git) - offers a prompt for git repos. Comes bundled with `oh-my-posh` for PowerShell. Use `oh-my-posh` prompt and `posh-git` for autocompletion.
 
 ## git
 - [https://www.toptal.com/developers/gitignore](https://www.toptal.com/developers/gitignore) - .gitignore files for your project
