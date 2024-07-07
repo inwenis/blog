@@ -22,3 +22,6 @@ categories:
 
 ## http
 - [https://www.telerik.com/fiddler/fiddler-classic](https://www.telerik.com/fiddler/fiddler-classic) - inspect http traffic/modify & replay requests
+
+## other
+- [https://nomacs.org/](https://nomacs.org/) - free, open source image viewer - because the default Windows one sux
