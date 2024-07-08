@@ -26,3 +26,4 @@ categories:
 ## other
 - [https://nomacs.org/](https://nomacs.org/) - free, open source image viewer - because the default Windows one sux
 - [https://keepass.info/](https://keepass.info/) - free safe password database
+- [https://www.videolan.org/vlc/](https://www.videolan.org/vlc/) - my go to video player
