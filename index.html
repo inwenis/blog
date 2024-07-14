@@ -742,6 +742,29 @@
   
   
     <li class="md-nav__item">
+      <a href="category/experience/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    experience
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="category/js/" class="md-nav__link">
         
   
@@ -916,6 +939,136 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2024-07-15 00:00:00">July 15, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/general-coding/" class="md-meta__link">General coding</a>, 
+              <a href="category/experience/" class="md-meta__link">experience</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="how-the-way-i-workcodeinvestigatedebug-changed-with-time-experience"><a class="toclink" href="2024/07/15/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/">How the way I work/code/investigate/debug changed with time &amp; experience</a></h2>
+<p>I use this metaphor when describing how I work these days.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ajDLIJB1p4o?si=LZsMct8yqq-RYTXa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<h2 id="tldr"><a class="toclink" href="2024/07/15/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#tldr">TL;DR;</a></h2>
+<ol>
+<li>Quick feedback is king<ul>
+<li>unit tests</li>
+<li>quick test in another way</li>
+<li>reproduce issues locally</li>
+<li>try things out in a small project on the side, not in the project you're working on</li>
+</ul>
+</li>
+<li>One thing at a time<ul>
+<li>experimenting</li>
+<li>refactoring preparing for feature addition</li>
+<li>feature coding</li>
+<li>cleaning up after feature coding</li>
+</ul>
+</li>
+<li>Divide problems into smaller problems<ul>
+<li>and remember - one thing (problem) at a time</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="example"><a class="toclink" href="2024/07/15/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#example">Example</a></h3>
+<p>You're working with code that talks to a remote API, you want to test different API calls to the remote API.</p>
+<p><strong>don't</strong> - change API parameters in code and run the project each time you test sth. It takes too long.</p>
+<p><strong>do</strong> - write a piece of code to send a HTTP request, fiddle with this code</p>
+<p><strong>do</strong> - intercept request with <code>fiddler</code>/<code>postman</code>/other interceptor and reissue requests with different parameters</p>
+<hr />
+<h3 id="example_1"><a class="toclink" href="2024/07/15/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#example_1">Example</a></h3>
+<p>Something fails in CI pipeline.</p>
+<p><strong>don't</strong> - make a change, commit, wait for remote CI to trigger, see result</p>
+<p><strong>do</strong> - reproduce issue locally</p>
+<hr />
+<h2 id="longer-read"><a class="toclink" href="2024/07/15/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#longer-read">Longer read</a></h2>
+<ol>
+<li>Quick feedback</li>
+<li><strong>do</strong> - write a test for it</li>
+<li><strong>do</strong> - isolate your issue/suspect/the piece of code you're working with<ul>
+<li>it is helpful if you can run just a module/sub-system/piece of your project/system</li>
+<li>partial execution helps - like in python/jupiter or F# fsx</li>
+</ul>
+</li>
+<li>if you relay on external data and it takes time to retrieve it (even a 5 seconds delay can be annoying) - dump data to a file and read it from the file instead of hitting an external API or a DB every time you run your code</li>
+<li><strong>don't</strong> try to understand how <code>List.foldBack()</code> works while debugging a big project. Do it on the side.</li>
+<li>spin up a new solution/project on the side to test things</li>
+<li>
+<p>occasional juniors ask "does this work this way" - you can test it your self easily if you do it on the side</p>
+</li>
+<li>
+<p>One thing at a time</p>
+</li>
+<li>separate refactoring from feature addition</li>
+<li>fiddle first, find the walls/obstacles</li>
+<li><code>git reset --hard</code></li>
+<li>refactor preparing for new feature (can become a separate PR)</li>
+<li>code feature</li>
+<li>if during coding you find something that needs refactoring/renaming/cleaning up - any kind of "WTF is this? I need to fix this!" try a) or b)<ul>
+<li>a) make a note to fix it later</li>
+<li>b) fix immediately
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; git stash
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt; git checkout master
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&gt; git checkout -b fix-typo
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>fix stuff
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>merge or create a PR
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>git checkout feature
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>&gt; git merge fix-typo or git rebase fix-typo
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>continue work
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>always have a paper notepad on your desk</p>
+<ul>
+<li>note things you would like to come back to or investigate</li>
+<li>it gives me great satisfaction to go through a list of "side quests" I have noted and strike though all of them, knowing I have dealt with each one before starting a new task</li>
+<li>when investigating sth I also note question I would like to be able to answer after I'm done investigating<ul>
+<li>example: while working with axios and cookies i found conflicting information whether axios supports cookies. After the investigation I knew that axios supports cookies by default in a browser but not in node js</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Divide problems into smaller problems</p>
+</li>
+<li>example - coding logic for a new feature in a CLI tool and designing the CLI arguments - these can be 2 sub-tasks</li>
+</ol>
+<h2 id="big-bang-vs-baby-steps"><a class="toclink" href="2024/07/15/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#big-bang-vs-baby-steps">Big bang vs baby steps</a></h2>
+<p>The old me often ended up doing the <strong>big bang</strong>. Rewriting large chunks of code at once. Starting things from scratch. Working for hours or days with a code base that can't even compile.</p>
+<p>Downsides
+   - for a long time the project doesn't even compile, I lose motivation, I feel like I'm walking in the dark, I don't see errors for a long time
+   - requires a lot of context keeping in my mind since I've ripped the project apart
+   - if I abandon work for a few days sometimes I forget everything and progress is lost</p>
+<p>The new me prefers <strong>baby steps</strong></p>
+<p>Fiddle with the code knowing I'll <code>git reset --hard</code>. Try renaming some stuff - helps me understand the codebase better. Try out different things and abandon them. At this point I usually get an idea/feeling of what needs to be done. Plan few smaller refactorings. After them I am usually closer to the solution and am able to code it without a big bang.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_Z_3iB-XDWc?si=qbQHD4c9X0GvLpA7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2024-06-30 00:00:00">June 30, 2024</time></li>
         
           <li class="md-meta__item">
@@ -962,6 +1115,7 @@
 <ul>
 <li><a href="https://nomacs.org/">https://nomacs.org/</a> - free, open source image viewer - because the default Windows one sux</li>
 <li><a href="https://keepass.info/">https://keepass.info/</a> - free safe password database</li>
+<li><a href="https://www.videolan.org/vlc/">https://www.videolan.org/vlc/</a> - my go to video player</li>
 </ul>
     
   </div>
