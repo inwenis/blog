@@ -9,14 +9,14 @@ I use this metaphor when describing how I work these days.
     - unit tests
     - quick test in another way
     - reproduce issues locally
-    - do not experiment in your large/heavy project
+    - try things out in a small project on the side, not in the project you're working on
 2. One thing at a time
     - experimenting
     - refactoring preparing for feature addition
     - feature coding
-    - clean up after feature coding
+    - cleaning up after feature coding
 3. Divide problems into smaller problems
-    - and remember one thing (problem) at a time
+    - and remember - one thing (problem) at a time
 
 ---
 ## Example
@@ -33,9 +33,9 @@ __do__ - intercept request with `fiddler`/`postman`/other interceptor and reissu
 ## Example
 Something fails in CI pipeline.
 
-__don't__ make a change, commit, wait for remote CI to trigger, see result
+__don't__ - make a change, commit, wait for remote CI to trigger, see result
 
-__do__ reproduce issue locally
+__do__ - reproduce issue locally
 
 ---
 
