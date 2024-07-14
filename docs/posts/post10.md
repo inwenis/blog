@@ -2,7 +2,8 @@
 draft: false
 date: 2024-07-15
 categories:
-  - xxx
+  - General coding
+  - experience
 ---
 
 # How the way I work/code/investigate/debug changed with time & experience
