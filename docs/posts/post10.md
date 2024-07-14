@@ -1,7 +1,15 @@
+---
+draft: false
+date: 2024-07-15
+categories:
+  - xxx
+---
+
 # How the way I work/code/investigate/debug changed with time & experience
 
 I use this metaphor when describing how I work these days.
-[vid here]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ajDLIJB1p4o?si=LZsMct8yqq-RYTXa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 # TL;DR;
 
@@ -91,3 +99,5 @@ Downsides
 The new me prefers __baby steps__
 
 Fiddle with the code knowing I'll `git reset --hard`. Try renaming some stuff - helps me understand the codebase better. Try out different things and abandon them. At this point I usually get an idea/feeling of what needs to be done. Plan few smaller refactorings. After them I am usually closer to the solution and am able to code it without a big bang.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_Z_3iB-XDWc?si=qbQHD4c9X0GvLpA7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
