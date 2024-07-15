@@ -45,6 +45,28 @@ This happened to me once - I had to find all http/s links to a specific domains 
 
 Exercise - find all distinct http/s links in [https://github.com/tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract)
 
+## Exercise 4
+
+Task - remove the string "42" from each line of multiple CSV files.
+
+You can use this to generate the input CSV files:
+```PowerShell
+$numberOfFiles = 10
+$numberOfRows = 100
+
+$fileNames = 1..$numberOfFiles | % { "file$_.csv" }
+$csvData = 1..$numberOfRows | ForEach-Object {
+    [PSCustomObject]@{
+        Column1 = "Value $_"
+        Column2 = "Value $($_ * 2)"
+        Column3 = "Value $($_ * 3)"
+    }
+}
+
+$fileNames | % { $csvData | Export-Csv -Path $_ }
+```
+
+
 .
 
 .
@@ -318,4 +340,11 @@ a
 > find . -type f -not -path './.git/*' | xargs grep -E https?:.* -ho | sort | uniq
 
 # finds 234 links
+```
+
+## Exercise 4 - answer
+
+```PowerShell
+[PowerShell 7.4]
+ls *.csv | % { (cat $_ ) -replace "42","" | out-file $_ }
 ```
