@@ -7,11 +7,11 @@ categories:
   - exercises
 ---
 
-# PowerShell upsie
+# PowerShell "Oopsie"
 
-Task - remove a specific string from each line of multiple CSV files.
+## Task - remove a specific string from each line of multiple CSV files.
 
-This task is added to the [scripting exercise list](post02.md).
+This task was added to the [scripting exercise list](post02.md).
 
 First - let's generate some CSV files to work with:
 ```PowerShell
@@ -30,12 +30,12 @@ $csvData = 1..$numberOfRows | ForEach-Object {
 $fileNames | % { $csvData | Export-Csv -Path $_ }
 ```
 
-The upsie:
+## The "Oopsie"
 ```PowerShell
 ls *.csv | % { cat $_ | % { $_ -replace "42","" } | out-file $_ -Append }
 ```
 
-This command will never finish. Run it for a moment (and kill it), see the result and try to figure out what happens. Explanation below.
+This command will never finish. Run it for a moment (and then kill it), see the result, and try to figure out what happens. Explanation below.
 
 .
 
@@ -110,14 +110,14 @@ This command will never finish. Run it for a moment (and kill it), see the resul
 .
 
 ## The explanation
-`Get-Content` (aka. `cat`) keeps the file open and reads the content that our command is appending thus creating an infinite loop.
+`Get-Content` (aka. `cat`) keeps the file open and reads the content that our command is appending, thus creating an infinite loop.
 
 
 ## The fix
 
-There are many ways to fix this this "upsie"
+There are many ways to fix this this "oopsie"
 
-Perhaps the simplest one is to not write to and read from the exact same file. Maybe a sensible rule is __when processing files always write to a different file__:
+Perhaps the simplest one is to not write to and read from the exact same file. A sensible rule is __when processing files always write to a different file__:
 
 ```PowerShell
 ls *.csv | % { cat $_ | % { $_ -replace "42","" } | out-file -path "fixed$($_.Name)" }
