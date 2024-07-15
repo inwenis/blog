@@ -1,6 +1,17 @@
+---
+draft: false
+date: 2024-07-15
+categories:
+  - PowerShell
+  - scripting
+  - exercises
+---
+
 # PowerShell upsie
 
 Task - remove a specific string from each line of multiple CSV files.
+
+This task is added to the [scripting exercise list](post02.md).
 
 First - let's generate some CSV files to work with:
 ```PowerShell
