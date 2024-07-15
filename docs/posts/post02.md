@@ -348,3 +348,10 @@ a
 [PowerShell 7.4]
 ls *.csv | % { (cat $_ ) -replace "42","" | out-file $_ }
 ```
+
+```bash
+[bash]
+> sed -i 's/43//' *.csv
+> sed -ibackup 's/43//' *.csv # creates backup files
+```
+This is so neat, makes me think those unix people had access to some wisdom that is lost now.
