@@ -18,7 +18,7 @@
     
     
       
-        <title>PowerShell upsie - programki.eu</title>
+        <title>PowerShell "Oopsie" - programki.eu</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#powershell-upsie" class="md-skip">
+        <a href="#powershell-oopsie" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PowerShell upsie
+              PowerShell "Oopsie"
             
           </span>
         </div>
@@ -860,6 +860,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#task-remove-a-specific-string-from-each-line-of-multiple-csv-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task - remove a specific string from each line of multiple CSV files.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-oopsie" class="md-nav__link">
+    <span class="md-ellipsis">
+      The "Oopsie"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-explanation" class="md-nav__link">
     <span class="md-ellipsis">
       The explanation
@@ -958,9 +976,9 @@
         
 
 
-<h1 id="powershell-upsie">PowerShell upsie</h1>
-<p>Task - remove a specific string from each line of multiple CSV files.</p>
-<p>This task is added to the <a href="../../../../2022/10/28/exercises-in-bashshellscripting/">scripting exercise list</a>.</p>
+<h1 id="powershell-oopsie">PowerShell "Oopsie"</h1>
+<h2 id="task-remove-a-specific-string-from-each-line-of-multiple-csv-files">Task - remove a specific string from each line of multiple CSV files.</h2>
+<p>This task was added to the <a href="../../../../2022/10/28/exercises-in-bashshellscripting/">scripting exercise list</a>.</p>
 <p>First - let's generate some CSV files to work with:
 <div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$numberOfFiles</span> <span class="p">=</span> <span class="n">10</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">$numberOfRows</span> <span class="p">=</span> <span class="n">100</span>
@@ -976,10 +994,10 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nv">$fileNames</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$csvData</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$_</span> <span class="p">}</span>
 </span></code></pre></div></p>
-<p>The upsie:
+<h2 id="the-oopsie">The "Oopsie"</h2>
 <div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="n">-Append</span> <span class="p">}</span>
-</span></code></pre></div></p>
-<p>This command will never finish. Run it for a moment (and kill it), see the result and try to figure out what happens. Explanation below.</p>
+</span></code></pre></div>
+<p>This command will never finish. Run it for a moment (and then kill it), see the result, and try to figure out what happens. Explanation below.</p>
 <p>.</p>
 <p>.</p>
 <p>.</p>
@@ -1017,10 +1035,10 @@
 <p>.</p>
 <p>.</p>
 <h2 id="the-explanation">The explanation</h2>
-<p><code>Get-Content</code> (aka. <code>cat</code>) keeps the file open and reads the content that our command is appending thus creating an infinite loop.</p>
+<p><code>Get-Content</code> (aka. <code>cat</code>) keeps the file open and reads the content that our command is appending, thus creating an infinite loop.</p>
 <h2 id="the-fix">The fix</h2>
-<p>There are many ways to fix this this "upsie"</p>
-<p>Perhaps the simplest one is to not write to and read from the exact same file. Maybe a sensible rule is <strong>when processing files always write to a different file</strong>:</p>
+<p>There are many ways to fix this this "oopsie"</p>
+<p>Perhaps the simplest one is to not write to and read from the exact same file. A sensible rule is <strong>when processing files always write to a different file</strong>:</p>
 <div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="n">-path</span> <span class="s2">&quot;fixed</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&quot;</span> <span class="p">}</span>
 </span></code></pre></div>
 <p>Knowing the reason for our command hanging we can make sure the whole file is read before we overwrite it:
