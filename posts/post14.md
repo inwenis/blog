@@ -4,6 +4,9 @@ post ideas
 self updating exe, self update from github
 10_000 lines of code can save 10 hours of analysis
 best code is code never written (best solution)
+    the best code I have never written
+    dc - database sync
+    inco - additional kafka cuz we miss data
 how to work with xpath and puppeteer shard
 poor man's secrets - keepass + auto type
 
