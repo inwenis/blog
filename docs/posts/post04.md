@@ -34,7 +34,7 @@ try {
 
 ## Take away
 
-- talk to your users - in this case to find our that data doesn't need to arrive seconds after being published
+- talk to your users - in this case to learn that this data is not time critical
 - don't optimize prematurely
 - don't catch all exception pretending you handle them
 
