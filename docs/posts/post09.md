@@ -182,8 +182,10 @@ Distinguished Encoding Rules - is a way of encoding data structures. A certifica
 X.509 is the standard defining public key certificates for TLS/SSL (HTTPS)
 
 
-# PFX
+# PFX/P12/PKCS12
 PFX seems to be Microsoft's complicated file format for storing cryptographic data.
+
+P12/PKCS12 is the successor to PFX. Sometimes the terms PFX/P12/PKCS12 are used interchangeably.
 
 
 ---
