@@ -205,6 +205,33 @@ convention - propose
     - specify format in secret name
     - use plain - not base64 encoded
 
+# Converting
+
+```
+# PFX/pkcs12 to PEM
+openssl pkcs12 -in cert.pfx -out cert.pem -nodes
+
+# PFX/pkcs12 to PEM no password
+openssl pkcs12 -in cert.p12 -out cert_without_pwd.pem -nodes -password pass:1234
+
+# PEM to PFX/pkcs12 (both have passwords)
+openssl pkcs12 -export -out cert.pfx -in cert.pem -inkey cert.pem -passin pass:1234 -passout pass:1234
+
+# PEM to PFX/pkcs12 (when key and cert are in separate .pem files)
+openssl pkcs12 -export -out bob_pfx.pfx -inkey bob_key.pem -in bob_cert.cert
+
+# if openssl hangs try running it using winpty
+winpty openssl pkcs12 -in cert.pfx -out cert.pem -nodes
+```
+
+Sources:
+
+https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl
+
+https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate
+
+https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit
+
 # Lazy websites
 
 Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).
