@@ -8,9 +8,9 @@ categories:
 
 # <3 regex
 
-https://regex101.com/r/RdCR7j/1 - set the global flag (g) to get all matches
+[https://regex101.com/r/RdCR7j/1](https://regex101.com/r/RdCR7j/1) - set the global flag (g) to get all matches
 
-https://www.debuggex.com/ - havent't played with this a lot but I might give it a try, looks like a decent learning tool
+[https://www.debuggex.com/](https://www.debuggex.com/) - havent't played with this a lot but I might give it a try, looks like a decent learning tool
 
 ## regex - use static Regex.Matches() or instantiante Regex()?
 
@@ -23,16 +23,16 @@ Are you *using more than 15 regexes* and *use them frequently* and *they're comp
 
 > Test performance before you optimize
 
-https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions
-https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0
+[https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions](https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions)
+[https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0](https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0)
 
 ## What is the whole fus about backtracing?
 
 Microsoft's documentation does a bad job explaning backtracking.
 
-Read about backtracking here - https://www.regular-expressions.info/catastrophic.html
+Read about backtracking here - [https://www.regular-expressions.info/catastrophic.html](https://www.regular-expressions.info/catastrophic.html)
 
-To experience backtracing yourself -  https://regex101.com/r/1rWKNN/1
+To experience backtracing yourself - [https://regex101.com/r/1rWKNN/1](https://regex101.com/r/1rWKNN/1)
 - keep on adding "x" to the input and see how the execution time increses
 - with 35*"x" it takes 5 seconds for the regex to find out it doesn't match!
 
@@ -140,7 +140,7 @@ Regex.Count(book, "[^\w]\w{3}[^\w]") |> printfn "%d" // count 3 letter words
 ```
 
 # regex - Quick Reference (Microsoft)
-https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference
+[https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference](https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference)
 
 # Cheat sheet
 
@@ -240,16 +240,16 @@ More options are available using `RegexOptions` enum
 
 ## Practice regex
 
-https://regex101.com/quiz
+[https://regex101.com/quiz](https://regex101.com/quiz)
 
-https://regexcrossword.com/
+[https://regexcrossword.com/](https://regexcrossword.com/)
 
 ## Tutorial:
 
-I recall reading this tutorial years ago and I liked it - https://www.regular-expressions.info/tutorial.html
+I recall reading this tutorial years ago and I liked it - [https://www.regular-expressions.info/tutorial.html](https://www.regular-expressions.info/tutorial.html)
 
 ## Misc
-https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/
+[https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/](https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/)
 
 I love regex.
 
@@ -262,4 +262,4 @@ If regex did not exist, it would be necessary to invent it.
 Why does `.Matches()` return a custom collection instead of `List<Match>`?
 > Historic reasons. `Regex` was made in .Net 1.0 before generic were a thing.
 
-https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com
+[https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com](https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com)
