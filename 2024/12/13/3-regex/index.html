@@ -1,0 +1,1256 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../07/15/powershell-oopsie/">
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title><3 regex - programki.eu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-MZ0JN1EDPS"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-MZ0JN1EDPS",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-MZ0JN1EDPS",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-regex" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="programki.eu" class="md-header__button md-logo" aria-label="programki.eu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            programki.eu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              &lt;3 regex
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="programki.eu" class="md-nav__button md-logo" aria-label="programki.eu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    programki.eu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/f-sharp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    F Sharp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/general-coding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    General coding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTPS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/powershell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PowerShell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/ssl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/team-lead/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Team lead
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/axios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    axios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    certificates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cookies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/dependencies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/exercises/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    exercises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/experience/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    experience
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/js/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/keys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/node/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    node
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/npm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    npm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/regex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    regex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/scripting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    scripting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regex-use-static-regexmatches-or-instantiante-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      regex - use static Regex.Matches() or instantiante Regex()?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-whole-fus-about-backtracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is the whole fus about backtracing?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-13 00:00:00+00:00" class="md-ellipsis">December 13, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/f-sharp/">F Sharp</a>, 
+                              <a href="../../../../category/regex/">regex</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              5 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="3-regex">&lt;3 regex</h1>
+<p>https://regex101.com/r/RdCR7j/1 - set the global flag (g) to get all matches</p>
+<p>https://www.debuggex.com/ - havent't played with this a lot but I might give it a try, looks like a decent learning tool</p>
+<h2 id="regex-use-static-regexmatches-or-instantiante-regex">regex - use static Regex.Matches() or instantiante Regex()?</h2>
+<p>By default use static method.</p>
+<p>.NET regex engine caches regexes (by default 15).</p>
+<p>Are you <em>using more than 15 regexes</em> and <em>use them frequently</em> and <em>they're complex</em> and <em>you care about a performance</em>?</p>
+<blockquote>
+<p>Investigate <code>Regex()</code> and <code>RegexOptions.Compiled</code> <code>RegexOptions.CompiledToAssembly</code></p>
+<p>Test performance before you optimize</p>
+</blockquote>
+<p>https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions
+https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0</p>
+<h2 id="what-is-the-whole-fus-about-backtracing">What is the whole fus about backtracing?</h2>
+<p>Microsoft's documentation does a bad job explaning backtracking.</p>
+<p>Read about backtracking here - https://www.regular-expressions.info/catastrophic.html</p>
+<p>To experience backtracing yourself -  https://regex101.com/r/1rWKNN/1
+- keep on adding "x" to the input and see how the execution time increses
+- with 35*"x" it takes 5 seconds for the regex to find out it doesn't match!</p>
+<h2 id="code">Code</h2>
+<p>These are the methods you need:</p>
+<p><div class="language-F# highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">open</span><span class="w"> </span><span class="nn">System</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Text.RegularExpressions</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Matches</span><span class="o">(</span><span class="s">&quot;input&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;pattern&quot;</span><span class="o">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Matches</span><span class="o">(</span><span class="s">&quot;input&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;pattern&quot;</span><span class="o">,</span><span class="w"> </span><span class="nn">RegexOptions</span><span class="p">.</span><span class="n">IgnoreCase</span><span class="w"> </span><span class="o">|||</span><span class="w"> </span><span class="nn">RegexOptions</span><span class="p">.</span><span class="n">Singleline</span><span class="o">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Matches</span><span class="o">(</span><span class="s">&quot;input&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;pattern&quot;</span><span class="o">,</span><span class="w"> </span><span class="nn">RegexOptions</span><span class="p">.</span><span class="n">IgnoreCase</span><span class="w"> </span><span class="o">|||</span><span class="w"> </span><span class="nn">RegexOptions</span><span class="p">.</span><span class="n">Singleline</span><span class="o">,</span><span class="w"> </span><span class="nn">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="o">(</span><span class="mi">10</span><span class="o">.))</span><span class="w"> </span><span class="c1">// you can use a timeout to prevent a DoS attack with malicous inputs</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Match</span><span class="bp">()</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">IsMatch</span><span class="bp">()</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Replace</span><span class="bp">()</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Split</span><span class="bp">()</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Count</span><span class="bp">()</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">let</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Regex</span><span class="o">(</span><span class="s">&quot;pattern&quot;</span><span class="o">)</span><span class="w"> </span><span class="c1">// instance Regex offers the same methods</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">r</span><span class="o">.</span><span class="n">Matches</span><span class="o">(</span><span class="s">&quot;input&quot;</span><span class="o">)</span>
+</span></code></pre></div>
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex?view=net-9.0">Regex class - https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex?view=net-9.0</a></p>
+<p>Sample:</p>
+<p><div class="language-F# highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">let</span><span class="w"> </span><span class="nv">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">Matches</span><span class="o">(</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;(</span><span class="err">\</span><span class="s">w)o&quot;</span><span class="o">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">matches</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Seq</span><span class="p">.</span><span class="n">iter</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="w"> </span><span class="n">x</span><span class="o">.</span><span class="n">Value</span><span class="o">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">matches</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Seq</span><span class="p">.</span><span class="n">iter</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span><span class="w"> </span><span class="n">x</span><span class="o">.</span><span class="n">Groups</span><span class="o">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">matches</span><span class="o">.[</span><span class="mi">0</span><span class="o">].</span><span class="n">Groups</span><span class="o">.[</span><span class="mi">1</span><span class="o">].</span><span class="n">Value</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%s&quot;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// Lo             // these are the whole matches</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// do             //</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1">// lo             //</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">// co             //</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">// seq [Lo; L]    // group 0 is the whole match, group 1 is the (\w)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">// seq [do; d]    //</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">// seq [lo; l]    //</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1">// seq [co; c]    //</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1">// L              // this is the letter captured by (\w)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">let</span><span class="w"> </span><span class="nv">matches2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">Matches</span><span class="o">(</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;(</span><span class="err">\</span><span class="s">w)+o&quot;</span><span class="o">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">matches2</span><span class="o">.[</span><span class="mi">1</span><span class="o">].</span><span class="n">Groups</span><span class="o">.[</span><span class="mi">1</span><span class="o">].</span><span class="n">Value</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">matches2</span><span class="o">.[</span><span class="mi">1</span><span class="o">].</span><span class="n">Groups</span><span class="o">.[</span><span class="mi">1</span><span class="o">].</span><span class="n">Captures</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Seq</span><span class="p">.</span><span class="n">iter</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">Value</span><span class="o">)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1">// l              // gotcha! the value of the group is the last thing captured by that group</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="c1">// d              // here the (\w)+ group captures 3 times</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1">// o              //</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="c1">// l              //</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Match object properties:
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Match.Success -&gt; bool   | true      | false        |
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Match.Value   -&gt; string | the match | String.Empty |
+</span></code></pre></div>
+<div class="language-F# highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">let</span><span class="w"> </span><span class="nv">match3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">Match</span><span class="o">(</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;Lorem i[a-z ]+i&quot;</span><span class="o">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">match3</span><span class="o">.</span><span class="n">Success</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">match3</span><span class="o">.</span><span class="n">Value</span><span class="w">   </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">// true</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">// &quot;Lorem ipsum dolor si&quot;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">let</span><span class="w"> </span><span class="nv">match4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">Match</span><span class="o">(</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;Lorem i[A-Z ]+i&quot;</span><span class="o">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">match4</span><span class="o">.</span><span class="n">Success</span><span class="w">            </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">match4</span><span class="o">.</span><span class="n">Value</span><span class="w">              </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">match4</span><span class="o">.</span><span class="n">Groups</span><span class="o">.</span><span class="n">Count</span><span class="w">       </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">match4</span><span class="o">.</span><span class="n">Groups</span><span class="o">.[</span><span class="mi">0</span><span class="o">].</span><span class="n">Success</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%A&quot;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">// false</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1">// &quot;&quot;    // notice this is String.empty not &lt;null&gt;</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1">// 1     // even for a failed match there is always at least one group</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1">// false</span>
+</span></code></pre></div></p>
+<div class="language-F# highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">let</span><span class="w"> </span><span class="nv">mutable</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">Match</span><span class="o">(</span><span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;</span><span class="err">\</span><span class="s">wo&quot;</span><span class="o">)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">while</span><span class="w"> </span><span class="n">m</span><span class="o">.</span><span class="n">Success</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="w"> </span><span class="n">m</span><span class="o">.</span><span class="n">Value</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">m</span><span class="o">.</span><span class="n">NextMatch</span><span class="bp">()</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">let</span><span class="w"> </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="s">&quot;The next day the children were ready to go to the plum thicket in the&quot;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="s">&quot;peach orchard as soon as they had their breakfast, but while they were&quot;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="s">&quot;talking about it a new trouble arose. It grew out of a question asked by&quot;</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="s">&quot;Drusilla.&quot;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="o">]</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">lines</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">IsMatch</span><span class="o">(</span><span class="n">line</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;the&quot;</span><span class="o">))</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">List</span><span class="p">.</span><span class="n">map</span><span class="w">    </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nn">Regex</span><span class="p">.</span><span class="n">Replace</span><span class="o">(</span><span class="n">line</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;(</span><span class="err">\</span><span class="s">w+) the&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;the $1&quot;</span><span class="o">))</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="k">let</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="s">&quot;don&#39;t we all love</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="s">&quot;dealing with different</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">    </span><span class="s">&quot;line endings</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="s">&quot;it&#39;s so much fun&quot;</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Split</span><span class="o">(</span><span class="n">text</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\r</span><span class="s">?</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">)</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Array</span><span class="p">.</span><span class="n">iter</span><span class="w"> </span><span class="o">(</span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="o">)</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Net.Http</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="k">let</span><span class="w"> </span><span class="nv">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="bp">()</span><span class="o">).</span><span class="n">GetStringAsync</span><span class="o">(</span><span class="s">&quot;https://www.gutenberg.org/cache/epub/74886/pg74886.txt&quot;</span><span class="o">).</span><span class="n">Result</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Count</span><span class="o">(</span><span class="n">book</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;[^</span><span class="err">\</span><span class="s">w]</span><span class="err">\</span><span class="s">w{3}[^</span><span class="err">\</span><span class="s">w]&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="w"> </span><span class="c1">// count 3 letter words</span>
+</span></code></pre></div>
+<h1 id="regex-quick-reference-microsoft">regex - Quick Reference (Microsoft)</h1>
+<p>https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</p>
+<h1 id="cheat-sheet">Cheat sheet</h1>
+<p>Character escapes
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>\t     matches a tab \u0009
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>\r     match a carriage return \u000D
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>\n     new line \u000A
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>\unnnn match a unicode character by hexadecimal representation, exactly 4 digits
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>\.     match a dot (not any character) aka. match literally
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>\*     match an asterisk (don&#39;t interpret * as a regex special quantifier)
+</span></code></pre></div></p>
+<p>Character classes
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[character_group]       /[ae]/ will match &quot;a&quot; in &quot;gray&quot;
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>[^not_character_group]
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>[a-z] [A-Z] [a-z0-9A-Z] character ranges
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>.                       wildcard - any character except \n except when using SingleLine option
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>\w                      word character - upper/lower case letters and numbers
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>\W                      non word character
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>\s                      white-space character
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>\S                      non whitespace character
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>\d                      digit
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>\D                      non digit
+</span></code></pre></div></p>
+<p>Anchors
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>^   $ beginning and end of a string (in multiline mode beginning and end of a line)
+</span></code></pre></div></p>
+<p>Grouping
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>(subexpression)               (\w)\1 - match a character and the same character again - &quot;aa&quot; in &quot;xaax&quot;
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>(?&lt;name&gt;subexpression)        named group (?&lt;double&gt;\w)\k&lt;double&gt; - same as above
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>(?:subexpression)             noncapturing group - Write(?:Line)? - will match both Write and WriteLine in a string
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>                              (:?Mr\. |Ms\. |Mrs\. )?\w+\s\w+ -&gt; match fist name, last name and optional preceding title
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>(?imnsx-imnsx: subexpression) turn options on or off for a group
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>(?=subexp)                    zero-width positive lookahead assertion
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>(?!subexp)                    negative lookahead
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>(?&lt;=subexp)
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>(?&lt;!subexp)                   look behind assertions
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>                              make sure a subexp is/is not following (but don&#39;t match it, ie. don&#39;t consume the characters)
+</span></code></pre></div></p>
+<p>Quantifiers
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>*     0...n (all these are greedy by default -&gt; match as many as possible)
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>+     1...n
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>?     0...1
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>{n}   exactly n
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>{n,}  at least n
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>{n,m} n...m
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>*?
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>+?
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>??
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>{n,}?
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>{n,m}? question mark makes the match nongreedy (mach as few as possible)
+</span></code></pre></div></p>
+<p>Backreference
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>\number   match the value of a previous subexpression - (\w)\1 - matches the same \w character twice
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>\k&lt;name&gt;  backreference using group name
+</span></code></pre></div></p>
+<p>Alternation Constructs
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>| - any element separated by | - th(e|is|at) and the|this|that both match &quot;the&quot; &quot;this&quot; &quot;that&quot;
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>TODO - match yes if expresion else match no
+</span></code></pre></div></p>
+<p>Substitution
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$number use numbered group
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>${name} use named group
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>$$      literal $
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>$&amp;      whole match
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>$`      text before the match
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>$&#39;      text after the match
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>$+      last group
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>$_      entier input string
+</span></code></pre></div></p>
+<p>Inline options
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>(?imnsx-imnsx)               use it like this at the beginning
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>(?imnsx-imnsx:subexpression) use for a group
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>i                            case insensetive
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>m                            multiline - match beginning and end of a line
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>n                            do not capture unnamed groups
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>s                            signle line - . matches \n also
+</span></code></pre></div>
+More options are available using <code>RegexOptions</code> enum</p>
+<h2 id="practice-regex">Practice regex</h2>
+<p>https://regex101.com/quiz</p>
+<p>https://regexcrossword.com/</p>
+<h2 id="tutorial">Tutorial:</h2>
+<p>I recall reading this tutorial years ago and I liked it - https://www.regular-expressions.info/tutorial.html</p>
+<h2 id="misc">Misc</h2>
+<p>https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/</p>
+<p>I love regex.</p>
+<p>However I used to say "if you solve a problem with regex now you have 2 problems"</p>
+<p>Not knowing how this quote came to be I repeated it for years. I'll smack the next person to repeat this quote without elaborating.</p>
+<p>If regex did not exist, it would be necessary to invent it.</p>
+<p>Why does <code>.Matches()</code> return a custom collection instead of <code>List&lt;Match&gt;</code>?</p>
+<blockquote>
+<p>Historic reasons. <code>Regex</code> was made in .Net 1.0 before generic were a thing.</p>
+</blockquote>
+<p>https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
