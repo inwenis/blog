@@ -263,3 +263,5 @@ Why does `.Matches()` return a custom collection instead of `List<Match>`?
 > Historic reasons. `Regex` was made in .Net 1.0 before generic were a thing.
 
 [https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com](https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com)
+
+I used `(?<!\[.*?)(?<!\(")https?://\S+` with replace `[$&]($&)` to linkify links in this post
