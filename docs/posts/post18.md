@@ -24,6 +24,7 @@ Are you *using more than 15 regexes* and *use them frequently* and *they're comp
 > Test performance before you optimize
 
 [https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions](https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions)
+
 [https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0](https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0)
 
 ## What is the whole fus about backtracing?
