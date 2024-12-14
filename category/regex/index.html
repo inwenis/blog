@@ -927,8 +927,8 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="3-regex"><a class="toclink" href="../../2024/12/13/3-regex/">&lt;3 regex</a></h2>
-<p>https://regex101.com/r/RdCR7j/1 - set the global flag (g) to get all matches</p>
-<p>https://www.debuggex.com/ - havent't played with this a lot but I might give it a try, looks like a decent learning tool</p>
+<p><a href="https://regex101.com/r/RdCR7j/1">https://regex101.com/r/RdCR7j/1</a> - set the global flag (g) to get all matches</p>
+<p><a href="https://www.debuggex.com/">https://www.debuggex.com/</a> - havent't played with this a lot but I might give it a try, looks like a decent learning tool</p>
 <h3 id="regex-use-static-regexmatches-or-instantiante-regex"><a class="toclink" href="../../2024/12/13/3-regex/#regex-use-static-regexmatches-or-instantiante-regex">regex - use static Regex.Matches() or instantiante Regex()?</a></h3>
 <p>By default use static method.</p>
 <p>.NET regex engine caches regexes (by default 15).</p>
@@ -937,12 +937,12 @@
 <p>Investigate <code>Regex()</code> and <code>RegexOptions.Compiled</code> <code>RegexOptions.CompiledToAssembly</code></p>
 <p>Test performance before you optimize</p>
 </blockquote>
-<p>https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions
-https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions">https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex#static-regular-expressions</a>
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0">https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-9.0</a></p>
 <h3 id="what-is-the-whole-fus-about-backtracing"><a class="toclink" href="../../2024/12/13/3-regex/#what-is-the-whole-fus-about-backtracing">What is the whole fus about backtracing?</a></h3>
 <p>Microsoft's documentation does a bad job explaning backtracking.</p>
-<p>Read about backtracking here - https://www.regular-expressions.info/catastrophic.html</p>
-<p>To experience backtracing yourself -  https://regex101.com/r/1rWKNN/1
+<p>Read about backtracking here - <a href="https://www.regular-expressions.info/catastrophic.html">https://www.regular-expressions.info/catastrophic.html</a></p>
+<p>To experience backtracing yourself - <a href="https://regex101.com/r/1rWKNN/1">https://regex101.com/r/1rWKNN/1</a>
 - keep on adding "x" to the input and see how the execution time increses
 - with 35*"x" it takes 5 seconds for the regex to find out it doesn't match!</p>
 <h3 id="code"><a class="toclink" href="../../2024/12/13/3-regex/#code">Code</a></h3>
@@ -1037,7 +1037,7 @@ https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.rege
 </span><span id="__span-46-27"><a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a><span class="nn">Regex</span><span class="p">.</span><span class="n">Count</span><span class="o">(</span><span class="n">book</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;[^</span><span class="err">\</span><span class="s">w]</span><span class="err">\</span><span class="s">w{3}[^</span><span class="err">\</span><span class="s">w]&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="w"> </span><span class="c1">// count 3 letter words</span>
 </span></code></pre></div>
 <h2 id="regex-quick-reference-microsoft"><a class="toclink" href="../../2024/12/13/3-regex/#regex-quick-reference-microsoft">regex - Quick Reference (Microsoft)</a></h2>
-<p>https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference">https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</a></p>
 <h2 id="cheat-sheet"><a class="toclink" href="../../2024/12/13/3-regex/#cheat-sheet">Cheat sheet</a></h2>
 <p>Character escapes
 <div class="language-text highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>\t     matches a tab \u0009
@@ -1115,12 +1115,12 @@ https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.rege
 </span></code></pre></div>
 More options are available using <code>RegexOptions</code> enum</p>
 <h3 id="practice-regex"><a class="toclink" href="../../2024/12/13/3-regex/#practice-regex">Practice regex</a></h3>
-<p>https://regex101.com/quiz</p>
-<p>https://regexcrossword.com/</p>
+<p><a href="https://regex101.com/quiz">https://regex101.com/quiz</a></p>
+<p><a href="https://regexcrossword.com/">https://regexcrossword.com/</a></p>
 <h3 id="tutorial"><a class="toclink" href="../../2024/12/13/3-regex/#tutorial">Tutorial:</a></h3>
-<p>I recall reading this tutorial years ago and I liked it - https://www.regular-expressions.info/tutorial.html</p>
+<p>I recall reading this tutorial years ago and I liked it - <a href="https://www.regular-expressions.info/tutorial.html">https://www.regular-expressions.info/tutorial.html</a></p>
 <h3 id="misc"><a class="toclink" href="../../2024/12/13/3-regex/#misc">Misc</a></h3>
-<p>https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/</p>
+<p><a href="https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/</a></p>
 <p>I love regex.</p>
 <p>However I used to say "if you solve a problem with regex now you have 2 problems"</p>
 <p>Not knowing how this quote came to be I repeated it for years. I'll smack the next person to repeat this quote without elaborating.</p>
@@ -1129,7 +1129,7 @@ More options are available using <code>RegexOptions</code> enum</p>
 <blockquote>
 <p>Historic reasons. <code>Regex</code> was made in .Net 1.0 before generic were a thing.</p>
 </blockquote>
-<p>https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com</p>
+<p><a href="https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com">https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com</a></p>
     
   </div>
 </article>
