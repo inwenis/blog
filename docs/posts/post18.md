@@ -266,3 +266,12 @@ Why does `.Matches()` return a custom collection instead of `List<Match>`?
 [https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com](https://github.com/dotnet/runtime/discussions/74919?utm_source=chatgpt.com)
 
 I used `(?<!\[.*?)(?<!\(")https?://\S+` with replace `[$&]($&)` to linkify links in this post
+
+My lovely regex helpers
+```F#
+let regexExtract  regex                      text = Regex.Match(text, regex).Value
+let regexExtractg regex                      text = Regex.Match(text, regex).Groups.[1].Value
+let regexExtracts regex                      text = Regex.Matches(text, regex) |> Seq.map (fun x -> x.Value)
+let regexReplace  regex (replacement:string) text = Regex.Replace(text, regex, replacement)
+let regexRemove   regex                      text = Regex.Replace(text, regex, String.Empty)
+```
