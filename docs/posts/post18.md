@@ -212,6 +212,8 @@ Backreference
 Alternation Constructs
 ```
 | - any element separated by | - th(e|is|at) and the|this|that both match "the" "this" "that"
+    ala|ma|kota - match "ala" or "ma" or "kota"
+    ala ma (kota|psa) - match "ala ma kota" or "ala ma psa"
 TODO - match yes if expresion else match no
 ```
 
