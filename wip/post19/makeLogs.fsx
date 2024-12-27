@@ -5,6 +5,8 @@ open System.Text.Json
 #r "nuget: FSharp.Data"
 open FSharp.Data
 
+Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ // ensures the script runs from the directory it's located in
+
 // -------------------------------------------------------------------------
 
 type LogEntry = {
