@@ -68,7 +68,7 @@ runWithMemoryCheck (fun () ->
 
 // only the properties we're interested in
 type LogEntryRecord = {
-    Timestamp: DateTime
+    Timestamp: DateTimeOffset
     Level: string
     }
 
@@ -83,9 +83,30 @@ let try3 () =
 
 runWithMemoryCheck (fun () -> try3()) |> snd |> printfn "Memory used: %f GB"
 
+// try using JsonNode and JsonDocument
+open System.Text.Json.Nodes
+let try4 () =
+    use f = File.OpenText("./logs.json")
+    [
+        while not f.EndOfStream do
+            let line = f.ReadLine() |> JsonNode.Parse
+            let t = line.["Timestamp"].GetValue<DateTimeOffset>()
+            let l = line.["Level"].GetValue<string>()
+            yield { Timestamp = t; Level = l }
+    ]
+runWithMemoryCheck (fun () -> try4()) |> snd |> printfn "Memory used: %f GB"
 
-
-
+// this seems faster than JsonNode
+let try5 () =
+    use f = File.OpenText("./logs.json")
+    [
+        while not f.EndOfStream do
+            use line = f.ReadLine() |> JsonDocument.Parse
+            let t = line.RootElement.GetProperty("Timestamp").GetDateTimeOffset()
+            let l = line.RootElement.GetProperty("Level").GetString()
+            yield { Timestamp = t; Level = l }
+    ]
+runWithMemoryCheck (fun () -> try5()) |> snd |> printfn "Memory used: %f GB"
 
 // JsonSerializer -> static class
 
@@ -120,6 +141,7 @@ JsonSerializer.Deserialize<LogEntryRecord>(jsonString, options)
 
 // TODO - understand this - Utf8JsonReader
 
+// nice - https://stu.dev/a-look-at-jsondocument/
 
 
 // JsonNode and JsonDocument
@@ -154,3 +176,5 @@ y.["x"].AsObject().ToJsonString() // you can serialize subsection of the json
 JsonNode.DeepEquals(x, y) // comparing json
 
 // JsonDocument -> immutable
+// just read the docs here - https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom
+// json document - faster, not mutable
