@@ -113,6 +113,18 @@ let try5 () =
     ]
 runWithMemoryCheck (fun () -> try5()) |> snd |> printfn "Memory used: %f GB"
 
+
+let try6 () =
+    use f = File.OpenText("./logs.json")
+    [
+        while not f.EndOfStream do
+            let line = f.ReadLine() |> FSharp.Data.JsonValue.Parse
+            let t = line.GetProperty("Timestamp").AsDateTimeOffset()
+            let l = line.GetProperty("Level").AsString()
+            yield { Timestamp = t; Level = l }
+    ]
+runWithMemoryCheck (fun () -> try6()) |> snd |> printfn "Memory used: %f GB"
+
 // JsonSerializer -> static class
 
 let jsonString = ""
@@ -244,3 +256,7 @@ let json = Json.serialize data
 
 let deserialized = Json.deserialize<TheUnion> json
 // deserialized is OneFieldCase("The string")
+
+// I could also test this
+let j = FSharp.Data.JsonValue.Parse("{}")
+j.Properties()
