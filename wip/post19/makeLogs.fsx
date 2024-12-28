@@ -156,17 +156,17 @@ x.["Timestamp"].GetPath()
 
 // how to do the equivalent of this int temperatureInt = (int)forecastNode!["Temperature"]!; in f#?
 
-x.["Timestamp"].GetType() |> string // json value
+x["Timestamp"].GetType() |> string // json value
 x.GetType() |> string // json obj
-x.["x"].GetValue<int[]>() // err
-x.["x"].AsArray() |> Seq.map (fun a -> a.GetValue<int>()) // ok
-x.["x"].[0].GetValue<int>() // ok
+x["x"].GetValue<int[]>() // err
+x["x"].AsArray() |> Seq.map (fun a -> a.GetValue<int>()) // ok
+x["x"].[0].GetValue<int>() // ok
 
 // create json
 let myObj = new JsonObject()
-myObj.["asdf"] <- DateTimeOffset.Now
+myObj["asdf"] <- DateTimeOffset.Now
 myObj.ToJsonString()
-myObj.["asdf"] <- new JsonArray(1,2)
+myObj["asdf"] <- new JsonArray(1,2)
 myObj.Remove("asdf")
 
 let y = JsonNode.Parse("""{"x":{"y":[1,2,3]},"Timestamp": "2024-12-23T20:51:18.2020753+01:00", "Level": "ERROR", "Message": "File not found", "RedundantContent": "xxxxxxxxxx"}""")
@@ -180,3 +180,12 @@ JsonNode.DeepEquals(x, y) // comparing json
 // JsonDocument -> immutable
 // just read the docs here - https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom
 // json document - faster, not mutable
+
+
+// https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev
+// nice
+// https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/
+
+// The System.Text.Json namespace contains all the entry points and the main types.
+// The System.Text.Json.Serialization namespace contains attributes and APIs for advanced scenarios and customization specific to serialization and deserialization.
+// https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom#json-dom-choices
