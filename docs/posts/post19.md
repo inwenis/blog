@@ -1,3 +1,11 @@
+---
+draft: false
+date: 2024-12-29
+categories:
+  - F Sharp
+  - json
+---
+
 # Json
 
 Should I use `System.Text.Json` (STJ) or `Newtonsoft.Json` (previously `Json.NET`)?
