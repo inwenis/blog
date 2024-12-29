@@ -182,6 +182,12 @@ type LogEntryRecord = {
 // JsonSerializer.Deserialize<'Type>(jsonString, options)
 // JsonSerializer.DeserializeAsync(stream, ...) <- only streams can be parsed async cuz parsing string is purely CPU bound
 
+// Deserialization behaviour:
+//  - By default, property name matching is case-sensitive. You can specify case-insensitivity.
+//  - Non-public constructors are ignored by the serializer.
+//  - Deserialization to immutable objects or properties that don't have public set accessors is supported but not enabled by default.
+//    ^ I'm not sure about this cuz F# records seem to work just fine
+
 JsonSerializer.Deserialize<LogEntryRecord>(jsonString)
 // { Timestamp = 0001-01-01T00:00:00.0000000+00:00 Level = null }
 // no properties match but JsonSerializer just returns default values
@@ -238,6 +244,12 @@ JsonSerializer.Serialize(options, options)
 //  "DefaultIgnoreCondition": 0,
 //  ...
 
+// Serialization behaviour:
+//  - by default, all public properties are serialized. You can specify properties to ignore. You can also include private members.
+//  - by default, JSON is minified. You can pretty-print the JSON.
+//  - by default, casing of JSON names matches the .NET names. You can customize JSON name casing.
+//  - by default, fields are ignored. You can include fields.
+
 
 // # JsonNode and JsonDocument
 
@@ -274,45 +286,80 @@ m.Remove("TimeStamp")
 
 let a = JsonNode.Parse("""{"x":{"y":[1,2,3]}}""")
 a.["x"] // this is a JasonNode
-a.["x"].AsObject() // this is a JsonObject
+a.["x"].AsObject() // this returns a JsonObject
 a.["x"].AsObject() |> Seq.map (fun x -> printfn "%A" x) // iterate over properties of the object
-a.["x"].AsObject().ToJsonString() // you can serialize subsection of the json
+a.["x"].ToJsonString() // you can serialize subsection of the json
 // {"y":[1,2,3]}
 
 JsonNode.DeepEquals(x, a) // comparison
 ```
 
-https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev
+## F# types
+```F#
+open System.Text.Json
 
-a post from when they introduced the new json API
+// Record - OK
+type DummyRecord = {
+    Text: string
+    Num:  int
+    }
 
+let r = { Text = "asdf"; Num = 1 }
 
-https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/
-keep this?
+JsonSerializer.Serialize(r) |> JsonSerializer.Deserialize<DummyRecord>
 
-# Serialize straing to UTF-8
+let tuple = (42, "asdf")
+JsonSerializer.Serialize(tuple) |> JsonSerializer.Deserialize<int * string>
+
+type TupleAlias = int * string
+let tuple2 = (43, "sfdg") : TupleAlias
+JsonSerializer.Serialize(tuple2) |> JsonSerializer.Deserialize<TupleAlias>
+
+// Discriminated Union :(
+type SampleDiscriminatedUnion =
+    | A of int
+    | B of string
+    | C of int * string
+let x = A 1
+JsonSerializer.Serialize(x) // eeeeeeeeeeeeee !
+
+// Option - OK
+JsonSerializer.Serialize(Some 42) |> JsonSerializer.Deserialize<int option>
+JsonSerializer.Serialize(None) |> JsonSerializer.Deserialize<int option>
+open System
+type RecordTest2 = {
+    Timestamp: DateTimeOffset
+    Level: string
+    TestOp: int option
+    }
+
+// Discriminated Union is supported in FSharp.Json
+// https://github.com/fsprojects/FSharp.Json
+#r "nuget: FSharp.Json"
+open FSharp.Json
+let data = C (42, "The string")
+let json = Json.serialize data
+// val json: string = "{
+//   "C": [
+//     42,
+//     "The string"
+//   ]
+// }
+
+let deserialized = Json.deserialize<SampleDiscriminatedUnion> json
+// val deserialized: SampleDiscriminatedUnion = C (42, "The string")
+```
+
+## Serialize straight to UTF-8
 `JsonSerializer.SerializeToUtf8Bytes(value, options)` <- why does this one exist?
 > Strings in .Net are stored in memory as UTF-16, so if you don't need a string, you can use this method and serialize straight to UTF-8 bytes (it's 5-10% faster, see link)
 https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8
 
-// here
+## More links
+https://stu.dev/a-look-at-jsondocument/
 
+https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/
 
+https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev
 
-// Serialization behaviour
-// By default, all public properties are serialized. You can specify properties to ignore. You can also include private members.
-// By default, JSON is minified. You can pretty-print the JSON.
-// By default, casing of JSON names matches the .NET names. You can customize JSON name casing.
-// By default, fields are ignored. You can include fields.
-
-
-// Deserialization behavior
-// The following behaviors apply when deserializing JSON:
-
-// By default, property name matching is case-sensitive. You can specify case-insensitivity.
-// Non-public constructors are ignored by the serializer.
-// Deserialization to immutable objects or properties that don't have public set accessors is supported but not enabled by default. See Immutable types and records.
-
-// TODO - understand this - Utf8JsonReader
-
-// nice - https://stu.dev/a-look-at-jsondocument/
+a post from when they introduced the new json API
