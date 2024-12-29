@@ -2,52 +2,44 @@ open System
 open System.IO
 open System.Text.Json
 
-#r "nuget: FSharp.Data"
-open FSharp.Data
-
 fsi.AddPrinter<DateTimeOffset>(fun dt -> dt.ToString("O"))
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ // ensures the script runs from the directory it's located in
-
 // -------------------------------------------------------------------------
 
-
+// sample log entry for testing
 type LogEntry = {
-    Timestamp: DateTime
-    Level: string
-    Message: string
-    RedundantContent: string
+    Timestamp       : DateTimeOffset
+    Level           : string
+    Message         : string
+}
+
+// only the properties we're interested in
+type LogEntryRecord = {
+    Timestamp: DateTimeOffset
+    Level    : string
 }
 
 let random = Random()
-let levels = [| "INFO"; "WARN"; "ERROR"; "DEBUG" |]
-let messages = [| "User logged in"; "User logged out"; "File not found"; "Access denied"; "Operation completed"; "Operation failed" |]
+let levels = [ "INFO"; "WARN"; "ERROR"; "DEBUG" ]
 
 let generateLogEntry () =
     {
-        Timestamp        = DateTime.Now.AddSeconds(-random.Next(0, 10000))
+        Timestamp        = DateTimeOffset.Now.AddSeconds(-random.Next(0, 10000))
         Level            = levels.[random.Next(levels.Length)]
-        Message          = messages.[random.Next(messages.Length)]
-        RedundantContent = String.replicate(random.Next(10, 100)) "x"
+        Message          = String.replicate(random.Next(10, 100)) "x" // random string to simulate redundant content
     }
 
-List.init 6_000_000 (fun _ -> generateLogEntry()) // 6M lines is around 1GB of data
+List.init 7_000_000 (fun _ -> generateLogEntry()) // 7M entries is around 1GB of data
 |> List.map (fun entry -> JsonSerializer.Serialize(entry))
 |> fun lines -> File.WriteAllLines("./logs.json", lines)
 
+let lines = File.ReadAllLines "./logs.json"
 
-type JsonProviderLogEntry = JsonProvider<"""
-{
-    "Timestamp"        : "2024-12-23T20:51:18.2020753+01:00",
-    "Level"            : "ERROR",
-    "Message"          : "File not found",
-    "RedundantContent" : "x"
-}""">
-
-let runWithMemoryCheck f =
+let runWithMemoryCheck lines singleLineParser =
     GC.Collect()
     let before = GC.GetTotalMemory(true)
-    let x = f()
+    let x = lines |> Array.map singleLineParser
     GC.Collect()
     let after = GC.GetTotalMemory(true)
     let m = ((after - before) |> float) / 1024. / 1024. / 1024. // GB
@@ -56,74 +48,60 @@ let runWithMemoryCheck f =
 #time
 // -------------------------------------------------------------------------
 
-runWithMemoryCheck (fun () ->
-    File.ReadAllLines("./logs.json")
-    |> Array.map (fun line -> JsonProviderLogEntry.Parse(line))
-) |> snd |> printfn "Memory used: %f GB"
+#r "nuget: FSharp.Data"
+open FSharp.Data
 
-runWithMemoryCheck (fun () ->
-    use s = File.OpenText("./logs.json")
-    [
-        while not s.EndOfStream do
-            let line = s.ReadLine()
-            let parsed = JsonProviderLogEntry.Parse(line)
-            yield parsed
-    ]
-) |> snd |> printfn "Memory used: %f GB"
+type LogEntryJsonProvider = JsonProvider<"""
+{
+    "Timestamp"        : "2024-12-23T20:51:18.2020753+01:00",
+    "Level"            : "ERROR",
+    "Message"          : "File not found"
+}""">
 
-// only the properties we're interested in
-type LogEntryRecord = {
-    Timestamp: DateTimeOffset
-    Level: string
-    }
+let fSharpDataJsonProvider = LogEntryJsonProvider.Parse
 
-let try3 () =
-    use f = File.OpenText("./logs.json")
-    [
-        while not f.EndOfStream do
-            let line = f.ReadLine()
-            let parsed = JsonSerializer.Deserialize<LogEntryRecord>(line)
-            yield parsed
-    ]
+runWithMemoryCheck lines fSharpDataJsonProvider |> snd |> printfn "Memory used: %f GB"
+// Memory used: 4.420363 GB
+// Real: 00:00:35.829, CPU: 00:02:07.312, GC gen0: 84, gen1: 25, gen2: 8
 
-runWithMemoryCheck (fun () -> try3()) |> snd |> printfn "Memory used: %f GB"
+let fSharpDataJsonNode (x:string) =
+    let line = x |> JsonValue.Parse
+    let t = line.GetProperty("Timestamp").AsDateTimeOffset()
+    let l = line.GetProperty("Level").AsString()
+    { Timestamp = t; Level = l }
+runWithMemoryCheck lines fSharpDataJsonNode |> snd |> printfn "Memory used: %f GB"
+//Memory used: 0.521624 GB
+//Real: 00:00:16.557, CPU: 00:00:35.281, GC gen0: 29, gen1: 10, gen2: 4
+// -------------------------------------------------------------------------
 
-// try using JsonNode and JsonDocument
+open System.Text.Json
+let jsonSerializer (x:string) = JsonSerializer.Deserialize<LogEntryRecord>(x)
+
+runWithMemoryCheck lines jsonSerializer |> snd |> printfn "Memory used: %f GB"
+// Memory used: 0.521555 GB
+// Real: 00:00:10.823, CPU: 00:00:44.453, GC gen0: 11, gen1: 6, gen2: 4
+
 open System.Text.Json.Nodes
-let try4 () =
-    use f = File.OpenText("./logs.json")
-    [
-        while not f.EndOfStream do
-            let line = f.ReadLine() |> JsonNode.Parse
-            let t = line.["Timestamp"].GetValue<DateTimeOffset>()
-            let l = line.["Level"].GetValue<string>()
-            yield { Timestamp = t; Level = l }
-    ]
-runWithMemoryCheck (fun () -> try4()) |> snd |> printfn "Memory used: %f GB"
+let jsonNode (line:string) =
+    let line = line |> JsonNode.Parse
+    let t = line.["Timestamp"].GetValue<DateTimeOffset>()
+    let l = line.["Level"].GetValue<string>()
+    { Timestamp = t; Level = l }
 
-// this seems faster than JsonNode
-let try5 () =
-    use f = File.OpenText("./logs.json")
-    [
-        while not f.EndOfStream do
-            use line = f.ReadLine() |> JsonDocument.Parse
-            let t = line.RootElement.GetProperty("Timestamp").GetDateTimeOffset()
-            let l = line.RootElement.GetProperty("Level").GetString()
-            yield { Timestamp = t; Level = l }
-    ]
-runWithMemoryCheck (fun () -> try5()) |> snd |> printfn "Memory used: %f GB"
+runWithMemoryCheck lines jsonNode |> snd |> printfn "Memory used: %f GB"
+// Memory used: 0.521419 GB
+// Real: 00:00:09.533, CPU: 00:00:27.359, GC gen0: 16, gen1: 7, gen2: 4
+
+let jsonDocument (x:string) =
+    use doc = x |> JsonDocument.Parse
+    let t = doc.RootElement.GetProperty("Timestamp").GetDateTimeOffset()
+    let l = doc.RootElement.GetProperty("Level").GetString()
+    { Timestamp = t; Level = l }
+runWithMemoryCheck lines jsonDocument |> snd |> printfn "Memory used: %f GB"
+// Memory used: 0.521525 GB
+// Real: 00:00:06.208, CPU: 00:00:17.546, GC gen0: 5, gen1: 4, gen2: 4
 
 
-let try6 () =
-    use f = File.OpenText("./logs.json")
-    [
-        while not f.EndOfStream do
-            let line = f.ReadLine() |> FSharp.Data.JsonValue.Parse
-            let t = line.GetProperty("Timestamp").AsDateTimeOffset()
-            let l = line.GetProperty("Level").AsString()
-            yield { Timestamp = t; Level = l }
-    ]
-runWithMemoryCheck (fun () -> try6()) |> snd |> printfn "Memory used: %f GB"
 
 // JsonSerializer -> static class
 
