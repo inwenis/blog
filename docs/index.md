@@ -11,5 +11,5 @@ You can reach me at `inwenis at gmail.com`
 
 ## Me gusta
 
-I don't have a better palce for this yet so here's a list of links I like:
+I don't have a better place for this yet so here's a list of links I like:
 - [dict in F#](https://krzysztofskowronekblog.hashnode.dev/dictionaries-in-f)
