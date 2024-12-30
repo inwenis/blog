@@ -18,7 +18,7 @@ Should I use `System.Text.Json` (STJ) or `Newtonsoft.Json` (previously `Json.NET
 *marshal* - assemble and arrange (a group of people, especially troops) in order.
 > "the general marshalled his troops"
 
-*marshalling (UK) (in computer science) (marshal US)* - getting parameters from here to there
+*marshalling* (UK) (in computer science) (marshal US) - getting parameters from here to there
 
 *serialization* - transforming something (data) to a format usable for storage or transmission over the network
 
@@ -27,9 +27,6 @@ Should I use `System.Text.Json` (STJ) or `Newtonsoft.Json` (previously `Json.NET
 *JSON* - Java Script Object Notation - data interchange format.
 [https://www.json.org/json-en.html](https://www.json.org/json-en.html)
 
-TODO for myself - watch these maybe
- - [https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1](https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1)
- - [https://www.infoq.com/presentations/Heretical-Open-Source/](https://www.infoq.com/presentations/Heretical-Open-Source/)
 
 ## Why this post
 
@@ -138,8 +135,9 @@ runWithMemoryCheck lines jsonDocument           |> snd |> printfn "Memory used: 
 // Real: 00:00:06.208, CPU: 00:00:17.546, GC gen0: 5, gen1: 4, gen2: 4
 ```
 ### Conclusion
-Performance and memory usage of `JsonProvider` is terrible compared to any other alternative.
-`JsonDocument` is the speed winner.
+
+- `FSharp.Data.JsonProvider` is terrible compared to any other alternative (slow and uses lots more memory)
+- `STJ.JsonDocument` is the speed winner.
 
 ## `System.Text.Json` cheat sheet
 
@@ -461,3 +459,8 @@ for (k, v) in d.Properties() do
 [https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev)
 
 a post from when they introduced the new json API
+
+TODO for myself - watch these maybe
+
+ - [https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1](https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1)
+ - [https://www.infoq.com/presentations/Heretical-Open-Source/](https://www.infoq.com/presentations/Heretical-Open-Source/)
