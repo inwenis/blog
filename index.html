@@ -1038,14 +1038,11 @@
 <blockquote>
 <p>"the general marshalled his troops"</p>
 </blockquote>
-<p><em>marshalling (UK) (in computer science) (marshal US)</em> - getting parameters from here to there</p>
+<p><em>marshalling</em> (UK) (in computer science) (marshal US) - getting parameters from here to there</p>
 <p><em>serialization</em> - transforming something (data) to a format usable for storage or transmission over the network</p>
 <p><a href="https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling">https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling</a></p>
 <p><em>JSON</em> - Java Script Object Notation - data interchange format.
 <a href="https://www.json.org/json-en.html">https://www.json.org/json-en.html</a></p>
-<p>TODO for myself - watch these maybe
- - <a href="https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1">https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1</a>
- - <a href="https://www.infoq.com/presentations/Heretical-Open-Source/">https://www.infoq.com/presentations/Heretical-Open-Source/</a></p>
 <h3 id="why-this-post"><a class="toclink" href="2024/12/29/json/#why-this-post">Why this post</a></h3>
 <p>While analysing some logs I used <code>FSharp.Data</code>'s <code>JsonProvider</code>. Only a few properties were relevant but <code>JsonProvider</code> stores the whole json in memory. With 10GB of logs to analyse I quick run out of memory.</p>
 <p>Let's do some testing!</p>
@@ -1149,8 +1146,10 @@
 </span><span id="__span-0-98"><a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a><span class="c1">// Real: 00:00:06.208, CPU: 00:00:17.546, GC gen0: 5, gen1: 4, gen2: 4</span>
 </span></code></pre></div>
 <h4 id="conclusion"><a class="toclink" href="2024/12/29/json/#conclusion">Conclusion</a></h4>
-<p>Performance and memory usage of <code>JsonProvider</code> is terrible compared to any other alternative.
-<code>JsonDocument</code> is the speed winner.</p>
+<ul>
+<li><code>FSharp.Data.JsonProvider</code> is terrible compared to any other alternative (slow and uses lots more memory)</li>
+<li><code>STJ.JsonDocument</code> is the speed winner.</li>
+</ul>
 <h3 id="systemtextjson-cheat-sheet"><a class="toclink" href="2024/12/29/json/#systemtextjson-cheat-sheet"><code>System.Text.Json</code> cheat sheet</a></h3>
 <div class="language-F# highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">open</span><span class="w"> </span><span class="nn">System</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Text.Json</span>
@@ -1462,6 +1461,12 @@
 <p><a href="https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/">https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/</a></p>
 <p><a href="https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev">https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev</a></p>
 <p>a post from when they introduced the new json API</p>
+<p>TODO for myself - watch these maybe</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1">https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1</a></li>
+<li><a href="https://www.infoq.com/presentations/Heretical-Open-Source/">https://www.infoq.com/presentations/Heretical-Open-Source/</a></li>
+<li><a href="https://fsprojects.github.io/FSharp.Data/library/JsonProvider.html">https://fsprojects.github.io/FSharp.Data/library/JsonProvider.html</a> - read this</li>
+</ul>
     
   </div>
 </article>
