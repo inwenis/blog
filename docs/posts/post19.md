@@ -358,6 +358,95 @@ let deserialized = Json.deserialize<SampleDiscriminatedUnion> json
 // val deserialized: SampleDiscriminatedUnion = C (42, "The string")
 ```
 
+## More on `FSharp.Data` JsonNode
+```F#
+#r "nuget:FSharp.Data"
+open FSharp.Data
+
+let j = JsonValue.Parse("""{"x":{"y":[1,2,3]}}""")
+j.Properties()
+// val it: (string * JsonValue) array =
+//   [|("x", {
+//   "y": [
+//     1,
+//     2,
+//     3
+//   ]
+// })|]
+j.["x"].["y"].AsArray()
+j.TryGetProperty "x"
+
+// JsonValue is a discriminated union
+// union JsonValue =
+//   | String of string
+//   | Number of decimal
+//   | Float of float
+//   | Record of properties: (string * JsonValue) array
+//   | Array of elements: JsonValue array
+//   | Boolean of bool
+//   | Null
+//
+// docs:
+// https://fsprojects.github.io/FSharp.Data/reference/fsharp-data-jsonvalue.html
+//
+// there are also extension methods:
+// https://fsprojects.github.io/FSharp.Data/reference/fsharp-data-jsonextensions.html
+//
+// AsArray doesn't fail if the value is not an array, as opposed to other AsSth methods
+// See below how extension methods are defined
+// source: https://github.com/fsprojects/FSharp.Data/blob/main/src/FSharp.Data.Json.Core/JsonExtensions.fs
+open System.Globalization
+open System.Runtime.CompilerServices
+open System.Runtime.InteropServices
+open FSharp.Data.Runtime
+open FSharp.Core
+
+[<Extension>]
+type JsonExtensions =
+    /// Get all the elements of a JSON value.
+    /// Returns an empty array if the value is not a JSON array.
+    [<Extension>]
+    static member AsArray(x: JsonValue) =
+        match x with
+        | (JsonValue.Array elements) -> elements
+        | _ -> [||]
+
+    /// Get a number as an integer (assuming that the value fits in integer)
+    [<Extension>]
+    static member AsInteger(x, [<Optional>] ?cultureInfo) =
+        let cultureInfo = defaultArg cultureInfo CultureInfo.InvariantCulture
+
+        match JsonConversions.AsInteger cultureInfo x with
+        | Some i -> i
+        | _ ->
+            failwithf "Not an int: %s"
+            <| x.ToString(JsonSaveOptions.DisableFormatting)
+
+// construct a json object
+let d =
+    JsonValue.Record [|
+        "event",      JsonValue.String "asdf"
+        "properties", JsonValue.Record [|
+            "token",       JsonValue.String "tokenId"
+            "distinct_id", JsonValue.String "123123"
+        |]
+    |]
+
+d.ToString().Replace("\r\n", "").Replace(" ", "")
+
+// if you want to process the json object
+for (k, v) in d.Properties() do
+    printfn "Property: %s" k
+    match v with
+    | JsonValue.Record props -> printfn "\t%A" props
+    | JsonValue.String s     -> printfn "\t%A" s
+    | JsonValue.Number n     -> printfn "\t%A" n
+    | JsonValue.Float f      -> printfn "\t%A" f
+    | JsonValue.Array a      -> printfn "\t%A" a
+    | JsonValue.Boolean b    -> printfn "\t%A" b
+    | JsonValue.Null         -> printfn "\tnull"
+```
+
 ## Serialize straight to UTF-8
 `JsonSerializer.SerializeToUtf8Bytes(value, options)` <- why does this one exist?
 > Strings in .Net are stored in memory as UTF-16, so if you don't need a string, you can use this method and serialize straight to UTF-8 bytes (it's 5-10% faster, see link)
