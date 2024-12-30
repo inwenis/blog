@@ -22,14 +22,14 @@ Should I use `System.Text.Json` (STJ) or `Newtonsoft.Json` (previously `Json.NET
 
 *serialization* - transforming something (data) to a format usable for storage or transmission over the network
 
-https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling
+[https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling](https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling)
 
 *JSON* - Java Script Object Notation - data interchange format.
-https://www.json.org/json-en.html
+[https://www.json.org/json-en.html](https://www.json.org/json-en.html)
 
 TODO for myself - watch these maybe
- - https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1
- - https://www.infoq.com/presentations/Heretical-Open-Source/
+ - [https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1](https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1)
+ - [https://www.infoq.com/presentations/Heretical-Open-Source/](https://www.infoq.com/presentations/Heretical-Open-Source/)
 
 ## Why this post
 
@@ -451,13 +451,13 @@ for (k, v) in d.Properties() do
 ## Serialize straight to UTF-8
 `JsonSerializer.SerializeToUtf8Bytes(value, options)` <- why does this one exist?
 > Strings in .Net are stored in memory as UTF-16, so if you don't need a string, you can use this method and serialize straight to UTF-8 bytes (it's 5-10% faster, see link)
-https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8
+[https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8)
 
 ## More links
-https://stu.dev/a-look-at-jsondocument/
+[https://stu.dev/a-look-at-jsondocument/](https://stu.dev/a-look-at-jsondocument/)
 
-https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/
+[https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/](https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/)
 
-https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev
+[https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev)
 
 a post from when they introduced the new json API
