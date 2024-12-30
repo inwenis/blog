@@ -358,7 +358,7 @@ let deserialized = Json.deserialize<SampleDiscriminatedUnion> json
 // val deserialized: SampleDiscriminatedUnion = C (42, "The string")
 ```
 
-## More on `FSharp.Data` JsonNode
+## More on `FSharp.Data` JsonValue
 ```F#
 #r "nuget:FSharp.Data"
 open FSharp.Data
@@ -378,16 +378,17 @@ j.TryGetProperty "x"
 
 // JsonValue is a discriminated union
 // union JsonValue =
-//   | String of string
-//   | Number of decimal
-//   | Float of float
-//   | Record of properties: (string * JsonValue) array
-//   | Array of elements: JsonValue array
+//   | String  of string
+//   | Number  of decimal
+//   | Float   of float
+//   | Record  of properties: (string * JsonValue) array
+//   | Array   of elements: JsonValue array
 //   | Boolean of bool
 //   | Null
 //
 // docs:
 // https://fsprojects.github.io/FSharp.Data/reference/fsharp-data-jsonvalue.html
+// https://fsprojects.github.io/FSharp.Data/library/JsonValue.html <- if you'll be working with JsonValue read this
 //
 // there are also extension methods:
 // https://fsprojects.github.io/FSharp.Data/reference/fsharp-data-jsonextensions.html
