@@ -10,7 +10,7 @@ categories:
 
 Should I use `System.Text.Json` (STJ) or `Newtonsoft.Json` (previously `Json.NET`)?
 
--> use STJ, Newtonsoft is no longer enhanced with new features. The author works for Microsoft now on some non-json stuff.
+> use STJ, Newtonsoft is no longer enhanced with new features. The author works for Microsoft now on some non-json stuff.
 
 [JamesNK reddit comment](https://www.reddit.com/r/dotnet/comments/14xgfjl/comment/jrocq6z/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
