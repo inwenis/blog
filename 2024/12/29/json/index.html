@@ -1065,7 +1065,9 @@
 
 <h1 id="json">Json</h1>
 <p>Should I use <code>System.Text.Json</code> (STJ) or <code>Newtonsoft.Json</code> (previously <code>Json.NET</code>)?</p>
-<p>-&gt; use STJ, Newtonsoft is no longer enhanced with new features. The author works for Microsoft now on some non-json stuff.</p>
+<blockquote>
+<p>use STJ, Newtonsoft is no longer enhanced with new features. The author works for Microsoft now on some non-json stuff.</p>
+</blockquote>
 <p><a href="https://www.reddit.com/r/dotnet/comments/14xgfjl/comment/jrocq6z/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">JamesNK reddit comment</a></p>
 <h2 id="terms">Terms</h2>
 <p><em>marshal</em> - assemble and arrange (a group of people, especially troops) in order.</p>
@@ -1074,12 +1076,12 @@
 </blockquote>
 <p><em>marshalling (UK) (in computer science) (marshal US)</em> - getting parameters from here to there</p>
 <p><em>serialization</em> - transforming something (data) to a format usable for storage or transmission over the network</p>
-<p>https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling</p>
+<p><a href="https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling">https://stackoverflow.com/questions/770474/what-is-the-difference-between-serialization-and-marshaling</a></p>
 <p><em>JSON</em> - Java Script Object Notation - data interchange format.
-https://www.json.org/json-en.html</p>
+<a href="https://www.json.org/json-en.html">https://www.json.org/json-en.html</a></p>
 <p>TODO for myself - watch these maybe
- - https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1
- - https://www.infoq.com/presentations/Heretical-Open-Source/</p>
+ - <a href="https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1">https://www.youtube.com/watch?v=TjVcVWB0oFk&amp;list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&amp;index=1</a>
+ - <a href="https://www.infoq.com/presentations/Heretical-Open-Source/">https://www.infoq.com/presentations/Heretical-Open-Source/</a></p>
 <h2 id="why-this-post">Why this post</h2>
 <p>While analysing some logs I used <code>FSharp.Data</code>'s <code>JsonProvider</code>. Only a few properties were relevant but <code>JsonProvider</code> stores the whole json in memory. With 10GB of logs to analyse I quick run out of memory.</p>
 <p>Let's do some testing!</p>
@@ -1489,12 +1491,12 @@ https://www.json.org/json-en.html</p>
 <p><code>JsonSerializer.SerializeToUtf8Bytes(value, options)</code> &lt;- why does this one exist?</p>
 <blockquote>
 <p>Strings in .Net are stored in memory as UTF-16, so if you don't need a string, you can use this method and serialize straight to UTF-8 bytes (it's 5-10% faster, see link)
-https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8</p>
+<a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8">https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to#serialize-to-utf-8</a></p>
 </blockquote>
 <h2 id="more-links">More links</h2>
-<p>https://stu.dev/a-look-at-jsondocument/</p>
-<p>https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/</p>
-<p>https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev</p>
+<p><a href="https://stu.dev/a-look-at-jsondocument/">https://stu.dev/a-look-at-jsondocument/</a></p>
+<p><a href="https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/">https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/</a></p>
+<p><a href="https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev">https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev</a></p>
 <p>a post from when they introduced the new json API</p>
 
 
