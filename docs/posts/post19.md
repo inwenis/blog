@@ -62,9 +62,9 @@ let levels = [ "INFO"; "WARN"; "ERROR"; "DEBUG" ]
 
 let generateLogEntry () =
     {
-        Timestamp        = DateTimeOffset.Now.AddSeconds(-random.Next(0, 10000))
-        Level            = levels.[random.Next(levels.Length)]
-        Message          = String.replicate(random.Next(10, 100)) "x" // random string to simulate redundant content
+        Timestamp = DateTimeOffset.Now.AddSeconds(-random.Next(0, 10000))
+        Level     = levels.[random.Next(levels.Length)]
+        Message   = String.replicate(random.Next(10, 100)) "x" // random string to simulate redundant content
     }
 
 List.init 7_000_000 (fun _ -> generateLogEntry()) // 7M entries is around 1GB of data
