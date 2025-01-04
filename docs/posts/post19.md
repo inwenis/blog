@@ -464,4 +464,3 @@ TODO for myself - watch these maybe
 
  - [https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1](https://www.youtube.com/watch?v=TjVcVWB0oFk&list=PLEzQf147-uEoNCeDlRrXv6ClsLDN-HtNm&index=1)
  - [https://www.infoq.com/presentations/Heretical-Open-Source/](https://www.infoq.com/presentations/Heretical-Open-Source/)
- - [https://fsprojects.github.io/FSharp.Data/library/JsonProvider.html](https://fsprojects.github.io/FSharp.Data/library/JsonProvider.html) - read this
