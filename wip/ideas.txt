@@ -1,0 +1,2 @@
+f# collections
+    seq vs ienumerable
