@@ -46,15 +46,15 @@ Environment.CurrentDirectory <- __SOURCE_DIRECTORY__ // ensures the script runs 
 
 // sample log entry for testing
 type LogEntry = {
-    Timestamp       : DateTimeOffset
-    Level           : string
-    Message         : string
+    Timestamp : DateTimeOffset
+    Level     : string
+    Message   : string
 }
 
 // only the properties we're interested in
 type LogEntryRecord = {
-    Timestamp: DateTimeOffset
-    Level    : string
+    Timestamp : DateTimeOffset
+    Level     : string
 }
 
 let random = Random()
