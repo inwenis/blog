@@ -97,18 +97,22 @@ type LogEntryJsonProvider = JsonProvider<"""
 }""">
 
 let fSharpDataJsonProvider = LogEntryJsonProvider.Parse
-let fSharpDataJsonNode (x:string) =
+
+let fSharpDataJsonValue (x:string) =
     let line = x |> FSharp.Data.JsonValue.Parse
     let t = line.GetProperty("Timestamp").AsDateTimeOffset()
     let l = line.GetProperty("Level").AsString()
     { Timestamp = t; Level = l }
-let jsonSerializer (x:string) = JsonSerializer.Deserialize<LogEntryRecord>(x)
-let jsonNode (line:string) =
+
+let stjJsonSerializer (x:string) = JsonSerializer.Deserialize<LogEntryRecord>(x)
+
+let stjJsonNode (line:string) =
     let line = line |> JsonNode.Parse
     let t = line.["Timestamp"].GetValue<DateTimeOffset>()
     let l = line.["Level"].GetValue<string>()
     { Timestamp = t; Level = l }
-let jsonDocument (x:string) =
+
+let stjJsonDocument (x:string) =
     use doc = x |> JsonDocument.Parse
     let t = doc.RootElement.GetProperty("Timestamp").GetDateTimeOffset()
     let l = doc.RootElement.GetProperty("Level").GetString()
@@ -118,19 +122,19 @@ runWithMemoryCheck lines fSharpDataJsonProvider |> snd |> printfn "Memory used: 
 // Memory used: 4.420363 GB
 // Real: 00:00:35.829, CPU: 00:02:07.312, GC gen0: 84, gen1: 25, gen2: 8
 
-runWithMemoryCheck lines fSharpDataJsonNode     |> snd |> printfn "Memory used: %f GB"
+runWithMemoryCheck lines fSharpDataJsonValue    |> snd |> printfn "Memory used: %f GB"
 //Memory used: 0.521624 GB
 //Real: 00:00:16.557, CPU: 00:00:35.281, GC gen0: 29, gen1: 10, gen2: 4
 
-runWithMemoryCheck lines jsonSerializer         |> snd |> printfn "Memory used: %f GB"
+runWithMemoryCheck lines stjJsonSerializer      |> snd |> printfn "Memory used: %f GB"
 // Memory used: 0.521555 GB
 // Real: 00:00:10.823, CPU: 00:00:44.453, GC gen0: 11, gen1: 6, gen2: 4
 
-runWithMemoryCheck lines jsonNode               |> snd |> printfn "Memory used: %f GB"
+runWithMemoryCheck lines stjJsonNode            |> snd |> printfn "Memory used: %f GB"
 // Memory used: 0.521419 GB
 // Real: 00:00:09.533, CPU: 00:00:27.359, GC gen0: 16, gen1: 7, gen2: 4
 
-runWithMemoryCheck lines jsonDocument           |> snd |> printfn "Memory used: %f GB"
+runWithMemoryCheck lines stjJsonDocument        |> snd |> printfn "Memory used: %f GB"
 // Memory used: 0.521525 GB
 // Real: 00:00:06.208, CPU: 00:00:17.546, GC gen0: 5, gen1: 4, gen2: 4
 ```
