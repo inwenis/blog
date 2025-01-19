@@ -272,7 +272,7 @@ JsonSerializer.Serialize(options, options)
 // JsonNode     -> mutable
 
 open System.Text.Json.Nodes
-let x = JsonNode.Parse(jsonString) // JsonObject
+let x = JsonNode.Parse(jsonString) // type(x) = JsonNode
 x.ToJsonString()
 x.["PropertyName3"].GetValue<DateTimeOffset>()
 x.["PropertyName3"].GetPath()
