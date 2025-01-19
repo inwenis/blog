@@ -145,6 +145,8 @@ runWithMemoryCheck lines stjJsonDocument        |> snd |> printfn "Memory used: 
 
 ## `System.Text.Json` cheat sheet
 
+![System.Text.Json namespaces](./post19.jpg)
+
 ```F#
 open System
 open System.Text.Json
@@ -304,7 +306,7 @@ a.["x"].ToJsonString() // you can serialize subsection of the json
 JsonNode.DeepEquals(x, a) // comparison
 ```
 
-## F# types
+## F# types and json serialization
 ```F#
 open System.Text.Json
 
@@ -360,7 +362,7 @@ let deserialized = Json.deserialize<SampleDiscriminatedUnion> json
 // val deserialized: SampleDiscriminatedUnion = C (42, "The string")
 ```
 
-## More on `FSharp.Data` JsonValue
+## More on `FSharp.Data`'s `JsonValue`
 ```F#
 #r "nuget:FSharp.Data"
 open FSharp.Data
