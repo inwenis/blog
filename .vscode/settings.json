@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
-        "Newtonsoft"
+        "failwithf",
+        "Newtonsoft",
+        "printfn"
     ],
     "FSharp.inlayHints.typeAnnotations": false,
     "FSharp.inlayHints.parameterNames": false
