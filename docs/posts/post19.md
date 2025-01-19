@@ -85,9 +85,13 @@ let runWithMemoryCheck lines singleLineParser =
 #time
 // -------------------------------------------------------------------------
 
+open System.Text.Json.Nodes
+
 #r "nuget: FSharp.Data"
 open FSharp.Data
-open System.Text.Json.Nodes
+
+#r "nuget: FSharp.Json"
+open FSharp.Json
 
 type LogEntryJsonProvider = JsonProvider<"""
 {
@@ -118,30 +122,21 @@ let stjJsonDocument (x:string) =
     let l = doc.RootElement.GetProperty("Level").GetString()
     { Timestamp = t; Level = l }
 
-runWithMemoryCheck lines fSharpDataJsonProvider |> snd |> printfn "Memory used: %f GB"
-// Memory used: 4.420363 GB
-// Real: 00:00:35.829, CPU: 00:02:07.312, GC gen0: 84, gen1: 25, gen2: 8
+let sharpJson (x:string) = Json.deserialize<LogEntryRecord> x
 
-runWithMemoryCheck lines fSharpDataJsonValue    |> snd |> printfn "Memory used: %f GB"
-//Memory used: 0.521624 GB
-//Real: 00:00:16.557, CPU: 00:00:35.281, GC gen0: 29, gen1: 10, gen2: 4
+runWithMemoryCheck lines fSharpDataJsonProvider |> snd |> printfn "Memory used: %f GB" // Memory used: 4.420363 GB | Real: 00:00:35.829, CPU: 00:02:07.312, GC gen0: 84,   gen1: 25,  gen2: 8
+runWithMemoryCheck lines fSharpDataJsonValue    |> snd |> printfn "Memory used: %f GB" // Memory used: 0.521624 GB | Real: 00:00:16.557, CPU: 00:00:35.281, GC gen0: 29,   gen1: 10,  gen2: 4
+runWithMemoryCheck lines stjJsonSerializer      |> snd |> printfn "Memory used: %f GB" // Memory used: 0.521555 GB | Real: 00:00:10.823, CPU: 00:00:44.453, GC gen0: 11,   gen1: 6,   gen2: 4
+runWithMemoryCheck lines stjJsonNode            |> snd |> printfn "Memory used: %f GB" // Memory used: 0.521419 GB | Real: 00:00:09.533, CPU: 00:00:27.359, GC gen0: 16,   gen1: 7,   gen2: 4
+runWithMemoryCheck lines stjJsonDocument        |> snd |> printfn "Memory used: %f GB" // Memory used: 0.521525 GB | Real: 00:00:06.208, CPU: 00:00:17.546, GC gen0: 5,    gen1: 4,   gen2: 4
+runWithMemoryCheck lines sharpJson              |> snd |> printfn "Memory used: %f GB" // Memory used: 0.520846 GB | Real: 00:01:02.761, CPU: 00:01:20.578, GC gen0: 1022, gen1: 260, gen2: 4
 
-runWithMemoryCheck lines stjJsonSerializer      |> snd |> printfn "Memory used: %f GB"
-// Memory used: 0.521555 GB
-// Real: 00:00:10.823, CPU: 00:00:44.453, GC gen0: 11, gen1: 6, gen2: 4
-
-runWithMemoryCheck lines stjJsonNode            |> snd |> printfn "Memory used: %f GB"
-// Memory used: 0.521419 GB
-// Real: 00:00:09.533, CPU: 00:00:27.359, GC gen0: 16, gen1: 7, gen2: 4
-
-runWithMemoryCheck lines stjJsonDocument        |> snd |> printfn "Memory used: %f GB"
-// Memory used: 0.521525 GB
-// Real: 00:00:06.208, CPU: 00:00:17.546, GC gen0: 5, gen1: 4, gen2: 4
 ```
 ### Conclusion
 
 - `FSharp.Data.JsonProvider` is terrible compared to any other alternative (slow and uses lots more memory)
 - `STJ.JsonDocument` is the speed winner.
+- `FSharp.Json` supports F# types but it quite slow
 
 ## `System.Text.Json` cheat sheet
 
