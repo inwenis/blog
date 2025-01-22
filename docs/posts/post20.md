@@ -76,3 +76,5 @@ Warning: Ignoring extra certs from `./extra.cer`, load failed: error:02000002:sy
 ```
 - You get annoyed and you ask yourself how to set an
 [environment variable but only in a specific directory](post20.md)
+
+I use this myself here -> [the public part of my powershell-profile](https://github.com/inwenis/powershell-profile/blob/master/Profile.ps1#L194)
