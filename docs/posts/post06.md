@@ -8,8 +8,6 @@ categories:
 
 # It will be great, set it up, don't use it, remove it
 
-2024-05-02
-
 Today, I removed something I allowed to be created despite initially feeling it was redundant.
 
 A year ago, a student found a tool to auto-generate documentation for our internal SDK from code annotations. They proposed embedding this documentation in our Continuous Integration pipeline. Although the idea sounded good on paper, I felt it wouldn’t be used by our team. However, the team was enthusiastic.
