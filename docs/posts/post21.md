@@ -5,6 +5,7 @@ categories:
   - poem
 ---
 
+```
 blood stains in the snow
 you left a few
 jumping home
@@ -21,7 +22,9 @@ don't fear wherever you go
 remember wide beaches
 you used to love
 we will be there someday to
+```
 
+```
 Plamy krwi na śniegu
 zostawiłaś kilka,
 wracając do domu,
@@ -39,3 +42,4 @@ pamiętaj o szerokich plażach,
 które tak kochałaś.
 Czekaj tam na nas,
 W końcu przyjdziemy.
+```
