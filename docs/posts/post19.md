@@ -142,14 +142,22 @@ runWithMemoryCheck lines sharpJson              |> snd |> printfn "Memory used: 
 
 ![System.Text.Json namespaces](./post19.jpg)
 
+
+
+- JsonSerializer -> deserialize into fixed type
+- JsonDocument   -> immutable (for reading only)
+- JsonDocument   -> faster, IDisposable, uses shared memory pool
+- JsonNode       -> mutable (you can construct json)
+
+`JsonNode` vs `JsonDocument` see [https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom#json-dom-choices](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom#json-dom-choices)
+
+### `System.Text.Json.JsonSerializer`
 ```F#
 open System
 open System.Text.Json
 
 // The System.Text.Json namespace contains all the entry points and the main types.
 // The System.Text.Json.Serialization namespace contains attributes and APIs for advanced scenarios and customization specific to serialization and deserialization.
-
-fsi.AddPrinter<DateTimeOffset>(fun dt -> dt.ToString("O"))
 
 // System.Text.Json.JsonSerializer -> is a static class
 //                                 -> you can instantiate and reuse the JsonSerialization options
@@ -256,19 +264,25 @@ JsonSerializer.Serialize(options, options)
 //  - by default, JSON is minified. You can pretty-print the JSON.
 //  - by default, casing of JSON names matches the .NET names. You can customize JSON name casing.
 //  - by default, fields are ignored. You can include fields.
+```
 
 
-// # JsonNode and JsonDocument
-
-// Should you use JsonNode or JsonDocument? see link below
-// https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom#json-dom-choices
-
-// JsonDocument -> immutable
-// JsonDocument -> faster, IDisposable, uses some shared memory pool
-// https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom
-// JsonNode     -> mutable
-
+### `System.Text.Json.JsonNode`
+```F#
+open System
 open System.Text.Json.Nodes
+
+let jsonString = """{
+    "PropertyName1" : "dummyValue",
+    "PropertyName2" : 42,
+    "PropertyName3" : "2024-12-29T10:31:36.3774099+01:00",
+    "PropertyName4" : {"NestedProperty" : 42},
+    "PropertyName5" : [
+        42,
+        11
+    ]
+}"""
+
 let x = JsonNode.Parse(jsonString) // type(x) = JsonNode
 x.ToJsonString()
 x.["PropertyName3"].GetValue<DateTimeOffset>()
@@ -299,6 +313,11 @@ a.["x"].ToJsonString() // you can serialize subsection of the json
 // {"y":[1,2,3]}
 
 JsonNode.DeepEquals(x, a) // comparison
+```
+
+### `System.Text.Json.JsonDocument`
+```
+TODO
 ```
 
 ## F# types and json serialization
@@ -457,9 +476,7 @@ for (k, v) in d.Properties() do
 
 [https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/](https://blog.ploeh.dk/2023/12/18/serializing-restaurant-tables-in-f/)
 
-[https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev)
-
-a post from when they introduced the new json API
+[https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/?ref=stu.dev) - a post from when they introduced the new json API
 
 TODO for myself - watch these maybe
 
