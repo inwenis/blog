@@ -862,6 +862,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../category/poem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    poem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../category/regex/" class="md-nav__link">
         
   
@@ -938,6 +961,188 @@
       <header class="md-typeset">
         <h1 id="blog">Blog</h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2024-05-09 00:00:00+00:00">May 9, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/node/" class="md-meta__link">node</a>, 
+              <a href="../../category/npm/" class="md-meta__link">npm</a>, 
+              <a href="../../category/js/" class="md-meta__link">js</a>, 
+              <a href="../../category/dependencies/" class="md-meta__link">dependencies</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="node-packages-updating"><a class="toclink" href="../../2024/05/09/node-packages-updating/">node packages updating</a></h2>
+<h3 id="tldr"><a class="toclink" href="../../2024/05/09/node-packages-updating/#tldr">tl;dr</a></h3>
+<ol>
+<li><code>&gt; npm install depcheck -g</code> - install <code>depcheck</code> globally</li>
+<li><code>&gt; depcheck</code> - check for redundant packages</li>
+<li><code>&gt; npm un this-redundant-package</code> - uninstall redundant packages (repeat for all redundant packages)</li>
+<li>Create a pull-request <code>remove-redundant-packages</code></li>
+</ol>
+<hr />
+<ol>
+<li><code>&gt; npm i</code> - make order in <code>node_modules</code></li>
+<li><code>&gt; npm audit</code> - see vulnerability issues</li>
+<li><code>&gt; npm audit fix</code> - fix vulnerability issues that don't require attention</li>
+<li>Create a pull-request <code>fix-vulnerability-issues</code></li>
+</ol>
+<hr />
+<ol>
+<li><code>&gt; npm i npm-check-updates -g</code> - install <code>npm-check-updates</code> globally</li>
+<li><code>&gt; npm-check-updates</code> - see how outdated packages are</li>
+<li><code>&gt; npm outdated</code> - see how outdated packages are</li>
+<li><code>&gt; npm update --save</code> - update packages respecting your semver constraints from <code>packages.json</code></li>
+<li>If you have packages that use major version <code>0.*.*</code> you'll need to manually update these now<ul>
+<li><code>&gt; npm install that-one-package@latest</code></li>
+</ul>
+</li>
+<li>Create a pull-request <code>update-packages-minor</code></li>
+</ol>
+<hr />
+<p>If you're brave and can test/run you project easily:</p>
+<ol>
+<li><code>ncu -u</code> - updates <code>packages.json</code> to all latest versions as shown by <code>npm-check-updates</code><ul>
+<li>this might introduce breaking changes</li>
+</ul>
+</li>
+<li><code>npm i</code> - update <code>package-lock.json</code></li>
+<li>Test your project.</li>
+<li>Create a pull-request <code>update-packages-major</code></li>
+</ol>
+<hr />
+<p>If you're not brave or can't just YOLO and update all major versions:</p>
+<ol>
+<li><code>npm-check-updates</code> - check again what is left to update</li>
+<li><code>npm i that-package@latest</code> - update major version of of <code>that-package</code></li>
+<li>Test your project.<ul>
+<li>.js is dynamically typed so you might have just updated a package that breaks your project but you'll not know until you run your code</li>
+</ul>
+</li>
+<li>Repeat for all packages.</li>
+<li>Create a pull-request <code>update-packages-major</code></li>
+</ol>
+<h3 id="longer-read"><a class="toclink" href="../../2024/05/09/node-packages-updating/#longer-read">longer read</a></h3>
+<p>Need to update dependencies in a node js project? Here are my notes on this.</p>
+<p><code>&gt; npm i</code> (<code>npm install</code>)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>&gt; npm i
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>added 60 packages, removed 124 packages, changed 191 packages, and audited 522 packages in 13s
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>96 packages are looking for funding
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>  run `npm fund` for details
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>10 vulnerabilities (2 low, 7 moderate, 1 high)
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>To address issues that do not require attention, run:
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>  npm audit fix
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>To address all issues possible (including breaking changes), run:
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>  npm audit fix --force
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>Some issues need review, and may require choosing
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>a different dependency.
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>Run `npm audit` for details.
+</span></code></pre></div>
+- installs missing packages in <code>node_modules</code>
+- removes redundant packages in <code>node_modules</code>
+- installs correct versions of mismatched packages (if <code>packages-lock.json</code> wants a different version than found in <code>node_modules</code>)
+- shows what is going on with packaged in your project</p>
+<p><code>&gt; npm audit</code> - shows a report on vulnerability issues in your dependencies</p>
+<p><code>&gt; npm audit fix</code> - updates packages to address vulnerability issues (updates that do not require attention)</p>
+<p><code>&gt; npm outdated</code> - shows a table with your packages and versions
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>$ npm outdated
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>Package      Current   Wanted   Latest  Location                  Depended by
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>glob          5.0.15   5.0.15    6.0.1  node_modules/glob         dependent-package-name
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>nothingness    0.0.3      git      git  node_modules/nothingness  dependent-package-name
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>npm            3.5.1    3.5.2    3.5.1  node_modules/npm          dependent-package-name
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>local-dev      0.0.3   linked   linked  local-dev                 dependent-package-name
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>once           1.3.2    1.3.3    1.3.3  node_modules/once         dependent-package-name
+</span></code></pre></div></p>
+<ul>
+<li><code>Current</code> - what is in <code>nodes_modules</code></li>
+<li><code>Wanted</code> - most recent version that respect the version constraint from <code>packages.json</code></li>
+<li><code>Latest</code> - latest version from npm registry</li>
+</ul>
+<p>To update to latest minor+patch versions of your dependencies (<code>Wanted</code>) - <code>npm outdated</code> shows all you need to know but I prefer the output of <code>npm-check-updates</code></p>
+<p><code>&gt; npm i npm-check-updates -g</code> (<code>-g</code> -&gt; global mode - package will be available on your whole machine)</p>
+<p><code>&gt; npm-check-updates</code> - shows where an update will be a major/minor/patch update (I like the colors)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>Checking C:\git\blog\package.json
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>[====================] 39/39 100%
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a> @azure/storage-blob         ^12.5.0  →      ^12.17.0
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a> adm-zip                     ^0.4.16  →       ^0.5.12
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a> axios                       ^0.27.2  →        ^1.6.8
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a> basic-ftp                    ^5.0.1  →        ^5.0.5
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a> cheerio                 ^1.0.0-rc.6  →  ^1.0.0-rc.12
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a> eslint                      ^8.12.0  →        ^9.2.0
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a> eslint-config-prettier       ^8.5.0  →        ^9.1.0
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a> eslint-plugin-import        ^2.25.4  →       ^2.29.1
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a> fast-xml-parser              ^4.2.4  →        ^4.3.6
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a> humanize-duration           ^3.27.3  →       ^3.32.0
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a> iconv                        ^3.0.0  →        ^3.0.1
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a> jsonwebtoken                 ^9.0.0  →        ^9.0.2
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a> luxon                        ^3.4.3  →        ^3.4.4
+</span></code></pre></div></p>
+<h4 id="let-us-update-something"><a class="toclink" href="../../2024/05/09/node-packages-updating/#let-us-update-something">Let us update something</a></h4>
+<p><code>&gt; npm update</code> - perform updates respecting your semver constraints and update <code>package-lock.json</code></p>
+<p><code>&gt; npm update --save</code> - same as above but also update <code>packages.json</code>, use this one always</p>
+<p><strong>The behavior for packages with major version <code>0.*.*</code> is different than for versions &gt;=<code>1.0.0</code> (see <code>npm help update</code>)</strong></p>
+<p><code>npm update</code> will most likely bump all minor and patch versions for you.</p>
+<p>You can run <code>npm update --save</code> often.</p>
+<h4 id="what-do-the-symbols-in-packagejson-mean"><a class="toclink" href="../../2024/05/09/node-packages-updating/#what-do-the-symbols-in-packagejson-mean">What do the symbols in <code>package.json</code> mean?</a></h4>
+<p>https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json/25861938#25861938</p>
+<h4 id="npm-update-save-vs-npm-audit-fix"><a class="toclink" href="../../2024/05/09/node-packages-updating/#npm-update-save-vs-npm-audit-fix"><code>npm update --save</code> vs <code>npm audit fix</code></a></h4>
+<p><code>npm audit fix</code> will only update packages to fix vulnerability issues</p>
+<p><code>npm update --save</code> will update all packages it can (respecting semver constraints)</p>
+<h4 id="do-i-have-unused-dependencies"><a class="toclink" href="../../2024/05/09/node-packages-updating/#do-i-have-unused-dependencies">Do I have unused dependencies?</a></h4>
+<p><code>&gt; npm install depcheck -g</code></p>
+<p><code>&gt; depcheck</code> - shows unused dependencies.
+<code>depcheck</code> scans for <code>require</code>/<code>import</code> statements in your code so you might be utilizing a package differently but <code>depcheck</code> will consider it unused (ex. when you import packages using <code>importLazy</code>).</p>
+<h4 id="npm-check"><a class="toclink" href="../../2024/05/09/node-packages-updating/#npm-check">npm-check</a></h4>
+<p><code>&gt; npm i npm-check -g</code></p>
+<p><code>&gt; npm-check</code> - a different tool to help with dependencies (I didn't use it)</p>
+<h4 id="honorable-mentions"><a class="toclink" href="../../2024/05/09/node-packages-updating/#honorable-mentions">honorable mentions</a></h4>
+<p><code>&gt; npm ls</code> - list installed packages (from <code>node_modules</code>)</p>
+<p><code>&gt; npm ls axios</code> - show all versions of axios and why we have them</p>
+<p><code>npm ls</code> will not show you origin of not-installed optional dependencies.</p>
+<p>Consider this - you devleop on a <code>win</code> maching and deploy your solution to a <code>linux</code> box.
+On windows (see below) you might think <code>node-gyp-build</code> is not used in your solution.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>&gt; npm ls node-gyp-build
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>test-npm@1.0.0 C:\git\test-npm
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>`-- (empty)
+</span></code></pre></div></p>
+<p>But on a linux box it will be used:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>&gt; npm ls node-gyp-build
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>npm-test-proj@1.0.0 /git/npm-test-proj
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>└─┬ kafka-lz4-lite@1.0.5
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>  └─┬ piscina@3.2.0
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>    └─┬ nice-napi@1.0.2
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>      └── node-gyp-build@4.8.1
+</span></code></pre></div></p>
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

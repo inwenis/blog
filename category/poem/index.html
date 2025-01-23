@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../exercises/">
+        <link rel="prev" href="../npm/">
       
       
-        <link rel="next" href="../js/">
+        <link rel="next" href="../regex/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>experience - programki.eu</title>
+        <title>poem - programki.eu</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#experience" class="md-skip">
+        <a href="#poem" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              experience
+              poem
             
           </span>
         </div>
@@ -713,23 +713,12 @@
                 
   
   
-    
-  
   
     
-      
-    
   
   
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../experience/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -738,7 +727,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -863,12 +851,23 @@
                 
   
   
-  
     
   
   
-    <li class="md-nav__item">
-      <a href="../poem/" class="md-nav__link">
+    
+      
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -877,6 +876,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -965,7 +965,7 @@
   <div class="md-content" data-md-component="content">
     <div class="md-content__inner">
       <header class="md-typeset">
-        <h1 id="experience">experience</h1>
+        <h1 id="poem">poem</h1>
       </header>
       
         <article class="md-post md-post--excerpt">
@@ -974,19 +974,18 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
-          <time datetime="2024-07-14 00:00:00+00:00">July 14, 2024</time></li>
+          <time datetime="2025-01-23 00:00:00+00:00">January 23, 2025</time></li>
         
           <li class="md-meta__item">
             in
             
-              <a href="../general-coding/" class="md-meta__link">General coding</a>, 
-              <a href="./" class="md-meta__link">experience</a></li>
+              <a href="./" class="md-meta__link">poem</a></li>
         
         
           
           <li class="md-meta__item">
             
-              3 min read
+              1 min read
             
           </li>
         
@@ -995,105 +994,40 @@
     </div>
   </header>
   <div class="md-post__content md-typeset">
-    <h2 id="how-the-way-i-workcodeinvestigatedebug-changed-with-time-experience"><a class="toclink" href="../../2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/">How the way I work/code/investigate/debug changed with time &amp; experience</a></h2>
-<p>I use this metaphor when describing how I work these days.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ajDLIJB1p4o?si=LZsMct8yqq-RYTXa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-<h2 id="tldr"><a class="toclink" href="../../2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#tldr">TL;DR;</a></h2>
-<ol>
-<li>Quick feedback is king<ul>
-<li>unit tests</li>
-<li>quick test in another way</li>
-<li>reproduce issues locally</li>
-<li>try things out in a small project on the side, not in the project you're working on</li>
-</ul>
-</li>
-<li>One thing at a time<ul>
-<li>experimenting</li>
-<li>refactoring preparing for feature addition</li>
-<li>feature coding</li>
-<li>cleaning up after feature coding</li>
-</ul>
-</li>
-<li>Divide problems into smaller problems<ul>
-<li>and remember - one thing (problem) at a time</li>
-</ul>
-</li>
-</ol>
-<hr />
-<h3 id="example"><a class="toclink" href="../../2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#example">Example</a></h3>
-<p>You're working with code that talks to a remote API, you want to test different API calls to the remote API.</p>
-<p><strong>don't</strong> - change API parameters in code and run the project each time you test something. It takes too long.</p>
-<p><strong>do</strong> - write a piece of code to send an HTTP request, fiddle with this code</p>
-<p><strong>do</strong> - intercept request with <code>Fiddler</code>/<code>Postman</code>/other interceptor and reissue requests with different parameters</p>
-<hr />
-<h3 id="example_1"><a class="toclink" href="../../2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#example_1">Example</a></h3>
-<p>Something fails in the CI pipeline.</p>
-<p><strong>don't</strong> - make a change, commit, wait for remote CI to trigger, see result</p>
-<p><strong>do</strong> - reproduce issue locally</p>
-<hr />
-<h2 id="longer-read"><a class="toclink" href="../../2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#longer-read">Longer read</a></h2>
-<ol>
-<li>Quick feedback</li>
-<li><strong>do</strong> - write a test for it</li>
-<li><strong>do</strong> - isolate your issue/suspect/the piece of code you're working with<ul>
-<li>it is helpful if you can run just a module/sub-system/piece of your project/system</li>
-<li>partial execution helps - like in Python/Jupyter or F# fsx</li>
-</ul>
-</li>
-<li>if you rely on external data and it takes time to retrieve it (even a 5-second delay can be annoying) - dump data to a file and read it from the file instead of hitting an external API or a DB every time you run your code</li>
-<li><strong>don't</strong> try to understand how <code>List.foldBack()</code> works while debugging a big project. Do it on the side.</li>
-<li>spin up a new solution/project on the side to test things</li>
-<li>
-<p>occasional juniors ask "does this work this way" - you can test it yourself easily if you do it on the side</p>
-</li>
-<li>
-<p>One thing at a time</p>
-</li>
-<li>separate refactoring from feature addition</li>
-<li>fiddle first, find the walls/obstacles</li>
-<li><code>git reset --hard</code></li>
-<li>refactor preparing for a new feature (can become a separate PR)</li>
-<li>code feature</li>
-<li>if during coding you find something that needs refactoring/renaming/cleaning up - any kind of "WTF is this? I need to fix this!" try a) or b)<ul>
-<li>a) make a note to fix it later</li>
-<li>b) fix immediately
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt; git stash
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&gt; git checkout master
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&gt; git checkout -b fix-typo
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>fix stuff
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>merge or create a PR
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>git checkout feature
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>&gt; git merge fix-typo or git rebase fix-typo
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>continue work
-</span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p>always have a paper notepad on your desk</p>
-<ul>
-<li>note things you would like to come back to or investigate</li>
-<li>it gives me great satisfaction to go through a list of "side quests" I have noted and strike through all of them, knowing I have dealt with each one before starting a new task</li>
-<li>when investigating something I also note questions I would like to be able to answer after I'm done investigating<ul>
-<li>example: while working with Axios and cookies I found conflicting information about whether Axios supports cookies. After the investigation, I knew that Axios supports cookies by default in a browser but not in Node.js</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Divide problems into smaller problems</p>
-</li>
-<li>example - coding logic for a new feature in a CLI tool and designing the CLI arguments - these can be 2 sub-tasks</li>
-</ol>
-<h2 id="big-bang-vs-baby-steps"><a class="toclink" href="../../2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/#big-bang-vs-baby-steps">Big bang vs baby steps</a></h2>
-<p>The old me often ended up doing the <strong>big bang</strong>. Rewriting large chunks of code at once. Starting things from scratch. Working for hours or days with a codebase that can't even compile.</p>
-<p>Downsides
-   - for a long time the project doesn't even compile, I lose motivation, I feel like I'm walking in the dark, I don't see errors for a long time
-   - requires a lot of context keeping in my mind since I've ripped the project apart
-   - if I abandon work for a few days sometimes I forget everything and progress is lost</p>
-<p>The new me prefers <strong>baby steps</strong></p>
-<p>Fiddle with the code knowing I'll <code>git reset --hard</code>. Try renaming some stuff - helps me understand the codebase better. Try out different things and abandon them. At this point, I usually get an idea/feeling of what needs to be done. Plan a few smaller refactorings. After them, I am usually closer to the solution and am able to code it without a big bang.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_Z_3iB-XDWc?si=qbQHD4c9X0GvLpA7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h2 id="post21"><a class="toclink" href="../../2025/01/23/post21/">Post21</a></h2>
+<p>blood stains in the snow
+you left a few
+jumping home
+for me to remember the last walk
+snow will melt soon
+this memory
+I will not let fade
+you were loved
+and you loved us too
+of that I'm sure
+it's a tough call
+to let you sleep
+don't fear wherever you go
+remember wide beaches
+you used to love
+we will be there someday to</p>
+<p>Plamy krwi na śniegu
+zostawiłaś kilka,
+wracając do domu,
+abym zapamiętał ostatni spacer.
+Śnieg wkrótce stopnieje,
+ale to wspomnienie
+nie pozwolę mu odejść.
+Byłaś kochana
+i kochałeś też nas,
+tego jestem pewien.
+To trudna decyzja,
+pozwolić ci zasnąć.
+Nie bój się, dokądkolwiek zmierzasz,
+pamiętaj o szerokich plażach,
+które tak kochałaś.
+Czekaj tam na nas,
+W końcu przyjdziemy.</p>
     
   </div>
 </article>
