@@ -316,8 +316,45 @@ JsonNode.DeepEquals(x, a) // comparison
 ```
 
 ### `System.Text.Json.JsonDocument`
-```
-TODO
+```F#
+open System
+open System.Text.Json
+
+let jsonString = """{
+    "PropertyName1" : "dummyValue",
+    "PropertyName2" : 42,
+    "PropertyName3" : "2024-12-29T10:31:36.3774099+01:00",
+    "PropertyName4" : {"NestedProperty" : 42},
+    "PropertyName5" : [
+        42,
+        11
+    ]
+}"""
+
+use x = JsonDocument.Parse(jsonString) // remember this is an IDisposable
+x.RootElement.GetProperty("PropertyName1").GetString()
+x.RootElement.GetProperty("PropertyName2").GetInt32()
+x.RootElement.GetProperty("PropertyName3").GetDateTime()
+x.RootElement.GetProperty("PropertyName4").GetProperty("NestedProperty").GetInt32()
+x.RootElement.GetProperty("PropertyName5").EnumerateArray() |> Seq.map (fun x -> x.GetInt32())
+
+for i in x.RootElement.GetProperty("PropertyName5").EnumerateArray() do
+    printfn "%A" i
+
+// you could also write a generic helper
+
+type JsonElement with
+  member x.Get<'T>(name:string) : 'T =
+    let p = x.GetProperty(name)
+    match typeof<'T> with
+    | t when t = typeof<string> -> p.GetString() |> unbox
+    | t when t = typeof<int> -> p.GetInt32() |> unbox
+    | t when t = typeof<DateTime> -> p.GetDateTime() |> unbox
+    | t when t = typeof<JsonElement> -> p |> unbox
+    | t when t = typeof<int[]> -> p.EnumerateArray() |> Seq.map (fun x -> x.GetInt32()) |> Seq.toArray |> unbox
+    | _ -> failwith "unsupported type"
+
+x.RootElement.Get<string>("PropertyName1")
 ```
 
 ## F# types and json serialization
