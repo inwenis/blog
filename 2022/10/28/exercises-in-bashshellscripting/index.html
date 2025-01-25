@@ -990,6 +990,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exercise-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise-1-answer" class="md-nav__link">
     <span class="md-ellipsis">
       Exercise 1 - answer
@@ -1044,6 +1053,15 @@
   <a href="#exercise-4-answer" class="md-nav__link">
     <span class="md-ellipsis">
       Exercise 4 - answer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-5-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 5 - answer
     </span>
   </a>
   
@@ -1112,7 +1130,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              8 min read
+                              9 min read
                             
                           </span>
                         </div>
@@ -1170,6 +1188,8 @@
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nv">$fileNames</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$csvData</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$_</span> <span class="p">}</span>
 </span></code></pre></div></p>
+<h2 id="exercise-5">Exercise 5</h2>
+<p>Just like me you created tens of repositories while writing code katas. Now you would like to keep all katas in a single repository. Write a script to move several repositories to a single repository. Each repo's content will end up in a dedicated directory in the new "master" repo. Remember to merge unrelated histories in the "master" repo.</p>
 <p>.</p>
 <p>.</p>
 <p>.</p>
@@ -1398,6 +1418,33 @@
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>&gt;<span class="w"> </span>sed<span class="w"> </span>-ibackup<span class="w"> </span><span class="s1">&#39;s/43//&#39;</span><span class="w"> </span>*.csv<span class="w"> </span><span class="c1"># creates backup files</span>
 </span></code></pre></div>
 This neat, perhaps unix people had wisdom that is lost now.</p>
+<h2 id="exercise-5-answer">Exercise 5 - answer</h2>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">$repos</span> <span class="p">=</span> <span class="p">@(</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="p">@(</span><span class="s2">&quot;https://github.com/inwenis/kata.sortingitout&quot;</span><span class="p">,</span> <span class="s2">&quot;sortingitout&quot;</span><span class="p">,</span> <span class="s2">&quot;kata_sorting_it_out&quot;</span>  <span class="p">),</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="p">@(</span><span class="s2">&quot;https://github.com/inwenis/anagrams_kata2&quot;</span><span class="p">,</span>    <span class="s2">&quot;anagrams2&quot;</span><span class="p">,</span>    <span class="s2">&quot;kata_anagrams2&quot;</span>  <span class="p">),</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="p">@(</span><span class="s2">&quot;https://github.com/inwenis/anagram_kata&quot;</span><span class="p">,</span>      <span class="s2">&quot;anagrams&quot;</span><span class="p">,</span>     <span class="s2">&quot;kata&quot;</span>  <span class="p">)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">)</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="nv">$repos</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="nv">$repo</span><span class="p">,</span> <span class="nv">$branch</span><span class="p">,</span> <span class="nv">$dir</span> <span class="p">=</span> <span class="nv">$_</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="nv">$repoName</span> <span class="p">=</span> <span class="nv">$repo</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[-</span><span class="n">1</span><span class="p">]</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    <span class="n">git</span> <span class="n">clone</span> <span class="nv">$repo</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="nb">pushd </span><span class="nv">$repoName</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>    <span class="n">git</span> <span class="n">co</span> <span class="n">-b</span> <span class="nv">$branch</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>    <span class="nv">$all</span> <span class="p">=</span> <span class="nb">Get-ChildItem</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>    <span class="n">mkdir</span> <span class="nv">$dir</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>    <span class="nv">$all</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>        <span class="nb">Move-Item</span> <span class="nv">$_</span> <span class="n">-Destination</span> <span class="nv">$dir</span>
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>    <span class="p">}</span>
+</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>    <span class="n">git</span> <span class="n">add</span> <span class="n">-A</span>
+</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>    <span class="n">git</span> <span class="n">cm</span> <span class="n">-am</span> <span class="s2">&quot;move&quot;</span>
+</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>    <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">kata</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">inwenis</span><span class="p">/</span><span class="n">kata</span>
+</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>    <span class="n">git</span> <span class="n">push</span> <span class="n">-u</span> <span class="n">kata</span> <span class="nv">$branch</span>
+</span><span id="__span-16-22"><a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>    <span class="nb">popd</span>
+</span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>    <span class="nb">Remove-Item</span> <span class="nv">$repoName</span> <span class="n">-Recurse</span> <span class="n">-Force</span>
+</span><span id="__span-16-24"><a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>    <span class="nb">Read-Host</span> <span class="s2">&quot;Press Enter to continue&quot;</span>
+</span><span id="__span-16-25"><a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="p">}</span>
+</span></code></pre></div>
 
 
 
