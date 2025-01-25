@@ -66,6 +66,9 @@ $csvData = 1..$numberOfRows | ForEach-Object {
 $fileNames | % { $csvData | Export-Csv -Path $_ }
 ```
 
+## Exercise 5
+
+Just like me you created tens of repositories while writing code katas. Now you would like to keep all katas in a single repository. Write a script to move several repositories to a single repository. Each repo's content will end up in a dedicated directory in the new "master" repo. Remember to merge unrelated histories in the "master" repo.
 
 .
 
@@ -355,3 +358,33 @@ ls *.csv | % { (cat $_ ) -replace "42","" | out-file $_ }
 > sed -ibackup 's/43//' *.csv # creates backup files
 ```
 This neat, perhaps unix people had wisdom that is lost now.
+
+## Exercise 5 - answer
+
+```PowerShell
+$repos = @(
+    @("https://github.com/inwenis/kata.sortingitout", "sortingitout", "kata_sorting_it_out"  ),
+    @("https://github.com/inwenis/anagrams_kata2",    "anagrams2",    "kata_anagrams2"  ),
+    @("https://github.com/inwenis/anagram_kata",      "anagrams",     "kata"  )
+)
+
+$repos | ForEach-Object {
+    $repo, $branch, $dir = $_
+    $repoName = $repo.Split("/")[-1]
+    git clone $repo
+    pushd $repoName
+    git co -b $branch
+    $all = Get-ChildItem
+    mkdir $dir
+    $all | ForEach-Object {
+        Move-Item $_ -Destination $dir
+    }
+    git add -A
+    git cm -am "move"
+    git remote add kata https://github.com/inwenis/kata
+    git push -u kata $branch
+    popd
+    Remove-Item $repoName -Recurse -Force
+    Read-Host "Press Enter to continue"
+}
+```
