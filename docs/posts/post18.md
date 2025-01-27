@@ -249,7 +249,7 @@ More options are available using `RegexOptions` enum
 
 [https://alf.nu/RegexGolf](https://alf.nu/RegexGolf)
 
-## Tutorial:
+## Tutorial
 
 I recall reading this tutorial years ago and I liked it - [https://www.regular-expressions.info/tutorial.html](https://www.regular-expressions.info/tutorial.html)
 
