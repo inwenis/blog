@@ -995,7 +995,9 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="powershell-gotcha-dynamic-scoping"><a class="toclink" href="../../2025/02/08/powershell-gotcha---dynamic-scoping/">PowerShell Gotcha! - dynamic scoping</a></h2>
-<h3 id="powershell-uses-dynamic-scoping-yet-the-about_scopes-page-doesnt-mention-the-word-dynamic-wird-wird-so-weird-that-you-need-to-misspell-weird-to-get-your-point-across"><a class="toclink" href="../../2025/02/08/powershell-gotcha---dynamic-scoping/#powershell-uses-dynamic-scoping-yet-the-about_scopes-page-doesnt-mention-the-word-dynamic-wird-wird-so-weird-that-you-need-to-misspell-weird-to-get-your-point-across">PowerShell uses dynamic scoping. Yet the <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7.5">about_Scopes</a> page doesn't mention the word "dynamic". Wird (wird - so weird that you need to misspell weird to get your point across).</a></h3>
+<p>PowerShell uses dynamic scoping. Yet the <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7.5">about_Scopes</a> page doesn't mention the word "dynamic".</p>
+<p>Wird (wird - so weird that you need to misspell weird to get your point across).</p>
+<hr />
 <p><div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
 </span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="nv">$t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
@@ -1043,7 +1045,7 @@
 </span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
 </span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>InvalidOperation: C:\Users\inwen\AppData\Local\Temp\44f5ff41-4105-482b-a134-b505049d2c61\test3.ps1:2
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>InvalidOperation: C:\Users\...\Temp\44f5ff41-4105-482b-a134-b505049d2c61\test3.ps1:2
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>Line |
 </span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>   2 |      Write-Host $t
 </span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>     |                 ~~
