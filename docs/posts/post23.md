@@ -11,6 +11,13 @@ PowerShell uses dynamic scoping. Yet the [about_Scopes](https://learn.microsoft.
 
 Wird (wird - so weird that you need to misspell weird to get your point across).
 
+## tl;dr;
+
+In PowerShell variables are copied into the stack frame created for the function you're calling. So the "child" function can use your variables but can only modify its own copies.
+You can avoid this by setting your variable to private `$private:varName=...` and using `Set-StrictMode -version latest` to throw an error if "child" functions try to access a undefined variable.
+
+PowerShell uses dynamic scoping. What we know from most programming languages is lexical scoping.
+
 ---
 ```PowerShell
 function Do-InnerFunction  { Write-Host $t }
@@ -25,7 +32,7 @@ Do-OutterFunction
 hello
 ```
 
-Weird!
+Weird! (this is dynamic scoping)
 
 ---
 
