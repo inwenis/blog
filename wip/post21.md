@@ -1,3 +1,1 @@
-my powershell profile
-
-and how to set a env variable only in a directory
+https://stackoverflow.com/questions/11107428/how-can-i-force-powershell-to-return-an-array-when-a-call-only-returns-one-objec
