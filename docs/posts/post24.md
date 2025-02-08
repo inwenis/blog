@@ -6,7 +6,7 @@ categories:
 ---
 
 
-# Some neat fsx F#
+# Some neat fsx F\#
 
 My company had a hackathon focused on data scraping/processing.
 
