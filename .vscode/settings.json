@@ -5,5 +5,25 @@
         "printfn"
     ],
     "FSharp.inlayHints.typeAnnotations": false,
-    "FSharp.inlayHints.parameterNames": false
+    "FSharp.inlayHints.parameterNames": false,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#e137d8",
+        "activityBar.background": "#e137d8",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#4f530c",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#e137d8",
+        "statusBar.background": "#c71ebe",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#e137d8",
+        "statusBarItem.remoteBackground": "#c71ebe",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#c71ebe",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#c71ebe99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#c71ebe"
 }
