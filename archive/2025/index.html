@@ -997,6 +997,10 @@
     <h2 id="powershell-gotcha-dynamic-scoping"><a class="toclink" href="../../2025/02/08/powershell-gotcha---dynamic-scoping/">PowerShell Gotcha! - dynamic scoping</a></h2>
 <p>PowerShell uses dynamic scoping. Yet the <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7.5">about_Scopes</a> page doesn't mention the word "dynamic".</p>
 <p>Wird (wird - so weird that you need to misspell weird to get your point across).</p>
+<h3 id="tldr"><a class="toclink" href="../../2025/02/08/powershell-gotcha---dynamic-scoping/#tldr">tl;dr;</a></h3>
+<p>In PowerShell variables are copied into the stack frame created for the function you're calling. So the "child" function can use your variables but can only modify its own copies.
+You can avoid this by setting your variable to private <code>$private:varName=...</code> and using <code>Set-StrictMode -version latest</code> to throw an error if "child" functions try to access a undefined variable.</p>
+<p>PowerShell uses dynamic scoping. What we know from most programming languages is lexical scoping.</p>
 <hr />
 <p><div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
@@ -1008,7 +1012,7 @@
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>hello
 </span></code></pre></div></p>
-<p>Weird!</p>
+<p>Weird! (this is dynamic scoping)</p>
 <hr />
 <div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">Set-StrictMode</span> <span class="n">-Version</span> <span class="n">Latest</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
