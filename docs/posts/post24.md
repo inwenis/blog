@@ -71,9 +71,10 @@ urls
 ```
 
 Things to keep in mind:
-- always have a try/catch all exceptions in async/tasks/threads
+
+  - always have a try/catch all exceptions in async/tasks/threads
     - you don't want your thread to die without you knowing
-- always set a timeout when scraping (default timeout in .NET is 100s which is excessive for this script)
+  - always set a timeout when scraping (default timeout in .NET is 100s which is excessive for this script)
 
 A minimalistic http server to listen to our scrapers:
 
