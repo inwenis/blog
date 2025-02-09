@@ -1081,10 +1081,14 @@
 </span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
 </span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="c1">// Async.CancelDefaultToken()</span>
 </span></code></pre></div></p>
-<p>Things to keep in mind:
-- always have a try/catch all exceptions in async/tasks/threads
-    - you don't want your thread to die without you knowing
-- always set a timeout when scraping (default timeout in .NET is 100s which is excessive for this script)</p>
+<p>Things to keep in mind:</p>
+<ul>
+<li>always have a try/catch all exceptions in async/tasks/threads<ul>
+<li>you don't want your thread to die without you knowing</li>
+</ul>
+</li>
+<li>always set a timeout when scraping (default timeout in .NET is 100s which is excessive for this script)</li>
+</ul>
 <p>A minimalistic http server to listen to our scrapers:</p>
 <div class="language-F# highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Net</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Text</span>
