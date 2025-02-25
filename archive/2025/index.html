@@ -1027,9 +1027,10 @@
 </span></code></pre></div>
 ^ confirmed that my Ubuntu <code>WSL</code> can't reach <code>registry.npmjs.org</code></p>
 <h3 id="solution"><a class="toclink" href="../../2025/02/25/npm-wsl-eai_again/#solution">Solution</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>printf &quot;nameserver 8.8.8.8\n&quot; &gt; /etc/resolv.conf
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>printf &quot;nameserver 8.8.8.8\n&quot; &gt; /etc/resolv.conf
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>printf &quot;[network]\ngenerateResolvConf = false\n&quot; &gt; /etc/wsl.conf
 </span></code></pre></div>
+^ use <code>8.8.8.8</code> - Google's DNS. Stop WSL from generating the <code>resolv.conf</code> on startup. Previously I had some funky DNS there that didn't work.</p>
     
   </div>
 </article>
