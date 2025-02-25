@@ -997,6 +997,49 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2025-02-25 00:00:00">February 25, 2025</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/npm/" class="md-meta__link">npm</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="npm-wsl-eai_again"><a class="toclink" href="../../2025/02/25/npm-wsl-eai_again/">npm wsl EAI_AGAIN</a></h2>
+<p>Running <code>npm ci</code> on <code>WSL</code> (Windows Subsystem for Linux) failed with:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>npm ERR! syscall getaddrinfo
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>npm ERR! errno EAI_AGAIN
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>npm ERR! request to http://registry.npmjs.org/nodemon failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org
+</span></code></pre></div>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>dig registry.npmjs.org
+</span></code></pre></div>
+^ confirmed that my Ubuntu <code>WSL</code> can't reach <code>registry.npmjs.org</code></p>
+<h3 id="solution"><a class="toclink" href="../../2025/02/25/npm-wsl-eai_again/#solution">Solution</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>printf &quot;nameserver 8.8.8.8\n&quot; &gt; /etc/resolv.conf
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>printf &quot;[network]\ngenerateResolvConf = false\n&quot; &gt; /etc/wsl.conf
+</span></code></pre></div>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-02-19 00:00:00">February 19, 2025</time></li>
         
           <li class="md-meta__item">

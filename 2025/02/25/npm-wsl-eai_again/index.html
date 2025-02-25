@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../../09/some-neat-fsx-f/">
+        <link rel="prev" href="../../19/post25/">
       
-      
-        <link rel="next" href="../../25/npm-wsl-eai_again/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Post25 - programki.eu</title>
+        <title>npm wsl EAI_AGAIN - programki.eu</title>
       
     
     
@@ -71,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#npm-wsl-eai_again" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Post25
+              npm wsl EAI_AGAIN
             
           </span>
         </div>
@@ -962,6 +965,25 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -998,7 +1020,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
-                        <time datetime="2025-02-19 00:00:00" class="md-ellipsis">February 19, 2025</time>
+                        <time datetime="2025-02-25 00:00:00" class="md-ellipsis">February 25, 2025</time>
                       </div>
                     </li>
                     
@@ -1009,7 +1031,7 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/misc/">misc</a></span>
+                              <a href="../../../../category/npm/">npm</a></span>
                         </div>
                       </li>
                     
@@ -1040,57 +1062,19 @@
         
 
 
-  <h1>Post25</h1>
-
-<p><code>1024 * 1024</code> - this many bytes is an <code>mibibyte</code> (<code>MiB</code>).</p>
-<p>A <code>megabyte</code> like a <code>megameter</code> is 10^6 bytes.</p>
-<p>We all frequently say <code>megabyte</code> meaning a <code>mibibyte</code>. Like wise a <code>kilobyte</code> != <code>kibibyte</code></p>
-<table>
-<thead>
-<tr>
-<th>Unit</th>
-<th>Abbreviation</th>
-<th>Size in Bytes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kibibyte</td>
-<td>KiB</td>
-<td>1,024</td>
-</tr>
-<tr>
-<td>Mebibyte</td>
-<td>MiB</td>
-<td>1,048,576</td>
-</tr>
-<tr>
-<td>Gibibyte</td>
-<td>GiB</td>
-<td>1,073,741,824</td>
-</tr>
-<tr>
-<td>Kilobyte</td>
-<td>KB</td>
-<td>1,000</td>
-</tr>
-<tr>
-<td>Megabyte</td>
-<td>MB</td>
-<td>1,000,000</td>
-</tr>
-<tr>
-<td>Gigabyte</td>
-<td>GB</td>
-<td>1,000,000,000</td>
-</tr>
-</tbody>
-</table>
-<p>Network speeds are measured in Mbps - that is mega bits per second - that is <code>1,000,000</code> bits per second.</p>
-<p>MB - Megabyte (SI)
-MiB - Mibibyte (IEC)
-Mb - Megabit (SI)</p>
-<p><a href="https://www.iec.ch/prefixes-binary-multiples">https://www.iec.ch/prefixes-binary-multiples</a></p>
+<h1 id="npm-wsl-eai_again">npm wsl EAI_AGAIN</h1>
+<p>Running <code>npm ci</code> on <code>WSL</code> (Windows Subsystem for Linux) failed with:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm ERR! syscall getaddrinfo
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>npm ERR! errno EAI_AGAIN
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>npm ERR! request to http://registry.npmjs.org/nodemon failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org
+</span></code></pre></div>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dig registry.npmjs.org
+</span></code></pre></div>
+^ confirmed that my Ubuntu <code>WSL</code> can't reach <code>registry.npmjs.org</code></p>
+<h2 id="solution">Solution</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>printf &quot;nameserver 8.8.8.8\n&quot; &gt; /etc/resolv.conf
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>printf &quot;[network]\ngenerateResolvConf = false\n&quot; &gt; /etc/wsl.conf
+</span></code></pre></div>
 
 
 
