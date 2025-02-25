@@ -30,3 +30,7 @@ bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
 chattr +i /etc/resolv.conf
 ```
 ^ use `8.8.8.8` (Google's DNS). Stop recreating `resolv.conf` on startup
+
+
+kudos [https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747](https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747)
+
