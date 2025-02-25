@@ -23,6 +23,10 @@ dig registry.npmjs.org
 ## Solution
 
 ```
-printf "nameserver 8.8.8.8\n" > /etc/resolv.conf.head
+rm /etc/resolv.conf
+bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+bash -c 'echo "[network]" > /etc/wsl.conf'
+bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+chattr +i /etc/resolv.conf
 ```
-^ prepend `8.8.8.8` (Google's DNS). `/etc/resolv.conf` is regenerated on startup so we need to configure what will be prepended to it.
+^ use `8.8.8.8` (Google's DNS). Stop recreating `resolv.conf` on startup
