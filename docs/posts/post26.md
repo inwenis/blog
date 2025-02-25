@@ -23,7 +23,6 @@ dig registry.npmjs.org
 ## Solution
 
 ```
-printf "nameserver 8.8.8.8\n" > /etc/resolv.conf
-printf "[network]\ngenerateResolvConf = false\n" > /etc/wsl.conf
+printf "nameserver 8.8.8.8\n" > /etc/resolv.conf.head
 ```
-^ use `8.8.8.8` - Google's DNS. Stop WSL from generating the `resolv.conf` on startup. Previously I had some funky DNS there that didn't work.
+^ prepend `8.8.8.8` (Google's DNS). `/etc/resolv.conf` is regenerated on startup so we need to configure what will be prepended to it.
