@@ -33,4 +33,3 @@ chattr +i /etc/resolv.conf
 
 
 kudos [https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747](https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747)
-
