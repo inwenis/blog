@@ -33,3 +33,7 @@ chattr +i /etc/resolv.conf
 
 
 kudos [https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747](https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747)
+
+### note to self
+
+it still doesn't work when I'm on my company's VPN. `8.8.8.8` is unreachable. : (
