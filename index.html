@@ -1110,16 +1110,20 @@
 </span></code></pre></div>
 ^ confirmed that my Ubuntu <code>WSL</code> can't reach <code>registry.npmjs.org</code></p>
 <h3 id="solution"><a class="toclink" href="2025/02/25/npm-wsl-eai_again/#solution">Solution</a></h3>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm /etc/resolv.conf
+<p>In WSL:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm /etc/resolv.conf
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bash -c &#39;echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf&#39;
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bash -c &#39;echo &quot;[network]&quot; &gt; /etc/wsl.conf&#39;
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>bash -c &#39;echo &quot;generateResolvConf = false&quot; &gt;&gt; /etc/wsl.conf&#39;
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>chattr +i /etc/resolv.conf
 </span></code></pre></div>
 ^ use <code>8.8.8.8</code> (Google's DNS). Stop recreating <code>resolv.conf</code> on startup</p>
+<p>In Windows:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Set-Content -Path &quot;C:\Users\{user}\.wslconfig&quot; -Value &quot;[wsl2]`nnetworkingMode=mirrored&quot;
+</span></code></pre></div></p>
+<p>Works now, also on my company's VPN.</p>
 <p>kudos <a href="https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747">https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747</a></p>
-<h4 id="note-to-self"><a class="toclink" href="2025/02/25/npm-wsl-eai_again/#note-to-self">note to self</a></h4>
-<p>it still doesn't work when I'm on my company's VPN. <code>8.8.8.8</code> is unreachable. : (</p>
+<p>more info <a href="https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431">https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431</a></p>
     
   </div>
 </article>
