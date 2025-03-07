@@ -12,7 +12,7 @@ categories:
 
 [https://www.debuggex.com/](https://www.debuggex.com/) - havent't played with this a lot but I might give it a try, looks like a decent learning tool
 
-## regex - use static Regex.Matches() or instantiante Regex()?
+## regex - use static Regex.Matches() or instantiate Regex()?
 
 By default use static method.
 
