@@ -753,6 +753,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../js/" class="md-nav__link">
         
   
@@ -1023,22 +1046,22 @@
 <h3 id="task-remove-a-specific-string-from-each-line-of-multiple-csv-files"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#task-remove-a-specific-string-from-each-line-of-multiple-csv-files">Task - remove a specific string from each line of multiple CSV files.</a></h3>
 <p>This task was added to the <a href="../../2022/10/28/exercises-in-bashshellscripting/">scripting exercise list</a>.</p>
 <p>First - let's generate some CSV files to work with:
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">$numberOfFiles</span> <span class="p">=</span> <span class="n">10</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">$numberOfRows</span> <span class="p">=</span> <span class="n">100</span>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nv">$fileNames</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$numberOfFiles</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="s2">&quot;file$_.csv&quot;</span> <span class="p">}</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nv">$csvData</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$numberOfRows</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>        <span class="n">Column1</span> <span class="p">=</span> <span class="s2">&quot;Value $_&quot;</span>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>        <span class="n">Column2</span> <span class="p">=</span> <span class="s2">&quot;Value </span><span class="p">$(</span><span class="nv">$_</span> <span class="p">*</span> <span class="n">2</span><span class="p">)</span><span class="s2">&quot;</span>
-</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>        <span class="n">Column3</span> <span class="p">=</span> <span class="s2">&quot;Value </span><span class="p">$(</span><span class="nv">$_</span> <span class="p">*</span> <span class="n">3</span><span class="p">)</span><span class="s2">&quot;</span>
-</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>    <span class="p">}</span>
-</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="p">}</span>
-</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
-</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="nv">$fileNames</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$csvData</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$_</span> <span class="p">}</span>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">$numberOfFiles</span> <span class="p">=</span> <span class="n">10</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">$numberOfRows</span> <span class="p">=</span> <span class="n">100</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nv">$fileNames</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$numberOfFiles</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="s2">&quot;file$_.csv&quot;</span> <span class="p">}</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="nv">$csvData</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$numberOfRows</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="n">Column1</span> <span class="p">=</span> <span class="s2">&quot;Value $_&quot;</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="n">Column2</span> <span class="p">=</span> <span class="s2">&quot;Value </span><span class="p">$(</span><span class="nv">$_</span> <span class="p">*</span> <span class="n">2</span><span class="p">)</span><span class="s2">&quot;</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        <span class="n">Column3</span> <span class="p">=</span> <span class="s2">&quot;Value </span><span class="p">$(</span><span class="nv">$_</span> <span class="p">*</span> <span class="n">3</span><span class="p">)</span><span class="s2">&quot;</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>    <span class="p">}</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="p">}</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="nv">$fileNames</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$csvData</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$_</span> <span class="p">}</span>
 </span></code></pre></div></p>
 <h3 id="the-oopsie"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#the-oopsie">The "Oopsie"</a></h3>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="n">-Append</span> <span class="p">}</span>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="n">-Append</span> <span class="p">}</span>
 </span></code></pre></div>
 <p>This command will never finish. Run it for a moment (and then kill it), see the result, and try to figure out what happens. Explanation below.</p>
 <p>.</p>
@@ -1082,14 +1105,14 @@
 <h3 id="the-fix"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#the-fix">The fix</a></h3>
 <p>There are many ways to fix this this "oopsie"</p>
 <p>Perhaps the simplest one is to not write to and read from the exact same file. A sensible rule is <strong>when processing files always write to a different file</strong>:</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="n">-path</span> <span class="s2">&quot;fixed</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&quot;</span> <span class="p">}</span>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="n">-path</span> <span class="s2">&quot;fixed</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&quot;</span> <span class="p">}</span>
 </span></code></pre></div>
 <p>Knowing the reason for our command hanging we can make sure the whole file is read before we overwrite it:
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">(</span><span class="nb">cat </span><span class="nv">$_</span> <span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="p">}</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">(</span><span class="nb">cat </span><span class="nv">$_</span> <span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="p">}</span> <span class="c"># we can also use -replace as an array operator</span>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">(</span><span class="nb">cat </span><span class="nv">$_</span> <span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="p">}</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">(</span><span class="nb">cat </span><span class="nv">$_</span> <span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="p">}</span> <span class="c"># we can also use -replace as an array operator</span>
 </span></code></pre></div></p>
 <p>I'm amazed by github's co-pilot answer for "powershell one liner to remove a specific text from multiple CSV files":</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nb">Get-ChildItem</span> <span class="n">-Filter</span> <span class="s2">&quot;*.csv&quot;</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="p">(</span><span class="nb">Get-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FullName</span><span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;string_to_replace&quot;</span><span class="p">,</span> <span class="s2">&quot;replacement_string&quot;</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FullName</span> <span class="p">}</span>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">Get-ChildItem</span> <span class="n">-Filter</span> <span class="s2">&quot;*.csv&quot;</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="p">(</span><span class="nb">Get-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FullName</span><span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;string_to_replace&quot;</span><span class="p">,</span> <span class="s2">&quot;replacement_string&quot;</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FullName</span> <span class="p">}</span>
 </span></code></pre></div>
     
   </div>

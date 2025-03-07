@@ -747,6 +747,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../category/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../category/js/" class="md-nav__link">
         
   
@@ -984,6 +1007,110 @@
       <header class="md-typeset">
         <h1 id="blog">Blog</h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2024-07-15 00:00:00">July 15, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="../../category/scripting/" class="md-meta__link">scripting</a>, 
+              <a href="../../category/exercises/" class="md-meta__link">exercises</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="powershell-oopsie"><a class="toclink" href="../../2024/07/15/powershell-oopsie/">PowerShell "Oopsie"</a></h2>
+<h3 id="task-remove-a-specific-string-from-each-line-of-multiple-csv-files"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#task-remove-a-specific-string-from-each-line-of-multiple-csv-files">Task - remove a specific string from each line of multiple CSV files.</a></h3>
+<p>This task was added to the <a href="../../2022/10/28/exercises-in-bashshellscripting/">scripting exercise list</a>.</p>
+<p>First - let's generate some CSV files to work with:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">$numberOfFiles</span> <span class="p">=</span> <span class="n">10</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">$numberOfRows</span> <span class="p">=</span> <span class="n">100</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nv">$fileNames</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$numberOfFiles</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="s2">&quot;file$_.csv&quot;</span> <span class="p">}</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nv">$csvData</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$numberOfRows</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>        <span class="n">Column1</span> <span class="p">=</span> <span class="s2">&quot;Value $_&quot;</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>        <span class="n">Column2</span> <span class="p">=</span> <span class="s2">&quot;Value </span><span class="p">$(</span><span class="nv">$_</span> <span class="p">*</span> <span class="n">2</span><span class="p">)</span><span class="s2">&quot;</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>        <span class="n">Column3</span> <span class="p">=</span> <span class="s2">&quot;Value </span><span class="p">$(</span><span class="nv">$_</span> <span class="p">*</span> <span class="n">3</span><span class="p">)</span><span class="s2">&quot;</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>    <span class="p">}</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="p">}</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="nv">$fileNames</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$csvData</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$_</span> <span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="the-oopsie"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#the-oopsie">The "Oopsie"</a></h3>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="n">-Append</span> <span class="p">}</span>
+</span></code></pre></div>
+<p>This command will never finish. Run it for a moment (and then kill it), see the result, and try to figure out what happens. Explanation below.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<h3 id="the-explanation"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#the-explanation">The explanation</a></h3>
+<p><code>Get-Content</code> (aka. <code>cat</code>) keeps the file open and reads the content that our command is appending, thus creating an infinite loop.</p>
+<h3 id="the-fix"><a class="toclink" href="../../2024/07/15/powershell-oopsie/#the-fix">The fix</a></h3>
+<p>There are many ways to fix this this "oopsie"</p>
+<p>Perhaps the simplest one is to not write to and read from the exact same file. A sensible rule is <strong>when processing files always write to a different file</strong>:</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">cat </span><span class="nv">$_</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="n">-path</span> <span class="s2">&quot;fixed</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&quot;</span> <span class="p">}</span>
+</span></code></pre></div>
+<p>Knowing the reason for our command hanging we can make sure the whole file is read before we overwrite it:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">(</span><span class="nb">cat </span><span class="nv">$_</span> <span class="p">)</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="p">}</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">ls </span><span class="p">*.</span><span class="n">csv</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">(</span><span class="nb">cat </span><span class="nv">$_</span> <span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;42&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">|</span> <span class="nb">out-file</span> <span class="nv">$_</span> <span class="p">}</span> <span class="c"># we can also use -replace as an array operator</span>
+</span></code></pre></div></p>
+<p>I'm amazed by github's co-pilot answer for "powershell one liner to remove a specific text from multiple CSV files":</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nb">Get-ChildItem</span> <span class="n">-Filter</span> <span class="s2">&quot;*.csv&quot;</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="p">(</span><span class="nb">Get-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FullName</span><span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;string_to_replace&quot;</span><span class="p">,</span> <span class="s2">&quot;replacement_string&quot;</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FullName</span> <span class="p">}</span>
+</span></code></pre></div>
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
@@ -2388,170 +2515,6 @@ This neat, perhaps unix people had wisdom that is lost now.</p>
   </div>
 </article>
       
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2021-06-12 00:00:00">June 12, 2021</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="../../category/f-sharp/" class="md-meta__link">F Sharp</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="f-async-be-mindful-of-what-you-put-in-async"><a class="toclink" href="../../2021/06/12/f-async---be-mindful-of-what-you-put-in-async-/">F# async - be mindful of what you put in async {}</a></h2>
-<div class="language-F# highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-6-10">10</a></span>
-<span class="normal"><a href="#__codelineno-6-11">11</a></span>
-<span class="normal"><a href="#__codelineno-6-12">12</a></span>
-<span class="normal"><a href="#__codelineno-6-13">13</a></span>
-<span class="normal"><a href="#__codelineno-6-14">14</a></span>
-<span class="normal"><a href="#__codelineno-6-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">open</span><span class="w"> </span><span class="nn">System</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="k">let</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Random</span><span class="bp">()</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="k">let</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="bp">()</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="nv">random_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="o">.</span><span class="n">Next</span><span class="bp">()</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">  </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;%i&quot;</span><span class="w"> </span><span class="n">random_num</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">  </span><span class="o">}</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="n">m</span><span class="w"> </span><span class="bp">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span><span class="w"> </span><span class="c1">// prints a random number</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="n">m</span><span class="w"> </span><span class="bp">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span><span class="w"> </span><span class="c1">// prints another random number</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="k">let</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">()</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="n">x</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span><span class="w"> </span><span class="c1">// prints another random number</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="n">x</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span><span class="w"> </span><span class="c1">// prints same number as above</span>
-</span></code></pre></div></td></tr></table></div>
-<p>Why does it matter that lines 14 and 15 print the same number?</p>
-<p>Let's consider the following code:</p>
-<div class="language-F# highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-7-10">10</a></span>
-<span class="normal"><a href="#__codelineno-7-11">11</a></span>
-<span class="normal"><a href="#__codelineno-7-12">12</a></span>
-<span class="normal"><a href="#__codelineno-7-13">13</a></span>
-<span class="normal"><a href="#__codelineno-7-14">14</a></span>
-<span class="normal"><a href="#__codelineno-7-15">15</a></span>
-<span class="normal"><a href="#__codelineno-7-16">16</a></span>
-<span class="normal"><a href="#__codelineno-7-17">17</a></span>
-<span class="normal"><a href="#__codelineno-7-18">18</a></span>
-<span class="normal"><a href="#__codelineno-7-19">19</a></span>
-<span class="normal"><a href="#__codelineno-7-20">20</a></span>
-<span class="normal"><a href="#__codelineno-7-21">21</a></span>
-<span class="normal"><a href="#__codelineno-7-22">22</a></span>
-<span class="normal"><a href="#__codelineno-7-23">23</a></span>
-<span class="normal"><a href="#__codelineno-7-24">24</a></span>
-<span class="normal"><a href="#__codelineno-7-25">25</a></span>
-<span class="normal"><a href="#__codelineno-7-26">26</a></span>
-<span class="normal"><a href="#__codelineno-7-27">27</a></span>
-<span class="normal"><a href="#__codelineno-7-28">28</a></span>
-<span class="normal"><a href="#__codelineno-7-29">29</a></span>
-<span class="normal"><a href="#__codelineno-7-30">30</a></span>
-<span class="normal"><a href="#__codelineno-7-31">31</a></span>
-<span class="normal"><a href="#__codelineno-7-32">32</a></span>
-<span class="normal"><a href="#__codelineno-7-33">33</a></span>
-<span class="normal"><a href="#__codelineno-7-34">34</a></span>
-<span class="normal"><a href="#__codelineno-7-35">35</a></span>
-<span class="normal"><a href="#__codelineno-7-36">36</a></span>
-<span class="normal"><a href="#__codelineno-7-37">37</a></span>
-<span class="normal"><a href="#__codelineno-7-38">38</a></span>
-<span class="normal"><a href="#__codelineno-7-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1">// We&#39;re sending http requests and if they fail we&#39;d like to retry them</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="o">#</span><span class="n">r</span><span class="w"> </span><span class="s">&quot;System.Net.Http&quot;</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Net.Http</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="k">let</span><span class="w"> </span><span class="nv">HTTP_CLIENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="bp">()</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="k">let</span><span class="w"> </span><span class="nv">send</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="nv">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpRequestMessage</span><span class="bp">()</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">  </span><span class="n">httpRequest</span><span class="o">.</span><span class="n">RequestUri</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Uri</span><span class="w"> </span><span class="n">url</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">  </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">    </span><span class="k">let!</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">      </span><span class="nn">HTTP_CLIENT</span><span class="p">.</span><span class="n">SendAsync</span><span class="w"> </span><span class="n">httpRequest</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">AwaitTask</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">r</span>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">  </span><span class="o">}</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="n">send</span><span class="w"> </span><span class="s">&quot;http://test&quot;</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="n">send</span><span class="w"> </span><span class="s">&quot;http://test&quot;</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="k">let</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">send</span><span class="w"> </span><span class="s">&quot;http://test&quot;</span>
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="n">y</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="n">y</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24"></a>
-</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25"></a><span class="k">let</span><span class="w"> </span><span class="nv">retry</span><span class="w"> </span><span class="n">computation</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26"></a><span class="w">  </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27"></a><span class="w">    </span><span class="k">try</span>
-</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28"></a><span class="w">      </span><span class="k">let!</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">computation</span>
-</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">r</span>
-</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="w">    </span><span class="k">with</span>
-</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="w">      </span><span class="n">printf</span><span class="w"> </span><span class="s">&quot;ups, err, let&#39;s retry&quot;</span>
-</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="w">      </span><span class="k">let!</span><span class="w"> </span><span class="nv">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">computation</span>
-</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">r2</span>
-</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35"></a><span class="w">  </span><span class="o">}</span>
-</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36"></a>
-</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37"></a><span class="n">send</span><span class="w"> </span><span class="s">&quot;http://test&quot;</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">retry</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
-</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38"></a><span class="c1">// retrying will fail always with &quot;The request message was already sent. Cannot send the same request message multiple times.&quot;</span>
-</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39"></a><span class="c1">// This is because just like L14/15 print the same number, here we send the exact same request object and that&#39;s not allowed</span>
-</span></code></pre></div></td></tr></table></div>
-<p>The fix
-<div class="language-F# highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-8-10">10</a></span>
-<span class="normal"><a href="#__codelineno-8-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">let</span><span class="w"> </span><span class="nv">send2</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">  </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpRequestMessage</span><span class="bp">()</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="n">httpRequest</span><span class="o">.</span><span class="n">RequestUri</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Uri</span><span class="w"> </span><span class="n">url</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="k">let!</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">      </span><span class="nn">HTTP_CLIENT</span><span class="p">.</span><span class="n">SendAsync</span><span class="w"> </span><span class="n">httpRequest</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">AwaitTask</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">r</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span><span class="o">}</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">send2</span><span class="w"> </span><span class="s">&quot;http://test&quot;</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">retry</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
-</span></code></pre></div></td></tr></table></div></p>
-    
-  </div>
-</article>
-      
       
         
           
@@ -2559,7 +2522,7 @@ This neat, perhaps unix people had wisdom that is lost now.</p>
 
 
 <nav class="md-pagination">
-  <a class="md-pagination__link" href="../..">1</a> <span class="md-pagination__current">2</span>
+  <a class="md-pagination__link" href="../..">1</a> <span class="md-pagination__current">2</span> <a class="md-pagination__link" href="../3/">3</a>
 </nav>
         
       

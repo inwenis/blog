@@ -753,6 +753,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../category/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../category/js/" class="md-nav__link">
         
   
@@ -990,6 +1013,48 @@
       <header class="md-typeset">
         <h1 id="2025">2025</h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2025-03-07 00:00:00">March 7, 2025</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/git/" class="md-meta__link">git</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="git-goodies"><a class="toclink" href="../../2025/03/07/git-goodies/">git goodies</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git branch -d `git branch | grep feature`                             # delete all branches with feature in its name
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git branch | grep feature | xargs git branch -d                       # same as ^
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>git push origin --delete branchXYZ                                    # git push origin :branchXYZ
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>git push origin --delete `git branch -r | grep feature | cut -c10-`   # delete all feature branches from remote
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>git show branch:file &gt; write_here                                     # https://stackoverflow.com/questions/7856416/view-a-file-in-a-different-git-branch-without-changing-branches
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>git checkout branch -- path/to/file                                   # similar to previous but checkout the file
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>git checkout --ours foo/bar.java                                      # useful for rebases or merges, works with --theirs too
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>git log -p -- src/data_capture_tools                                  # changes only made to a specific directory
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>git log --all --full-history -- &quot;**/thefile.*&quot;                        # https://stackoverflow.com/questions/7203515/how-to-find-a-deleted-file-in-the-project-commit-history
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>git log --left-right --graph --cherry-pick --oneline feature...branch # https://til.hashrocket.com/posts/18139f4f20-list-different-commits-between-two-branches
+</span></code></pre></div>
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
