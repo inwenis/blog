@@ -42,3 +42,20 @@ Works now, also on my company's VPN.
 kudos [https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747](https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747)
 
 more info [https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431](https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431)
+
+### update 2025-03-18
+
+Today the above solution didn't work - I could not reach `8.8.8.8` - I tested it with `dig registry.npmjs.org`.
+This fixed it today :confused:
+
+WSL:
+```
+chattr -i /etc/resolv.conf
+rm /etc/resolv.conf
+rm /etc/wsl.conf
+```
+
+Windows:
+```
+rm "C:\Users\{user}\.wslconfig"
+```
