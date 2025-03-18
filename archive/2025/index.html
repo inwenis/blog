@@ -1062,6 +1062,42 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2025-03-07 00:00:00">March 7, 2025</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/misc/" class="md-meta__link">misc</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="escape"><a class="toclink" href="../../2025/03/07/escape/">escape!</a></h2>
+<p>Why does escaping a character mean escaping a character?</p>
+<p>When a C compiler (or any other compiler) encounters a <code>"</code> it thinks to it self "huh, this is the begninning or end of a string!".</p>
+<p>Say you need <code>"</code> in your string?</p>
+<p>You have to tell the compiler "do not process this character like you always do, I want you to ESCAPE the default processing". You do this with <code>"dear compiler this \" will become a double quotation mark in my string"</code>.</p>
+<p>Likewise if you want a new line you need to tell the compile "do not process this n as a "n", escape the default processing and process it as a new line \n".</p>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-02-25 00:00:00">February 25, 2025</time></li>
         
           <li class="md-meta__item">
@@ -1084,28 +1120,39 @@
   <div class="md-post__content md-typeset">
     <h2 id="npm-wsl-eai_again"><a class="toclink" href="../../2025/02/25/npm-wsl-eai_again/">npm wsl EAI_AGAIN</a></h2>
 <p>Running <code>npm ci</code> on <code>WSL</code> (Windows Subsystem for Linux) failed with:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>npm ERR! syscall getaddrinfo
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>npm ERR! errno EAI_AGAIN
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>npm ERR! request to http://registry.npmjs.org/nodemon failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>npm ERR! syscall getaddrinfo
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>npm ERR! errno EAI_AGAIN
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>npm ERR! request to http://registry.npmjs.org/nodemon failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org
 </span></code></pre></div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>dig registry.npmjs.org
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>dig registry.npmjs.org
 </span></code></pre></div>
 ^ confirmed that my Ubuntu <code>WSL</code> can't reach <code>registry.npmjs.org</code></p>
 <h3 id="solution"><a class="toclink" href="../../2025/02/25/npm-wsl-eai_again/#solution">Solution</a></h3>
 <p>In WSL:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>rm /etc/resolv.conf
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>bash -c &#39;echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf&#39;
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>bash -c &#39;echo &quot;[network]&quot; &gt; /etc/wsl.conf&#39;
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>bash -c &#39;echo &quot;generateResolvConf = false&quot; &gt;&gt; /etc/wsl.conf&#39;
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>chattr +i /etc/resolv.conf
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>rm /etc/resolv.conf
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>bash -c &#39;echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf&#39;
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>bash -c &#39;echo &quot;[network]&quot; &gt; /etc/wsl.conf&#39;
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>bash -c &#39;echo &quot;generateResolvConf = false&quot; &gt;&gt; /etc/wsl.conf&#39;
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>chattr +i /etc/resolv.conf
 </span></code></pre></div>
 ^ use <code>8.8.8.8</code> (Google's DNS). Stop recreating <code>resolv.conf</code> on startup</p>
 <p>In Windows:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Set-Content -Path &quot;C:\Users\{user}\.wslconfig&quot; -Value &quot;[wsl2]`nnetworkingMode=mirrored&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Set-Content -Path &quot;C:\Users\{user}\.wslconfig&quot; -Value &quot;[wsl2]`nnetworkingMode=mirrored&quot;
 </span></code></pre></div></p>
 <p>Works now, also on my company's VPN.</p>
 <p>kudos <a href="https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747">https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747</a></p>
 <p>more info <a href="https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431">https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431</a></p>
+<h4 id="update-2025-03-18"><a class="toclink" href="../../2025/02/25/npm-wsl-eai_again/#update-2025-03-18">update 2025-03-18</a></h4>
+<p>Today the above solution didn't work - I could not reach <code>8.8.8.8</code> - I tested it with <code>dig registry.npmjs.org</code>.
+This fixed it today :confused:</p>
+<p>WSL:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>chattr -i /etc/resolv.conf
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>rm /etc/resolv.conf
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>rm /etc/wsl.conf
+</span></code></pre></div></p>
+<p>Windows:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>rm &quot;C:\Users\{user}\.wslconfig&quot;
+</span></code></pre></div></p>
     
   </div>
 </article>

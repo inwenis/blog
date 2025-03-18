@@ -9,8 +9,10 @@
       
       
       
-        <link rel="prev" href="../escape/">
+        <link rel="prev" href="../../../02/25/npm-wsl-eai_again/">
       
+      
+        <link rel="next" href="../git-goodies/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -18,7 +20,7 @@
     
     
       
-        <title>git goodies - programki.eu</title>
+        <title>escape! - programki.eu</title>
       
     
     
@@ -70,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#git-goodies" class="md-skip">
+        <a href="#escape" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              git goodies
+              escape!
             
           </span>
         </div>
@@ -1037,7 +1039,7 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/git/">git</a></span>
+                              <a href="../../../../category/misc/">misc</a></span>
                         </div>
                       </li>
                     
@@ -1068,18 +1070,12 @@
         
 
 
-<h1 id="git-goodies">git goodies</h1>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git branch -d `git branch | grep feature`                             # delete all branches with feature in its name
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git branch | grep feature | xargs git branch -d                       # same as ^
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>git push origin --delete branchXYZ                                    # git push origin :branchXYZ
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>git push origin --delete `git branch -r | grep feature | cut -c10-`   # delete all feature branches from remote
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>git show branch:file &gt; write_here                                     # https://stackoverflow.com/questions/7856416/view-a-file-in-a-different-git-branch-without-changing-branches
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>git checkout branch -- path/to/file                                   # similar to previous but checkout the file
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>git checkout --ours foo/bar.java                                      # useful for rebases or merges, works with --theirs too
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>git log -p -- src/data_capture_tools                                  # changes only made to a specific directory
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>git log --all --full-history -- &quot;**/thefile.*&quot;                        # https://stackoverflow.com/questions/7203515/how-to-find-a-deleted-file-in-the-project-commit-history
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>git log --left-right --graph --cherry-pick --oneline feature...branch # https://til.hashrocket.com/posts/18139f4f20-list-different-commits-between-two-branches
-</span></code></pre></div>
+<h1 id="escape">escape!</h1>
+<p>Why does escaping a character mean escaping a character?</p>
+<p>When a C compiler (or any other compiler) encounters a <code>"</code> it thinks to it self "huh, this is the begninning or end of a string!".</p>
+<p>Say you need <code>"</code> in your string?</p>
+<p>You have to tell the compiler "do not process this character like you always do, I want you to ESCAPE the default processing". You do this with <code>"dear compiler this \" will become a double quotation mark in my string"</code>.</p>
+<p>Likewise if you want a new line you need to tell the compile "do not process this n as a "n", escape the default processing and process it as a new line \n".</p>
 
 
 

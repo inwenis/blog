@@ -12,7 +12,7 @@
         <link rel="prev" href="../../19/post25/">
       
       
-        <link rel="next" href="../../../03/07/git-goodies/">
+        <link rel="next" href="../../../03/07/escape/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -1006,6 +1006,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-2025-03-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      update 2025-03-18
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1111,6 +1126,17 @@
 <p>Works now, also on my company's VPN.</p>
 <p>kudos <a href="https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747">https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747</a></p>
 <p>more info <a href="https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431">https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431</a></p>
+<h3 id="update-2025-03-18">update 2025-03-18</h3>
+<p>Today the above solution didn't work - I could not reach <code>8.8.8.8</code> - I tested it with <code>dig registry.npmjs.org</code>.
+This fixed it today :confused:</p>
+<p>WSL:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chattr -i /etc/resolv.conf
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>rm /etc/resolv.conf
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>rm /etc/wsl.conf
+</span></code></pre></div></p>
+<p>Windows:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rm &quot;C:\Users\{user}\.wslconfig&quot;
+</span></code></pre></div></p>
 
 
 
