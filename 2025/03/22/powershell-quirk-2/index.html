@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../../../../2024/12/29/json/">
+        <link rel="prev" href="../../07/git-goodies/">
       
-      
-        <link rel="next" href="../../23/post21/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Environment variable - programki.eu</title>
+        <title>PowerShell quirk 2 - programki.eu</title>
       
     
     
@@ -72,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#environment-variable" class="md-skip">
+        <a href="#powershell-quirk-2" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Environment variable
+              PowerShell quirk 2
             
           </span>
         </div>
@@ -1000,18 +998,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#but-only-in-a-specific-directory" class="md-nav__link">
+  <a href="#tldr" class="md-nav__link">
     <span class="md-ellipsis">
-      but only in a specific directory
+      tl;dr
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-did-i-need-this" class="md-nav__link">
+  <a href="#longer-reads" class="md-nav__link">
     <span class="md-ellipsis">
-      Why did I need this?
+      longer reads
     </span>
   </a>
   
@@ -1054,7 +1052,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2025-01-20 00:00:00+00:00" class="md-ellipsis">January 20, 2025</time>
+                        <time datetime="2025-03-22 00:00:00+00:00" class="md-ellipsis">March 22, 2025</time>
                       </div>
                     </li>
                     
@@ -1076,7 +1074,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              2 min read
+                              1 min read
                             
                           </span>
                         </div>
@@ -1096,68 +1094,22 @@
         
 
 
-<h1 id="environment-variable">Environment variable</h1>
-<h2 id="but-only-in-a-specific-directory">but only in a specific directory</h2>
-<p>The idea - use the <code>Prompt</code> function to check if you're in a specific dir and set/unset an env var:</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">function</span> <span class="n">Prompt</span> <span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nv">$currentDir</span> <span class="p">=</span> <span class="nb">Get-Location</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;C:\git\that-special-dir&quot;</span> <span class="o">-eq</span> <span class="nv">$currentDir</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="nv">$env:THAT_SPECIAL_ENV_VAR</span> <span class="p">=</span> <span class="s2">&quot;./extra.cer&quot;</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="p">}</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="nb">Remove-Item</span> <span class="n">Env</span><span class="p">:\</span><span class="n">THAT_SPECIAL_ENV_VAR</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="p">}</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
+<h1 id="powershell-quirk-2">PowerShell quirk 2</h1>
+<h2 id="tldr">tl;dr</h2>
+<p>Let's say you have a <code>File[1].txt</code> file and you would like to read it.
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Get-Content</span> <span class="s2">&quot;File[1].txt&quot;</span>
 </span></code></pre></div>
-<p>Extract the special env setting/unsetting to a function:</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">function</span> <span class="n">SetOrUnSet-DirectoryDependent-EnvironmentVariables</span> <span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nv">$currentDir</span> <span class="p">=</span> <span class="nb">Get-Location</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;C:\git\that-special-dir&quot;</span> <span class="o">-eq</span> <span class="nv">$currentDir</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="nv">$env:THAT_SPECIAL_ENV_VAR</span> <span class="p">=</span> <span class="s2">&quot;./extra.cer&quot;</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="p">}</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="nb">Remove-Item</span> <span class="n">Env</span><span class="p">:\</span><span class="n">THAT_SPECIAL_ENV_VAR</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="p">}</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">function</span> <span class="n">Prompt</span> <span class="p">{</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">SetOrUnSet-DirectoryDependent-EnvironmentVariables</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
+^ this returns nothing</p>
+<p>Why?</p>
+<p>PowerShell interprets <code>[]</code> as special characters. A range in this case. PowerShell is actually looking for a file named <code>File1.txt</code>.</p>
+<p>What to do?</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Get-Content</span> <span class="s2">&quot;File</span><span class="se">``</span><span class="s2">[1</span><span class="se">``</span><span class="s2">].txt&quot;</span>
 </span></code></pre></div>
-<p>If your <code>Prompt</code> function is already overwritten by ex. <code>oh-my-posh</code>:</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">function</span> <span class="n">SetOrUnSet-DirectoryDependent-EnvironmentVariables</span> <span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nv">$currentDir</span> <span class="p">=</span> <span class="nb">Get-Location</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;C:\git\that-special-dir&quot;</span> <span class="o">-eq</span> <span class="nv">$currentDir</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="nv">$env:THAT_SPECIAL_ENV_VAR</span> <span class="p">=</span> <span class="s2">&quot;./extra.cer&quot;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="p">}</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="nb">Remove-Item</span> <span class="n">Env</span><span class="p">:\</span><span class="n">THAT_SPECIAL_ENV_VAR</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="p">}</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nv">$promptFunction</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Command</span> <span class="n">Prompt</span><span class="p">).</span><span class="n">ScriptBlock</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">function</span> <span class="n">Prompt</span> <span class="p">{</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">SetOrUnSet-DirectoryDependent-EnvironmentVariables</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="nv">$promptFunction</span><span class="p">.</span><span class="n">Invoke</span><span class="p">()</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
-</span></code></pre></div>
-<h2 id="why-did-i-need-this">Why did I need this?</h2>
-<p>In a repository with several js scrapers run by <code>NODE</code> a few scrape data from misconfigured websites. These websites don't provide the intermediate certificate for https. Your browser automatically fills in the gap for convenience but a simple http client like <code>axios</code> will rightfully reject the connection as it can't verify who it is talking to (see more <a href="../../../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#lazy-websites">here</a>)</p>
-<p>Solution?</p>
-<blockquote>
-<p>Use <a href="https://nodejs.org/api/cli.html#node_extra_ca_certsfile">NODE_EXTRA_CA_CERTS</a></p>
-</blockquote>
+<h2 id="longer-reads">longer reads</h2>
 <ul>
-<li>You configure your production server with <code>NODE_EXTRA_CA_CERTS</code>.</li>
-<li>When testing locally you get tired of remembering to set <code>NODE_EXTRA_CA_CERTS</code>.</li>
-<li>You add <code>NODE_EXTRA_CA_CERTS</code> to your powershell profile. Now every time you run anything using <code>NODE</code> (like vs code) you see
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Warning: Ignoring extra certs from `./extra.cer`, load failed: error:02000002:system library:OPENSSL_internal:No such file or directory
-</span></code></pre></div></li>
-<li>You get annoyed and you ask yourself how to set an
-<a href="./">environment variable but only in a specific directory</a></li>
+<li><a href="https://stackoverflow.com/questions/21008180/copy-file-with-square-brackets-in-the-filename-and-use-wildcard">https://stackoverflow.com/questions/21008180/copy-file-with-square-brackets-in-the-filename-and-use-wildcard</a></li>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730956(v=technet.10)?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730956(v=technet.10)?redirectedfrom=MSDN</a></li>
 </ul>
-<p>I use this myself here -&gt; <a href="https://github.com/inwenis/powershell-profile/blob/master/Profile.ps1">the public part of my powershell-profile</a></p>
 
 
 
