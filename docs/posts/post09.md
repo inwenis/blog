@@ -129,7 +129,7 @@ A PPK file stores a private key, and the corresponding public key. Both are cont
 https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
 
 # PEM
-Privacy-Enhanced Mail (PEM) is THE file format for exhanging keys, certificates.
+Privacy-Enhanced Mail (PEM) is THE file format for exchanging keys, certificates.
 
 - `.cer` & `.crt` - PEM file with a certificate
 - `.key` - PEM with with a private or public key
