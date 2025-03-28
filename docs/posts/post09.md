@@ -79,7 +79,7 @@ TJUd1W+d3LmikOUgGzil
 
 We can double click the cert file to view it (on Windows) or use many other different tools to view its content.
 
-https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate
+[https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate](https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate)
 
 ```PowerShell
 > $cert = New-Object Security.Cryptography.X509Certificates.X509Certificate2([string]"C:\Users\inwen\Downloads\_.wikipedia.org.crt")
@@ -143,7 +143,7 @@ PuTTy has its own format of key files -> .ppk
 
 ppk - putty private key (ppk can be changed to pem with some software)
 A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
-https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
+[https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html](https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html)
 
 # PEM
 Privacy-Enhanced Mail (PEM) is THE file format for exchanging keys, certificates.
@@ -207,16 +207,16 @@ P12/PKCS12 is the successor to PFX. Sometimes the terms PFX/P12/PKCS12 are used 
 
 ---
 base64 offline decoder:
-https://www.glezen.org/Base64Decoder.html
+[https://www.glezen.org/Base64Decoder.html](https://www.glezen.org/Base64Decoder.html)
 
 Nice description of certs vs key:
-https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
+[https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl](https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl)
 
 Generate yourself a certificate:
-https://getacert.com/index.html
+[https://getacert.com/index.html](https://getacert.com/index.html)
 
 Important info on `rejectUnauthorized: false` and certificates in `axios`/`node`:
-https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate
+[https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate](https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate)
 
 convention - propose
     - specify format in secret name
@@ -243,11 +243,11 @@ winpty openssl pkcs12 -in cert.pfx -out cert.pem -nodes
 
 Sources:
 
-https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl
+[https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl](https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl)
 
-https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate
+[https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate](https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate)
 
-https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit
+[https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit](https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit)
 
 # Lazy websites
 
@@ -272,15 +272,15 @@ Read more [here](https://stackoverflow.com/a/53585725/2377787)
 ## does (for node)
 Use [NODE_EXTRA_CA_CERTS](https://nodejs.org/api/cli.html#node_extra_ca_certsfile). Alternatively use a library to programmatically give node the missing certificate [link](https://stackoverflow.com/a/39972054/2377787)
 
-Good read - https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs
+Good read - [https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs](https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs)
 
 # root CA stores
 ## Node
 
 It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:
 
-- https://github.com/nodejs/node/blob/main/src/node_root_certs.h
-- https://github.com/nodejs/node/issues/4175
+- [https://github.com/nodejs/node/blob/main/src/node_root_certs.h](https://github.com/nodejs/node/blob/main/src/node_root_certs.h)
+- [https://github.com/nodejs/node/issues/4175](https://github.com/nodejs/node/issues/4175)
 
 ## Windows
 You can view Windows certificates with PowerShell:
@@ -289,8 +289,8 @@ Get-ChildItem -Recurse Cert:
 ```
 
 ## Chrome
-https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md
+[https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md](https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md)
 
-If you would like to become chrome's trusted CA - https://www.chromium.org/Home/chromium-security/root-ca-policy/
+If you would like to become chrome's trusted CA - [https://www.chromium.org/Home/chromium-security/root-ca-policy/](https://www.chromium.org/Home/chromium-security/root-ca-policy/)
 
-https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html
+[https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html](https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html)
