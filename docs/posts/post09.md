@@ -108,17 +108,34 @@ Issuer               : CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1, O=DigiCert In
 Subject              : CN=*.wikipedia.org, O="Wikimedia Foundation, Inc.", L=San Francisco, S=California, C=US
 ```
 
-## SSL & TLS & SSH & SFTP
+## SSL & TLS & SSH & SFTP & FTPS & FTP over SSH
 
-SSH (Secure SHell protocol) - protocol that allows to execute shell commands over a secure connection.
+SSH (Secure Shell protocol) - protocol that allows to execute shell commands over a secure connection.
 
-SFTP is an extension of SSH. SFTP != FTP over SSH.
+FTP (File Transfer Protocol) - the plain old FTP protocol that has been around since 1970s. It usually runs over TCP port 21.
+
+SFTP (SSH File Transfer Protocol or Secure File Transfer Protocol) another, completely different file transfer protocol. Provides file transfer and manipulation capabilities. It can work over any reliable data stream, but is typically used with SSH.
+
+"FTP over SSH" uses the regular old FTP protocol, but an SSH tunnel is placed between client and server.
+
+SFTP != FTP over SSH
+
+FTPS (also known as FTP-SSL and FTP Secure) - extension of FTP with support for FTP over SSL.
+
+FTPS != FTP over SSH (FTP over SLL != FTP over SSH)
+
 To connect to a SFTP server you need a private ssh key. The public ssh key (your private key's counterpart) is stored at the server.
+
+To connect to a FTPS you need a X.509 certificate.
 
 TLS & SSL - think of SSL as the older/first protocol for secure communication. SSL was outphased by TLS. TLS is THE protocol used by HTTPS for secure connections.
 
 Clients can be anonymous in TLS - usually the case on web - the server provides a cert to your browser but you don't need a cert of your own.
 TLS can be mutual - if the client has a cert the servers will/can validate it.
+
+read more on FTP/SFTP/FTPS/FTP over SSH
+- [https://stackoverflow.com/questions/440463/differences-between-sftp-and-ftp-over-ssh](https://stackoverflow.com/questions/440463/differences-between-sftp-and-ftp-over-ssh)
+- [https://www.rebex.net/kb/secure-ftp/](https://www.rebex.net/kb/secure-ftp/)
 
 ## PuTTy
 PuTTy is free+open source software than can do SSH.
