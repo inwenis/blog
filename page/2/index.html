@@ -2434,7 +2434,7 @@ The cert includes:</p>
 </span><span id="__span-25-47"><a id="__codelineno-25-47" name="__codelineno-25-47" href="#__codelineno-25-47"></a>-----END CERTIFICATE-----
 </span></code></pre></div>
 <p>We can double click the cert file to view it (on Windows) or use many other different tools to view its content.</p>
-<p>https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate</p>
+<p><a href="https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate">https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate</a></p>
 <div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">&gt;</span> <span class="nv">$cert</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X509Certificate2</span><span class="p">(</span><span class="no">[string]</span><span class="s2">&quot;C:\Users\inwen\Downloads\_.wikipedia.org.crt&quot;</span><span class="p">)</span>
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="p">&gt;</span> <span class="nv">$cert</span> <span class="p">|</span> <span class="nb">select </span><span class="p">*</span>
 </span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
@@ -2481,7 +2481,7 @@ TLS can be mutual - if the client has a cert the servers will/can validate it.</
 PuTTy has its own format of key files -&gt; .ppk</p>
 <p>ppk - putty private key (ppk can be changed to pem with some software)
 A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
-https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html</p>
+<a href="https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html">https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html</a></p>
 <h2 id="pem"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#pem">PEM</a></h2>
 <p>Privacy-Enhanced Mail (PEM) is THE file format for exchanging keys, certificates.</p>
 <ul>
@@ -2533,13 +2533,13 @@ https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html</p>
 <p>P12/PKCS12 is the successor to PFX. Sometimes the terms PFX/P12/PKCS12 are used interchangeably.</p>
 <hr />
 <p>base64 offline decoder:
-https://www.glezen.org/Base64Decoder.html</p>
+<a href="https://www.glezen.org/Base64Decoder.html">https://www.glezen.org/Base64Decoder.html</a></p>
 <p>Nice description of certs vs key:
-https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl</p>
+<a href="https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl">https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl</a></p>
 <p>Generate yourself a certificate:
-https://getacert.com/index.html</p>
+<a href="https://getacert.com/index.html">https://getacert.com/index.html</a></p>
 <p>Important info on <code>rejectUnauthorized: false</code> and certificates in <code>axios</code>/<code>node</code>:
-https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate</p>
+<a href="https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate">https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate</a></p>
 <p>convention - propose
     - specify format in secret name
     - use plain - not base64 encoded</p>
@@ -2560,9 +2560,9 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 </span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>winpty openssl pkcs12 -in cert.pfx -out cert.pem -nodes
 </span></code></pre></div>
 <p>Sources:</p>
-<p>https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl</p>
-<p>https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate</p>
-<p>https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit</p>
+<p><a href="https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl">https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl</a></p>
+<p><a href="https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate">https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate</a></p>
+<p><a href="https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit">https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit</a></p>
 <h2 id="lazy-websites"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#lazy-websites">Lazy websites</a></h2>
 <p>Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).</p>
 <p>Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.</p>
@@ -2578,22 +2578,22 @@ https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-c
 <p>Read more <a href="https://stackoverflow.com/a/53585725/2377787">here</a></p>
 <h3 id="does-for-node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#does-for-node">does (for node)</a></h3>
 <p>Use <a href="https://nodejs.org/api/cli.html#node_extra_ca_certsfile">NODE_EXTRA_CA_CERTS</a>. Alternatively use a library to programmatically give node the missing certificate <a href="https://stackoverflow.com/a/39972054/2377787">link</a></p>
-<p>Good read - https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs</p>
+<p>Good read - <a href="https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs">https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs</a></p>
 <h2 id="root-ca-stores"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#root-ca-stores">root CA stores</a></h2>
 <h3 id="node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#node">Node</a></h3>
 <p>It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:</p>
 <ul>
-<li>https://github.com/nodejs/node/blob/main/src/node_root_certs.h</li>
-<li>https://github.com/nodejs/node/issues/4175</li>
+<li><a href="https://github.com/nodejs/node/blob/main/src/node_root_certs.h">https://github.com/nodejs/node/blob/main/src/node_root_certs.h</a></li>
+<li><a href="https://github.com/nodejs/node/issues/4175">https://github.com/nodejs/node/issues/4175</a></li>
 </ul>
 <h3 id="windows"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#windows">Windows</a></h3>
 <p>You can view Windows certificates with PowerShell:
 <div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nb">Get-ChildItem</span> <span class="n">-Recurse</span> <span class="n">Cert</span><span class="p">:</span>
 </span></code></pre></div></p>
 <h3 id="chrome"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#chrome">Chrome</a></h3>
-<p>https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md</p>
-<p>If you would like to become chrome's trusted CA - https://www.chromium.org/Home/chromium-security/root-ca-policy/</p>
-<p>https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html</p>
+<p><a href="https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md">https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md</a></p>
+<p>If you would like to become chrome's trusted CA - <a href="https://www.chromium.org/Home/chromium-security/root-ca-policy/">https://www.chromium.org/Home/chromium-security/root-ca-policy/</a></p>
+<p><a href="https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html">https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html</a></p>
     
   </div>
 </article>
