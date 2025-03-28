@@ -2569,7 +2569,7 @@ A PPK file stores a private key, and the corresponding public key. Both are cont
 <h3 id="donts-for-node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#donts-for-node">don't's (for node)</a></h3>
 <p>Several answers on SO suggest:</p>
 <ul>
-<li><code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> or </li>
+<li><code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> or</li>
 <li><code>const httpsAgent = new https.Agent({ rejectUnauthorized: false });</code></li>
 </ul>
 <p>Both are terrible ideas - they make your app accept unauthorized connections. They are the equivalent of this conversation:</p>
