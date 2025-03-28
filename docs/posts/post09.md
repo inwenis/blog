@@ -79,7 +79,7 @@ TJUd1W+d3LmikOUgGzil
 
 We can double click the cert file to view it (on Windows) or use many other different tools to view its content.
 
-https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate
+[https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate](https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate)
 
 ```PowerShell
 > $cert = New-Object Security.Cryptography.X509Certificates.X509Certificate2([string]"C:\Users\inwen\Downloads\_.wikipedia.org.crt")
@@ -108,17 +108,34 @@ Issuer               : CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1, O=DigiCert In
 Subject              : CN=*.wikipedia.org, O="Wikimedia Foundation, Inc.", L=San Francisco, S=California, C=US
 ```
 
-## SSL & TLS & SSH & SFTP
+## SSL & TLS & SSH & SFTP & FTPS & FTP over SSH
 
-SSH (Secure SHell protocol) - protocol that allows to execute shell commands over a secure connection.
+SSH (Secure Shell protocol) - protocol that allows to execute shell commands over a secure connection.
 
-SFTP is an extension of SSH. SFTP != FTP over SSH.
+FTP (File Transfer Protocol) - the plain old FTP protocol that has been around since 1970s. It usually runs over TCP port 21.
+
+SFTP (SSH File Transfer Protocol or Secure File Transfer Protocol) another, completely different file transfer protocol. Provides file transfer and manipulation capabilities. It can work over any reliable data stream, but is typically used with SSH.
+
+"FTP over SSH" uses the regular old FTP protocol, but an SSH tunnel is placed between client and server.
+
+SFTP != FTP over SSH
+
+FTPS (also known as FTP-SSL and FTP Secure) - extension of FTP with support for FTP over SSL.
+
+FTPS != FTP over SSH (FTP over SLL != FTP over SSH)
+
 To connect to a SFTP server you need a private ssh key. The public ssh key (your private key's counterpart) is stored at the server.
+
+To connect to a FTPS you need a X.509 certificate.
 
 TLS & SSL - think of SSL as the older/first protocol for secure communication. SSL was outphased by TLS. TLS is THE protocol used by HTTPS for secure connections.
 
 Clients can be anonymous in TLS - usually the case on web - the server provides a cert to your browser but you don't need a cert of your own.
 TLS can be mutual - if the client has a cert the servers will/can validate it.
+
+read more on FTP/SFTP/FTPS/FTP over SSH
+- [https://stackoverflow.com/questions/440463/differences-between-sftp-and-ftp-over-ssh](https://stackoverflow.com/questions/440463/differences-between-sftp-and-ftp-over-ssh)
+- [https://www.rebex.net/kb/secure-ftp/](https://www.rebex.net/kb/secure-ftp/)
 
 ## PuTTy
 PuTTy is free+open source software than can do SSH.
@@ -126,7 +143,7 @@ PuTTy has its own format of key files -> .ppk
 
 ppk - putty private key (ppk can be changed to pem with some software)
 A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
-https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
+[https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html](https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html)
 
 # PEM
 Privacy-Enhanced Mail (PEM) is THE file format for exchanging keys, certificates.
@@ -190,16 +207,16 @@ P12/PKCS12 is the successor to PFX. Sometimes the terms PFX/P12/PKCS12 are used 
 
 ---
 base64 offline decoder:
-https://www.glezen.org/Base64Decoder.html
+[https://www.glezen.org/Base64Decoder.html](https://www.glezen.org/Base64Decoder.html)
 
 Nice description of certs vs key:
-https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl
+[https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl](https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl)
 
 Generate yourself a certificate:
-https://getacert.com/index.html
+[https://getacert.com/index.html](https://getacert.com/index.html)
 
 Important info on `rejectUnauthorized: false` and certificates in `axios`/`node`:
-https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate
+[https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate](https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate)
 
 convention - propose
     - specify format in secret name
@@ -226,11 +243,11 @@ winpty openssl pkcs12 -in cert.pfx -out cert.pem -nodes
 
 Sources:
 
-https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl
+[https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl](https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl)
 
-https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate
+[https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate](https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate)
 
-https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit
+[https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit](https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit)
 
 # Lazy websites
 
@@ -241,7 +258,7 @@ Some servers are misconfigured and do not send the intermediate certificates. Yo
 ## don't's (for node)
 Several answers on SO suggest:
 
-- `NODE_TLS_REJECT_UNAUTHORIZED=0` or 
+- `NODE_TLS_REJECT_UNAUTHORIZED=0` or
 - `const httpsAgent = new https.Agent({ rejectUnauthorized: false });`
 
 Both are terrible ideas - they make your app accept unauthorized connections. They are the equivalent of this conversation:
@@ -255,15 +272,15 @@ Read more [here](https://stackoverflow.com/a/53585725/2377787)
 ## does (for node)
 Use [NODE_EXTRA_CA_CERTS](https://nodejs.org/api/cli.html#node_extra_ca_certsfile). Alternatively use a library to programmatically give node the missing certificate [link](https://stackoverflow.com/a/39972054/2377787)
 
-Good read - https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs
+Good read - [https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs](https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs)
 
 # root CA stores
 ## Node
 
 It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:
 
-- https://github.com/nodejs/node/blob/main/src/node_root_certs.h
-- https://github.com/nodejs/node/issues/4175
+- [https://github.com/nodejs/node/blob/main/src/node_root_certs.h](https://github.com/nodejs/node/blob/main/src/node_root_certs.h)
+- [https://github.com/nodejs/node/issues/4175](https://github.com/nodejs/node/issues/4175)
 
 ## Windows
 You can view Windows certificates with PowerShell:
@@ -272,8 +289,8 @@ Get-ChildItem -Recurse Cert:
 ```
 
 ## Chrome
-https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md
+[https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md](https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md)
 
-If you would like to become chrome's trusted CA - https://www.chromium.org/Home/chromium-security/root-ca-policy/
+If you would like to become chrome's trusted CA - [https://www.chromium.org/Home/chromium-security/root-ca-policy/](https://www.chromium.org/Home/chromium-security/root-ca-policy/)
 
-https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html
+[https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html](https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html)
