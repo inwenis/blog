@@ -258,7 +258,7 @@ Some servers are misconfigured and do not send the intermediate certificates. Yo
 ## don't's (for node)
 Several answers on SO suggest:
 
-- `NODE_TLS_REJECT_UNAUTHORIZED=0` or 
+- `NODE_TLS_REJECT_UNAUTHORIZED=0` or
 - `const httpsAgent = new https.Agent({ rejectUnauthorized: false });`
 
 Both are terrible ideas - they make your app accept unauthorized connections. They are the equivalent of this conversation:
