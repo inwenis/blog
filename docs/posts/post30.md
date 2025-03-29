@@ -26,3 +26,4 @@ categories:
 ![x](./post30/IMG_1180.HEIC)
 ![x](./post30/IMG_1181.HEIC)
 ![x](./post30/IMG_1182.HEIC)
+![x](./post30/PICT0962.JPG)
