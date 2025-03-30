@@ -9,18 +9,22 @@ categories:
 
 Google products seem to slowly become worse, examples:
 
-- gmail doesn't recognize flight itinerary
-- google photos removed the map view
-- google photos - you can't simply remove all your pictures
-- google photos - you can't simply download all your pictures
-- google photos - using takeout to download pictures leaves you to deal with metadata in json
-- google search is loaded with ads
-- google search results seem worst than they used to be
-- android removed the possibility to record phone calls
-- youtube - ads everywhere
+- Gmail no longer recognizes flight itineraries.
+- Google Photos:
+    - Removed the map view.
+    - Doesn’t let you easily delete all photos.
+    - Doesn’t offer a simple way to download everything.
+    - Takeout exports require dealing with messy JSON metadata.
+- Google Search:
+    - Cluttered with ads.
+    - Results feel worse than they used to be.
+- Android removed native phone call recording.
+- YouTube is overloaded with ads.
 
-I just moved away from Google Photos. For geeks I recommend [https://immich.app/](https://immich.app/). They're amazing.
+I just moved away from Google Photos. For geeks I recommend . They're amazing.
 
-I used this [https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper](https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper) to fix google takeout.
+Just moved away from Google Photos. For geeks, [https://immich.app/](https://immich.app/) is a great alternative — they're amazing.
 
-I would consider paying immich if they offered a hosted version.
+To fix the chaos from Google Takeout, I used this [https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper](https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper).
+
+Would definitely consider paying for Immich if they offered a hosted version.
