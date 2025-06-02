@@ -122,7 +122,7 @@ SFTP != FTP over SSH
 
 FTPS (also known as FTP-SSL and FTP Secure) - extension of FTP with support for FTP over SSL.
 
-FTPS != FTP over SSH (FTP over SLL != FTP over SSH)
+FTPS != FTP over SSH (FTP over SSL != FTP over SSH)
 
 To connect to a SFTP server you need a private ssh key. The public ssh key (your private key's counterpart) is stored at the server.
 
