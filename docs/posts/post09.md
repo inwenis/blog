@@ -193,10 +193,10 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 Contents between header and footer (`-----BEGIN CERTIFICATE-----` + `-----END CERTIFICATE-----`) is base64 encoded. The content can be DER binary data.
 
 # DER
-Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like `validity date`, `issuer`, etc. For certificates to work you need to store this information and transfer it. DER encodes this information is a binary format. This is then after base64 encoded and then it goes into a PEM file.
+Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like `validity date`, `issuer`, etc. For certificates to work you need to store this information and transfer it. DER encodes this information in a binary format. This is then base64 encoded and goes into a PEM file.
 
 # X.509
-X.509 is the standard defining public key certificates for TLS/SSL (HTTPS)
+X.509 is the standard, defining public key certificates for TLS/SSL (HTTPS)
 
 
 # PFX/P12/PKCS12
@@ -253,7 +253,7 @@ Sources:
 
 Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).
 
-Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.
+Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with e.g. node your connection will be rejected.
 
 ## don't's (for node)
 Several answers on SO suggest:
