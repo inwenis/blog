@@ -21,8 +21,6 @@ Google products seem to slowly become worse, examples:
 - Android removed native phone call recording.
 - YouTube is overloaded with ads.
 
-I just moved away from Google Photos. For geeks I recommend . They're amazing.
-
 Just moved away from Google Photos. For geeks, [https://immich.app/](https://immich.app/) is a great alternative — they're amazing.
 
 To fix the chaos from Google Takeout, I used this [https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper](https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper).
