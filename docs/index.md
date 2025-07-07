@@ -20,3 +20,4 @@ You can reach me at `inwenis at gmail.com`
 I don't have a better place for this yet so here's a list of links I like:
 - [dict in F#](https://krzysztofskowronekblog.hashnode.dev/dictionaries-in-f)
 - [https://www.fssnip.net/fy/title/Typeinference-friendly-division-and-multiplication](https://www.fssnip.net/fy/title/Typeinference-friendly-division-and-multiplication)
+- https://blog.nilenso.com/blog/2025/05/29/ai-assisted-coding/
