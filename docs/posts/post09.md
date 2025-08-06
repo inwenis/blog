@@ -142,6 +142,7 @@ PuTTy is free+open source software than can do SSH.
 PuTTy has its own format of key files -> .ppk
 
 ppk - putty private key (ppk can be changed to pem with some software)
+
 A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
 [https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html](https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html)
 
