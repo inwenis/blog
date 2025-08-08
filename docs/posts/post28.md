@@ -7,7 +7,7 @@ categories:
 
 # escape!
 
-Why does escaping a character mean escaping a character?
+Why is escaping a character called escaping a character?
 
 When a C compiler (or any other compiler) encounters a `"` it thinks to it self "huh, this is the begninning or end of a string!".
 
