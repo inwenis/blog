@@ -1014,6 +1014,261 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2024-05-18 00:00:00+00:00">May 18, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/certificates/" class="md-meta__link">certificates</a>, 
+              <a href="../../category/keys/" class="md-meta__link">keys</a>, 
+              <a href="../../category/ssl/" class="md-meta__link">SSL</a>, 
+              <a href="../../category/https/" class="md-meta__link">HTTPS</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              6 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="notes-on-keys-certs-certificates-https-ssl-ssh-tls"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/">Notes on keys, certs, certificates, HTTPS, SSL, SSH, TLS</a></h2>
+<p>key != cert (a key is different from a certificate)</p>
+<p>Keys are used to encrypt connections, certs are used to verify that the key owner is who he says he is.</p>
+<h3 id="certificate-aka-cert"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#certificate-aka-cert">Certificate aka cert</a></h3>
+<p>A certificate proves that a public key belongs to a given entity.
+The cert includes:</p>
+<ul>
+<li>public key</li>
+<li>information about the key</li>
+<li>CA's signature validating the cert</li>
+</ul>
+<p>CA's signature basically says "I confirm that this public key belongs to this person/entity". The signature is made using CA's private key.</p>
+<p>This is wikipedia certificate which I've exported from my chrome browser. This is the certificate in PEM format.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>-----BEGIN CERTIFICATE-----
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>MIIISzCCB9GgAwIBAgIQB0GeOVg6THbPHqFDR/pfOjAKBggqhkjOPQQDAzBWMQsw
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>CQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMTAwLgYDVQQDEydEaWdp
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>Q2VydCBUTFMgSHlicmlkIEVDQyBTSEEzODQgMjAyMCBDQTEwHhcNMjMxMDE4MDAw
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>MDAwWhcNMjQxMDE2MjM1OTU5WjB5MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2Fs
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>aWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEjMCEGA1UEChMaV2lraW1l
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>ZGlhIEZvdW5kYXRpb24sIEluYy4xGDAWBgNVBAMMDyoud2lraXBlZGlhLm9yZzBZ
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>MBMGByqGSM49AgEGCCqGSM49AwEHA0IABDVh9CEa/2rEO/oGR8YZbr5wOPHcFrG8
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>OBQS1BQrHAsxgVn1Z/bnKtE8Hvqup+0GXdZvXYlMa8iw4A+Dz/XTitqjggZcMIIG
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>WDAfBgNVHSMEGDAWgBQKvAgpF4ylOW16Ds4zxy6z7fvDejAdBgNVHQ4EFgQUyqwM
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>Z6LjhkM/u0PnQdmhhzp43TMwggLtBgNVHREEggLkMIIC4IIPKi53aWtpcGVkaWEu
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>b3Jngg13aWtpbWVkaWEub3Jngg1tZWRpYXdpa2kub3Jngg13aWtpYm9va3Mub3Jn
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>ggx3aWtpZGF0YS5vcmeCDHdpa2luZXdzLm9yZ4INd2lraXF1b3RlLm9yZ4IOd2lr
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>aXNvdXJjZS5vcmeCD3dpa2l2ZXJzaXR5Lm9yZ4IOd2lraXZveWFnZS5vcmeCDndp
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>a3Rpb25hcnkub3Jnghd3aWtpbWVkaWFmb3VuZGF0aW9uLm9yZ4IGdy53aWtpghJ3
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>bWZ1c2VyY29udGVudC5vcmeCESoubS53aWtpcGVkaWEub3Jngg8qLndpa2ltZWRp
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>YS5vcmeCESoubS53aWtpbWVkaWEub3JnghYqLnBsYW5ldC53aWtpbWVkaWEub3Jn
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>gg8qLm1lZGlhd2lraS5vcmeCESoubS5tZWRpYXdpa2kub3Jngg8qLndpa2lib29r
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>cy5vcmeCESoubS53aWtpYm9va3Mub3Jngg4qLndpa2lkYXRhLm9yZ4IQKi5tLndp
+</span><span id="__span-25-20"><a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>a2lkYXRhLm9yZ4IOKi53aWtpbmV3cy5vcmeCECoubS53aWtpbmV3cy5vcmeCDyou
+</span><span id="__span-25-21"><a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>d2lraXF1b3RlLm9yZ4IRKi5tLndpa2lxdW90ZS5vcmeCECoud2lraXNvdXJjZS5v
+</span><span id="__span-25-22"><a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>cmeCEioubS53aWtpc291cmNlLm9yZ4IRKi53aWtpdmVyc2l0eS5vcmeCEyoubS53
+</span><span id="__span-25-23"><a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a>aWtpdmVyc2l0eS5vcmeCECoud2lraXZveWFnZS5vcmeCEioubS53aWtpdm95YWdl
+</span><span id="__span-25-24"><a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a>Lm9yZ4IQKi53aWt0aW9uYXJ5Lm9yZ4ISKi5tLndpa3Rpb25hcnkub3JnghkqLndp
+</span><span id="__span-25-25"><a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>a2ltZWRpYWZvdW5kYXRpb24ub3JnghQqLndtZnVzZXJjb250ZW50Lm9yZ4INd2lr
+</span><span id="__span-25-26"><a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>aXBlZGlhLm9yZ4IRd2lraWZ1bmN0aW9ucy5vcmeCEyoud2lraWZ1bmN0aW9ucy5v
+</span><span id="__span-25-27"><a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>cmcwPgYDVR0gBDcwNTAzBgZngQwBAgIwKTAnBggrBgEFBQcCARYbaHR0cDovL3d3
+</span><span id="__span-25-28"><a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>dy5kaWdpY2VydC5jb20vQ1BTMA4GA1UdDwEB/wQEAwIDiDAdBgNVHSUEFjAUBggr
+</span><span id="__span-25-29"><a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>BgEFBQcDAQYIKwYBBQUHAwIwgZsGA1UdHwSBkzCBkDBGoESgQoZAaHR0cDovL2Ny
+</span><span id="__span-25-30"><a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>bDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTSHlicmlkRUNDU0hBMzg0MjAyMENB
+</span><span id="__span-25-31"><a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>MS0xLmNybDBGoESgQoZAaHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
+</span><span id="__span-25-32"><a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>VExTSHlicmlkRUNDU0hBMzg0MjAyMENBMS0xLmNybDCBhQYIKwYBBQUHAQEEeTB3
+</span><span id="__span-25-33"><a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTwYIKwYBBQUH
+</span><span id="__span-25-34"><a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a>MAKGQ2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFRMU0h5YnJp
+</span><span id="__span-25-35"><a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>ZEVDQ1NIQTM4NDIwMjBDQTEtMS5jcnQwDAYDVR0TAQH/BAIwADCCAYAGCisGAQQB
+</span><span id="__span-25-36"><a id="__codelineno-25-36" name="__codelineno-25-36" href="#__codelineno-25-36"></a>1nkCBAIEggFwBIIBbAFqAHcA7s3QZNXbGs7FXLedtM0TojKHRny87N7DUUhZRnEf
+</span><span id="__span-25-37"><a id="__codelineno-25-37" name="__codelineno-25-37" href="#__codelineno-25-37"></a>tZsAAAGLQ1J6cgAABAMASDBGAiEA5reeeuLSzGPvJQ5hT3Bd8aOVxmIltXMTLhY6
+</span><span id="__span-25-38"><a id="__codelineno-25-38" name="__codelineno-25-38" href="#__codelineno-25-38"></a>19qDGWUCIQDO0LMbF3s42tyxgFIOt7rVOpsHe9Sy0wFQQj8BWO0LIQB2AEiw42va
+</span><span id="__span-25-39"><a id="__codelineno-25-39" name="__codelineno-25-39" href="#__codelineno-25-39"></a>pkc0D+VqAvqdMOscUgHLVt0sgdm7v6s52IRzAAABi0NSegEAAAQDAEcwRQIgYJdu
+</span><span id="__span-25-40"><a id="__codelineno-25-40" name="__codelineno-25-40" href="#__codelineno-25-40"></a>BrioIun6FTeQhDxqK2eyZehguOkxScS3nwsGSakCIQC1FyuCpm+QQBRJFSTAnStR
+</span><span id="__span-25-41"><a id="__codelineno-25-41" name="__codelineno-25-41" href="#__codelineno-25-41"></a>iP+hgGIhgzyZ837usahB0QB3ANq2v2s/tbYin5vCu1xr6HCRcWy7UYSFNL2kPTBI
+</span><span id="__span-25-42"><a id="__codelineno-25-42" name="__codelineno-25-42" href="#__codelineno-25-42"></a>1/urAAABi0NSeg8AAAQDAEgwRgIhAOm1GvY8M4V+tUyjV9/PCj8rcWHUOvfY0a/o
+</span><span id="__span-25-43"><a id="__codelineno-25-43" name="__codelineno-25-43" href="#__codelineno-25-43"></a>nsKg/bitAiEA1Vm1pP8CDp7hGcQzBBTscpCVebzWCe8DK231mtv97QUwCgYIKoZI
+</span><span id="__span-25-44"><a id="__codelineno-25-44" name="__codelineno-25-44" href="#__codelineno-25-44"></a>zj0EAwMDaAAwZQIwKuOOLjmwGgtjG6SASF4W2e8KtQZANRsYXMXJDGwBCi9fM7Qy
+</span><span id="__span-25-45"><a id="__codelineno-25-45" name="__codelineno-25-45" href="#__codelineno-25-45"></a>S9dvlFLwrcDg1gxlAjEA5XwJikbpk/qyQerzeUspuZKhqh1KPuj2uBdp8vicuBxu
+</span><span id="__span-25-46"><a id="__codelineno-25-46" name="__codelineno-25-46" href="#__codelineno-25-46"></a>TJUd1W+d3LmikOUgGzil
+</span><span id="__span-25-47"><a id="__codelineno-25-47" name="__codelineno-25-47" href="#__codelineno-25-47"></a>-----END CERTIFICATE-----
+</span></code></pre></div>
+<p>We can double click the cert file to view it (on Windows) or use many other different tools to view its content.</p>
+<p><a href="https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate">https://stackoverflow.com/questions/9758238/how-to-view-the-contents-of-a-pem-certificate</a></p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">&gt;</span> <span class="nv">$cert</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X509Certificate2</span><span class="p">(</span><span class="no">[string]</span><span class="s2">&quot;C:\Users\inwen\Downloads\_.wikipedia.org.crt&quot;</span><span class="p">)</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="p">&gt;</span> <span class="nv">$cert</span> <span class="p">|</span> <span class="nb">select </span><span class="p">*</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="n">EnhancedKeyUsageList</span> <span class="p">:</span> <span class="p">{</span><span class="n">Server</span> <span class="n">Authentication</span> <span class="p">(</span><span class="n">1</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">1</span><span class="p">),</span> <span class="n">Client</span> <span class="n">Authentication</span> <span class="p">(</span><span class="n">1</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">2</span><span class="p">)}</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="n">DnsNameList</span>          <span class="p">:</span> <span class="p">{*.</span><span class="n">wikipedia</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">wikimedia</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">mediawiki</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">wikibooks</span><span class="p">.</span><span class="n">org</span><span class="p">...}</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="n">SendAsTrustedIssuer</span>  <span class="p">:</span> <span class="n">False</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="n">Archived</span>             <span class="p">:</span> <span class="n">False</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="n">Extensions</span>           <span class="p">:</span> <span class="p">{</span><span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span><span class="p">...}</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="n">FriendlyName</span>         <span class="p">:</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="n">IssuerName</span>           <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X500DistinguishedName</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="n">NotAfter</span>             <span class="p">:</span> <span class="n">17</span><span class="p">/</span><span class="n">10</span><span class="p">/</span><span class="n">2024</span> <span class="n">01</span><span class="p">:</span><span class="n">59</span><span class="p">:</span><span class="n">59</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="n">NotBefore</span>            <span class="p">:</span> <span class="n">18</span><span class="p">/</span><span class="n">10</span><span class="p">/</span><span class="n">2023</span> <span class="n">02</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="n">HasPrivateKey</span>        <span class="p">:</span> <span class="n">False</span>
+</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="n">PrivateKey</span>           <span class="p">:</span>
+</span><span id="__span-26-15"><a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="n">PublicKey</span>            <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">PublicKey</span>
+</span><span id="__span-26-16"><a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="n">RawData</span>              <span class="p">:</span> <span class="p">{</span><span class="n">48</span><span class="p">,</span> <span class="n">130</span><span class="p">,</span> <span class="n">8</span><span class="p">,</span> <span class="n">75</span><span class="p">...}</span>
+</span><span id="__span-26-17"><a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="n">SerialNumber</span>         <span class="p">:</span> <span class="n">07419E39583A4C76CF1EA14347FA5F3A</span>
+</span><span id="__span-26-18"><a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="n">SubjectName</span>          <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X500DistinguishedName</span>
+</span><span id="__span-26-19"><a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="n">SignatureAlgorithm</span>   <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">Oid</span>
+</span><span id="__span-26-20"><a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a><span class="n">Thumbprint</span>           <span class="p">:</span> <span class="n">483F0C71F34AE0EA30D99BD60463DCDAA8F49DFB</span>
+</span><span id="__span-26-21"><a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a><span class="n">Version</span>              <span class="p">:</span> <span class="n">3</span>
+</span><span id="__span-26-22"><a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a><span class="n">Handle</span>               <span class="p">:</span> <span class="n">2140299849504</span>
+</span><span id="__span-26-23"><a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a><span class="n">Issuer</span>               <span class="p">:</span> <span class="n">CN</span><span class="p">=</span><span class="n">DigiCert</span> <span class="n">TLS</span> <span class="n">Hybrid</span> <span class="n">ECC</span> <span class="n">SHA384</span> <span class="n">2020</span> <span class="n">CA1</span><span class="p">,</span> <span class="n">O</span><span class="p">=</span><span class="n">DigiCert</span> <span class="n">Inc</span><span class="p">,</span> <span class="n">C</span><span class="p">=</span><span class="n">US</span>
+</span><span id="__span-26-24"><a id="__codelineno-26-24" name="__codelineno-26-24" href="#__codelineno-26-24"></a><span class="n">Subject</span>              <span class="p">:</span> <span class="n">CN</span><span class="p">=*.</span><span class="n">wikipedia</span><span class="p">.</span><span class="n">org</span><span class="p">,</span> <span class="n">O</span><span class="p">=</span><span class="s2">&quot;Wikimedia Foundation, Inc.&quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">=</span><span class="n">San</span> <span class="n">Francisco</span><span class="p">,</span> <span class="n">S</span><span class="p">=</span><span class="n">California</span><span class="p">,</span> <span class="n">C</span><span class="p">=</span><span class="n">US</span>
+</span></code></pre></div>
+<h3 id="ssl-tls-ssh-sftp-ftps-ftp-over-ssh"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#ssl-tls-ssh-sftp-ftps-ftp-over-ssh">SSL &amp; TLS &amp; SSH &amp; SFTP &amp; FTPS &amp; FTP over SSH</a></h3>
+<p>SSH (Secure Shell protocol) - protocol that allows to execute shell commands over a secure connection.</p>
+<p>FTP (File Transfer Protocol) - the plain old FTP protocol that has been around since 1970s. It usually runs over TCP port 21.</p>
+<p>SFTP (SSH File Transfer Protocol or Secure File Transfer Protocol) another, completely different file transfer protocol. Provides file transfer and manipulation capabilities. It can work over any reliable data stream, but is typically used with SSH.</p>
+<p>"FTP over SSH" uses the regular old FTP protocol, but an SSH tunnel is placed between client and server.</p>
+<p>SFTP != FTP over SSH</p>
+<p>FTPS (also known as FTP-SSL and FTP Secure) - extension of FTP with support for FTP over SSL.</p>
+<p>FTPS != FTP over SSH (FTP over SSL != FTP over SSH)</p>
+<p>To connect to a SFTP server you need a private ssh key. The public ssh key (your private key's counterpart) is stored at the server.</p>
+<p>To connect to a FTPS you need a X.509 certificate.</p>
+<p>TLS &amp; SSL - think of SSL as the older/first protocol for secure communication. SSL was outphased by TLS. TLS is THE protocol used by HTTPS for secure connections.</p>
+<p>Clients can be anonymous in TLS - usually the case on web - the server provides a cert to your browser but you don't need a cert of your own.
+TLS can be mutual - if the client has a cert the servers will/can validate it.</p>
+<p>read more on FTP/SFTP/FTPS/FTP over SSH
+- <a href="https://stackoverflow.com/questions/440463/differences-between-sftp-and-ftp-over-ssh">https://stackoverflow.com/questions/440463/differences-between-sftp-and-ftp-over-ssh</a>
+- <a href="https://www.rebex.net/kb/secure-ftp/">https://www.rebex.net/kb/secure-ftp/</a></p>
+<h3 id="putty"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#putty">PuTTy</a></h3>
+<p>PuTTy is free+open source software than can do SSH.
+PuTTy has its own format of key files -&gt; .ppk</p>
+<p>ppk - putty private key (ppk can be changed to pem with some software)</p>
+<p>A PPK file stores a private key, and the corresponding public key. Both are contained in the same file.
+<a href="https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html">https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html</a></p>
+<h2 id="pem"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#pem">PEM</a></h2>
+<p>Privacy-Enhanced Mail (PEM) is THE file format for exchanging keys, certificates.</p>
+<ul>
+<li><code>.cer</code> &amp; <code>.crt</code> - PEM file with a certificate</li>
+<li><code>.key</code> - PEM with with a private or public key</li>
+</ul>
+<p>The file extensions doesn't really matter. Just open the file and see the headers to be sure what it is.</p>
+<p>To view a pem certificate on Windows - rename it to <code>.crt</code> and double click.</p>
+<p>You can open a .pem file as plain text as see its content:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>// pem ignores stuff between the headers so you can put comments here
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>-----BEGIN RSA PRIVATE KEY-----
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>MbS2U6wTS24SZk5RunJIUkitRKeWWMS28SLGfkDs1bBYlSPa5smAd3/q1OePi4ae
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>dU6YgWuDxzBAKEKVSUu6pA2HOdyQ9N4F1dI+F8w9J990zE93EgyNqZFBBa2L70h4
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>M7DrB0gJBWMdUMoxGnun5glLiCMo2JrHZ9RkMiallS1sHMhELx2UAlP8I1+0Mav8
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>iMlHGyUW8EJy0paVf09MPpceEcVwDBeX0+G4UQlO551GTFtOSRjcD8U+GkCzka9W
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>/SFQrSGe3Gh3SDaOw/4JEMAjWPDLiCglwh0rLIO4VwU6AxzTCuCw3d1ZxQsU6VFQ
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>PqHA8haOUATZIrp3886PBThVqALBk9p1Nqn51bXLh13Zy9DZIVx4Z5Ioz/EGuzgR
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>d68VW5wybLjYE2r6Q9nHpitSZ4ZderwjIZRes67HdxYFw8unm4Wo6kuGnb5jSSag
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>vwBxKzAf3Omn+J6IthTJKuDd13rKZGMcRpQQ6VstwihYt1TahQ/qfJUWPjPcU5ML
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>9LkgVwA8Ndi1wp1/sEPe+UlL16L6vO9jUHcueWN7+zSUOE/cDSJyMd9x/ZL8QASA
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>ETd5dujVIqlINL2vJKr1o4T+i0RsnpfFiqFmBKlFqww/SKzJeChdyEtpa/dJMrt2
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>8S86b6zEmkser+SDYgGketS2DZ4hB+vh2ujSXmS8Gkwrn+BfHMzkbtio8lWbGw0l
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>eM1tfdFZ6wMTLkxRhBkBK4JiMiUMvpERyPib6a2L6iXTfH+3RUDS6A==
+</span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>-----END RSA PRIVATE KEY-----
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>-----BEGIN CERTIFICATE-----
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>MIICMzCCAZygAwIBAgIJALiPnVsvq8dsMA0GCSqGSIb3DQEBBQUAMFMxCzAJBgNV
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>BAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNVBAcTA2ZvbzEMMAoGA1UEChMDZm9v
+</span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>MQwwCgYDVQQLEwNmb28xDDAKBgNVBAMTA2ZvbzAeFw0xMzAzMTkxNTQwMTlaFw0x
+</span><span id="__span-27-22"><a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>ODAzMTgxNTQwMTlaMFMxCzAJBgNVBAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNV
+</span><span id="__span-27-23"><a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>BAcTA2ZvbzEMMAoGA1UEChMDZm9vMQwwCgYDVQQLEwNmb28xDDAKBgNVBAMTA2Zv
+</span><span id="__span-27-24"><a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a>bzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzdGfxi9CNbMf1UUcvDQh7MYB
+</span><span id="__span-27-25"><a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a>OveIHyc0E0KIbhjK5FkCBU4CiZrbfHagaW7ZEcN0tt3EvpbOMxxc/ZQU2WN/s/wP
+</span><span id="__span-27-26"><a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a>xph0pSfsfFsTKM4RhTWD2v4fgk+xZiKd1p0+L4hTtpwnEw0uXRVd0ki6muwV5y/P
+</span><span id="__span-27-27"><a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a>+5FHUeldq+pgTcgzuK8CAwEAAaMPMA0wCwYDVR0PBAQDAgLkMA0GCSqGSIb3DQEB
+</span><span id="__span-27-28"><a id="__codelineno-27-28" name="__codelineno-27-28" href="#__codelineno-27-28"></a>BQUAA4GBAJiDAAtY0mQQeuxWdzLRzXmjvdSuL9GoyT3BF/jSnpxz5/58dba8pWen
+</span><span id="__span-27-29"><a id="__codelineno-27-29" name="__codelineno-27-29" href="#__codelineno-27-29"></a>v3pj4P3w5DoOso0rzkZy2jEsEitlVM2mLSbQpMM+MUVQCQoiG6W9xuCFuxSrwPIS
+</span><span id="__span-27-30"><a id="__codelineno-27-30" name="__codelineno-27-30" href="#__codelineno-27-30"></a>pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
+</span><span id="__span-27-31"><a id="__codelineno-27-31" name="__codelineno-27-31" href="#__codelineno-27-31"></a>-----END CERTIFICATE-----
+</span></code></pre></div></p>
+<p>Contents between header and footer (<code>-----BEGIN CERTIFICATE-----</code> + <code>-----END CERTIFICATE-----</code>) is base64 encoded. The content can be DER binary data.</p>
+<h2 id="der"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#der">DER</a></h2>
+<p>Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like <code>validity date</code>, <code>issuer</code>, etc. For certificates to work you need to store this information and transfer it. DER encodes this information is a binary format. This is then after base64 encoded and then it goes into a PEM file.</p>
+<h2 id="x509"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#x509">X.509</a></h2>
+<p>X.509 is the standard defining public key certificates for TLS/SSL (HTTPS)</p>
+<h2 id="pfxp12pkcs12"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#pfxp12pkcs12">PFX/P12/PKCS12</a></h2>
+<p>PFX seems to be Microsoft's complicated file format for storing cryptographic data.</p>
+<p>P12/PKCS12 is the successor to PFX. Sometimes the terms PFX/P12/PKCS12 are used interchangeably.</p>
+<hr />
+<p>base64 offline decoder:
+<a href="https://www.glezen.org/Base64Decoder.html">https://www.glezen.org/Base64Decoder.html</a></p>
+<p>Nice description of certs vs key:
+<a href="https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl">https://superuser.com/questions/620121/what-is-the-difference-between-a-certificate-and-a-key-with-respect-to-ssl</a></p>
+<p>Generate yourself a certificate:
+<a href="https://getacert.com/index.html">https://getacert.com/index.html</a></p>
+<p>Important info on <code>rejectUnauthorized: false</code> and certificates in <code>axios</code>/<code>node</code>:
+<a href="https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate">https://stackoverflow.com/questions/51363855/how-to-configure-axios-to-use-ssl-certificate</a></p>
+<p>convention - propose
+    - specify format in secret name
+    - use plain - not base64 encoded</p>
+<h2 id="converting"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#converting">Converting</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a># PFX/pkcs12 to PEM
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>openssl pkcs12 -in cert.pfx -out cert.pem -nodes
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a># PFX/pkcs12 to PEM no password
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>openssl pkcs12 -in cert.p12 -out cert_without_pwd.pem -nodes -password pass:1234
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a># PEM to PFX/pkcs12 (both have passwords)
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>openssl pkcs12 -export -out cert.pfx -in cert.pem -inkey cert.pem -passin pass:1234 -passout pass:1234
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a># PEM to PFX/pkcs12 (when key and cert are in separate .pem files)
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>openssl pkcs12 -export -out bob_pfx.pfx -inkey bob_key.pem -in bob_cert.cert
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
+</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a># if openssl hangs try running it using winpty
+</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>winpty openssl pkcs12 -in cert.pfx -out cert.pem -nodes
+</span></code></pre></div>
+<p>Sources:</p>
+<p><a href="https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl">https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl</a></p>
+<p><a href="https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate">https://stackoverflow.com/questions/808669/convert-a-cert-pem-certificate-to-a-pfx-certificate</a></p>
+<p><a href="https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit">https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit</a></p>
+<h2 id="lazy-websites"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#lazy-websites">Lazy websites</a></h2>
+<p>Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).</p>
+<p>Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.</p>
+<h3 id="donts-for-node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#donts-for-node">don't's (for node)</a></h3>
+<p>Several answers on SO suggest:</p>
+<ul>
+<li><code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> or</li>
+<li><code>const httpsAgent = new https.Agent({ rejectUnauthorized: false });</code></li>
+</ul>
+<p>Both are terrible ideas - they make your app accept unauthorized connections. They are the equivalent of this conversation:</p>
+<p>"I can't verify this certificate, we can not be sure who we are connecting to" - says Node with care in its voice</p>
+<p>"Doesn't matter, YOLO, carry on" - you reply shrugging your shoulders</p>
+<p>Read more <a href="https://stackoverflow.com/a/53585725/2377787">here</a></p>
+<h3 id="does-for-node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#does-for-node">does (for node)</a></h3>
+<p>Use <a href="https://nodejs.org/api/cli.html#node_extra_ca_certsfile">NODE_EXTRA_CA_CERTS</a>. Alternatively use a library to programmatically give node the missing certificate <a href="https://stackoverflow.com/a/39972054/2377787">link</a></p>
+<p>Good read - <a href="https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs">https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs</a></p>
+<h2 id="root-ca-stores"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#root-ca-stores">root CA stores</a></h2>
+<h3 id="node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#node">Node</a></h3>
+<p>It seems everyone has their own root CA store these days. Nodes has a hardcoded list of root CA see:</p>
+<ul>
+<li><a href="https://github.com/nodejs/node/blob/main/src/node_root_certs.h">https://github.com/nodejs/node/blob/main/src/node_root_certs.h</a></li>
+<li><a href="https://github.com/nodejs/node/issues/4175">https://github.com/nodejs/node/issues/4175</a></li>
+</ul>
+<h3 id="windows"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#windows">Windows</a></h3>
+<p>You can view Windows certificates with PowerShell:
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nb">Get-ChildItem</span> <span class="n">-Recurse</span> <span class="n">Cert</span><span class="p">:</span>
+</span></code></pre></div></p>
+<h3 id="chrome"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#chrome">Chrome</a></h3>
+<p><a href="https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md">https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/root_store.md</a></p>
+<p>If you would like to become chrome's trusted CA - <a href="https://www.chromium.org/Home/chromium-security/root-ca-policy/">https://www.chromium.org/Home/chromium-security/root-ca-policy/</a></p>
+<p><a href="https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html">https://blog.chromium.org/2022/09/announcing-launch-of-chrome-root-program.html</a></p>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2024-05-09 00:00:00+00:00">May 9, 2024</time></li>
         
           <li class="md-meta__item">
