@@ -7,7 +7,7 @@ categories:
 
 # git goodies
 
-```
+```bash
 git branch -d `git branch | grep feature`                             # delete all branches with feature in its name
 git branch | grep feature | xargs git branch -d                       # same as ^
 git push origin --delete branchXYZ                                    # git push origin :branchXYZ
@@ -18,4 +18,48 @@ git checkout --ours foo/bar.java                                      # useful f
 git log -p -- src/data_capture_tools                                  # changes only made to a specific directory
 git log --all --full-history -- "**/thefile.*"                        # https://stackoverflow.com/questions/7203515/how-to-find-a-deleted-file-in-the-project-commit-history
 git log --left-right --graph --cherry-pick --oneline feature...branch # https://til.hashrocket.com/posts/18139f4f20-list-different-commits-between-two-branches
+git diff main...                                                      # the PR diff - changes since I branched out from main
+```
+
+# .. and ... notation
+
+```
+main: 🔴──🟠──🟢
+            \
+             🔵 B <- HEAD
+```
+
+```bash
+git log main B
+# 🟢 commit-main-3   (main)
+# 🔵 commit-b-1      (HEAD -> B)
+# 🟠 commit-main-2
+# 🔴 initial commit1
+```
+
+```bash
+git diff main..B
+    diff main  B
+    diff main    # (when you're on B)
+# +🔵 commit-b-1
+# -🟢 commit-main-3
+
+git diff main...B
+    diff main...
+    diff $(git merge-base main B) B
+# +🔵 commit-b-1
+```
+
+```bash
+git log main..B
+git log main..
+git log ^main B
+# 🔵 commit-b-1 (HEAD -> B)
+# think of it as a set difference B\main
+
+git log main...B
+git log main...
+# 🟢 commit-main-3 (main)
+# 🔵 commit-b-1 (HEAD -> B)
+# think of it as as symetric set differene mainΔB
 ```
