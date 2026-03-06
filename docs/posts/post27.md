@@ -55,11 +55,11 @@ git log main..B
 git log main..
 git log ^main B
 # 🔵 commit-b-1 (HEAD -> B)
-# think of it as a set difference B\main
+# think of it as set difference: B \ main
 
 git log main...B
 git log main...
 # 🟢 commit-main-3 (main)
 # 🔵 commit-b-1 (HEAD -> B)
-# think of it as as symetric set differene mainΔB
+# think of it as the symmetric set difference: main Δ B
 ```
