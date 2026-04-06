@@ -1037,141 +1037,6 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
-          <time datetime="2025-02-08 00:00:00+00:00">February 8, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="../../category/powershell/" class="md-meta__link">PowerShell</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="powershell-gotcha-dynamic-scoping"><a class="toclink" href="../../2025/02/08/powershell-gotcha---dynamic-scoping/">PowerShell Gotcha! - dynamic scoping</a></h2>
-<p>PowerShell uses dynamic scoping. Yet the <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7.5">about_Scopes</a> page doesn't mention the word "dynamic".</p>
-<p>Wird (wird - so weird that you need to misspell weird to get your point across).</p>
-<h3 id="tldr"><a class="toclink" href="../../2025/02/08/powershell-gotcha---dynamic-scoping/#tldr">tl;dr;</a></h3>
-<p>In PowerShell variables are copied into the stack frame created for the function you're calling. So the "child" function can use your variables but can only modify its own copies.
-You can avoid this by setting your variable to private <code>$private:varName=...</code> and using <code>Set-StrictMode -version latest</code> to throw an error if "child" functions try to access a undefined variable.</p>
-<p>PowerShell uses dynamic scoping. What we know from most programming languages is lexical scoping.</p>
-<hr />
-<p><div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="nv">$t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
-</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    <span class="k">Do</span><span class="n">-InnerFunction</span>
-</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="p">}</span>
-</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
-</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>hello
-</span></code></pre></div></p>
-<p>Weird! (this is dynamic scoping)</p>
-<hr />
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nb">Set-StrictMode</span> <span class="n">-Version</span> <span class="n">Latest</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    <span class="nv">$t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>    <span class="k">Do</span><span class="n">-InnerFunction</span>
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="p">}</span>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="nb">Set-StrictMode</span> <span class="n">-Off</span> <span class="c"># remember to turn strict mode off for further testing</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>hello
-</span></code></pre></div>
-<p>Weird! (but makes sense since in PowerShell's world this is perfectly legal hence "strict" changes nothing here)</p>
-<hr />
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
-</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    <span class="nv">$private:t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
-</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="k">Do</span><span class="n">-InnerFunction</span>
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="p">}</span>
-</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
-</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>
-</span></code></pre></div>
-<p>Output is empty. No errors but at least <code>$t</code> behaves more like a variable we know from C#/F#.</p>
-<hr />
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nb">Set-StrictMode</span> <span class="n">-Version</span> <span class="n">Latest</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span>  <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$t</span> <span class="p">}</span>
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>    <span class="nv">$private:t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>    <span class="k">Do</span><span class="n">-InnerFunction</span>
-</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="p">}</span>
-</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
-</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>InvalidOperation: C:\Users\...\Temp\44f5ff41-4105-482b-a134-b505049d2c61\test3.ps1:2
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>Line |
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>   2 |      Write-Host $t
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>     |                 ~~
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>     | The variable &#39;$t&#39; cannot be retrieved because it has not been set.
-</span></code></pre></div>
-<p>Finally!</p>
-<hr />
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span> <span class="p">{</span>
-</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>    <span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>    <span class="nv">$t</span> <span class="p">=</span> <span class="s2">&quot;world&quot;</span>
-</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>    <span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="p">}</span>
-</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
-</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
-</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>    <span class="nv">$t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
-</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>    <span class="k">Do</span><span class="n">-InnerFunction</span>
-</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>    <span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a><span class="p">}</span>
-</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>
-</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>hello
-</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>world
-</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>hello
-</span></code></pre></div>
-<p>Ah! So variables are copied to the next "scope".</p>
-<hr />
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-InnerFunction</span> <span class="p">{</span>
-</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>    <span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>    <span class="nv">$global:t</span> <span class="p">=</span> <span class="s2">&quot;world&quot;</span>
-</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>    <span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="p">}</span>
-</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>
-</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="k">function</span> <span class="k">Do</span><span class="n">-OutterFunction</span> <span class="p">{</span>
-</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>    <span class="nv">$t</span> <span class="p">=</span> <span class="s2">&quot;hello&quot;</span>
-</span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>    <span class="k">Do</span><span class="n">-InnerFunction</span>
-</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>    <span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span><span id="__span-34-11"><a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="p">}</span>
-</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a>
-</span><span id="__span-34-13"><a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="k">Do</span><span class="n">-OutterFunction</span>
-</span><span id="__span-34-14"><a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a><span class="nb">Write-Host</span> <span class="nv">$t</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>hello
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>hello
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>hello
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>world
-</span></code></pre></div>
-<p>Now we have created a <code>global</code> <code>$t</code> variable.</p>
-<p>This <a href="https://ig2600.blogspot.com/2010/01/powershell-is-dynamically-scoped-and.html">https://ig2600.blogspot.com/2010/01/powershell-is-dynamically-scoped-and.html</a> explains it nicely.</p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
           <time datetime="2025-01-28 00:00:00+00:00">January 28, 2025</time></li>
         
           <li class="md-meta__item">
@@ -1193,26 +1058,26 @@ You can avoid this by setting your variable to private <code>$private:varName=..
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="post22"><a class="toclink" href="../../2025/01/28/post22/">Post22</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>W chatce w lesie siedzi Pan
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Nie odzywa się do nikogo bo jest sam
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Myśli ciężkie, głowa pogrążona w chorobie
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Zaraz zawiśnie na grobie
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Wspomnienia zaplątane same w sobie
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Siedzi, mruga, własną głowę zruga
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Pora zaraz będzie na spanie
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>A on wciąż, o matko Boska, gdzie jego posłanie?
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Poradzić nic nie może, bo siedzi wciąż na dworze
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Robaczki, wykałaczki go wkurwiają
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Chciałby uciec jak ten zając
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>co poradzić temu Panu?
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Myślę że to cud że doszedł aż tu
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Drogi miał w brud
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>Co zrobić? Ktr pomoże
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>Matko boska on wciąż siedzi na dworze
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>Siedzi, mruga
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>Fajkę pyka
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>Tytoń słaby
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>Jest już cały osiwiały
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>W chatce w lesie siedzi Pan
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Nie odzywa się do nikogo bo jest sam
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Myśli ciężkie, głowa pogrążona w chorobie
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Zaraz zawiśnie na grobie
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Wspomnienia zaplątane same w sobie
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Siedzi, mruga, własną głowę zruga
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Pora zaraz będzie na spanie
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>A on wciąż, o matko Boska, gdzie jego posłanie?
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>Poradzić nic nie może, bo siedzi wciąż na dworze
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Robaczki, wykałaczki go wkurwiają
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Chciałby uciec jak ten zając
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>co poradzić temu Panu?
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>Myślę że to cud że doszedł aż tu
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>Drogi miał w brud
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>Co zrobić? Ktr pomoże
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>Matko boska on wciąż siedzi na dworze
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Siedzi, mruga
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>Fajkę pyka
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>Tytoń słaby
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>Jest już cały osiwiały
 </span></code></pre></div>
     
   </div>
@@ -2576,6 +2441,45 @@ See below:
 </span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="n">False</span>
 </span></code></pre></div>
 Above <code>$a;</code> is understood as <code>$a</code> is a collection, collections should be enumerated and each item is passed to the pipeline. <code>@($a;)</code> sees 3 elements but not the original array and creates an array from the 3 elements. In PS <code>@($collection)</code> creates a copy of <code>$collection</code>. <code>@(,$collection)</code> - creates an array with a single element <code>$collection</code>.</p>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2024-06-17 00:00:00+00:00">June 17, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/general-coding/" class="md-meta__link">General coding</a>, 
+              <a href="../../category/team-lead/" class="md-meta__link">Team lead</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="it-will-be-great-set-it-up-dont-use-it-remove-it"><a class="toclink" href="../../2024/06/17/it-will-be-great-set-it-up-dont-use-it-remove-it/">It will be great, set it up, don't use it, remove it</a></h2>
+<p>Today, I removed something I allowed to be created despite initially feeling it was redundant.</p>
+<p>A year ago, a student found a tool to auto-generate documentation for our internal SDK from code annotations. They proposed embedding this documentation in our Continuous Integration pipeline. Although the idea sounded good on paper, I felt it wouldn’t be used by our team. However, the team was enthusiastic.</p>
+<p>Everyone in our team has the SDK's git repo on their machine, and we rely on IntelliSense and the code for documentation. It seemed unlikely that we would change our habits since the new documentation wouldn’t be easier to use than just using F12 to view the source code.</p>
+<p>Despite my doubts, I allowed this feature as the team lead. I had already rejected a few initiatives from that student and didn’t want to kill their motivation. I wanted to let them work on something they found interesting. There was a slight chance I was wrong and the documentation might be used.</p>
+<p>Today, a year later, I noticed the docs website no longer works. It had been down for some time, and no one noticed because no one used it. I removed any trace of the published documentation.</p>
+<p>This made me reflect: was it wrong to allow something to be created that never paid off?</p>
+<p>In this case, the investment was small. The gain was that the student got to work on something interesting. So, I think it was right to let our team try it out and remove it once we were certain it wasn’t used</p>
     
   </div>
 </article>
