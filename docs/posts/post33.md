@@ -22,15 +22,17 @@ let color =
     | Ok      -> "green"
     | Warning -> "yellow"
     | Error   -> "red"
+```
 
 This is one value-producing construct. No mutable variable. No repeated assignment. No control-flow noise. Just input shape to output value.
 
 That is what people mean by "one expression": the whole block evaluates to a value.
 
-## if / elseif / else in PowerShell is usually a statement, not an expression
+## `if / elseif / else` in PowerShell is usually a statement, not an expression
 
 In PowerShell, the same logic often looks like this:
 
+```powershell
 if ($status -eq "Ok") {
     $color = "green"
 }
@@ -40,6 +42,7 @@ elseif ($status -eq "Warning") {
 else {
     $color = "red"
 }
+```
 
 This works. But it is not the same thing.
 
@@ -47,18 +50,19 @@ This is not "a case-to-value mapping". It is imperative control flow plus assign
 
 ## The real break point is side effects
 
-match is strongest when every branch returns a value. It gets weaker when branches mostly do things.
+`match` is strongest when every branch returns a value. It gets weaker when branches mostly do things.
 
 PowerShell code often does things:
 
-- Push-Location
-- Write-Output
-- Remove-Item
-- Start-Process
-- git fetch
+- `Push-Location`
+- `Write-Output`
+- `Remove-Item`
+- `Start-Process`
+- `git fetch`
 
 That changes what "readable" means.
 
+```powershell
 if ($exe.Length -eq 0) {
     Write-Output "No .exe files found..."
 }
@@ -71,14 +75,15 @@ else {
         Push-Location $selected.DirectoryName
     }
 }
+```
 
 This is not elegant in the F# sense. But it is direct. Each branch says exactly what effect happens.
 
 That matters. When code is effect-heavy, the most readable form is often the one that exposes the effect immediately.
 
-## “Obvious with side effects” means case -> action
+## “Obvious with side effects” means `case -> action`
 
-In a shell script, branches often exist to perform different actions. In that setting, if / elseif / else has a real advantage: it is blunt and honest.
+In a shell script, branches often exist to perform different actions. In that setting, `if / elseif / else` has a real advantage: it is blunt and honest.
 
 The reader sees:
 
@@ -88,17 +93,19 @@ The reader sees:
 
 There is no fake value flow around inherently imperative behavior.
 
-That is why people can reasonably prefer if / elseif / else in PowerShell even if they love match elsewhere.
+That is why people can reasonably prefer `if / elseif / else` in PowerShell even if they love `match` elsewhere.
 
-## The trap: simulating match with helper functions
+## The trap: simulating `match` with helper functions
 
 If you try to make PowerShell feel more like F#, the first move is usually to extract tiny branch helpers.
 
+```powershell
 function Write-NoExeFound { Write-Output "No .exe files found..." }
 function Push-ExeDirectory($exe) { Push-Location $exe.DirectoryName }
 
 if     ($exe.Length -eq 0) { Write-NoExeFound }
 elseif ($exe.Length -eq 1) { Push-ExeDirectory $exe[0] }
+```
 
 This is not automatically bad. But it is easy to add ceremony faster than clarity.
 
@@ -118,6 +125,7 @@ PowerShell functions write to the pipeline by default. That means a helper that 
 
 This is a real failure mode:
 
+```powershell
 function Write-NoExeFound { Write-Output "No .exe files found..." }
 
 $goto =
@@ -127,12 +135,13 @@ $goto =
 if ($null -ne $goto) {
     Push-Location $goto
 }
+```
 
 Looks harmless. It is not.
 
-In the zero-results case, the message becomes $goto. Then Push-Location tries to enter a directory literally named:
+In the zero-results case, the message becomes `$goto`. Then `Push-Location` tries to enter a directory literally named:
 
-No .exe files found...
+`No .exe files found...`
 
 That bug is a good example of the cost of abstraction in PowerShell. The language will happily treat output as data unless you are extremely explicit.
 
@@ -142,18 +151,19 @@ Sometimes. Not always.
 
 A small refactor from shared mutable state to branch-owned behavior can be a real improvement. Moving logic closer to the branch that owns it is usually good.
 
-But do not overstate it. In a short PowerShell function, plain if / elseif / else is often already the right answer.
+But do not overstate it. In a short PowerShell function, plain `if / elseif / else` is often already the right answer.
 
 Here is the honest ranking:
 
-- if / elseif / else: usually the most idiomatic choice for effect-heavy PowerShell
-- switch: the best native “match-like” compromise
-- tiny helper-function mini-language: sometimes readable, often more ceremony than value
+- `if / elseif / else`: usually the most idiomatic choice for effect-heavy PowerShell
+- `switch`: the best native “match-like” compromise
+- `tiny helper-function mini-language`: sometimes readable, often more ceremony than value
 
-## If you want match-like structure in PowerShell, use switch
+## If you want `match`-like structure in PowerShell, use `switch`
 
-switch gets you closer to case-based branching without pretending PowerShell is F#.
+`switch` gets you closer to case-based branching without pretending PowerShell is F#.
 
+```powershell
 switch ($exe.Length) {
     0 {
         Write-Output "No .exe files found in the current directory or its subdirectories."
@@ -173,6 +183,7 @@ switch ($exe.Length) {
         }
     }
 }
+```
 
 This keeps the case-based shape while staying idiomatic for the language you are actually in.
 
@@ -184,9 +195,9 @@ The rule is still simple: use the shortest name that is unambiguous in local con
 
 Good:
 
-- $toRemove
-- $localToRemove
-- $remoteToRemove
+- `$toRemove`
+- `$localToRemove`
+- `$remoteToRemove`
 
 Bad:
 
@@ -196,13 +207,13 @@ Tooling makes longer names cheaper than they used to be. It does not make overde
 
 ## Bottom line
 
-match feels better because it is a case-to-value expression. That is a real strength, not aesthetic hype.
+`match` feels better because it is a case-to-value expression. That is a real strength, not aesthetic hype.
 
 But PowerShell is not built around that model. It is built around commands, pipelines, and side effects.
 
 So the practical rule is:
 
-- when branches return values, match is hard to beat
+- when branches return values, `match` is hard to beat
 - when branches perform effects, plain branching is often the clearest form
 - use helpers when they isolate meaningful logic
 - do not invent a fake F# on top of PowerShell just because the syntax looks cleaner
