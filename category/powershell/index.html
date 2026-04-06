@@ -1043,6 +1043,164 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2026-04-06 00:00:00+00:00">April 6, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">PowerShell</a>, 
+              <a href="../f-sharp/" class="md-meta__link">F Sharp</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="match-feels-better-than-if-until-powershell"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/"><code>match</code> feels better than <code>if</code> until PowerShell</a></h2>
+<h3 id="tldr"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#tldr">tl;dr</a></h3>
+<p><code>match</code> in F# is usually <code>case -&gt; value</code>.</p>
+<p>In PowerShell it is often <code>case -&gt; effect</code>.</p>
+<p>That is why plain <code>if / elseif / else</code> or <code>switch</code> often reads better in PowerShell than trying to force a fake <code>match</code> style.</p>
+<h3 id="in-f-match-is-a-value"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#in-f-match-is-a-value">In F# <code>match</code> is a value</a></h3>
+<div class="language-fsharp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">let</span><span class="w"> </span><span class="nv">color</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="k">with</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Ok</span><span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;green&quot;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Warning</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;yellow&quot;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Error</span><span class="w">   </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;red&quot;</span>
+</span></code></pre></div>
+<p>This whole thing evaluates to one value.</p>
+<p>No mutable variable.
+No repeated assignment.</p>
+<p>That is why <code>match</code> feels so clean.</p>
+<h3 id="in-powershell-the-same-thing-often-becomes-control-flow"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#in-powershell-the-same-thing-often-becomes-control-flow">In PowerShell the same thing often becomes control flow</a></h3>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$status</span> <span class="o">-eq</span> <span class="s2">&quot;Ok&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="nv">$color</span> <span class="p">=</span> <span class="s2">&quot;green&quot;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">}</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">elseif</span> <span class="p">(</span><span class="nv">$status</span> <span class="o">-eq</span> <span class="s2">&quot;Warning&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="nv">$color</span> <span class="p">=</span> <span class="s2">&quot;yellow&quot;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">}</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="nv">$color</span> <span class="p">=</span> <span class="s2">&quot;red&quot;</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>This works fine.</p>
+<p>But it is not really <code>case -&gt; value</code>.
+It is branching plus assignment.</p>
+<h3 id="the-real-issue-is-side-effects"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#the-real-issue-is-side-effects">The real issue is side effects</a></h3>
+<p>PowerShell code often wants to:</p>
+<ul>
+<li><code>Write-Output</code></li>
+<li><code>Push-Location</code></li>
+<li><code>Remove-Item</code></li>
+<li><code>Start-Process</code></li>
+<li>run <code>git fetch</code></li>
+</ul>
+<p>At that point the question is no longer "what value do I return?".</p>
+<p>It is "what do I do in this case?".</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found...&quot;</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">}</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">elseif</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="nb">Push-Location</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">DirectoryName</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">}</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>    <span class="nv">$selected</span> <span class="p">=</span> <span class="p">...</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$selected</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>        <span class="nb">Push-Location</span> <span class="nv">$selected</span><span class="p">.</span><span class="n">DirectoryName</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="p">}</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>This is not elegant in the F# sense.</p>
+<p>But it is honest.
+Each branch shows the effect directly.</p>
+<h3 id="the-trap"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#the-trap">The trap</a></h3>
+<p>When trying to make PowerShell feel more like F#, it is easy to add helpers like this:</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">function</span> <span class="nb">Write-NoExeFound</span> <span class="p">{</span> <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found...&quot;</span> <span class="p">}</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">function</span> <span class="nb">Push-ExeDirectory</span><span class="p">(</span><span class="nv">$exe</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Push-Location</span> <span class="nv">$exe</span><span class="p">.</span><span class="n">DirectoryName</span> <span class="p">}</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="k">if</span>     <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Write-NoExeFound</span> <span class="p">}</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">elseif</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Push-ExeDirectory</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="p">}</span>
+</span></code></pre></div>
+<p>Sometimes this is fine.</p>
+<p>Sometimes it is just:</p>
+<ul>
+<li>more names</li>
+<li>more jumping around</li>
+<li>more ceremony</li>
+</ul>
+<p>PowerShell also makes this riskier than it first looks because functions write to the pipeline by default.</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">function</span> <span class="nb">Write-NoExeFound</span> <span class="p">{</span> <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found...&quot;</span> <span class="p">}</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nv">$goto</span> <span class="p">=</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Write-NoExeFound</span> <span class="p">}</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">DirectoryName</span> <span class="p">}</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$null</span> <span class="o">-ne</span> <span class="nv">$goto</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="nb">Push-Location</span> <span class="nv">$goto</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>In the zero-results case <code>$goto</code> becomes <code>No .exe files found...</code>.</p>
+<p>Then <code>Push-Location</code> tries to go there.</p>
+<h3 id="switch-is-the-native-compromise"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#switch-is-the-native-compromise"><code>switch</code> is the native compromise</a></h3>
+<p>If you want something more match-like in PowerShell, <code>switch</code> is usually the right tool.</p>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">switch</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="n">0</span> <span class="p">{</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>        <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found in the current directory or its subdirectories.&quot;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="p">}</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="n">1</span> <span class="p">{</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>        <span class="nb">Push-Location</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">DirectoryName</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="p">}</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="k">default</span> <span class="p">{</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>        <span class="nv">$selected</span> <span class="p">=</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>            <span class="nv">$exe</span> <span class="p">|</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>            <span class="nb">Select-Object</span> <span class="n">Mode</span><span class="p">,</span> <span class="n">LastWriteTime</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">DirectoryName</span><span class="p">,</span> <span class="n">Name</span> <span class="p">|</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>            <span class="nb">Sort-Object</span> <span class="n">LastWriteTime</span> <span class="n">-Descending</span> <span class="p">|</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>            <span class="nb">Out-ConsoleGridView</span> <span class="n">-Title</span> <span class="s2">&quot;Where are we going?&quot;</span> <span class="n">-OutputMode</span> <span class="n">Single</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$selected</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>            <span class="nb">Push-Location</span> <span class="nv">$selected</span><span class="p">.</span><span class="n">DirectoryName</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>        <span class="p">}</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>    <span class="p">}</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>It keeps the case-based shape without pretending PowerShell is F#.</p>
+<h3 id="small-naming-side-note"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#small-naming-side-note">small naming side note</a></h3>
+<p>AI does not change naming rules.</p>
+<p>Use the shortest name that is unambiguous in local context.</p>
+<p>Good:</p>
+<ul>
+<li><code>$toRemove</code></li>
+<li><code>$localToRemove</code></li>
+<li><code>$remoteToRemove</code></li>
+</ul>
+<p>Bad:</p>
+<ul>
+<li>names that restate obvious context without adding clarity</li>
+</ul>
+<h3 id="bottom-line"><a class="toclink" href="../../2026/04/06/match-feels-better-than-if-until-powershell/#bottom-line">bottom line</a></h3>
+<ul>
+<li>when code is <code>case -&gt; value</code>, <code>match</code> is hard to beat</li>
+<li>when code is <code>case -&gt; effect</code>, plain branching is often clearer</li>
+<li>in PowerShell, <code>switch</code> is usually a better match-like tool than helper-function gymnastics</li>
+</ul>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-03-22 00:00:00+00:00">March 22, 2025</time></li>
         
           <li class="md-meta__item">
