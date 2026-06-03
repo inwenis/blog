@@ -9,9 +9,16 @@ categories:
 
 ## tl;dr
 
-Coding agents are amazing — no doubt.
+Coding agents are amazing — no doubt. (em dash not accidental)
 
 They can give you impostor syndrome when they nail a bug within a few minutes after a single prompt.
+
+But they are too polite with the codebase.
+
+They preserve too much.
+They assume too much.
+They verify too little.
+They turn accidental behavior into supported behavior.
 
 What they are bad at:
 
@@ -20,6 +27,26 @@ What they are bad at:
 - They believe weird accidental behavior is intentional.
 - They handle too many theoretical cases.
 - They often do not build a real understanding of the flow.
+
+So when I work with them, I try to push them away from:
+
+> write the fix
+
+and toward:
+
+> prove what is happening
+
+Do not just read the code.
+
+Abuse it.
+Rip it apart.
+Run strange little experiments.
+Create throwaway tools.
+Break the weird accidental feature if nobody should depend on it.
+
+The agent can write code very fast.
+
+But speed is not the same as understanding.
 
 And unless you help them, they will not abuse and rip apart a codebase just to run separate pieces, grow understanding, and validate claims.
 
@@ -239,34 +266,3 @@ This can make some kinds of programming harder.
 Not impossible.
 
 Just harder than expected.
-
-## bottom line
-
-Coding agents are amazing.
-
-But they are too polite with the codebase.
-
-They preserve too much.
-They assume too much.
-They verify too little.
-They turn accidental behavior into supported behavior.
-
-So when I work with them, I try to push them away from:
-
-> write the fix
-
-and toward:
-
-> prove what is happening
-
-Do not just read the code.
-
-Abuse it.
-Rip it apart.
-Run strange little experiments.
-Create throwaway tools.
-Break the weird accidental feature if nobody should depend on it.
-
-The agent can write code very fast.
-
-But speed is not the same as understanding.
