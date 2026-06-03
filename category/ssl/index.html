@@ -1242,9 +1242,9 @@ PuTTy has its own format of key files -&gt; .ppk</p>
 </span></code></pre></div></p>
 <p>Contents between header and footer (<code>-----BEGIN CERTIFICATE-----</code> + <code>-----END CERTIFICATE-----</code>) is base64 encoded. The content can be DER binary data.</p>
 <h2 id="der"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#der">DER</a></h2>
-<p>Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like <code>validity date</code>, <code>issuer</code>, etc. For certificates to work you need to store this information and transfer it. DER encodes this information is a binary format. This is then after base64 encoded and then it goes into a PEM file.</p>
+<p>Distinguished Encoding Rules - is a way of encoding data structures. A certificate is a data structure containing various entires like <code>validity date</code>, <code>issuer</code>, etc. For certificates to work you need to store this information and transfer it. DER encodes this information in a binary format. This is then base64 encoded and goes into a PEM file.</p>
 <h2 id="x509"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#x509">X.509</a></h2>
-<p>X.509 is the standard defining public key certificates for TLS/SSL (HTTPS)</p>
+<p>X.509 is the standard, defining public key certificates for TLS/SSL (HTTPS)</p>
 <h2 id="pfxp12pkcs12"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#pfxp12pkcs12">PFX/P12/PKCS12</a></h2>
 <p>PFX seems to be Microsoft's complicated file format for storing cryptographic data.</p>
 <p>P12/PKCS12 is the successor to PFX. Sometimes the terms PFX/P12/PKCS12 are used interchangeably.</p>
@@ -1282,7 +1282,7 @@ PuTTy has its own format of key files -&gt; .ppk</p>
 <p><a href="https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit">https://stackoverflow.com/questions/9450120/openssl-hangs-and-does-not-exit</a></p>
 <h2 id="lazy-websites"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#lazy-websites">Lazy websites</a></h2>
 <p>Website's certificates are usually signed by intermediate CA, which in turn are signed by a trusted root CA. The idea is that the server you connect to send you its certificate with all the intermediate certificates. Your app/machine should have the root CA certificate stored so it can validate the chain of certificates it received from the server (by just validating the root cert sent with its own root CA).</p>
-<p>Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with ex. node your connection will be rejected.</p>
+<p>Some servers are misconfigured and do not send the intermediate certificates. You do not notice because browsers fill in the gaps for a better browsing experience. However when you try to scrape the same website with e.g. node your connection will be rejected.</p>
 <h3 id="donts-for-node"><a class="toclink" href="../../2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/#donts-for-node">don't's (for node)</a></h3>
 <p>Several answers on SO suggest:</p>
 <ul>
