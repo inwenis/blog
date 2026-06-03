@@ -9,22 +9,26 @@ categories:
 
 ## tl;dr
 
-Coding agents are amazing - no doubt.
-They can give one imposter syndrome when they nail a bug withing a few minutes after a single prompt.
+Coding agents are amazing — no doubt.
 
-What they're bad at:
+They can give you impostor syndrome when they nail a bug within a few minutes after a single prompt.
+
+What they are bad at:
+
 - They do not investigate like experienced developers.
 - They dry-run things in their head.
 - They believe weird accidental behavior is intentional.
 - They handle too many theoretical cases.
 - They often do not build a real understanding of the flow.
 
-And unless you help them, they will not abuse and rip apart a codebase just to run separate pieces to grow understanding or validate claims.
+And unless you help them, they will not abuse and rip apart a codebase just to run separate pieces, grow understanding, and validate claims.
 
 ## fast mode
 
 Lately I have been using Claude with fast mode enabled.
-Works great, costs quite a lot.
+
+Works great. Costs quite a lot.
+
 Not necessarily because the model is smarter. Maybe it is not. But because the feedback loop is shorter.
 
 If the agent is slow, I multitask.
@@ -49,18 +53,27 @@ For example:
 
 This helps a lot.
 
-It does not remove hallucinations, but it makes the agent admit them.
+It does not remove hallucinations, but it makes them easier to catch.
 
 ## code is not the truth
 
-One thing I see often is that agents treat existing code as Moyzes treted his stone commandments.
+One thing I see often is that agents treat existing code like Moses treated his stone commandments.
 
-If the code implies this ridicolous combination of features and configs is possible it must be intentional and thau shall not break it!
+If the code implies that this ridiculous combination of features and configs is possible, it must be intentional and thou shalt not break it!
 
-This is understandable. Human developers do this too, especially in unfamiliar systems. Takes time for a human to realize "I've seen this oddity before, but I have never seen and proof it is used or coded intentionally"
+This is understandable. Human developers do this too, especially in unfamiliar systems.
+
+It takes time for a human to realize:
+
+> I have seen this oddity before, but I have never seen any proof that it is used intentionally.
 
 But agents do it very strongly.
-If some accidental behavior exists, the agent may preserve it. It may even build more code around it. They might harden the ridiculous functinality with tests. We wouldn't want to break functionality when refactoring, do we now?
+
+If some accidental behavior exists, the agent may preserve it. It may even build more code around it.
+
+They might harden the ridiculous functionality with tests.
+
+We would not want to break functionality when refactoring, do we now?
 
 The agent sees that and thinks:
 
@@ -87,12 +100,18 @@ They handle too many cases.
 
 They add defensive code for theoretical problems.
 
-They might add abstractions too early. The less I review the code they write the more I worry and feel the bloating somewhere.
-They add fallback paths.
-> What if that tool is not available on the users's pc? Let me code a handrolled simplified version. LOL
+They might add abstractions too early.
 
-Often during the review phase I tell it to KISS
-or:
+The less I review the code they write, the more I can feel the bloat accumulating somewhere.
+
+They add fallback paths.
+
+> What if that tool is not available on the user's PC? Let me code a hand-rolled simplified version. LOL.
+
+Often during the review phase I tell it to KISS.
+
+Or:
+
 > do not code defensively against imaginary issues
 
 This is not because defensive coding is always bad.
@@ -102,7 +121,8 @@ It is because code has a cost.
 Every extra branch is something to read.
 Every extra case is something to test.
 Every extra abstraction is another thing to understand.
-Extra supported case is what the agent will frown to break next time it touched the code.
+
+Every extra supported case is something the agent will resist breaking next time it touches the code.
 
 ## shallow understanding
 
@@ -155,7 +175,17 @@ They fake inputs.
 They break stuff on purpose.
 They run the program in stupid ways just to see what happens.
 
-Create and destroy worlds, create mutants to your liking, here the goal justifies any mean. Mold the system, code, component to your needs, run it, test it.
+Create and destroy worlds.
+
+Create mutants to your liking.
+
+Here the goal justifies almost any means.
+
+Mold the system, the code, the component to your needs.
+
+Run it.
+Test it.
+Learn what is actually true.
 
 ## throwaway tools
 
@@ -209,3 +239,34 @@ This can make some kinds of programming harder.
 Not impossible.
 
 Just harder than expected.
+
+## bottom line
+
+Coding agents are amazing.
+
+But they are too polite with the codebase.
+
+They preserve too much.
+They assume too much.
+They verify too little.
+They turn accidental behavior into supported behavior.
+
+So when I work with them, I try to push them away from:
+
+> write the fix
+
+and toward:
+
+> prove what is happening
+
+Do not just read the code.
+
+Abuse it.
+Rip it apart.
+Run strange little experiments.
+Create throwaway tools.
+Break the weird accidental feature if nobody should depend on it.
+
+The agent can write code very fast.
+
+But speed is not the same as understanding.
