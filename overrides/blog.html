@@ -1,0 +1,66 @@
+{% extends "main.html" %}
+
+{% block container %}
+  <div class="md-content" data-md-component="content">
+    <div class="md-content__inner">
+      <header class="md-typeset">
+        {{ page.content }}
+      </header>
+
+      <section class="blog-grid" aria-label="Blog posts">
+        {% for post in posts %}
+          {% set summary = post.meta.description or post.content | striptags | replace(post.post.title, "") | trim %}
+          {% if not summary %}
+            {% set summary = "Open this post to see its contents." %}
+          {% endif %}
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="{{ post.url | url }}">{{ post.post.title }}</a>
+              </h2>
+
+              {% if post.categories %}
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  {% for category in post.categories %}
+                    <a href="{{ category.url | url }}">{{ category.title }}</a>
+                  {% endfor %}
+                </nav>
+              {% endif %}
+
+              <p class="blog-card__summary">
+                {{ summary | truncate(220, true, "...") }}
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="{{ post.config.date.created }}">
+                  {{ post.config.date.created | date }}
+                </time>
+                {% if post.config.readtime %}
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    {% if post.config.readtime == 1 %}
+                      {{ lang.t("readtime.one") }}
+                    {% else %}
+                      {{ lang.t("readtime.other") | replace("#", post.config.readtime) }}
+                    {% endif %}
+                  </span>
+                {% endif %}
+              </div>
+              <a class="blog-card__link" href="{{ post.url | url }}">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        {% endfor %}
+      </section>
+
+      {% if pagination %}
+        {% block pagination %}
+          {% include "partials/pagination.html" %}
+        {% endblock %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

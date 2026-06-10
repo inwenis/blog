@@ -1,11 +1,13 @@
 site_name: programki.eu
 theme:
   name: material
+  custom_dir: overrides
   features:
     - content.code.copy
 plugins:
   - blog:
-      blog_dir: . 
+      blog_dir: .
+      pagination_per_page: 30
   - search
   - tags
 nav:
@@ -22,3 +24,5 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+extra_css:
+  - stylesheets/extra.css
