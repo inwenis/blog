@@ -1091,6 +1091,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise-1-answer" class="md-nav__link">
     <span class="md-ellipsis">
       Exercise 1 - answer
@@ -1154,6 +1163,15 @@
   <a href="#exercise-5-answer" class="md-nav__link">
     <span class="md-ellipsis">
       Exercise 5 - answer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-6-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 6 - answer
     </span>
   </a>
   
@@ -1282,6 +1300,8 @@
 </span></code></pre></div></p>
 <h2 id="exercise-5">Exercise 5</h2>
 <p>Just like me you created tens of repositories while writing code katas. Now you would like to keep all katas in a single repository. Write a script to move several repositories to a single repository. Each repo's content will end up in a dedicated directory in the new "master" repo. Remember to merge unrelated histories in the "master" repo.</p>
+<h2 id="exercise-6">Exercise 6</h2>
+<p>Inspect your PATH env variable, i.e. print each line on a new line.</p>
 <p>.</p>
 <p>.</p>
 <p>.</p>
@@ -1536,6 +1556,11 @@ This neat, perhaps unix people had wisdom that is lost now.</p>
 </span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>    <span class="nb">Remove-Item</span> <span class="nv">$repoName</span> <span class="n">-Recurse</span> <span class="n">-Force</span>
 </span><span id="__span-16-24"><a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>    <span class="nb">Read-Host</span> <span class="s2">&quot;Press Enter to continue&quot;</span>
 </span><span id="__span-16-25"><a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="exercise-6-answer">Exercise 6 - answer</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>:<span class="w"> </span><span class="s1">&#39;\n&#39;</span>
+</span></code></pre></div>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">$env:PATH</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 
 
