@@ -43,6 +43,8 @@
       
     
     
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1059,84 +1061,52 @@
       <header class="md-typeset">
         <h1 id="git">git</h1>
       </header>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-07 00:00:00+00:00">March 7, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">git</a></li>
-        
+
+      <section class="blog-grid" aria-label="Blog posts">
         
           
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="../../2025/03/07/git-goodies/">git goodies</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="./">git</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                git branch -d `git branch | grep feature` # delete all branches with feature in its name git branch | grep feature | xargs git branch -d # same as ^ git push origin --delete branchXYZ # git push origin :branchXYZ git ...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-03-07 00:00:00+00:00">
+                  March 7, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="../../2025/03/07/git-goodies/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="git-goodies"><a class="toclink" href="../../2025/03/07/git-goodies/">git goodies</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span><span class="sb">`</span>git<span class="w"> </span>branch<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>feature<span class="sb">`</span><span class="w">                             </span><span class="c1"># delete all branches with feature in its name</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>git<span class="w"> </span>branch<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>feature<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w">                       </span><span class="c1"># same as ^</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span>branchXYZ<span class="w">                                    </span><span class="c1"># git push origin :branchXYZ</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span><span class="sb">`</span>git<span class="w"> </span>branch<span class="w"> </span>-r<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>feature<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-c10-<span class="sb">`</span><span class="w">   </span><span class="c1"># delete all feature branches from remote</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>git<span class="w"> </span>show<span class="w"> </span>branch:file<span class="w"> </span>&gt;<span class="w"> </span>write_here<span class="w">                                     </span><span class="c1"># https://stackoverflow.com/questions/7856416/view-a-file-in-a-different-git-branch-without-changing-branches</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>git<span class="w"> </span>checkout<span class="w"> </span>branch<span class="w"> </span>--<span class="w"> </span>path/to/file<span class="w">                                   </span><span class="c1"># similar to previous but checkout the file</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>git<span class="w"> </span>checkout<span class="w"> </span>--ours<span class="w"> </span>foo/bar.java<span class="w">                                      </span><span class="c1"># useful for rebases or merges, works with --theirs too</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>git<span class="w"> </span>log<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>src/data_capture_tools<span class="w">                                  </span><span class="c1"># changes only made to a specific directory</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--full-history<span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;**/thefile.*&quot;</span><span class="w">                        </span><span class="c1"># https://stackoverflow.com/questions/7203515/how-to-find-a-deleted-file-in-the-project-commit-history</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>git<span class="w"> </span>log<span class="w"> </span>--left-right<span class="w"> </span>--graph<span class="w"> </span>--cherry-pick<span class="w"> </span>--oneline<span class="w"> </span>feature...branch<span class="w"> </span><span class="c1"># https://til.hashrocket.com/posts/18139f4f20-list-different-commits-between-two-branches</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>git<span class="w"> </span>diff<span class="w"> </span>main...<span class="w">                                                      </span><span class="c1"># the PR diff - changes since I branched out from main</span>
-</span></code></pre></div>
-<h2 id="and-notation"><a class="toclink" href="../../2025/03/07/git-goodies/#and-notation">.. and ... notation</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>main: 🔴──🟠──🟢
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>            \
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>             🔵 B &lt;- HEAD
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>git<span class="w"> </span>log<span class="w"> </span>main<span class="w"> </span>B
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># 🟢 commit-main-3   (main)</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 🔵 commit-b-1      (HEAD -&gt; B)</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># 🟠 commit-main-2</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># 🔴 initial commit1</span>
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>diff<span class="w"> </span>main..B
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span>diff<span class="w"> </span>main<span class="w">  </span>B
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span>diff<span class="w"> </span>main<span class="w">    </span><span class="c1"># (when you&#39;re on B)</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># +🔵 commit-b-1</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># -🟢 commit-main-3</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>git<span class="w"> </span>diff<span class="w"> </span>main...B
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span>diff<span class="w"> </span>main...
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span>diff<span class="w"> </span><span class="k">$(</span>git<span class="w"> </span>merge-base<span class="w"> </span>main<span class="w"> </span>B<span class="k">)</span><span class="w"> </span>B
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="c1"># +🔵 commit-b-1</span>
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>git<span class="w"> </span>log<span class="w"> </span>main..B
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>git<span class="w"> </span>log<span class="w"> </span>main..
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>git<span class="w"> </span>log<span class="w"> </span>^main<span class="w"> </span>B
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># 🔵 commit-b-1 (HEAD -&gt; B)</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># think of it as set difference: B \ main</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>git<span class="w"> </span>log<span class="w"> </span>main...B
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>git<span class="w"> </span>log<span class="w"> </span>main...
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># 🟢 commit-main-3 (main)</span>
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="c1"># 🔵 commit-b-1 (HEAD -&gt; B)</span>
-</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1"># think of it as the symmetric set difference: main Δ B</span>
-</span></code></pre></div>
-    
-  </div>
-</article>
-      
+      </section>
+
       
         
           

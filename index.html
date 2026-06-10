@@ -41,6 +41,8 @@
       
     
     
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1145,903 +1147,1162 @@
 <li><a href="https://blog.nilenso.com/blog/2025/05/29/ai-assisted-coding/">https://blog.nilenso.com/blog/2025/05/29/ai-assisted-coding/</a></li>
 </ul>
       </header>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-06-03 00:00:00+00:00">June 3, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/coding-agents/" class="md-meta__link">coding agents</a></li>
-        
+
+      <section class="blog-grid" aria-label="Blog posts">
         
           
-          <li class="md-meta__item">
-            
-              5 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="coding-agents-are-bad-at-being-curious"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/">coding agents are bad at being curious</a></h2>
-<h3 id="tldr"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#tldr">tl;dr</a></h3>
-<p>Coding agents are amazing — no doubt. (em dash not accidental)</p>
-<p>They can give you impostor syndrome when they nail a bug within a few minutes after a single prompt.</p>
-<p>But they are too polite with the codebase.</p>
-<p>They preserve too much.
-They assume too much.
-They verify too little.
-They turn accidental behavior into supported behavior.</p>
-<p>What they are bad at:</p>
-<ul>
-<li>They do not investigate like experienced developers.</li>
-<li>They dry-run things in their head.</li>
-<li>They believe weird accidental behavior is intentional.</li>
-<li>They handle too many theoretical cases.</li>
-<li>They often do not build a real understanding of the flow.</li>
-</ul>
-<p>So when I work with them, I try to push them away from:</p>
-<blockquote>
-<p>write the fix</p>
-</blockquote>
-<p>and toward:</p>
-<blockquote>
-<p>prove what is happening</p>
-</blockquote>
-<p>Do not just read the code.</p>
-<p>Abuse it.
-Rip it apart.
-Run strange little experiments.
-Create throwaway tools.
-Break the weird accidental feature if nobody should depend on it.</p>
-<p>The agent can write code very fast.</p>
-<p>But speed is not the same as understanding.</p>
-<p>And unless you help them, they will not abuse and rip apart a codebase just to run separate pieces, grow understanding, and validate claims.</p>
-<h3 id="fast-mode"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#fast-mode">fast mode</a></h3>
-<p>Lately I have been using Claude with fast mode enabled.</p>
-<p>Works great. Costs quite a lot.</p>
-<p>Not necessarily because the model is smarter. Maybe it is not. But because the feedback loop is shorter.</p>
-<p>If the agent is slow, I multitask.
-If I multitask, I lose context.
-If I lose context, I stop steering the agent properly.</p>
-<p>Then the agent goes somewhere weird and I have to reconstruct what happened.</p>
-<p>That is exhausting.</p>
-<h3 id="hallucinated-conclusions"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#hallucinated-conclusions">hallucinated conclusions</a></h3>
-<p>One useful trick is to make the agent list the claims it made.</p>
-<p>For example:</p>
-<ul>
-<li>what did you assume?</li>
-<li>what did you verify?</li>
-<li>what is only a guess?</li>
-<li>what file proves this?</li>
-<li>what command can I run to check it?</li>
-</ul>
-<p>This helps a lot.</p>
-<p>It does not remove hallucinations, but it makes them easier to catch.</p>
-<h3 id="code-is-not-the-truth"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#code-is-not-the-truth">code is not the truth</a></h3>
-<p>One thing I see often is that agents treat existing code like Moses treated his stone commandments.</p>
-<p>If the code implies that this ridiculous combination of features and configs is possible, it must be intentional and thou shalt not break it!</p>
-<p>This is understandable. Human developers do this too, especially in unfamiliar systems.</p>
-<p>It takes time for a human to realize:</p>
-<blockquote>
-<p>I have seen this oddity before, but I have never seen any proof that it is used intentionally.</p>
-</blockquote>
-<p>But agents do it very strongly.</p>
-<p>If some accidental behavior exists, the agent may preserve it. It may even build more code around it.</p>
-<p>They might harden the ridiculous functionality with tests.</p>
-<p>We would not want to break functionality when refactoring, do we now?</p>
-<p>The agent sees that and thinks:</p>
-<blockquote>
-<p>this must be supported</p>
-</blockquote>
-<p>But sometimes the correct answer is:</p>
-<blockquote>
-<p>no, this is nonsense, break it</p>
-</blockquote>
-<p>I often have to explicitly say this.</p>
-<p>You can change this behavior.
-Nobody depends on this.
-Nobody should depend on this.
-This weird dysfunctionality is not a feature.</p>
-<p>Without that permission, the agent may keep carrying the weirdness forward.</p>
-<h3 id="defensive-coding"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#defensive-coding">defensive coding</a></h3>
-<p>Agents also overengineer.</p>
-<p>They handle too many cases.</p>
-<p>They add defensive code for theoretical problems.</p>
-<p>They might add abstractions too early.</p>
-<p>The less I review the code they write, the more I can feel the bloat accumulating somewhere.</p>
-<p>They add fallback paths.</p>
-<blockquote>
-<p>What if that tool is not available on the user's PC? Let me code a hand-rolled simplified version. LOL.</p>
-</blockquote>
-<p>Often during the review phase I tell it to KISS.</p>
-<p>Or:</p>
-<blockquote>
-<p>do not code defensively against imaginary issues</p>
-</blockquote>
-<p>This is not because defensive coding is always bad.</p>
-<p>It is because code has a cost.</p>
-<p>Every extra branch is something to read.
-Every extra case is something to test.
-Every extra abstraction is another thing to understand.</p>
-<p>Every extra supported case is something the agent will resist breaking next time it touches the code.</p>
-<h3 id="shallow-understanding"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#shallow-understanding">shallow understanding</a></h3>
-<p>When I work with agents, I also notice something about myself.</p>
-<p>I do not build understanding the same way I used to.</p>
-<p>Before, I had to follow the flow myself.
-I had to open the files.
-I had to trace the calls.
-I had to suffer a little.</p>
-<p>That suffering was useful.</p>
-<p>Now the agent can grab code very quickly.</p>
-<p>This is good, but also dangerous.</p>
-<p>The agent may jump around the project and collect fragments. Then it builds an explanation from those fragments.</p>
-<p>But some of that code may be unreachable.
-Some of it may be old.
-Some of it may be a weird edge path.
-Some of it may not matter.</p>
-<p>So the agent can create an understanding that looks broad, but is actually shallow.</p>
-<p>It knows many pieces.
-It does not necessarily know the flow.</p>
-<h3 id="debugging-by-imagination"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#debugging-by-imagination">debugging by imagination</a></h3>
-<p>A common agent failure mode is debugging by imagination.</p>
-<p>It reads code.
-It explains what should happen.
-It proposes a fix.</p>
-<p>But it does not always check what actually happens.</p>
-<p>Experienced developers do ugly things.</p>
-<p>They add temporary logs.
-They print variables.
-They comment things out.
-They write tiny scripts.
-They create throwaway harnesses.
-They call private functions directly.
-They fake inputs.
-They break stuff on purpose.
-They run the program in stupid ways just to see what happens.</p>
-<p>Create and destroy worlds.</p>
-<p>Create mutants to your liking.</p>
-<p>Here the goal justifies almost any means.</p>
-<p>Mold the system, the code, the component to your needs.</p>
-<p>Run it.
-Test it.
-Learn what is actually true.</p>
-<h3 id="throwaway-tools"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#throwaway-tools">throwaway tools</a></h3>
-<p>Agents often need help creating throwaway tools.</p>
-<p>Not production tools.
-Not nice abstractions.
-Not reusable libraries.</p>
-<p>Just ugly little things used to learn something.</p>
-<p>A script that calls one function.
-A log line in the middle of a branch.
-A temporary endpoint.
-A fake input file.
-A tiny harness around one parser.
-A command that proves whether some path is reachable.</p>
-<p>This is how you turn guessing into knowing.</p>
-<p>But agents do not naturally do enough of it.</p>
-<p>They tend to dry-run the code mentally.</p>
-<p>Sometimes that is enough.</p>
-<p>Often it is not.</p>
-<h3 id="novelty"><a class="toclink" href="2026/06/03/coding-agents-are-bad-at-being-curious/#novelty">novelty</a></h3>
-<p>There is another thing I suspect.</p>
-<p>Coding agents are trained on code where people do things in established ways.</p>
-<p>So when you do something unusual, you may be fighting the model a little.</p>
-<p>It tries to pull the code back toward the common path.</p>
-<p>Usually that is good.</p>
-<p>Common patterns are common for a reason.</p>
-<p>But if you are deliberately doing something different, something new, or something specific to your system, the agent may keep “normalizing” it.</p>
-<p>It may remove the interesting part.
-It may replace your idea with a standard pattern.
-It may treat novelty as a mistake.</p>
-<p>This can make some kinds of programming harder.</p>
-<p>Not impossible.</p>
-<p>Just harder than expected.</p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-04-06 00:00:00+00:00">April 6, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
-              <a href="category/f-sharp/" class="md-meta__link">F Sharp</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2026/06/03/coding-agents-are-bad-at-being-curious/">coding agents are bad at being curious</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/coding-agents/">coding agents</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                tl;dr Coding agents are amazing — no doubt. (em dash not accidental) They can give you impostor syndrome when they nail a bug within a few minutes after a single prompt. But they are too polite with the codebase. They...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2026-06-03 00:00:00+00:00">
+                  June 3, 2026
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      5 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2026/06/03/coding-agents-are-bad-at-being-curious/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="match-feels-better-than-if-until-powershell"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/"><code>match</code> feels better than <code>if</code> until PowerShell</a></h2>
-<h3 id="tldr"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#tldr">tl;dr</a></h3>
-<p><code>match</code> in F# is usually <code>case -&gt; value</code>.</p>
-<p>In PowerShell it is often <code>case -&gt; effect</code>.</p>
-<p>That is why plain <code>if / elseif / else</code> or <code>switch</code> often reads better in PowerShell than trying to force a fake <code>match</code> style.</p>
-<h3 id="in-f-match-is-a-value"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#in-f-match-is-a-value">In F# <code>match</code> is a value</a></h3>
-<div class="language-fsharp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">let</span><span class="w"> </span><span class="nv">color</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="k">with</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Ok</span><span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;green&quot;</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Warning</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;yellow&quot;</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Error</span><span class="w">   </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;red&quot;</span>
-</span></code></pre></div>
-<p>This whole thing evaluates to one value.</p>
-<p>No mutable variable.
-No repeated assignment.</p>
-<p>That is why <code>match</code> feels so clean.</p>
-<h3 id="in-powershell-the-same-thing-often-becomes-control-flow"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#in-powershell-the-same-thing-often-becomes-control-flow">In PowerShell the same thing often becomes control flow</a></h3>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$status</span> <span class="o">-eq</span> <span class="s2">&quot;Ok&quot;</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nv">$color</span> <span class="p">=</span> <span class="s2">&quot;green&quot;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">elseif</span> <span class="p">(</span><span class="nv">$status</span> <span class="o">-eq</span> <span class="s2">&quot;Warning&quot;</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="nv">$color</span> <span class="p">=</span> <span class="s2">&quot;yellow&quot;</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="nv">$color</span> <span class="p">=</span> <span class="s2">&quot;red&quot;</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>This works fine.</p>
-<p>But it is not really <code>case -&gt; value</code>.
-It is branching plus assignment.</p>
-<h3 id="the-real-issue-is-side-effects"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#the-real-issue-is-side-effects">The real issue is side effects</a></h3>
-<p>PowerShell code often wants to:</p>
-<ul>
-<li><code>Write-Output</code></li>
-<li><code>Push-Location</code></li>
-<li><code>Remove-Item</code></li>
-<li><code>Start-Process</code></li>
-<li>run <code>git fetch</code></li>
-</ul>
-<p>At that point the question is no longer "what value do I return?".</p>
-<p>It is "what do I do in this case?".</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found...&quot;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">elseif</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="nb">Push-Location</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">DirectoryName</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="nv">$selected</span> <span class="p">=</span> <span class="p">...</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$selected</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="nb">Push-Location</span> <span class="nv">$selected</span><span class="p">.</span><span class="n">DirectoryName</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="p">}</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>This is not elegant in the F# sense.</p>
-<p>But it is honest.
-Each branch shows the effect directly.</p>
-<h3 id="the-trap"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#the-trap">The trap</a></h3>
-<p>When trying to make PowerShell feel more like F#, it is easy to add helpers like this:</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">function</span> <span class="nb">Write-NoExeFound</span> <span class="p">{</span> <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found...&quot;</span> <span class="p">}</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">function</span> <span class="nb">Push-ExeDirectory</span><span class="p">(</span><span class="nv">$exe</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Push-Location</span> <span class="nv">$exe</span><span class="p">.</span><span class="n">DirectoryName</span> <span class="p">}</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">if</span>     <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Write-NoExeFound</span> <span class="p">}</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">elseif</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Push-ExeDirectory</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="p">}</span>
-</span></code></pre></div>
-<p>Sometimes this is fine.</p>
-<p>Sometimes it is just:</p>
-<ul>
-<li>more names</li>
-<li>more jumping around</li>
-<li>more ceremony</li>
-</ul>
-<p>PowerShell also makes this riskier than it first looks because functions write to the pipeline by default.</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">function</span> <span class="nb">Write-NoExeFound</span> <span class="p">{</span> <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found...&quot;</span> <span class="p">}</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">$goto</span> <span class="p">=</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Write-NoExeFound</span> <span class="p">}</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">DirectoryName</span> <span class="p">}</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$null</span> <span class="o">-ne</span> <span class="nv">$goto</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="nb">Push-Location</span> <span class="nv">$goto</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>In the zero-results case <code>$goto</code> becomes <code>No .exe files found...</code>.</p>
-<p>Then <code>Push-Location</code> tries to go there.</p>
-<h3 id="switch-is-the-native-compromise"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#switch-is-the-native-compromise"><code>switch</code> is the native compromise</a></h3>
-<p>If you want something more match-like in PowerShell, <code>switch</code> is usually the right tool.</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">switch</span> <span class="p">(</span><span class="nv">$exe</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">0</span> <span class="p">{</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="nb">Write-Output</span> <span class="s2">&quot;No .exe files found in the current directory or its subdirectories.&quot;</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="p">}</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">1</span> <span class="p">{</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="nb">Push-Location</span> <span class="nv">$exe</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">DirectoryName</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="p">}</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">default</span> <span class="p">{</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="nv">$selected</span> <span class="p">=</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="nv">$exe</span> <span class="p">|</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="nb">Select-Object</span> <span class="n">Mode</span><span class="p">,</span> <span class="n">LastWriteTime</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">DirectoryName</span><span class="p">,</span> <span class="n">Name</span> <span class="p">|</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="nb">Sort-Object</span> <span class="n">LastWriteTime</span> <span class="n">-Descending</span> <span class="p">|</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>            <span class="nb">Out-ConsoleGridView</span> <span class="n">-Title</span> <span class="s2">&quot;Where are we going?&quot;</span> <span class="n">-OutputMode</span> <span class="n">Single</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$selected</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>            <span class="nb">Push-Location</span> <span class="nv">$selected</span><span class="p">.</span><span class="n">DirectoryName</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        <span class="p">}</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="p">}</span>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>It keeps the case-based shape without pretending PowerShell is F#.</p>
-<h3 id="small-naming-side-note"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#small-naming-side-note">small naming side note</a></h3>
-<p>AI does not change naming rules.</p>
-<p>Use the shortest name that is unambiguous in local context.</p>
-<p>Good:</p>
-<ul>
-<li><code>$toRemove</code></li>
-<li><code>$localToRemove</code></li>
-<li><code>$remoteToRemove</code></li>
-</ul>
-<p>Bad:</p>
-<ul>
-<li>names that restate obvious context without adding clarity</li>
-</ul>
-<h3 id="bottom-line"><a class="toclink" href="2026/04/06/match-feels-better-than-if-until-powershell/#bottom-line">bottom line</a></h3>
-<ul>
-<li>when code is <code>case -&gt; value</code>, <code>match</code> is hard to beat</li>
-<li>when code is <code>case -&gt; effect</code>, plain branching is often clearer</li>
-<li>in PowerShell, <code>switch</code> is usually a better match-like tool than helper-function gymnastics</li>
-</ul>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-30 00:00:00+00:00">March 30, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/misc/" class="md-meta__link">misc</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2026/04/06/match-feels-better-than-if-until-powershell/">match feels better than if until PowerShell</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                    <a href="category/f-sharp/">F Sharp</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                tl;dr match in F# is usually case -> value. In PowerShell it is often case -> effect. That is why plain if / elseif / else or switch often reads better in PowerShell than trying to force a fake match style. In F# matc...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2026-04-06 00:00:00+00:00">
+                  April 6, 2026
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2026/04/06/match-feels-better-than-if-until-powershell/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="googlegoogle-photos"><a class="toclink" href="2025/03/30/googlegoogle-photos/">Google/Google Photos</a></h2>
-<p>Google products seem to slowly become worse, examples:</p>
-<ul>
-<li>Gmail no longer recognizes flight itineraries.</li>
-<li>Google Photos:<ul>
-<li>Removed the map view.</li>
-<li>Doesn’t let you easily delete all photos.</li>
-<li>Doesn’t offer a simple way to download everything.</li>
-<li>Takeout exports require dealing with messy JSON metadata.</li>
-</ul>
-</li>
-<li>Google Search:<ul>
-<li>Cluttered with ads.</li>
-<li>Results feel worse than they used to be.</li>
-</ul>
-</li>
-<li>Android removed native phone call recording.</li>
-<li>YouTube is overloaded with ads.</li>
-</ul>
-<p>Just moved away from Google Photos. For geeks, <a href="https://immich.app/">https://immich.app/</a> is a great alternative — they're amazing.</p>
-<p>To fix the chaos from Google Takeout, I used this <a href="https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper">https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper</a>.</p>
-<p>Would definitely consider paying for Immich if they offered a hosted version.</p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-26 00:00:00+00:00">March 26, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/misc/" class="md-meta__link">misc</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/03/30/googlegoogle-photos/">Google/Google Photos</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/misc/">misc</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Google products seem to slowly become worse, examples: Gmail no longer recognizes flight itineraries. Google Photos: Removed the map view. Doesn’t let you easily delete all photos. Doesn’t offer a simple way to downlo...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-03-30 00:00:00+00:00">
+                  March 30, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/03/30/googlegoogle-photos/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
+          
             
-              2 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="photos"><a class="toclink" href="2025/03/26/photos/">photos</a></h2>
-<p><img alt="x" src="post30/IMG_20220606_165334.jpg" />
-<img alt="x" src="post30/IMG_20220606_165417.jpg" />
-<img alt="x" src="post30/IMG_20230129_214723_Bokeh.jpg" />
-<img alt="x" src="post30/IMG_20230129_214846.jpg" />
-<img alt="x" src="post30/IMG_20230129_214906.jpg" />
-<img alt="x" src="post30/IMG_20230420_114535.jpg" />
-<img alt="x" src="post30/original_cdaa01e9-0f7f-47de-9ed2-f593cf8f2a76_IMG_20230330_092332.jpg" />
-<img alt="x" src="post30/PICT1973.JPG" />
-<img alt="x" src="post30/2.jpg" />
-<img alt="x" src="post30/P1010350.JPG" />
-<img alt="x" src="post30/P1010374.JPG" />
-<img alt="x" src="post30/IMG_1170.HEIC" />
-<img alt="x" src="post30/IMG_1171.HEIC" />
-<img alt="x" src="post30/IMG_1172.HEIC" />
-<img alt="x" src="post30/IMG_1174.HEIC" />
-<img alt="x" src="post30/IMG_1175.HEIC" />
-<img alt="x" src="post30/IMG_1180.HEIC" />
-<img alt="x" src="post30/IMG_1181.HEIC" />
-<img alt="x" src="post30/IMG_1182.HEIC" />
-<img alt="x" src="post30/PICT0962.JPG" />
-<img alt="x" src="post30/dobre.JPG" /></p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-22 00:00:00+00:00">March 22, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/powershell/" class="md-meta__link">PowerShell</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/03/26/photos/">photos</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/misc/">misc</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Open this post to see its contents.
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-03-26 00:00:00+00:00">
+                  March 26, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/03/26/photos/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="powershell-quirk-2"><a class="toclink" href="2025/03/22/powershell-quirk-2/">PowerShell quirk 2</a></h2>
-<h3 id="tldr"><a class="toclink" href="2025/03/22/powershell-quirk-2/#tldr">tl;dr</a></h3>
-<p>Let's say you have a <code>File[1].txt</code> file and you would like to read it.
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Get-Content</span> <span class="s2">&quot;File[1].txt&quot;</span>
-</span></code></pre></div>
-^ this returns nothing</p>
-<p>Why?</p>
-<p>PowerShell interprets <code>[]</code> as special characters. A range in this case. PowerShell is actually looking for a file named <code>File1.txt</code>.</p>
-<p>What to do?</p>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Get-Content</span> <span class="s2">&quot;File</span><span class="se">``</span><span class="s2">[1</span><span class="se">``</span><span class="s2">].txt&quot;</span>
-</span></code></pre></div>
-<h3 id="longer-reads"><a class="toclink" href="2025/03/22/powershell-quirk-2/#longer-reads">longer reads</a></h3>
-<ul>
-<li><a href="https://stackoverflow.com/questions/21008180/copy-file-with-square-brackets-in-the-filename-and-use-wildcard">https://stackoverflow.com/questions/21008180/copy-file-with-square-brackets-in-the-filename-and-use-wildcard</a></li>
-<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730956(v=technet.10)?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730956(v=technet.10)?redirectedfrom=MSDN</a></li>
-</ul>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-07 00:00:00+00:00">March 7, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/git/" class="md-meta__link">git</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/03/22/powershell-quirk-2/">PowerShell quirk 2</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                tl;dr Let's say you have a File[1].txt file and you would like to read it. Get-Content "File[1].txt" ^ this returns nothing Why? PowerShell interprets [] as special characters. A range in this case. PowerShell is actu...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-03-22 00:00:00+00:00">
+                  March 22, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/03/22/powershell-quirk-2/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="git-goodies"><a class="toclink" href="2025/03/07/git-goodies/">git goodies</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span><span class="sb">`</span>git<span class="w"> </span>branch<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>feature<span class="sb">`</span><span class="w">                             </span><span class="c1"># delete all branches with feature in its name</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>branch<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>feature<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w">                       </span><span class="c1"># same as ^</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span>branchXYZ<span class="w">                                    </span><span class="c1"># git push origin :branchXYZ</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span><span class="sb">`</span>git<span class="w"> </span>branch<span class="w"> </span>-r<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>feature<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-c10-<span class="sb">`</span><span class="w">   </span><span class="c1"># delete all feature branches from remote</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>git<span class="w"> </span>show<span class="w"> </span>branch:file<span class="w"> </span>&gt;<span class="w"> </span>write_here<span class="w">                                     </span><span class="c1"># https://stackoverflow.com/questions/7856416/view-a-file-in-a-different-git-branch-without-changing-branches</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>git<span class="w"> </span>checkout<span class="w"> </span>branch<span class="w"> </span>--<span class="w"> </span>path/to/file<span class="w">                                   </span><span class="c1"># similar to previous but checkout the file</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>git<span class="w"> </span>checkout<span class="w"> </span>--ours<span class="w"> </span>foo/bar.java<span class="w">                                      </span><span class="c1"># useful for rebases or merges, works with --theirs too</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>git<span class="w"> </span>log<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>src/data_capture_tools<span class="w">                                  </span><span class="c1"># changes only made to a specific directory</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--full-history<span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;**/thefile.*&quot;</span><span class="w">                        </span><span class="c1"># https://stackoverflow.com/questions/7203515/how-to-find-a-deleted-file-in-the-project-commit-history</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>git<span class="w"> </span>log<span class="w"> </span>--left-right<span class="w"> </span>--graph<span class="w"> </span>--cherry-pick<span class="w"> </span>--oneline<span class="w"> </span>feature...branch<span class="w"> </span><span class="c1"># https://til.hashrocket.com/posts/18139f4f20-list-different-commits-between-two-branches</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>git<span class="w"> </span>diff<span class="w"> </span>main...<span class="w">                                                      </span><span class="c1"># the PR diff - changes since I branched out from main</span>
-</span></code></pre></div>
-<h2 id="and-notation"><a class="toclink" href="2025/03/07/git-goodies/#and-notation">.. and ... notation</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>main: 🔴──🟠──🟢
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>            \
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>             🔵 B &lt;- HEAD
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>log<span class="w"> </span>main<span class="w"> </span>B
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 🟢 commit-main-3   (main)</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 🔵 commit-b-1      (HEAD -&gt; B)</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 🟠 commit-main-2</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 🔴 initial commit1</span>
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>diff<span class="w"> </span>main..B
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>diff<span class="w"> </span>main<span class="w">  </span>B
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>diff<span class="w"> </span>main<span class="w">    </span><span class="c1"># (when you&#39;re on B)</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># +🔵 commit-b-1</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># -🟢 commit-main-3</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>git<span class="w"> </span>diff<span class="w"> </span>main...B
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span>diff<span class="w"> </span>main...
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span>diff<span class="w"> </span><span class="k">$(</span>git<span class="w"> </span>merge-base<span class="w"> </span>main<span class="w"> </span>B<span class="k">)</span><span class="w"> </span>B
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># +🔵 commit-b-1</span>
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>log<span class="w"> </span>main..B
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>git<span class="w"> </span>log<span class="w"> </span>main..
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>git<span class="w"> </span>log<span class="w"> </span>^main<span class="w"> </span>B
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 🔵 commit-b-1 (HEAD -&gt; B)</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># think of it as set difference: B \ main</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>git<span class="w"> </span>log<span class="w"> </span>main...B
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>git<span class="w"> </span>log<span class="w"> </span>main...
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># 🟢 commit-main-3 (main)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># 🔵 commit-b-1 (HEAD -&gt; B)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># think of it as the symmetric set difference: main Δ B</span>
-</span></code></pre></div>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-07 00:00:00+00:00">March 7, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/misc/" class="md-meta__link">misc</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/03/07/git-goodies/">git goodies</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/git/">git</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                git branch -d `git branch | grep feature` # delete all branches with feature in its name git branch | grep feature | xargs git branch -d # same as ^ git push origin --delete branchXYZ # git push origin :branchXYZ git ...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-03-07 00:00:00+00:00">
+                  March 7, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/03/07/git-goodies/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="escape"><a class="toclink" href="2025/03/07/escape/">escape!</a></h2>
-<p>Why is escaping a character called escaping a character?</p>
-<p>When a C compiler (or any other compiler) encounters a <code>"</code> it thinks to it self "huh, this is the begninning or end of a string!".</p>
-<p>Say you need <code>"</code> in your string?</p>
-<p>You have to tell the compiler "do not process this character like you always do, I want you to ESCAPE the default processing". You do this with <code>"dear compiler this \" will become a double quotation mark in my string"</code>.</p>
-<p>Likewise if you want a new line you need to tell the compile "do not process this n as a "n", escape the default processing and process it as a new line \n".</p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-02-25 00:00:00+00:00">February 25, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/npm/" class="md-meta__link">npm</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/03/07/escape/">escape!</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/misc/">misc</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Why is escaping a character called escaping a character? When a C compiler (or any other compiler) encounters a " it thinks to it self "huh, this is the begninning or end of a string!". Say you need " in your string? ...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-03-07 00:00:00+00:00">
+                  March 7, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/03/07/escape/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="npm-wsl-eai_again"><a class="toclink" href="2025/02/25/npm-wsl-eai_again/">npm wsl EAI_AGAIN</a></h2>
-<p>Running <code>npm ci</code> on <code>WSL</code> (Windows Subsystem for Linux) failed with:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm ERR! syscall getaddrinfo
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>npm ERR! errno EAI_AGAIN
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>npm ERR! request to http://registry.npmjs.org/nodemon failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org
-</span></code></pre></div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dig registry.npmjs.org
-</span></code></pre></div>
-^ confirmed that my Ubuntu <code>WSL</code> can't reach <code>registry.npmjs.org</code></p>
-<h3 id="solution"><a class="toclink" href="2025/02/25/npm-wsl-eai_again/#solution">Solution</a></h3>
-<p>In WSL:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm /etc/resolv.conf
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bash -c &#39;echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf&#39;
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bash -c &#39;echo &quot;[network]&quot; &gt; /etc/wsl.conf&#39;
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>bash -c &#39;echo &quot;generateResolvConf = false&quot; &gt;&gt; /etc/wsl.conf&#39;
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>chattr +i /etc/resolv.conf
-</span></code></pre></div>
-^ use <code>8.8.8.8</code> (Google's DNS). Stop recreating <code>resolv.conf</code> on startup</p>
-<p>In Windows:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Set-Content -Path &quot;C:\Users\{user}\.wslconfig&quot; -Value &quot;[wsl2]`nnetworkingMode=mirrored&quot;
-</span></code></pre></div></p>
-<p>Works now, also on my company's VPN.</p>
-<p>kudos <a href="https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747">https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747</a></p>
-<p>more info <a href="https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431">https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431</a></p>
-<h4 id="update-2025-03-18"><a class="toclink" href="2025/02/25/npm-wsl-eai_again/#update-2025-03-18">update 2025-03-18</a></h4>
-<p>Today the above solution didn't work - I could not reach <code>8.8.8.8</code> - I tested it with <code>dig registry.npmjs.org</code>.
-This fixed it today :confused:</p>
-<p>WSL:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chattr -i /etc/resolv.conf
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>rm /etc/resolv.conf
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>rm /etc/wsl.conf
-</span></code></pre></div></p>
-<p>Windows:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rm &quot;C:\Users\{user}\.wslconfig&quot;
-</span></code></pre></div></p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-02-19 00:00:00+00:00">February 19, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/misc/" class="md-meta__link">misc</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/02/25/npm-wsl-eai_again/">npm wsl EAI_AGAIN</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/npm/">npm</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Running npm ci on WSL (Windows Subsystem for Linux) failed with: npm ERR! syscall getaddrinfo npm ERR! errno EAI_AGAIN npm ERR! request to http://registry.npmjs.org/nodemon failed, reason: getaddrinfo EAI_AGAIN regist...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-02-25 00:00:00+00:00">
+                  February 25, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/02/25/npm-wsl-eai_again/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="post25"><a class="toclink" href="2025/02/19/post25/">Post25</a></h2>
-<p><code>1024 * 1024</code> - this many bytes is an <code>mibibyte</code> (<code>MiB</code>).</p>
-<p>A <code>megabyte</code> like a <code>megameter</code> is 10^6 bytes.</p>
-<p>We all frequently say <code>megabyte</code> meaning a <code>mibibyte</code>. Like wise a <code>kilobyte</code> != <code>kibibyte</code></p>
-<table>
-<thead>
-<tr>
-<th>Unit</th>
-<th>Abbreviation</th>
-<th>Size in Bytes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kibibyte</td>
-<td>KiB</td>
-<td>1,024</td>
-</tr>
-<tr>
-<td>Mebibyte</td>
-<td>MiB</td>
-<td>1,048,576</td>
-</tr>
-<tr>
-<td>Gibibyte</td>
-<td>GiB</td>
-<td>1,073,741,824</td>
-</tr>
-<tr>
-<td>Kilobyte</td>
-<td>KB</td>
-<td>1,000</td>
-</tr>
-<tr>
-<td>Megabyte</td>
-<td>MB</td>
-<td>1,000,000</td>
-</tr>
-<tr>
-<td>Gigabyte</td>
-<td>GB</td>
-<td>1,000,000,000</td>
-</tr>
-</tbody>
-</table>
-<p>Network speeds are measured in Mbps - that is mega bits per second - that is <code>1,000,000</code> bits per second.</p>
-<p>MB - Megabyte (SI)
-MiB - Mibibyte (IEC)
-Mb - Megabit (SI)</p>
-<p><a href="https://www.iec.ch/prefixes-binary-multiples">https://www.iec.ch/prefixes-binary-multiples</a></p>
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-02-09 00:00:00+00:00">February 9, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/f-sharp/" class="md-meta__link">F Sharp</a></li>
-        
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/02/19/post25/">Post25</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/misc/">misc</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                1024 * 1024 - this many bytes is an mibibyte (MiB). A megabyte like a megameter is 10^6 bytes. We all frequently say megabyte meaning a mibibyte. Like wise a kilobyte != kibibyte Unit Abbreviation Size in Bytes Kibiby...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-02-19 00:00:00+00:00">
+                  February 19, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/02/19/post25/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
           
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/02/09/some-neat-fsx-f/">Some neat fsx F#</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/f-sharp/">F Sharp</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                My company had a hackathon focused on data scraping/processing. Each team had to scrape 3 endpoints. I came up with something similar to this: open System open System.Net.Http open System.Text let c = new HttpClient()...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-02-09 00:00:00+00:00">
+                  February 9, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/02/09/some-neat-fsx-f/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
         
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="some-neat-fsx-f"><a class="toclink" href="2025/02/09/some-neat-fsx-f/">Some neat fsx F#</a></h2>
-<p>My company had a hackathon focused on data scraping/processing.</p>
-<p>Each team had to scrape 3 endpoints. I came up with something similar to this:
-<div class="language-F# highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">open</span><span class="w"> </span><span class="nn">System</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Net.Http</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Text</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">let</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="bp">()</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">c</span><span class="o">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nn">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="o">(</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="o">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">let</span><span class="w"> </span><span class="nv">lockObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">obj</span><span class="bp">()</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">let</span><span class="w"> </span><span class="nv">printSync</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">DateTimeOffset</span><span class="p">.</span><span class="nn">Now</span><span class="p">.</span><span class="n">ToString</span><span class="o">(</span><span class="s">&quot;O&quot;</span><span class="o">)</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">lock</span><span class="w"> </span><span class="n">lockObject</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="o">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">printfn</span><span class="w"> </span><span class="s">&quot;[%s] %s&quot;</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">text</span><span class="o">)</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">let</span><span class="w"> </span><span class="nv">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="bp">()</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">s</span><span class="o">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nn">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="o">(</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="o">)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">s</span><span class="o">.</span><span class="n">DefaultRequestHeaders</span><span class="o">.</span><span class="n">Add</span><span class="o">(</span><span class="s">&quot;X-Sender&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;this is me, Mario!&quot;</span><span class="o">)</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">let</span><span class="w"> </span><span class="nv">sendToDestination</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;{</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="s">    &quot;CreatedAt&quot;: &quot;xxXCreatedAtXxx&quot;,</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="s">    &quot;Stream&quot;: &quot;xxXStreamXxx&quot;,</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="s">    &quot;Data&quot;: [</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="s">        xxXDataXxx</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="s">    ]</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="s">}&quot;&quot;&quot;</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">template</span><span class="o">.</span><span class="n">Replace</span><span class="o">(</span><span class="s">&quot;xxXCreatedAtXxx&quot;</span><span class="o">,</span><span class="w"> </span><span class="nn">DateTimeOffset</span><span class="p">.</span><span class="nn">Now</span><span class="p">.</span><span class="n">ToString</span><span class="o">(</span><span class="s">&quot;O&quot;</span><span class="o">))</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">                          </span><span class="o">.</span><span class="n">Replace</span><span class="o">(</span><span class="s">&quot;xxXStreamXxx&quot;</span><span class="o">,</span><span class="w"> </span><span class="n">stream</span><span class="o">)</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">                          </span><span class="o">.</span><span class="n">Replace</span><span class="o">(</span><span class="s">&quot;xxXDataXxx&quot;</span><span class="o">,</span><span class="w"> </span><span class="n">response</span><span class="o">)</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="k">let!</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">.</span><span class="n">PostAsync</span><span class="o">(</span><span class="s">&quot;http://localhost:8080&quot;</span><span class="o">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringContent</span><span class="o">(</span><span class="n">payload</span><span class="o">,</span><span class="w"> </span><span class="nn">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">AwaitTask</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="n">sprintf</span><span class="w"> </span><span class="s">&quot;%s done sending response code %A&quot;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">response</span><span class="o">.</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printSync</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="o">}</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="k">let</span><span class="w"> </span><span class="nv">scraper</span><span class="w"> </span><span class="o">(</span><span class="n">url</span><span class="o">:</span><span class="kt">string</span><span class="o">)</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="k">do</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">        </span><span class="k">try</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">            </span><span class="k">let!</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">GetStringAsync</span><span class="o">(</span><span class="n">url</span><span class="o">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">AwaitTask</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">            </span><span class="k">do</span><span class="o">!</span><span class="w"> </span><span class="n">sendToDestination</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">response</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">            </span><span class="n">sprintf</span><span class="w"> </span><span class="s">&quot;scraped %40s sendTo %s&quot;</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printSync</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">        </span><span class="k">with</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="o">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">sprintf</span><span class="w"> </span><span class="s">&quot;failed to scrape/or send %40s&quot;</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">printSync</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">        </span><span class="k">do</span><span class="o">!</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">Sleep</span><span class="w"> </span><span class="mi">1000</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="o">}</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="k">let</span><span class="w"> </span><span class="nv">urls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">    </span><span class="s">&quot;https://jsonplaceholder.typicode.com/posts&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;123&quot;</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="w">    </span><span class="s">&quot;https://jsonplaceholder.typicode.com/posts&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;124&quot;</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="w">    </span><span class="s">&quot;https://jsonplaceholder.typicode.com/posts&quot;</span><span class="o">,</span><span class="w"> </span><span class="s">&quot;125&quot;</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="o">]</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="n">urls</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">List</span><span class="p">.</span><span class="n">map</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="w"> </span><span class="n">stream</span><span class="o">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">scraper</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="n">stream</span><span class="o">)</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">Parallel</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">Ignore</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">Start</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="c1">// Async.CancelDefaultToken()</span>
-</span></code></pre></div></p>
-<p>Things to keep in mind:</p>
-<ul>
-<li>always have a try/catch all exceptions in async/tasks/threads<ul>
-<li>you don't want your thread to die without you knowing</li>
-</ul>
-</li>
-<li>always set a timeout when scraping (default timeout in .NET is 100s which is excessive for this script)</li>
-</ul>
-<p>A minimalistic http server to listen to our scrapers:</p>
-<div class="language-F# highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Net</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">open</span><span class="w"> </span><span class="nn">System.Text</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// https://sergeytihon.com/2013/05/18/three-easy-ways-to-create-simple-web-server-with-f/</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">// run with `fsi --load:ws.fsx`</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// visit http://localhost:8080</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">let</span><span class="w"> </span><span class="nv">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://localhost:8080/&quot;</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">let</span><span class="w"> </span><span class="nv">listener</span><span class="w"> </span><span class="o">(</span><span class="n">handler</span><span class="o">:(</span><span class="n">HttpListenerRequest</span><span class="o">-&gt;</span><span class="n">HttpListenerResponse</span><span class="o">-&gt;</span><span class="n">Async</span><span class="o">&lt;</span><span class="kt">unit</span><span class="o">&gt;))</span><span class="w"> </span><span class="o">=</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">hl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpListener</span><span class="bp">()</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="n">hl</span><span class="o">.</span><span class="n">Prefixes</span><span class="o">.</span><span class="n">Add</span><span class="w"> </span><span class="n">host</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="n">hl</span><span class="o">.</span><span class="n">Start</span><span class="bp">()</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">FromBeginEnd</span><span class="o">(</span><span class="n">hl</span><span class="o">.</span><span class="n">BeginGetContext</span><span class="o">,</span><span class="w"> </span><span class="n">hl</span><span class="o">.</span><span class="n">EndGetContext</span><span class="o">)</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="k">do</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">            </span><span class="k">let!</span><span class="w"> </span><span class="nv">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">            </span><span class="nn">Async</span><span class="p">.</span><span class="n">Start</span><span class="o">(</span><span class="n">handler</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">Request</span><span class="w"> </span><span class="n">context</span><span class="o">.</span><span class="n">Response</span><span class="o">)</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="o">}</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nn">Async</span><span class="p">.</span><span class="n">Start</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">listener</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="n">async</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">        </span><span class="n">response</span><span class="o">.</span><span class="n">ContentType</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;text/html&quot;</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">        </span><span class="k">let</span><span class="w"> </span><span class="nv">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">UTF8Encoding</span><span class="p">.</span><span class="nn">UTF8</span><span class="p">.</span><span class="n">GetBytes</span><span class="o">(</span><span class="s">&quot;thanks!&quot;</span><span class="o">)</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">        </span><span class="n">response</span><span class="o">.</span><span class="n">OutputStream</span><span class="o">.</span><span class="n">Write</span><span class="o">(</span><span class="n">bytes</span><span class="o">,</span><span class="w"> </span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="n">bytes</span><span class="o">.</span><span class="n">Length</span><span class="o">)</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">        </span><span class="n">response</span><span class="o">.</span><span class="n">OutputStream</span><span class="o">.</span><span class="n">Close</span><span class="bp">()</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="o">})</span>
-</span></code></pre></div>
-    
-  </div>
-</article>
-      
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/02/08/powershell-gotcha---dynamic-scoping/">PowerShell Gotcha! - dynamic scoping</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                PowerShell uses dynamic scoping. Yet the about_Scopes page doesn't mention the word "dynamic". Wird (wird - so weird that you need to misspell weird to get your point across). tl;dr; In PowerShell variables are copied...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-02-08 00:00:00+00:00">
+                  February 8, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/02/08/powershell-gotcha---dynamic-scoping/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/01/28/post22/">Post22</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/poem/">poem</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                W chatce w lesie siedzi Pan Nie odzywa się do nikogo bo jest sam Myśli ciężkie, głowa pogrążona w chorobie Zaraz zawiśnie na grobie Wspomnienia zaplątane same w sobie Siedzi, mruga, własną głowę zruga Pora zaraz będzi...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-01-28 00:00:00+00:00">
+                  January 28, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/01/28/post22/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/01/23/post21/">Post21</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/poem/">poem</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                blood stains in the snow you left a few jumping home for me to remember the last walk snow will melt soon this memory I will not let fade you were loved and you loved us too of that I'm sure it's a tough call to let y...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-01-23 00:00:00+00:00">
+                  January 23, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/01/23/post21/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2025/01/20/environment-variable/">Environment variable</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                but only in a specific directory The idea - use the Prompt function to check if you're in a specific dir and set/unset an env var: function Prompt { $currentDir = Get-Location if ("C:\git\that-special-dir" -eq $curren...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2025-01-20 00:00:00+00:00">
+                  January 20, 2025
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2025/01/20/environment-variable/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/12/29/json/">Json</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/f-sharp/">F Sharp</a>
+                  
+                    <a href="category/json/">json</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Should I use System.Text. (STJ) or Newtonsoft. (previously .NET)? use STJ, Newtonsoft is no longer enhanced with new features. The author works for Microsoft now on some non-json stuff. JamesNK reddit comment Terms ma...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-12-29 00:00:00+00:00">
+                  December 29, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      9 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/12/29/json/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/12/13/3-regex/">&lt;3 regex</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/f-sharp/">F Sharp</a>
+                  
+                    <a href="category/regex/">regex</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                <3 regex https://regex101.com/r/RdCR7j/1 - set the global flag (g) to get all matches https://www.debuggex.com/ - havent't played with this a lot but I might give it a try, looks like a decent learning tool regex - us...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-12-13 00:00:00+00:00">
+                  December 13, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      5 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/12/13/3-regex/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/07/15/powershell-oopsie/">PowerShell "Oopsie"</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                    <a href="category/scripting/">scripting</a>
+                  
+                    <a href="category/exercises/">exercises</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Task - remove a specific string from each line of multiple CSV files. This task was added to the scripting exercise list. First - let's generate some CSV files to work with: $numberOfFiles = 10 $numberOfRows = 100 $fi...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-07-15 00:00:00+00:00">
+                  July 15, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/07/15/powershell-oopsie/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/">How the way I work/code/investigate/debug changed with time &amp; experience</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/general-coding/">General coding</a>
+                  
+                    <a href="category/experience/">experience</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                How the way I work/code/investigate/debug changed with time & experience I use this metaphor when describing how I work these days. TL;DR; Quick feedback is king unit tests quick test in another way reproduce issues l...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-07-14 00:00:00+00:00">
+                  July 14, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      3 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/07/14/how-the-way-i-workcodeinvestigatedebug-changed-with-time--experience/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/06/30/my-recommendations/">My recommendations</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/tools/">Tools</a>
+                  
+                    <a href="category/general-coding/">General coding</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Terminal etc. https://github.com/PowerShell/PowerShell - PowerShell 7+ - faster & better then Windows PowerShell https://ohmyposh.dev/ - amazing prompts - replace that old $ sign with amazing stuff https://github.com/...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-06-30 00:00:00+00:00">
+                  June 30, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      1 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/06/30/my-recommendations/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/06/24/powershell-quirk/">PowerShell quirk</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                tl;dr In PowerShell if you want to return an array instead of one element of the array at the time do this: > @(1..2) | % { $a = "a" * $_; @($a,$_) } # wrong! will pipe/return 1 element at a time > @(1..2) | % { $a = ...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-06-24 00:00:00+00:00">
+                  June 24, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      3 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/06/24/powershell-quirk/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/06/17/it-will-be-great-set-it-up-dont-use-it-remove-it/">It will be great, set it up, don't use it, remove it</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/general-coding/">General coding</a>
+                  
+                    <a href="category/team-lead/">Team lead</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Today, I removed something I allowed to be created despite initially feeling it was redundant. A year ago, a student found a tool to auto-generate documentation for our internal SDK from code annotations. They propose...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-06-17 00:00:00+00:00">
+                  June 17, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/06/17/it-will-be-great-set-it-up-dont-use-it-remove-it/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/">Notes on keys, certs, certificates, HTTPS, SSL, SSH, TLS</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/certificates/">certificates</a>
+                  
+                    <a href="category/keys/">keys</a>
+                  
+                    <a href="category/ssl/">SSL</a>
+                  
+                    <a href="category/https/">HTTPS</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                key != cert (a key is different from a certificate) Keys are used to encrypt connections, certs are used to verify that the key owner is who he says he is. Certificate aka cert A certificate proves that a public key b...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-05-18 00:00:00+00:00">
+                  May 18, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      6 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/05/18/notes-on-keys-certs-certificates-https-ssl-ssh-tls/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/05/09/node-packages-updating/">node packages updating</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/node/">node</a>
+                  
+                    <a href="category/npm/">npm</a>
+                  
+                    <a href="category/js/">js</a>
+                  
+                    <a href="category/dependencies/">dependencies</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                tl;dr > npm install depcheck -g - install depcheck globally > depcheck - check for redundant packages > npm un this-redundant-package - uninstall redundant packages (repeat for all redundant packages) Create a pull-re...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-05-09 00:00:00+00:00">
+                  May 9, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      4 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/05/09/node-packages-updating/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2024/05/06/axios-cookies--more/">axios, cookies &amp; more</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/node/">node</a>
+                  
+                    <a href="category/js/">js</a>
+                  
+                    <a href="category/axios/">axios</a>
+                  
+                    <a href="category/cookies/">cookies</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                axios, cookies & more axios axios - promise-based HTTP client for node.js when used in node.js axios uses http module (https://nodejs.org/api/http.html) in node axios does not support cookies by itself (https://github...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2024-05-06 00:00:00+00:00">
+                  May 6, 2024
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      5 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2024/05/06/axios-cookies--more/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2023/05/09/short-post-on-premature-optimization-and-error-handling/">Short post on premature optimization and error handling</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/general-coding/">General coding</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Premature optimization is the root of all evil ~Donald Knuth Don't pretend to handle more than you handle ~me just now My team took over some scrapers. After a few months an issue is reported stating that accounting i...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2023-05-09 00:00:00+00:00">
+                  May 9, 2023
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      3 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2023/05/09/short-post-on-premature-optimization-and-error-handling/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2022/10/28/exercises-in-bashshellscripting/">Exercises in bash/shell/scripting</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/powershell/">PowerShell</a>
+                  
+                    <a href="category/bash/">bash</a>
+                  
+                    <a href="category/scripting/">scripting</a>
+                  
+                    <a href="category/f-sharp/">F Sharp</a>
+                  
+                    <a href="category/exercises/">exercises</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                Being fluent in shell/scripting allows you to improve your work by 20%. It doesn't take you to another level. You don't suddenly poses the knowledge to implement flawless distributed transactions but some things get d...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2022-10-28 00:00:00+00:00">
+                  October 28, 2022
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      9 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2022/10/28/exercises-in-bashshellscripting/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+          
+          
+          <article class="blog-card">
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">
+                <a href="2021/06/12/f-async---be-mindful-of-what-you-put-in-async-/">F# async - be mindful of what you put in async {}</a>
+              </h2>
+
+              
+                <nav class="blog-card__categories" aria-label="Post categories">
+                  
+                    <a href="category/f-sharp/">F Sharp</a>
+                  
+                </nav>
+              
+
+              <p class="blog-card__summary">
+                1 2 3 4 5 6 7 8 9 10 11 12 13 14 15open System let r = Random() let m () = let random_num = r.Next() async { printfn "%i" random_num } m () |> Async.RunSynchronously // prints a random number m () |> Async.RunSynchron...
+              </p>
+            </div>
+
+            <footer class="blog-card__footer">
+              <div class="blog-card__meta">
+                <time datetime="2021-06-12 00:00:00+00:00">
+                  June 12, 2021
+                </time>
+                
+                  <span aria-hidden="true">&middot;</span>
+                  <span>
+                    
+                      2 min read
+                    
+                  </span>
+                
+              </div>
+              <a class="blog-card__link" href="2021/06/12/f-async---be-mindful-of-what-you-put-in-async-/">
+                Read post <span aria-hidden="true">&rarr;</span>
+              </a>
+            </footer>
+          </article>
+        
+      </section>
+
       
         
           
@@ -2049,7 +2310,7 @@ Mb - Megabit (SI)</p>
 
 
 <nav class="md-pagination">
-  <span class="md-pagination__current">1</span> <a class="md-pagination__link" href="page/2/">2</a> <a class="md-pagination__link" href="page/3/">3</a>
+  
 </nav>
         
       
