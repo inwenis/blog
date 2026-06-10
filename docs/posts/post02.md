@@ -70,6 +70,10 @@ $fileNames | % { $csvData | Export-Csv -Path $_ }
 
 Just like me you created tens of repositories while writing code katas. Now you would like to keep all katas in a single repository. Write a script to move several repositories to a single repository. Each repo's content will end up in a dedicated directory in the new "master" repo. Remember to merge unrelated histories in the "master" repo.
 
+## Exercise 6
+
+Inspect your PATH env variable, i.e. print each line on a new line.
+
 .
 
 .
@@ -387,4 +391,14 @@ $repos | ForEach-Object {
     Remove-Item $repoName -Recurse -Force
     Read-Host "Press Enter to continue"
 }
+```
+
+## Exercise 6 - answer
+
+```bash
+echo $PATH | tr : '\n'
+```
+
+```pwsh
+$env:PATH.Split(";")
 ```
