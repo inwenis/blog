@@ -19,6 +19,7 @@ Senior devs never wrote down how they molest/mutate/abuse code to examine it.
 So LLMs had no way to learn it and they don't do it.
 
 Coding agents also:
+
 - preserve too much (afraid to alter existing behaviour)
 - turn accidental behavior into supported behavior (no test for this crazy accidentally supported case? better add one!)
 - assume too much (they "dry run" code)
@@ -36,6 +37,7 @@ complement it with:
 > prove to me with an end to end test that your fix works.
 
 What I only now realized I started doing with experience:
+
 - do not just read the code
 - abuse it
 - rip it apart
