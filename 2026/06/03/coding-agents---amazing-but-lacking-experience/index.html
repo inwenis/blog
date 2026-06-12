@@ -18,7 +18,7 @@
     
     
       
-        <title>coding agents are bad at being curious - programki.eu</title>
+        <title>coding agents - amazing but lacking experience - programki.eu</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#coding-agents-are-bad-at-being-curious" class="md-skip">
+        <a href="#coding-agents-amazing-but-lacking-experience" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              coding agents are bad at being curious
+              coding agents - amazing but lacking experience
             
           </span>
         </div>
@@ -1205,40 +1205,37 @@
         
 
 
-<h1 id="coding-agents-are-bad-at-being-curious">coding agents are bad at being curious</h1>
+<h1 id="coding-agents-amazing-but-lacking-experience">coding agents - amazing but lacking experience</h1>
 <h2 id="tldr">tl;dr</h2>
 <p>Coding agents are amazing — no doubt. (em dash not accidental)</p>
-<p>They can give you impostor syndrome when they nail a bug within a few minutes after a single prompt.</p>
-<p>But they are too polite with the codebase.</p>
-<p>They preserve too much.
-They assume too much.
-They verify too little.
-They turn accidental behavior into supported behavior.</p>
-<p>What they are bad at:</p>
-<ul>
-<li>They do not investigate like experienced developers.</li>
-<li>They dry-run things in their head.</li>
-<li>They believe weird accidental behavior is intentional.</li>
-<li>They handle too many theoretical cases.</li>
-<li>They often do not build a real understanding of the flow.</li>
-</ul>
-<p>So when I work with them, I try to push them away from:</p>
+<p>They give you impostor syndrome nailing a bug after a single prompt.</p>
+<p>But:</p>
+<p>Senior devs never wrote down how they molest/mutate/abuse code to examine it.
+So LLMs had no way to learn it and they don't do it.</p>
+<p>Coding agents also:
+- preserve too much (afraid to alter existing behaviour)
+- turn accidental behavior into supported behavior (no test for this crazy accidentally supported case? better add one!)
+- assume too much (they "dry run" code)
+- verify too little (aka. hallucinate)
+- their premise is "for any requirement, code an <code>enterprise-ready</code> solution"
+- they don't follow the flow of code or debug it - they just <code>grep</code> strings</p>
+<p>What to do?
+Start with the usual:</p>
 <blockquote>
-<p>write the fix</p>
+<p>There is a bug. We expect xyz for a but we get abc. Fix it.</p>
 </blockquote>
-<p>and toward:</p>
+<p>complement it with:</p>
 <blockquote>
-<p>prove what is happening</p>
+<p>prove to me with an end to end test that your fix works.</p>
 </blockquote>
-<p>Do not just read the code.</p>
-<p>Abuse it.
-Rip it apart.
-Run strange little experiments.
-Create throwaway tools.
-Break the weird accidental feature if nobody should depend on it.</p>
-<p>The agent can write code very fast.</p>
-<p>But speed is not the same as understanding.</p>
-<p>And unless you help them, they will not abuse and rip apart a codebase just to run separate pieces, grow understanding, and validate claims.</p>
+<p>What I only now realized I started doing with experience:
+- do not just read the code
+- abuse it
+- rip it apart
+- run strange little experiments
+- create throwaway tools &amp; scripts
+- break the weird accidental feature if you know no one really asked/uses it (this one I was aware of)</p>
+<p>You can prompt the agent to abuse code, rip it apart just to run separate pieces, grow understanding, and validate claims.</p>
 <h2 id="fast-mode">fast mode</h2>
 <p>Lately I have been using Claude with fast mode enabled.</p>
 <p>Works great. Costs quite a lot.</p>
