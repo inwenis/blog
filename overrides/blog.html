@@ -20,11 +20,13 @@
               </h2>
 
               {% if post.categories %}
-                <nav class="blog-card__categories" aria-label="Post categories">
+                <ul class="blog-card__categories">
                   {% for category in post.categories %}
-                    <a href="{{ category.url | url }}">{{ category.title }}</a>
+                    <li>
+                      <a href="{{ category.url | url }}">{{ category.title }}</a>
+                    </li>
                   {% endfor %}
-                </nav>
+                </ul>
               {% endif %}
 
               <p class="blog-card__summary">
