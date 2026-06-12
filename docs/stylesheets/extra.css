@@ -28,30 +28,6 @@
   padding: 1rem 1rem 0.75rem;
 }
 
-.blog-card__statuses {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 0.6rem;
-}
-
-.blog-card__status {
-  padding: 0.1rem 0.45rem;
-  border-radius: 1rem;
-  font-size: 0.65rem;
-  font-weight: 700;
-}
-
-.blog-card__status--pinned {
-  background: var(--md-accent-fg-color--transparent);
-  color: var(--md-accent-fg-color);
-}
-
-.blog-card__status--draft {
-  background: var(--md-default-fg-color--lightest);
-  color: var(--md-default-fg-color--light);
-}
-
 .blog-card__title {
   margin: 0 0 0.6rem;
   font-size: 1.1rem;
@@ -73,9 +49,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  list-style: none;
+  margin-bottom: 0.75rem;
 }
 
 .blog-card__categories a {

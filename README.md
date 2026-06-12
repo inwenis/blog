@@ -12,9 +12,3 @@ open new console
 ```
 > ./run.ps1
 ```
-
-# How to test it?
-```
-> python -m unittest discover -s tests
-> mkdocs build --strict
-```

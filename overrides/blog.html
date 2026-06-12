@@ -15,35 +15,20 @@
           {% endif %}
           <article class="blog-card">
             <div class="blog-card__body">
-              {% if post.config.pin or post.config.draft %}
-                <div class="blog-card__statuses">
-                  {% if post.config.pin %}
-                    <span class="blog-card__status blog-card__status--pinned">Pinned</span>
-                  {% endif %}
-                  {% if post.config.draft %}
-                    <span class="blog-card__status blog-card__status--draft">
-                      {{ lang.t("blog.draft") }}
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-
               <h2 class="blog-card__title">
                 <a href="{{ post.url | url }}">{{ post.post.title }}</a>
               </h2>
 
               {% if post.categories %}
-                <ul class="blog-card__categories" aria-label="Post categories">
+                <nav class="blog-card__categories" aria-label="Post categories">
                   {% for category in post.categories %}
-                    <li>
-                      <a href="{{ category.url | url }}">{{ category.title }}</a>
-                    </li>
+                    <a href="{{ category.url | url }}">{{ category.title }}</a>
                   {% endfor %}
-                </ul>
+                </nav>
               {% endif %}
 
               <p class="blog-card__summary">
-                {{ summary | truncate(220, true, "...") | e }}
+                {{ summary | truncate(220, true, "...") }}
               </p>
             </div>
 
@@ -64,7 +49,7 @@
                 {% endif %}
               </div>
               <a class="blog-card__link" href="{{ post.url | url }}">
-                {{ lang.t("blog.continue") }} <span aria-hidden="true">&rarr;</span>
+                Read post <span aria-hidden="true">&rarr;</span>
               </a>
             </footer>
           </article>
