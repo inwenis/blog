@@ -1212,13 +1212,15 @@
 <p>But:</p>
 <p>Senior devs never wrote down how they molest/mutate/abuse code to examine it.
 So LLMs had no way to learn it and they don't do it.</p>
-<p>Coding agents also:
-- preserve too much (afraid to alter existing behaviour)
-- turn accidental behavior into supported behavior (no test for this crazy accidentally supported case? better add one!)
-- assume too much (they "dry run" code)
-- verify too little (aka. hallucinate)
-- their premise is "for any requirement, code an <code>enterprise-ready</code> solution"
-- they don't follow the flow of code or debug it - they just <code>grep</code> strings</p>
+<p>Coding agents also:</p>
+<ul>
+<li>preserve too much (afraid to alter existing behaviour)</li>
+<li>turn accidental behavior into supported behavior (no test for this crazy accidentally supported case? better add one!)</li>
+<li>assume too much (they "dry run" code)</li>
+<li>verify too little (aka. hallucinate)</li>
+<li>their premise is "for any requirement, code an <code>enterprise-ready</code> solution"</li>
+<li>they don't follow the flow of code or debug it - they just <code>grep</code> strings</li>
+</ul>
 <p>What to do?
 Start with the usual:</p>
 <blockquote>
@@ -1228,13 +1230,15 @@ Start with the usual:</p>
 <blockquote>
 <p>prove to me with an end to end test that your fix works.</p>
 </blockquote>
-<p>What I only now realized I started doing with experience:
-- do not just read the code
-- abuse it
-- rip it apart
-- run strange little experiments
-- create throwaway tools &amp; scripts
-- break the weird accidental feature if you know no one really asked/uses it (this one I was aware of)</p>
+<p>What I only now realized I started doing with experience:</p>
+<ul>
+<li>do not just read the code</li>
+<li>abuse it</li>
+<li>rip it apart</li>
+<li>run strange little experiments</li>
+<li>create throwaway tools &amp; scripts</li>
+<li>break the weird accidental feature if you know no one really asked/uses it (this one I was aware of)</li>
+</ul>
 <p>You can prompt the agent to abuse code, rip it apart just to run separate pieces, grow understanding, and validate claims.</p>
 <h2 id="fast-mode">fast mode</h2>
 <p>Lately I have been using Claude with fast mode enabled.</p>
