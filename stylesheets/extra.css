@@ -49,10 +49,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
-  margin-bottom: 0.75rem;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  list-style: none;
 }
 
 .blog-card__categories a {
+  display: block;
   padding: 0.1rem 0.45rem;
   border-radius: 1rem;
   background: var(--md-default-fg-color--lightest);
