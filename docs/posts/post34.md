@@ -5,50 +5,45 @@ categories:
   - coding agents
 ---
 
-# coding agents are bad at being curious
+# coding agents - amazing but lacking experience
 
 ## tl;dr
 
 Coding agents are amazing — no doubt. (em dash not accidental)
 
-They can give you impostor syndrome when they nail a bug within a few minutes after a single prompt.
+They give you impostor syndrome nailing a bug after a single prompt.
 
-But they are too polite with the codebase.
+But:
 
-They preserve too much.
-They assume too much.
-They verify too little.
-They turn accidental behavior into supported behavior.
+Senior devs never wrote down how they molest/mutate/abuse code to examine it.
+So LLMs had no way to learn it and they don't do it.
 
-What they are bad at:
+Coding agents also:
+- preserve too much (afraid to alter existing behaviour)
+- turn accidental behavior into supported behavior (no test for this crazy accidentally supported case? better add one!)
+- assume too much (they "dry run" code)
+- verify too little (aka. hallucinate)
+- their premise is "for any requirement, code an `enterprise-ready` solution"
+- they don't follow the flow of code or debug it - they just `grep` strings
 
-- They do not investigate like experienced developers.
-- They dry-run things in their head.
-- They believe weird accidental behavior is intentional.
-- They handle too many theoretical cases.
-- They often do not build a real understanding of the flow.
+What to do?
+Start with the usual:
 
-So when I work with them, I try to push them away from:
+> There is a bug. We expect xyz for a but we get abc. Fix it.
 
-> write the fix
+complement it with:
 
-and toward:
+> prove to me with an end to end test that your fix works.
 
-> prove what is happening
+What I only now realized I started doing with experience:
+- do not just read the code
+- abuse it
+- rip it apart
+- run strange little experiments
+- create throwaway tools & scripts
+- break the weird accidental feature if you know no one really asked/uses it (this one I was aware of)
 
-Do not just read the code.
-
-Abuse it.
-Rip it apart.
-Run strange little experiments.
-Create throwaway tools.
-Break the weird accidental feature if nobody should depend on it.
-
-The agent can write code very fast.
-
-But speed is not the same as understanding.
-
-And unless you help them, they will not abuse and rip apart a codebase just to run separate pieces, grow understanding, and validate claims.
+You can prompt the agent to abuse code, rip it apart just to run separate pieces, grow understanding, and validate claims.
 
 ## fast mode
 
