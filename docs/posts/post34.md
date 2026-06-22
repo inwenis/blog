@@ -5,7 +5,7 @@ categories:
   - coding agents
 ---
 
-# coding agents - amazing but lacking experience
+# coding agents - my thoughts
 
 ## tl;dr
 
