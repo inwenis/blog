@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../09/some-neat-fsx-f/">
+        <link rel="prev" href="../../../04/06/match-feels-better-than-if-until-powershell/">
       
       
-        <link rel="next" href="../../25/npm-wsl-eai_again/">
+        <link rel="next" href="../../22/coding-agents---phrases-i-needed-to-learn/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Post25 - programki.eu</title>
+        <title>coding agents - my thoughts - programki.eu</title>
       
     
     
@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#coding-agents-my-thoughts" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -105,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Post25
+              coding agents - my thoughts
             
           </span>
         </div>
@@ -1033,6 +1038,97 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      tl;dr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      fast mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hallucinated-conclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      hallucinated conclusions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-is-not-the-truth" class="md-nav__link">
+    <span class="md-ellipsis">
+      code is not the truth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defensive-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      defensive coding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shallow-understanding" class="md-nav__link">
+    <span class="md-ellipsis">
+      shallow understanding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-by-imagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      debugging by imagination
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#throwaway-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      throwaway tools
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#novelty" class="md-nav__link">
+    <span class="md-ellipsis">
+      novelty
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1069,7 +1165,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2025-02-19 00:00:00+00:00" class="md-ellipsis">February 19, 2025</time>
+                        <time datetime="2026-06-03 00:00:00+00:00" class="md-ellipsis">June 3, 2026</time>
                       </div>
                     </li>
                     
@@ -1080,7 +1176,7 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/misc/">misc</a></span>
+                              <a href="../../../../category/coding-agents/">coding agents</a></span>
                         </div>
                       </li>
                     
@@ -1091,7 +1187,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              1 min read
+                              5 min read
                             
                           </span>
                         </div>
@@ -1111,57 +1207,181 @@
         
 
 
-  <h1>Post25</h1>
-
-<p><code>1024 * 1024</code> - this many bytes is an <code>mibibyte</code> (<code>MiB</code>).</p>
-<p>A <code>megabyte</code> like a <code>megameter</code> is 10^6 bytes.</p>
-<p>We all frequently say <code>megabyte</code> meaning a <code>mibibyte</code>. Like wise a <code>kilobyte</code> != <code>kibibyte</code></p>
-<table>
-<thead>
-<tr>
-<th>Unit</th>
-<th>Abbreviation</th>
-<th>Size in Bytes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kibibyte</td>
-<td>KiB</td>
-<td>1,024</td>
-</tr>
-<tr>
-<td>Mebibyte</td>
-<td>MiB</td>
-<td>1,048,576</td>
-</tr>
-<tr>
-<td>Gibibyte</td>
-<td>GiB</td>
-<td>1,073,741,824</td>
-</tr>
-<tr>
-<td>Kilobyte</td>
-<td>KB</td>
-<td>1,000</td>
-</tr>
-<tr>
-<td>Megabyte</td>
-<td>MB</td>
-<td>1,000,000</td>
-</tr>
-<tr>
-<td>Gigabyte</td>
-<td>GB</td>
-<td>1,000,000,000</td>
-</tr>
-</tbody>
-</table>
-<p>Network speeds are measured in Mbps - that is mega bits per second - that is <code>1,000,000</code> bits per second.</p>
-<p>MB - Megabyte (SI)
-MiB - Mibibyte (IEC)
-Mb - Megabit (SI)</p>
-<p><a href="https://www.iec.ch/prefixes-binary-multiples">https://www.iec.ch/prefixes-binary-multiples</a></p>
+<h1 id="coding-agents-my-thoughts">coding agents - my thoughts</h1>
+<h2 id="tldr">tl;dr</h2>
+<p>Coding agents are amazing — no doubt. (em dash not accidental)</p>
+<p>They give you impostor syndrome nailing a bug after a single prompt.</p>
+<p>But:</p>
+<p>Senior devs never wrote down how they molest/mutate/abuse code to examine it.
+So LLMs had no way to learn it and they don't do it.</p>
+<p>Coding agents also:</p>
+<ul>
+<li>preserve too much (afraid to alter existing behaviour)</li>
+<li>turn accidental behavior into supported behavior (no test for this crazy accidentally supported case? better add one!)</li>
+<li>assume too much (they "dry run" code)</li>
+<li>verify too little (aka. hallucinate)</li>
+<li>their premise is "for any requirement, code an <code>enterprise-ready</code> solution"</li>
+<li>they don't follow the flow of code or debug it - they just <code>grep</code> strings</li>
+</ul>
+<p>What to do?
+Start with the usual:</p>
+<blockquote>
+<p>There is a bug. We expect xyz for a but we get abc. Fix it.</p>
+</blockquote>
+<p>complement it with:</p>
+<blockquote>
+<p>prove to me with an end to end test that your fix works.</p>
+</blockquote>
+<p>What I only now realized I started doing with experience:</p>
+<ul>
+<li>do not just read the code</li>
+<li>abuse it</li>
+<li>rip it apart</li>
+<li>run strange little experiments</li>
+<li>create throwaway tools &amp; scripts</li>
+<li>break the weird accidental feature if you know no one really asked/uses it (this one I was aware of)</li>
+</ul>
+<p>You can prompt the agent to abuse code, rip it apart just to run separate pieces, grow understanding, and validate claims.</p>
+<h2 id="fast-mode">fast mode</h2>
+<p>Lately I have been using Claude with fast mode enabled.</p>
+<p>Works great. Costs quite a lot.</p>
+<p>Not necessarily because the model is smarter. Maybe it is not. But because the feedback loop is shorter.</p>
+<p>If the agent is slow, I multitask.
+If I multitask, I lose context.
+If I lose context, I stop steering the agent properly.</p>
+<p>Then the agent goes somewhere weird and I have to reconstruct what happened.</p>
+<p>That is exhausting.</p>
+<h2 id="hallucinated-conclusions">hallucinated conclusions</h2>
+<p>One useful trick is to make the agent list the claims it made.</p>
+<p>For example:</p>
+<ul>
+<li>what did you assume?</li>
+<li>what did you verify?</li>
+<li>what is only a guess?</li>
+<li>what file proves this?</li>
+<li>what command can I run to check it?</li>
+</ul>
+<p>This helps a lot.</p>
+<p>It does not remove hallucinations, but it makes them easier to catch.</p>
+<h2 id="code-is-not-the-truth">code is not the truth</h2>
+<p>One thing I see often is that agents treat existing code like Moses treated his stone commandments.</p>
+<p>If the code implies that this ridiculous combination of features and configs is possible, it must be intentional and thou shalt not break it!</p>
+<p>This is understandable. Human developers do this too, especially in unfamiliar systems.</p>
+<p>It takes time for a human to realize:</p>
+<blockquote>
+<p>I have seen this oddity before, but I have never seen any proof that it is used intentionally.</p>
+</blockquote>
+<p>But agents do it very strongly.</p>
+<p>If some accidental behavior exists, the agent may preserve it. It may even build more code around it.</p>
+<p>They might harden the ridiculous functionality with tests.</p>
+<p>We would not want to break functionality when refactoring, do we now?</p>
+<p>The agent sees that and thinks:</p>
+<blockquote>
+<p>this must be supported</p>
+</blockquote>
+<p>But sometimes the correct answer is:</p>
+<blockquote>
+<p>no, this is nonsense, break it</p>
+</blockquote>
+<p>I often have to explicitly say this.</p>
+<p>You can change this behavior.
+Nobody depends on this.
+Nobody should depend on this.
+This weird dysfunctionality is not a feature.</p>
+<p>Without that permission, the agent may keep carrying the weirdness forward.</p>
+<h2 id="defensive-coding">defensive coding</h2>
+<p>Agents also overengineer.</p>
+<p>They handle too many cases.</p>
+<p>They add defensive code for theoretical problems.</p>
+<p>They might add abstractions too early.</p>
+<p>The less I review the code they write, the more I can feel the bloat accumulating somewhere.</p>
+<p>They add fallback paths.</p>
+<blockquote>
+<p>What if that tool is not available on the user's PC? Let me code a hand-rolled simplified version. LOL.</p>
+</blockquote>
+<p>Often during the review phase I tell it to KISS.</p>
+<p>Or:</p>
+<blockquote>
+<p>do not code defensively against imaginary issues</p>
+</blockquote>
+<p>This is not because defensive coding is always bad.</p>
+<p>It is because code has a cost.</p>
+<p>Every extra branch is something to read.
+Every extra case is something to test.
+Every extra abstraction is another thing to understand.</p>
+<p>Every extra supported case is something the agent will resist breaking next time it touches the code.</p>
+<h2 id="shallow-understanding">shallow understanding</h2>
+<p>When I work with agents, I also notice something about myself.</p>
+<p>I do not build understanding the same way I used to.</p>
+<p>Before, I had to follow the flow myself.
+I had to open the files.
+I had to trace the calls.
+I had to suffer a little.</p>
+<p>That suffering was useful.</p>
+<p>Now the agent can grab code very quickly.</p>
+<p>This is good, but also dangerous.</p>
+<p>The agent may jump around the project and collect fragments. Then it builds an explanation from those fragments.</p>
+<p>But some of that code may be unreachable.
+Some of it may be old.
+Some of it may be a weird edge path.
+Some of it may not matter.</p>
+<p>So the agent can create an understanding that looks broad, but is actually shallow.</p>
+<p>It knows many pieces.
+It does not necessarily know the flow.</p>
+<h2 id="debugging-by-imagination">debugging by imagination</h2>
+<p>A common agent failure mode is debugging by imagination.</p>
+<p>It reads code.
+It explains what should happen.
+It proposes a fix.</p>
+<p>But it does not always check what actually happens.</p>
+<p>Experienced developers do ugly things.</p>
+<p>They add temporary logs.
+They print variables.
+They comment things out.
+They write tiny scripts.
+They create throwaway harnesses.
+They call private functions directly.
+They fake inputs.
+They break stuff on purpose.
+They run the program in stupid ways just to see what happens.</p>
+<p>Create and destroy worlds.</p>
+<p>Create mutants to your liking.</p>
+<p>Here the goal justifies almost any means.</p>
+<p>Mold the system, the code, the component to your needs.</p>
+<p>Run it.
+Test it.
+Learn what is actually true.</p>
+<h2 id="throwaway-tools">throwaway tools</h2>
+<p>Agents often need help creating throwaway tools.</p>
+<p>Not production tools.
+Not nice abstractions.
+Not reusable libraries.</p>
+<p>Just ugly little things used to learn something.</p>
+<p>A script that calls one function.
+A log line in the middle of a branch.
+A temporary endpoint.
+A fake input file.
+A tiny harness around one parser.
+A command that proves whether some path is reachable.</p>
+<p>This is how you turn guessing into knowing.</p>
+<p>But agents do not naturally do enough of it.</p>
+<p>They tend to dry-run the code mentally.</p>
+<p>Sometimes that is enough.</p>
+<p>Often it is not.</p>
+<h2 id="novelty">novelty</h2>
+<p>There is another thing I suspect.</p>
+<p>Coding agents are trained on code where people do things in established ways.</p>
+<p>So when you do something unusual, you may be fighting the model a little.</p>
+<p>It tries to pull the code back toward the common path.</p>
+<p>Usually that is good.</p>
+<p>Common patterns are common for a reason.</p>
+<p>But if you are deliberately doing something different, something new, or something specific to your system, the agent may keep “normalizing” it.</p>
+<p>It may remove the interesting part.
+It may replace your idea with a standard pattern.
+It may treat novelty as a mistake.</p>
+<p>This can make some kinds of programming harder.</p>
+<p>Not impossible.</p>
+<p>Just harder than expected.</p>
 
 
 
