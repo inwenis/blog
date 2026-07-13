@@ -15,3 +15,13 @@ I needed to look them up so to understand what he's is saying.
 - coalesce - bring together/join
 - provenance - the source/origin of something
 - word - I agree (slang) originating from hiphop
+- invariant - a condition that must hold/be true at any moment
+    - to be more precise - in OOP an invariant of an object must be true from the `end of the constructor` to the `beggining of the destructor`
+        - makes sense cuz before the object is fully created or while it's being torn down the `invariant` is allowd not to hold
+        - the case where i stumbled onthis is:
+            - the ui i build had a few state that could not happen at the same time
+                - the invariant here was that the switches "live" and "history" can't be on at the same time
+                    - it helped to create one class that manages the state of the UI and ensure the invariant holds
+        - another exmple - invariant can be -> the progress has to always bee between 0 and 100 % (can't be negative or more than 100%)
+        - an invariant can also be false during execution of a method - when you transition from one state to another
+
