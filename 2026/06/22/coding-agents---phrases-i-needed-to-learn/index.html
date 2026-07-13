@@ -1150,6 +1150,25 @@ I needed to look them up so to understand what he's is saying.</p>
 <li>coalesce - bring together/join</li>
 <li>provenance - the source/origin of something</li>
 <li>word - I agree (slang) originating from hiphop</li>
+<li>invariant - a condition that must hold/be true at any moment<ul>
+<li>to be more precise - in OOP an invariant of an object must be true from the <code>end of the constructor</code> to the <code>beggining of the destructor</code><ul>
+<li>makes sense cuz before the object is fully created or while it's being torn down the <code>invariant</code> is allowd not to hold</li>
+<li>the case where i stumbled onthis is:<ul>
+<li>the ui i build had a few state that could not happen at the same time<ul>
+<li>the invariant here was that the switches "live" and "history" can't be on at the same time<ul>
+<li>it helped to create one class that manages the state of the UI and ensure the invariant holds</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>another exmple - invariant can be -&gt; the progress has to always bee between 0 and 100 % (can't be negative or more than 100%)</li>
+<li>an invariant can also be false during execution of a method - when you transition from one state to another</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 
