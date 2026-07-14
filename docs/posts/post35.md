@@ -24,4 +24,4 @@ I needed to look them up so to understand what he's is saying.
                     - it helped to create one class that manages the state of the UI and ensure the invariant holds
         - another exmple - invariant can be -> the progress has to always bee between 0 and 100 % (can't be negative or more than 100%)
         - an invariant can also be false during execution of a method - when you transition from one state to another
-
+- `hand rolled` code - insted of using a dependency code is written by hand
